@@ -1,7 +1,6 @@
 BitClip
 
-An bitcoin wallet that streamlines making bitcoin transactions, and provide Bitcoin market information
-to help users make better transaction decisions.
+A bitcoin wallet with light-weight UI, and provides market information to help users make better transaction decisions.
 
 ## Team
 
