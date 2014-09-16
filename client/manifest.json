@@ -17,6 +17,6 @@
       "38": "assets/bitcoin_38.png"
     },
     "default_title": "BitClip",
-    "default_popup": "popup.html"
+    "default_popup": "index.html"
   }
 }
