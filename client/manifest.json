@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "name": "BitClip",
+  "description": "This extension makes it easy to send and receive Bitcoins. We give you the information you need to make transaction decisions.",
+  "version": "0.1",
+
+  "icons": {
+    "16": "assets/bitcoin_16.png",
+    "48": "assets/bitcoin_48.png",
+    "128": "assets/bitcoin_128.png"
+  },
+
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/bitcoin_19.png",
+      "38": "assets/bitcoin_38.png"
+    },
+    "default_title": "BitClip",
+    "default_popup": "popup.html"
+  }
+}
