@@ -1,11 +1,11 @@
 angular.module('bitclip', [
-  'ui.router'
-  // 'bitclip.send'
+  'ui.router',
+  'bitclip.send'
 ])
 
 .config(['$stateProvider', '$urlRouterProvider',
   function($stateProvider, $urlRouterProvider) {
-    // $urlRouterProvider.otherwise('/send');
+    $urlRouterProvider.otherwise('/send');
 
     $stateProvider
       .state('send', {
@@ -15,9 +15,8 @@ angular.module('bitclip', [
       });
   }
 ])
-
-.run(['$state',
-  function($state) {
-    $state.transitionTo('send');
-  }
-])
+// .run(['$state',
+//   function($state) {
+//     $state.transitionTo('send');
+//   }
+// ])
