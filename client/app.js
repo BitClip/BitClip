@@ -10,13 +10,8 @@ angular.module('bitclip', [
     $stateProvider
       .state('send', {
         url: '/send',
-        templateUrl: 'send/send.tpl.html'
-        // controller: 'sendController'
+        templateUrl: 'send/send.tpl.html',
+        controller: 'sendController'
       });
   }
 ])
-// .run(['$state',
-//   function($state) {
-//     $state.transitionTo('send');
-//   }
-// ])
