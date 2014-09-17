@@ -6,7 +6,7 @@ angular.module('bitclip.send', [
   $scope.send = {
     closeEl: '.close',
     modal: {
-      templateUrl: 'send.btn.html',
+      templateUrl: 'send/send.btn.html',
       position: {
         top: '25%',
         left: '25%'

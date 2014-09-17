@@ -12,6 +12,7 @@ angular.module('bitclip', [
         url: '/send',
         templateUrl: 'send/send.tpl.html',
         controller: 'sendController'
-      });
+      })
+    //write for /receive and market
   }
 ])
