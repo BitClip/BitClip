@@ -1,5 +1,5 @@
 angular.module('bitclip.send', [
-  'ui.router'
+  'ngMorph'
 ])
 
 .controller('sendController', function($scope) {
