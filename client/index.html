@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="bitclip">
+<html>
   <head>
     <meta charset="utf-8">
     <title>BitClip</title>
@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body >
+  <body ng-app="bitclip" ng-csp="">
     <h4><span class="label label-primary">Your balance: 0 BTC</span></h4>
     <ul class="nav nav-tabs" role="tablist">
       <li class="active"><a ui-sref="Send">Transactions</a></li>
