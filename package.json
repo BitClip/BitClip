@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/BitClip/BitClip",
   "dependencies": {
+    "bitcoinjs-lib": "^1.0.2",
     "express": "^4.9.0"
   }
 }
