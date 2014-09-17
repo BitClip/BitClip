@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/BitClip/BitClip/issues"
   },
-  "homepage": "https://github.com/BitClip/BitClip"
+  "homepage": "https://github.com/BitClip/BitClip",
+  "dependencies": {
+    "express": "^4.9.0"
+  }
 }

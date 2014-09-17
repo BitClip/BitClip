@@ -1,26 +1,35 @@
 <!doctype html>
-<html ng-app="bitclip">
+<html>
   <head>
     <meta charset="utf-8">
     <title>BitClip</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <script src="../bower_components/jquery/dist/jquery.js"></script>
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
   </head>
-  <body >
-    <ul class="nav nav-tabs" role="tablist">
-      <li class="active"><a ui-sref="Send">Transactions</a></li>
-      <li><a ui-sref="Receive">Receive</a></li>
-      <li><a ui-sref="Market">Market</a></li>
-    </ul>
-    <!-- uiview goes here -->
+  <body ng-app="bitclip" ng-csp>
+    <div class="container">
+      <div class="row">
+        <h4><span class="label label-primary">Your balance: 0 BTC</span></h4>
+      </div>
+      <div class="row">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="active"><a ui-sref="send">Send</a></li>
+          <li><a ui-sref="receive">Receive</a></li>
+          <li><a ui-sref="market">Market</a></li>
+        </ul>
+      </div>
+        <div ui-view></div>
 
-    <div ui-view></div>
-    <!-- bower:js -->
-    <script src="../bower_components/angular/angular.min.js"></script>
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+      <!-- bower:js -->
+    </div>
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="lib/angular-morph/dist/angular-morph.min.js"></script>
+    <script src="send/send.controller.js"></script>
     <script src="app.js"></script>
     <!-- load more scripts -->
     </body>

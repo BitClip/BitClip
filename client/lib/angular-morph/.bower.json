@@ -1,0 +1,34 @@
+{
+  "name": "ngMorph",
+  "homepage": "https://github.com/jimobrien/2014-07-solo",
+  "authors": [
+    "Jim OBrien <jimobrien930@gmail.com>",
+    "Github Contributors"
+  ],
+  "description": "Morph DOM elements with ease",
+  "main": "dist/angular-morph.min.js",
+  "license": "MIT",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.23"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.23"
+  },
+  "_release": "407a3e2c62",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "407a3e2c622b6c59fa33ca86919043e10e08e5c2"
+  },
+  "_source": "git://github.com/jimobrien/ngMorph.git",
+  "_target": "*",
+  "_originalSource": "angular-morph"
+}
