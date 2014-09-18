@@ -1,5 +1,5 @@
-angular.module('bitclip.header', [])
+// angular.module('bitclip.header', [])
 
-.factory('HeaderController', ['$scope' function($scope){
+// .factory('HeaderController', ['$scope' function($scope){
 
-}])
+// }])
