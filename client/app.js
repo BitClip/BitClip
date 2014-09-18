@@ -18,7 +18,14 @@ angular.module('bitclip', [
       .state('receive', {
         url: '/receive',
         templateUrl: 'receive/receive.tpl.html',
-        controller: 'receiveController'
+        controller: 'receiveController',
+        resolve: {
+          currentAddress: function(Address) {
+            return Address.findAddress().then(function(currentAddress) {
+              return currentAddress;
+            });
+          }
+        }
       });
   }
-])
+]);

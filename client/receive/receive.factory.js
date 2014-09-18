@@ -1,34 +1,47 @@
 angular.module('bitclip.receiveFactory', [
 ])
 
-.factory('Address', function() {
-  var address = chrome.storage.local.get('currentAddress', function(address) {
-    if (!address) {
-      return newAddress();
-    }
-    return address;
-  });
+.factory('Address', ['$q', function($q) {
+  var findAddress = function() {
+    var deferred = $q.defer();
+    chrome.storage.local.get('currentAddress', function(currentAddress) {
+      var address = currentAddress.currentAddress || '';
+      deferred.resolve(address);
+    });
+    return deferred.promise;
+  };
 
   var newAddress = function() {
-    key = bitcoin.ECKey.makeRandom();
+    var key = bitcoin.ECKey.makeRandom();
 
     // Print your private key (in WIF format)
-    key.toWIF();
+    var currentPrivateKey = key.toWIF();
 
     // Print your public key (toString defaults to a Bitcoin address)
-    bitcoinAddress = key.pub.getAddress().toString();
-    console.log(bitcoinAddress);
+    var currentAddress = key.pub.getAddress().toString();
+    this.currentAddress = currentAddress;
 
-    chrome.storage.local.set({currentAddress: bitcoinAddress}, function(err) {
-      if (err) {
-        console.log('Failed to write to Chrome local storage', err);
+    chrome.storage.local.get(['currentAddress', 'currentPrivateKey', 'userHistory'], function(currentInfo) {
+      if (currentInfo.currentAddress) {
+        if (!currentInfo.userHistory) {
+          chrome.storage.local.set({userHistory: [[currentInfo.currentAddress, currentInfo.currentPrivateKey]]});
+        } else {
+          currentInfo.userHistory.push([currentInfo.currentAddress, currentInfo.currentPrivateKey]);
+          chrome.storage.local.set({
+            userHistory: currentInfo.userHistory
+          });
+        }
       }
-      return bitcoinAddress;
+    });
+
+    chrome.storage.local.set({
+      currentAddress: currentAddress,
+      currentPrivateKey: currentPrivateKey
     });
   };
 
   return {
-    address: address,
+    findAddress: findAddress,
     newAddress: newAddress
   };
-});
+}]);
