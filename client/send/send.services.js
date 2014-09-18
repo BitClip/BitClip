@@ -16,7 +16,8 @@ angular.module('bitclip.sendService', [
   //update transaction details with passed in object
   var updateTransaction = function(transactionObj){
     transactionDetails = transactionObj;
-  }
+  };
+
 
   //TODO: sendPayment logic
 
