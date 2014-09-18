@@ -1,5 +1,7 @@
 angular.module('bitclip', [
   'ui.router',
+  'bitclip.receiveFactory',
+  'bitclip.receiveController',
   'bitclip.send'
 ])
 
@@ -13,6 +15,17 @@ angular.module('bitclip', [
         templateUrl: 'send/send.tpl.html',
         controller: 'sendController'
       })
-    //write for /receive and market
+      .state('receive', {
+        url: '/receive',
+        templateUrl: 'receive/receive.tpl.html',
+        controller: 'receiveController',
+        resolve: {
+          currentAddress: function(Address) {
+            return Address.findAddress().then(function(currentAddress) {
+              return currentAddress;
+            });
+          }
+        }
+      });
   }
-])
+]);
