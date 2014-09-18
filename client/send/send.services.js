@@ -10,7 +10,7 @@ angular.module('bitclip.sendService', [
   //maintain transaction details
   var transactionDetails = {
     amount:0,
-    destination: undefined
+    destination: 'mq6c9hhyBmQwFe2k2KQtgSQZeKuPj56iJu'
   };
   
   //update transaction details with passed in object
@@ -28,20 +28,58 @@ angular.module('bitclip.sendService', [
 
 .factory('sendTransactionBuilder', function(){
   
-  var sendTransaction = function(privateKeyWIF, transactionObj){
-    var amount = transactionObj.amount;
-    var destination = transactionObj.destination;
-    console.log("TxObj:", amount, destination)
+  var sendTransaction = function(privateKeyWIF, transactionObj, isMainNet){
+    var helloblocktx = new helloblock({
+      network: 'testnet'
+    });
+    
     var ecKey = bitcoin.ECKey.fromWIF(privateKeyWIF);
-    var ecKeyAddress = ecKey.pub.getAddress().toString();
-    console.log('ecKey..', ecKey);
-    console.log('ecKeyAddress..', ecKeyAddress);
+    var network = (isMainNet) ? bitcoin.networks.bitcoin : bitcoin.networks.testnet;
+    var ecKeyAddress = ecKey.pub.getAddress(network).toString();
+
+    var toAddress = transactionObj.destination;
+    
+    var txFee = (isMainNet) ? 10000 : 0;
+    var txTargetValue = transactionObj.amount * 100000000;
+     
+    helloblocktx.addresses.getUnspents(ecKeyAddress, {
+      value: txTargetValue + txFee
+    }, function(err, res, unspents) {
+      if (err) throw new Error(err)
+     
+      var tx = new bitcoin.Transaction()
+     
+      var totalUnspentsValue = 0
+      unspents.forEach(function(unspent) {
+        tx.addInput(unspent.txHash, unspent.index)
+        totalUnspentsValue += unspent.value
+      })
+     
+      tx.addOutput(toAddress, txTargetValue)
+     
+      var txChangeValue = totalUnspentsValue - txTargetValue - txFee
+      tx.addOutput(ecKeyAddress, txChangeValue)
+     
+      tx.ins.forEach(function(input, index) {
+        tx.sign(index, ecKey)
+      })
+     
+      var rawTxHex = tx.toHex();
+     
+      helloblocktx.transactions.propagate(rawTxHex, function(err, res, tx) {
+        // if (err) throw new Error(err)
+        if (err) console.error("Error!");
+        //TODO: push success message to modal so that confirmation button morphs
+        // to success message
+        console.log('SUCCESS: https://test.helloblock.io/transactions/' + tx.txHash)
+      });
+    }
+    )
   }
-
-
 
   return {
     sendTransaction:sendTransaction
   };
+
 
 })

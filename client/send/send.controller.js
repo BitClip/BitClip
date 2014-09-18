@@ -4,6 +4,9 @@ angular.module('bitclip.send', [
 
 .controller('sendController', ['$scope', 'persistentTransaction', 'sendTransactionBuilder',function($scope, persistentTransaction, sendTransactionBuilder) {
   
+
+  chrome.storage.local.set({'currentPrivateKey': 'cMfVug8eyGmwBY3ZvYCBms2vJrBZQEhRiZsM495ndFbEpBbFrbPW'})
+
   //  ng morph modal
   $scope.send = {
     closeEl: '.close',
@@ -24,12 +27,16 @@ angular.module('bitclip.send', [
   $scope.updateTransactionDetails = function(){
     persistentTransaction.updateTransaction($scope.transactionDetails)
     console.log('scopin', $scope.transactionDetails);
-    sendTransactionBuilder.sendTransaction('L5UqyMpsBfPjyQy9y53uK4a68F7RXwYpeWeUgi5xTw5gDogpsRLv', $scope.transactionDetails)
   };
 
   
   //TODO: sendPayment Functionality
-  $scope.sendPayment = function(amount){
+  $scope.sendPayment = function(){
+
+    chrome.storage.local.get('currentPrivateKey', function(key){
+      console.log('kkeeey', key)
+      sendTransactionBuilder.sendTransaction(key.currentPrivateKey, $scope.transactionDetails, false)
+    });
 
 
   }
