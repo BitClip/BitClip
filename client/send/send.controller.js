@@ -97,9 +97,9 @@ angular.module('bitclip.send', [
 
 
   testTransaction();
-
+  
   //TODO: sendPayment Functionality
   $scope.sendPayment = function(amount){
   }
-
+  //TODO: ng-validate destination input : starts with 1, base58, 52length
 }]);
