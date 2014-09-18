@@ -1,3 +1,63 @@
+@import url(http://fonts.googleapis.com/css?family=Cabin+Condensed:400,500,600,700);
+@import url(http://fonts.googleapis.com/css?family=Varela+Round);
+
+/* ------- Body Size ------- */
+
+body {
+  width:200px;
+  height: 350px;
+  margin:4px;
+  padding:4px;
+  font-family:"Cabin Condensed", sans-serif;
+  background-color: #F4EFDC;
+  border:1px dashed #BA9B65;
+}
+
+/* ------- Header ------- */
+
+.banner{
+  box-sizing:border-box;
+  border:1px solid red;
+  position:relative;
+  padding:0px;
+}
+
+.btcBalance{
+  border:1px solid blue;
+  position: relative;
+  padding:0;
+  margin:10px auto;
+  height:21px;
+}
+
+.btcBalance > span {
+  position:relative;
+  top:0;
+  left:0;
+  padding-left:5px;
+  margin:auto;
+  border:1px solid green;
+}
+
+
+.btcBalance::after{
+  content:"";
+  width:0;
+  height:0;
+  position:relative;
+  display: inline-block;
+  border:10px solid blue;
+  border-right-color: transparent;
+  border-radius: 3px;
+  top:2px;
+}
+
+.headerTabs > ul > li{
+  display:inline-block;
+  list-style-type: none;
+}
+
+
 .sendButton {
   width: 100%;
   background-color: #24b662;
