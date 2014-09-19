@@ -1,4 +1,4 @@
-angular.module('bitclip')
+angular.module('bitclip.headerDirective', [])
 	.directive('headerBar', function() {
 		return {
 			restrict: 'E',

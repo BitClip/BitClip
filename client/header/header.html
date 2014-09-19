@@ -3,11 +3,15 @@
     <h4><span class="label label-primary">{{balanceMessage}}</span></h4>
   </div>
   <div class="col-md-6">
-    <div class="btn-group btn-group-xs">
-      <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-wrench"></span>
+    <div class="settingsDropDown btn-group btn-group-xs">
+      <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-wrench"></span>
       </button>
       <ul class="dropdown-menu" role="menu">
-        <li class="toggleNetwork"><a href="#">Use Testnet<span class="badge"><span class="glyphicon glyphicon-ok"></span></span></a></li>
+        <li class="toggleNetwork" ng-if="isMainNet"><a href="#">Change to Testnet</a></li>
+        <li class="toggleNetwork" ng-if="!isMainNet"><a href="#">Change to Mainnet</a></li>
+        <li class="divider"></li>
+        <li ><a href="#">2-Factor Authentication</a></li>
+        <li ><a href="#">Backup Wallet</a></li>
       </ul>
     </div>
   </div>

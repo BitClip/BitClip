@@ -59,9 +59,9 @@ angular.module('bitclip.headerServices', [])
           function(data) {
             console.log("helloblock returned balance obj: ", data);
             var balanceArray = data.data.addresses;
-            var sum = balanceArray.reduce(function(prevValue, currentObj, index) {
-              return prevValue + currentObj.confirmedBalance;
-            }, 0);
+            // var sum = balanceArray.reduce(function(prevValue, currentObj, index) {
+            //   return prevValue + currentObj.confirmedBalance;
+            // }, 0);
             deferred.resolve(sum);
           });
       }).catch(function(error) {
