@@ -1,0 +1,11 @@
+.sendButton {
+  width:100%;
+  background-color: #24b662;
+  border: 3px dashed #0a833d;
+}
+.sendButton:hover{
+  background-color: #2ecc71;
+  border: 3px double #0a833d;
+  color:#0a833d;
+
+}

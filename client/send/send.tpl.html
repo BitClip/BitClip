@@ -1,9 +1,9 @@
 <form ng-submit="document.getElementById('send').click()">
   <h2>Destination</h2>
-  <input type="text" name="destination" placeholder="Destination address" ng-model="destination" required>
+  <input type="text" name="destination" placeholder="Destination address" ng-model="transactionDetails.destination" required>
   <h2>Amount</h2>
-  <input type="text" name="amount" placeholder="Enter amount" ng-model="amount" required>
+  <input type="text" name="amount" placeholder="Enter amount" ng-model="transactionDetails.amount" required>
 </form>
 <br/>
-<button id="send" class="send" ng-morph-modal="send">Send</button>
+<button id="send" class="send sendButton btn btn-success" ng-click="updateTransactionDetails()" ng-morph-modal="send">Send</button>
 
