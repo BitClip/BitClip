@@ -10,8 +10,8 @@
   </head>
   <body ng-app="bitclip" ng-csp>
     <div class="container">
-      <div class="row">
-        <h4><span class="label label-primary">Your balance: 0 BTC</span></h4>
+      <div class="row" ng-controller="HeaderController">
+        <h4><span class="label label-primary">{{balanceMessage}}</span></h4>
       </div>
       <div class="row">
         <ul class="nav nav-tabs" role="tablist">
