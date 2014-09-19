@@ -6,7 +6,8 @@ angular.module('bitclip', [
   'bitclip.receiveFactory',
   'bitclip.receiveController',
   'bitclip.send',
-  'bitclip.sendService'
+  'bitclip.sendService',
+  'bitclip.utilServices'
 ])
 
 .config(['$stateProvider', '$urlRouterProvider',

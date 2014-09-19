@@ -1,11 +1,7 @@
 angular.module('bitclip.headerServices', [])
 
-.factory('GetBalance', ['$http', '$q', 'Address',
-  function($http, $q, Address) {
-
-    //we need to link isMainNet to a variable persisted
-    //in chrome storage
-    var isMainNet = true;
+.factory('GetBalance', ['$http', '$q', 'Address', 'NetworkSettings',
+  function($http, $q, Address, NetworkSettings) {
 
     //query the helloblock api to get confirmed balance
     //in all addresses
@@ -55,13 +51,22 @@ angular.module('bitclip.headerServices', [])
     var getBalanceForAllAddresses = function() {
       var deferred = $q.defer();
       getAllAddresses().then(function(addressArray) {
+        //TODO: must use Networks.getNetwork to
+        //fetch isMainNet first
         getBatchBalance(addressArray, isMainNet,
           function(data) {
             console.log("helloblock returned balance obj: ", data);
+            //balanceArray is array of objects returned from
+            //HB that contains a property called confirmedBalance
+            //which gives the balance of that address
             var balanceArray = data.data.addresses;
-            // var sum = balanceArray.reduce(function(prevValue, currentObj, index) {
-            //   return prevValue + currentObj.confirmedBalance;
-            // }, 0);
+
+            //use reduce to sum up the individual balance
+            //in each address object
+            var sum = balanceArray.reduce(function(prevValue, currentObj, index) {
+              return prevValue + currentObj.confirmedBalance;
+            }, 0);
+
             deferred.resolve(sum);
           });
       }).catch(function(error) {
@@ -86,14 +91,23 @@ angular.module('bitclip.headerServices', [])
 
     var getBalanceForCurrentAddress = function(callback) {
       var deferred = $q.defer();
+      //find the currentAddress
+      //TODO: instead of saving currentAddress and network as
+      //separate keys, perhaps we should set a
+      //current settings object that contains
+      //currentAddress and the Netwrok??
       Address.findAddress()
         .then(function(address) {
           console.log("current address: ", address);
-          getBalanceForSingleAddress(address, isMainNet)
-            .then(function(data) {
+          //find the network the user is currently using
+          //TODO: this is buggy for when the user uses the app
+          //for the first time and isMainNet is undefined
+          NetworkSettings.getNetwork().then(function(isMainNet) {
+            getBalanceForSingleAddress(address, isMainNet).then(function(data) {
               var confirmedBalance = data.data.address.confirmedBalance;
               deferred.resolve(confirmedBalance);
             })
+          })
         })
       return deferred.promise;
     };
