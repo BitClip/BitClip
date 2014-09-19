@@ -1,5 +1,7 @@
 angular.module('bitclip', [
   'ui.router',
+  'bitclip.header',
+  'bitclip.headerServices',
   'bitclip.receiveFactory',
   'bitclip.receiveController',
   'bitclip.send',
