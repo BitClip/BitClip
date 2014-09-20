@@ -1,10 +1,13 @@
 angular.module('bitclip.receiveController', [])
 
-.controller('receiveController', ['$scope', 'currentAddress', 'Address',
-  function($scope, currentAddress, Address) {
-    $scope.currentAddress = currentAddress;
+.controller('receiveController', ['$scope', 'Address',
+  function($scope, Address) {
+	Address.findCurrentAddress().then(function(currentAddress) {
+    	$scope.currentAddress = currentAddress;
+	});
+	Address.findAllAddresses().then(function(allAddresses) {
+    	$scope.allAddresses = allAddresses;
+	});
     $scope.newAddress = Address.newAddress;
-
-    if (!$scope.currentAddress) $scope.newAddress();
   }
 ]);

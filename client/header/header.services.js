@@ -39,7 +39,7 @@ angular.module('bitclip.headerServices', [])
       //separate keys, perhaps we should set a
       //current settings object that contains
       //currentAddress and the Netwrok??
-      Address.findAddress()
+      Address.findCurrentAddress()
         .then(function(address) {
           console.log("current address: ", address);
           //find the network the user is currently using

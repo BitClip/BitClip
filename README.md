@@ -1,6 +1,5 @@
 BitClip
 
-A bitcoin wallet with light-weight UI, and provides market information to help users make better transaction decisions.
 
 ## Team
 
@@ -25,7 +24,7 @@ A bitcoin wallet with light-weight UI, and provides market information to help u
 ## Requirements
 
 - Node 0.10.31
-- bitcoinjs-lib 1.0.2
+- BitcoinJS 1.0.2
 - HelloBlock
 
 
