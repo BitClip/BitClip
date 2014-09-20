@@ -1,7 +1,7 @@
 angular.module('bitclip.headerServices', [])
 
-.factory('GetBalance', ['$http', '$q', 'Address', 'NetworkSettings',
-  function($http, $q, Address, NetworkSettings) {
+.factory('GetBalance', ['$http', '$q', 'Address', 'LocalStorage',
+  function($http, $q, Address, LocalStorage) {
 
     //query the helloblock api to get confirmed balance
     //in all addresses
@@ -43,7 +43,7 @@ angular.module('bitclip.headerServices', [])
         .then(function(address) {
           console.log("current address: ", address);
           //find the network the user is currently using
-          NetworkSettings.getNetwork().then(function(isMainNet) {
+          LocalStorage.getNetwork().then(function(isMainNet) {
             //handle the case when the user has no network preference
             //and isMainNet is undefined
             //(this probably occurs when user has not generated

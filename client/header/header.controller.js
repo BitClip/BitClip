@@ -1,7 +1,7 @@
 angular.module('bitclip.header', [])
 
-.controller('HeaderController', ['$scope', 'GetBalance', 'NetworkSettings',
-  function($scope, GetBalance, NetworkSettings) {
+.controller('HeaderController', ['$scope', 'GetBalance', 'LocalStorage',
+  function($scope, GetBalance, LocalStorage) {
 
     //get balance for current address
 
@@ -32,11 +32,11 @@ angular.module('bitclip.header', [])
     //be displayed in the settingsDropDown menu
 
     var setNetworkInScope = function() {
-      NetworkSettings.getNetwork().then(function(isMainNet) {
+      LocalStorage.getNetwork().then(function(isMainNet) {
         //if network has not been set, we default to MainNet
         if (isMainNet === undefined) {
           $scope.isMainNet = true;
-          NetworkSettings.setNetwork($scope.isMainNet);
+          LocalStorage.setNetwork($scope.isMainNet);
         } else {
           $scope.isMainNet = isMainNet;
         };
@@ -49,7 +49,7 @@ angular.module('bitclip.header', [])
     //toggle the isMainNet variable in chrome local storage
     //and then update the $scope.isMainNet variable
     $scope.toggleNetwork = function() {
-      NetworkSettings.setNetwork(!$scope.isMainNet).then(function() {
+      LocalStorage.setNetwork(!$scope.isMainNet).then(function() {
         $scope.isMainNet = !$scope.isMainNet;
       });
     }
