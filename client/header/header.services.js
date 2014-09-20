@@ -43,13 +43,23 @@ angular.module('bitclip.headerServices', [])
         .then(function(address) {
           console.log("current address: ", address);
           //find the network the user is currently using
-          //TODO: this is buggy for when the user uses the app
-          //for the first time and isMainNet is undefined
           NetworkSettings.getNetwork().then(function(isMainNet) {
-            getBalanceForSingleAddress(address, isMainNet).then(function(data) {
-              var confirmedBalance = data.data.address.confirmedBalance;
-              deferred.resolve(confirmedBalance);
-            })
+            //handle the case when the user has no network preference
+            //and isMainNet is undefined
+            //(this probably occurs when user has not generated
+            // an address)
+            if (isMainNet === undefined) {
+              deferred.resolve("Error! No network specified");
+            } else {
+              //handles the case where there is a network preference
+              //hence can get the balance of the address from HelloBlock
+              getBalanceForSingleAddress(address, isMainNet).then(function(data) {
+                deferred.resolve(data);
+              }).catch(function(error) {
+                console.log("xxxxxxxxxxxxxxxxxx: ", error);
+                deferred.resolve(error);
+              })
+            }
           })
         })
       return deferred.promise;
