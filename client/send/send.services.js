@@ -10,7 +10,7 @@ angular.module('bitclip.sendService', [
   var transactionDetails = {
     amount: 0,
     //destination should be set to 0
-    destination: ''
+    destination: 'mq6c9hhyBmQwFe2k2KQtgSQZeKuPj56iJu'
   };
 
   //update transaction details with passed in object

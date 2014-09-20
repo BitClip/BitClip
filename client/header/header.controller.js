@@ -42,7 +42,6 @@ angular.module('bitclip.header', [])
         };
       })
     };
-
     setNetworkInScope();
 
     //when user click change to MainNet/TestNet
