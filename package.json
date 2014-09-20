@@ -20,5 +20,15 @@
     "bitcoinjs-lib": "^1.0.2",
     "express": "^4.9.0",
     "helloblock-js": "^0.2.5"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "karma": "^0.12.23",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-mocha": "^0.1.4",
+    "karma-nested-reporter": "^0.1.1",
+    "karma-nyan-reporter": "^0.0.43",
+    "karma-unicorn-reporter": "^0.1.4",
+    "mocha": "^1.20.1"
   }
 }
