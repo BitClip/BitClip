@@ -1,71 +1,213 @@
 @import url(http://fonts.googleapis.com/css?family=Cabin+Condensed:400,500,600,700);
+@import url(http://fonts.googleapis.com/css?family=Cabin:400,700);
 @import url(http://fonts.googleapis.com/css?family=Varela+Round);
+
+/* Colors:   
+  Teal: #35A5A7;
+  Orange: #F1A533;
+  Red: #F13C3F;
+  Light: #F1F1F1;
+  Dark: #0B0B0B;
+
+
+  Green: #60C03C;
+         #35A533
+
+ */
+
 
 /* ------- Body Size ------- */
 
 body {
-  width:200px;
-  height: 350px;
-  margin:4px;
-  padding:4px;
+  width:360px;
+  height: 270px;
+  margin:0;
   font-family:"Cabin Condensed", sans-serif;
-  background-color: #F4EFDC;
-  border:1px dashed #BA9B65;
+  background-color: #F1F1F1;
+  /*border:2px solid #4F3632;*/
+}
+ul, li {
+  padding:0;
+  margin:0;
+}
+a {
+  text-decoration: none;
+  color: #0B0B0B;
+}
+
+
+.row{
+  box-sizing:border-box;
+  position:relative;
+  height:14%;
+  width:100%;
 }
 
 /* ------- Header ------- */
 
 .banner{
-  box-sizing:border-box;
-  border:1px solid red;
-  position:relative;
-  padding:0px;
+  background-color: white;
+}
+
+.banner > ul {
+  width:100%;
+  position: relative;
+}
+
+.banner > ul > li {
+  display: inline-block;
+  position: absolute;
+  color: #35A5A7;
 }
 
 .btcBalance{
-  border:1px solid blue;
-  position: relative;
-  padding:0;
-  margin:10px auto;
-  height:21px;
+  border:1px solid #365FB7;
+  left:10px;
+  top:7px;
 }
 
-.btcBalance > span {
-  position:relative;
-  top:0;
-  left:0;
-  padding-left:5px;
-  margin:auto;
-  border:1px solid green;
+.bitclipTitle {
+  width:100%;
+  text-align: center;
+  top:3px;
+
+  font-family: 'Cabin', sans-serif;
+  font-size: 1.5em;
+  font-style: bold;
+  font-weight: 700;
 }
 
-
-.btcBalance::after{
-  content:"";
-  width:0;
-  height:0;
-  position:relative;
-  display: inline-block;
-  border:10px solid blue;
-  border-right-color: transparent;
-  border-radius: 3px;
-  top:2px;
+.optionsNav {
+  border:1px solid #365FB7;
+  right:10px;
+  top:7px;
 }
 
-.headerTabs > ul > li{
+/* ------- Tabs ------- */
+
+
+.headerTabs {
+  background-color: white;
+  border-bottom: 1px solid #F1A533;
+}
+
+.headerTabs > li{
   display:inline-block;
-  list-style-type: none;
+  text-align: center;
+  position:relative;
+  box-sizing:border-box;
+  width:33.3%;
+  height:100%;
+
+  font-size: 1.1em;
+  letter-spacing: .1em;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  background-color: #F1F1F1;
 }
 
+.headerTabs > li > a {
+  position: relative;
+  top:20%;
+  color:#C2C2C2;
+}
+
+.receiveTab {
+  border-right:1px solid white;
+  border-left:1px solid white;
+}
+
+li.active, li.active > a {
+  background-color: #F1A533;
+  color:white;
+}
+ 
+.headerTabs li:hover:not(.active),
+.headerTabs li:hover:not(.active) a {
+  background-color: #E8E8E8;
+  color:#0B0B0B;
+
+}
+
+
+/* ------- Send View ------- */
+
+form {
+  position:relative;
+}
+
+label {
+  display: block;
+  position: relative;
+  font-size: 1.3em;
+  letter-spacing: .04em;
+  margin:4% 0 3% 8%;
+}
+
+form input {
+  margin: 0em;
+  color:#0B0B0B;
+  text-indent: 5px;
+  border:none;
+  padding: 2px;
+  border: 1px solid #E8E8E8;
+  display: block;
+  width:80%;
+  margin:auto;
+}
+
+input:focus{
+  outline:0;
+  box-shadow: inset 0 0 2px #35A533;
+}
+
+.sendViewButton{
+  height: 14%;
+  border:2px solid;
+  font-weight: 400;
+  font-size: .9em;
+  letter-spacing: .15em;
+  position: fixed;
+  padding:0;
+  color:white;
+  border-color: #35A533;
+}
 
 .sendButton {
-  width: 100%;
-  background-color: #24b662;
-  border: 3px dashed #0a833d;
+  width:100%;
+  bottom:.5%;
+  background-color: #35A533;
 }
 
-.sendButton:hover {
+.sendButton:hover{
   background-color: #2ecc71;
   border: 3px double #0a833d;
-  color: #0a833d;
+  color:#0a833d;
 }
+
+.morphButton{
+  width:49%;
+  background-color: white;
+  border-width: .15em;
+  font-weight: 700;
+  font-size:.9em;
+  bottom:.5%;
+  z-index: 21000;
+}
+
+.send-confirm{
+  color: #35A533;
+  border-color: #35A533;
+  left:.5%;
+}
+
+.send-cancel{
+  color: #F13C3F;
+  border-color: #F13C3F;
+  right:.5%;
+}
+/*.close{
+  opacity: 1;
+}
+*/
+

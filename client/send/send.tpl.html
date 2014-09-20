@@ -5,6 +5,13 @@
   <input type="text" name="amount" placeholder="0" ng-model="transactionDetails.amount" required>
 </form>
 <br/>
-<button id="send" class="send sendButton btn btn-success" ng-click="updateTransactionDetails()" ng-morph-modal="send">Send</button>
+<button id="send" class="send sendButton btn btn-success" ng-click="updateTransactionDetails()" ng-show="!confirmed" ng-click="morph()">Send</button>
+
+<div class="" ng-show="confirmed" ng-click="morph()">
+
+  <button class="sendViewButton morphButton send-confirm" ng-click="sendPayment(amount); morph();">confirm</button>
+  <button class="sendViewButton morphButton send-cancel" ng-click="console.log('lol'); morph();">cancel</button>
+
+</div>
 
 
