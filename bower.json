@@ -16,6 +16,8 @@
   ],
   "dependencies": {
     "angular": "~1.2.25",
+    "angular-route": "^1.2.18",
+    "angular-mocks": "^1.2.18",
     "angular-ui-router": "~0.2.11",
     "angular-morph": "*",
     "font-awesome": "~4.2.0",
