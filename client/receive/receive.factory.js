@@ -1,8 +1,7 @@
 angular.module('bitclip.receiveFactory', [])
 
-.factory('Address', ['$q',
-  function($q) {
-    var findAddress = function() {
+.factory('Address', ['$q', function($q) {
+    var findCurrentAddress = function() {
       var deferred = $q.defer();
       chrome.storage.local.get('currentAddress', function(currentAddress) {
         var address = currentAddress.currentAddress || '';
@@ -11,41 +10,54 @@ angular.module('bitclip.receiveFactory', [])
       return deferred.promise;
     };
 
+    var findAllAddresses = function() {
+      var deferred = $q.defer();
+      chrome.storage.local.get('userHistory', function(userHistory) {
+        var addresses = userHistory.userHistory || [];
+        deferred.resolve(addresses);
+      });
+      return deferred.promise;
+    };
+
     var newAddress = function() {
       var key = bitcoin.ECKey.makeRandom();
-
-      // Print your private key (in WIF format)
       var currentPrivateKey = key.toWIF();
-
-      // Print your public key (toString defaults to a Bitcoin address)
       var currentAddress = key.pub.getAddress().toString();
-      this.currentAddress = currentAddress;
 
-      chrome.storage.local.get(['currentAddress', 'currentPrivateKey', 'userHistory'], function(currentInfo) {
-        if (currentInfo.currentAddress) {
-          if (!currentInfo.userHistory) {
-            chrome.storage.local.set({
-              userHistory: [
-                [currentInfo.currentAddress, currentInfo.currentPrivateKey]
-              ]
-            });
-          } else {
-            currentInfo.userHistory.push([currentInfo.currentAddress, currentInfo.currentPrivateKey]);
-            chrome.storage.local.set({
-              userHistory: currentInfo.userHistory
-            });
-          }
-        }
-      });
-
+      var that = this;
       chrome.storage.local.set({
         currentAddress: currentAddress,
         currentPrivateKey: currentPrivateKey
+      }, function() {
+        that.$apply(function() {
+          that.currentAddress = currentAddress;
+        });
+        chrome.storage.local.get(['currentAddress', 'currentPrivateKey', 'userHistory'], function(userInfo) {
+          if (!userInfo.userHistory) {
+            chrome.storage.local.set({
+              userHistory: [[userInfo.currentAddress, userInfo.currentPrivateKey]]
+            }, function() {
+              that.$apply(function() {
+                that.allAddresses = [[userInfo.currentAddress, userInfo.currentPrivateKey]];
+              });
+            });
+          } else {
+            userInfo.userHistory.unshift([currentAddress, currentPrivateKey]);
+            chrome.storage.local.set({
+              userHistory: userInfo.userHistory
+            }, function() {
+              that.$apply(function() {
+                that.allAddresses.unshift([currentAddress, currentPrivateKey]);
+              });
+            });
+          }
+        });
       });
     };
 
     return {
-      findAddress: findAddress,
+      findCurrentAddress: findCurrentAddress,
+      findAllAddresses: findAllAddresses,
       newAddress: newAddress
     };
   }

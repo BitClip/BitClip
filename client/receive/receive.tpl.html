@@ -1,4 +1,7 @@
 <h2>Share your address to receive Bitcoins</h2>
 {{ currentAddress }}
+<ul>
+	<li ng-repeat="address in allAddresses">{{ address[0] }}</li>
+</ul>
 <br/>
 <div class="button" ng-click="newAddress()">Generate Address</div>
