@@ -8,9 +8,13 @@ angular.module('bitclip.utilServices', [])
 		//building will use MainNet protocol
 		//if false, will use TestNet protocol
 		var setNetwork = function(isMainNet, callback) {
+			var deferred = $q.defer();
 			chrome.storage.local.set({
 				isMainNet: isMainNet
-			}, callback)
+			}, function() {
+				deferred.resolve();
+			});
+			return deferred.promise;
 		};
 
 		var getNetwork = function() {
