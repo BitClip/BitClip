@@ -6,9 +6,11 @@ angular.module('bitclip.sendController', [
   function($scope, persistentTransaction, TxBuilder, Utilities) {
 
   //  ng morph modal
-  $scope.confirm = false;
+  $scope.confirmed = false;
   $scope.morph = function(){
-    $scope.confirm = !$scope.confirm;
+    console.log('changin: ', $scope.confirmed );
+    $scope.confirmed = !$scope.confirmed;
+    console.log('to? ', $scope.confirmed );
   }
 
     //initialize transaction details (amount, destination)

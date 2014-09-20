@@ -1,17 +1,14 @@
 <form ng-submit="document.getElementById('send').click()">
-  <h2>Destination</h2>
-  <input type="text" name="destination" placeholder="e.g. mq6c9hhyBmQwFe2k2KQtgSQZeKuPj56iJu" ng-model="transactionDetails.destination" required>
-  <h2>Amount</h2>
-  <input type="text" name="amount" placeholder="0" ng-model="transactionDetails.amount" required>
+  <label>Destination:</label>
+  <input type="text" name="destination" placeholder="Recipient address" ng-model="transactionDetails.destination" required autofocus>
+  <label>Amount:</label>
+  <input type="text" name="amount" placeholder="Number of bitcoins to send" ng-model="transactionDetails.amount" required>
 </form>
-<br/>
-<button id="send" class="send sendButton btn btn-success" ng-click="updateTransactionDetails()" ng-show="!confirmed" ng-click="morph()">Send</button>
 
-<div class="" ng-show="confirmed" ng-click="morph()">
+<button ng-if="!confirmed" id="send" class="sendViewButton sendButton" ng-click="updateTransactionDetails(); morph();">Send</button>
 
-  <button class="sendViewButton morphButton send-confirm" ng-click="sendPayment(amount); morph();">confirm</button>
-  <button class="sendViewButton morphButton send-cancel" ng-click="console.log('lol'); morph();">cancel</button>
+<button ng-if="confirmed" class="sendViewButton morphButton send-confirm"  ng-click="sendPayment(amount); morph();">confirm</button>
+<button ng-if="confirmed" class="sendViewButton morphButton send-cancel" ng-click="morph();">cancel</button>
 
-</div>
 
 

@@ -13,17 +13,12 @@
       <div ng-controller="HeaderController">
         <header-bar/>
       </div>
-      <div class="row headerTabs">
-        <ul class="nav nav-tabs" role="tablist">
-          <li><a ui-sref="send">Send</a></li>
-          <li><a ui-sref="receive">Receive</a></li>
-          <li><a ui-sref="market">History</a></li>
-        </ul>
-      </div>
-      <div ui-view></div>
-    </div>
+      <ul class="row headerTabs" role="tablist">
+        <li class="sendTab active"><a ui-sref="send">Send</a></li><li class="receiveTab"><a ui-sref="receive">Receive</a></li><li class="historyTab"><a ui-sref="market">History</a></li>
+      </ul>
+        <div ui-view></div>
 
-    <!-- Bower dependencies -->
+
     <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="lib/angular/angular.js"></script>
