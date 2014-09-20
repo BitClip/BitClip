@@ -36,7 +36,7 @@ angular.module('bitclip.header', [])
         //if network has not been set, we default to MainNet
         if (isMainNet === undefined) {
           $scope.isMainNet = true;
-          NetworkSettings.setNetwork($scope.isMainNet)
+          NetworkSettings.setNetwork($scope.isMainNet);
         } else {
           $scope.isMainNet = isMainNet;
         };
@@ -49,7 +49,6 @@ angular.module('bitclip.header', [])
     //toggle the isMainNet variable in chrome local storage
     //and then update the $scope.isMainNet variable
     $scope.toggleNetwork = function() {
-      console.log("$scope.isMainNet in controller: ", $scope.isMainNet);
       NetworkSettings.setNetwork(!$scope.isMainNet).then(function() {
         $scope.isMainNet = !$scope.isMainNet;
       });

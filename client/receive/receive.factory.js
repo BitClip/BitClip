@@ -1,6 +1,7 @@
 angular.module('bitclip.receiveFactory', [])
 
-.factory('Address', ['$q', function($q) {
+.factory('Address', ['$q',
+  function($q) {
     var findCurrentAddress = function() {
       var deferred = $q.defer();
       chrome.storage.local.get('currentAddress', function(currentAddress) {
@@ -35,10 +36,14 @@ angular.module('bitclip.receiveFactory', [])
         chrome.storage.local.get(['currentAddress', 'currentPrivateKey', 'userHistory'], function(userInfo) {
           if (!userInfo.userHistory) {
             chrome.storage.local.set({
-              userHistory: [[userInfo.currentAddress, userInfo.currentPrivateKey]]
+              userHistory: [
+                [userInfo.currentAddress, userInfo.currentPrivateKey]
+              ]
             }, function() {
               that.$apply(function() {
-                that.allAddresses = [[userInfo.currentAddress, userInfo.currentPrivateKey]];
+                that.allAddresses = [
+                  [userInfo.currentAddress, userInfo.currentPrivateKey]
+                ];
               });
             });
           } else {

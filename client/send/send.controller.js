@@ -11,6 +11,7 @@ angular.module('bitclip.send', [
     // chrome.storage.local.set({
     //   'currentPrivateKey': 'cMfVug8eyGmwBY3ZvYCBms2vJrBZQEhRiZsM495ndFbEpBbFrbPW'
     // });
+
     //  ng morph modal
     $scope.send = {
       closeEl: '.close',
