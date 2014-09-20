@@ -13,7 +13,7 @@ angular.module('bitclip.header', [])
         $scope.balanceMessage = "Balance: " + confirmedBalance + " BTC";
       } else {
         //handles the case where there is no network selection made
-        console.log("no network selection")
+        console.log("no network selection");
         $scope.balanceMessage = data;
       }
     }).catch(function(error) {
