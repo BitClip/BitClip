@@ -9,6 +9,7 @@ angular.module('bitclip.sendService', [
   //maintain transaction details
   var transactionDetails = {
     amount: 0,
+    //destination should be set to 0
     destination: 'mq6c9hhyBmQwFe2k2KQtgSQZeKuPj56iJu'
   };
 

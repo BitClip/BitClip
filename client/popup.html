@@ -18,7 +18,7 @@
         <ul class="nav nav-tabs" role="tablist">
           <li class="active"><a ui-sref="send">Send</a></li>
           <li><a ui-sref="receive">Receive</a></li>
-          <li><a ui-sref="market">Market</a></li>
+          <li><a ui-sref="market">History</a></li>
         </ul>
       </div>
       <div ui-view></div>
@@ -30,12 +30,12 @@
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="lib/angular-morph/dist/angular-morph.min.js"></script>
-    <script src="bitcoinjs-min.js"></script>
+    <script src="btclib/bitcoinjs-min.js"></script>
+    <script src="btclib/helloblock-min.js"></script>
     <!-- Client-side dependencies -->
     <script src="app.js"></script>
     <script src="receive/receive.factory.js"></script>
     <script src="receive/receive.controller.js"></script>
-    <script src="helloblock-min.js"></script>
     <script src="header/header.controller.js"></script>
     <script src="header/header.services.js"></script>
     <script src="header/header.directive.js"></script>

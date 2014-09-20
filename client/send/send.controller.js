@@ -7,6 +7,7 @@ angular.module('bitclip.send', [
 
     //this is only here for testing to use with a testing account;
     //needs to be removed
+
     chrome.storage.local.set({
       'currentPrivateKey': 'cMfVug8eyGmwBY3ZvYCBms2vJrBZQEhRiZsM495ndFbEpBbFrbPW'
     });

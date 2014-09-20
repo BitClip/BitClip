@@ -1,6 +1,8 @@
 angular.module('bitclip.receiveFactory', [])
 
-.factory('Address', ['$q', function($q) {
+.factory('Address', ['$q',
+  function($q) {
+
     var findCurrentAddress = function() {
       var deferred = $q.defer();
       chrome.storage.local.get('currentAddress', function(currentAddress) {
@@ -35,10 +37,14 @@ angular.module('bitclip.receiveFactory', [])
         chrome.storage.local.get(['currentAddress', 'currentPrivateKey', 'userHistory'], function(userInfo) {
           if (!userInfo.userHistory) {
             chrome.storage.local.set({
-              userHistory: [[userInfo.currentAddress, userInfo.currentPrivateKey]]
+              userHistory: [
+                [userInfo.currentAddress, userInfo.currentPrivateKey]
+              ]
             }, function() {
               that.$apply(function() {
-                that.allAddresses = [[userInfo.currentAddress, userInfo.currentPrivateKey]];
+                that.allAddresses = [
+                  [userInfo.currentAddress, userInfo.currentPrivateKey]
+                ];
               });
             });
           } else {
@@ -54,6 +60,27 @@ angular.module('bitclip.receiveFactory', [])
         });
       });
     };
+
+    //////////////////////////////////////////////////////
+
+    /*
+     var createKeyAddressPair = function(isMainNet){
+        create address and key based on isMainNet
+        return [address, key]
+     };
+
+     var updateNetWorkObj = function(isMainNet, keyPairArray, callback){
+      LocalStorage.getSpecificNetworkObj(isMainNet).then(function(data){
+        var saveObj = {
+          currentAddress = keyPairArray[0];
+          ...and [1] for key
+          ...and update UserHistory
+        };
+        LocalStorage.updateSpecificNetworkObj(isMainNet, saveObj, callback);
+      })
+     };
+
+     */
 
     return {
       findCurrentAddress: findCurrentAddress,

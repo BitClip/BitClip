@@ -1,7 +1,7 @@
 angular.module('bitclip.header', [])
 
-.controller('HeaderController', ['$scope', 'GetBalance', 'NetworkSettings',
-  function($scope, GetBalance, NetworkSettings) {
+.controller('HeaderController', ['$scope', 'GetBalance', 'LocalStorage',
+  function($scope, GetBalance, LocalStorage) {
 
     //get balance for current address
 
@@ -13,7 +13,7 @@ angular.module('bitclip.header', [])
         $scope.balanceMessage = "Balance: " + confirmedBalance + " BTC";
       } else {
         //handles the case where there is no network selection made
-        console.log("no network selection")
+        console.log("no network selection");
         $scope.balanceMessage = data;
       }
     }).catch(function(error) {
@@ -32,25 +32,23 @@ angular.module('bitclip.header', [])
     //be displayed in the settingsDropDown menu
 
     var setNetworkInScope = function() {
-      NetworkSettings.getNetwork().then(function(isMainNet) {
+      LocalStorage.getNetwork().then(function(isMainNet) {
         //if network has not been set, we default to MainNet
         if (isMainNet === undefined) {
           $scope.isMainNet = true;
-          NetworkSettings.setNetwork($scope.isMainNet)
+          LocalStorage.setNetwork($scope.isMainNet);
         } else {
           $scope.isMainNet = isMainNet;
         };
       })
     };
-
     setNetworkInScope();
 
     //when user click change to MainNet/TestNet
     //toggle the isMainNet variable in chrome local storage
     //and then update the $scope.isMainNet variable
     $scope.toggleNetwork = function() {
-      console.log("$scope.isMainNet in controller: ", $scope.isMainNet);
-      NetworkSettings.setNetwork(!$scope.isMainNet).then(function() {
+      LocalStorage.setNetwork(!$scope.isMainNet).then(function() {
         $scope.isMainNet = !$scope.isMainNet;
       });
     }
