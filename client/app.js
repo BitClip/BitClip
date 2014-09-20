@@ -1,11 +1,13 @@
 angular.module('bitclip', [
   'ui.router',
   'bitclip.header',
+  'bitclip.headerDirective',
   'bitclip.headerServices',
   'bitclip.receiveFactory',
   'bitclip.receiveController',
   'bitclip.send',
-  'bitclip.sendService'
+  'bitclip.sendService',
+  'bitclip.utilServices'
 ])
 
 .config(['$stateProvider', '$urlRouterProvider',
