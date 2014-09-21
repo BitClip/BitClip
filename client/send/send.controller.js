@@ -1,4 +1,4 @@
-angular.module('bitclip.send', [
+angular.module('bitclip.sendController', [
   'ngMorph'
 ])
 

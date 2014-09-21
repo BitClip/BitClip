@@ -1,6 +1,6 @@
 //not loaded into app.js yet
 
-angular.module('bitclip.sendService', [
+angular.module('bitclip.sendFactory', [
   'ui.router'
 ])
 

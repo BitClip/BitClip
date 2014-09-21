@@ -1,9 +1,9 @@
-angular.module('bitclip.header', [])
+angular.module('bitclip.headerController', [])
 
-.controller('HeaderController', ['$scope', 'GetBalance', 'LocalStorage',
-  function($scope, GetBalance, LocalStorage) {
-
-    //get balance for current address
+.controller('HeaderController', ['$scope', 'GetBalance', 'Utilities',
+  function($scope, GetBalance, Utilities) {
+    Utilities.initialize().then(function() {
+      //get balance for current address
 
     GetBalance.getBalanceForCurrentAddress().then(function(data) {
       //handles the case where there is a
@@ -32,11 +32,11 @@ angular.module('bitclip.header', [])
     //be displayed in the settingsDropDown menu
 
     var setNetworkInScope = function() {
-      LocalStorage.getNetwork().then(function(isMainNet) {
+      Utilities.isMainNet().then(function(isMainNet) {
         //if network has not been set, we default to MainNet
         if (isMainNet === undefined) {
           $scope.isMainNet = true;
-          LocalStorage.setNetwork($scope.isMainNet);
+          GetBalance.setNetwork($scope.isMainNet);
         } else {
           $scope.isMainNet = isMainNet;
         };
@@ -48,10 +48,10 @@ angular.module('bitclip.header', [])
     //toggle the isMainNet variable in chrome local storage
     //and then update the $scope.isMainNet variable
     $scope.toggleNetwork = function() {
-      LocalStorage.setNetwork(!$scope.isMainNet).then(function() {
+      GetBalance.setNetwork(!$scope.isMainNet).then(function() {
         $scope.isMainNet = !$scope.isMainNet;
       });
     }
-
+    });
   }
-])
+]);
