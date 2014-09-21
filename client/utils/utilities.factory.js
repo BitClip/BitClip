@@ -1,19 +1,23 @@
 angular.module('bitclip.utilitiesFactory', [])
 
 .factory('Utilities', ['$http', '$q', function($http, $q) {
+  var InitObj = function(){
+    this.currentAddress = "";
+    this.currentPrivateKey = "";
+    this.allAddressesAndKeys = [];
+  };
   var initialize = function() {
     var deferred = $q.defer();
     chrome.storage.local.get(['isMainNet', 'mainNet', 'testNet'], function(obj) {
-      var init = {
-        currentAddress: '',
-        currentPrivateKey: '',
-        allAddressesAndKeys: []
-      };
+      console.log("data before init: \n\n", obj)
+      if (obj.isMainNet === undefined){
+        obj.isMainNet = true;
+      }
       if (obj.mainNet === undefined) {
-        obj.mainNet = init;
+        obj.mainNet = new InitObj();
       }
       if (obj.testNet === undefined) {
-        obj.testNet = init;
+        obj.testNet = new InitObj();
       }
       chrome.storage.local.set(obj, function() {
         deferred.resolve('Initialization complete.');
