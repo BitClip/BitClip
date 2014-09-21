@@ -24,13 +24,11 @@ angular.module('bitclip.sendController', [
     //update the transaction details with input field values
     $scope.updateTransactionDetails = function() {
       persistentTransaction.updateTransaction($scope.transactionDetails)
-      console.log('scopin', $scope.transactionDetails);
     };
 
     //TODO: sendPayment Functionality
     $scope.sendPayment = function() {
       chrome.storage.local.get(['currentPrivateKey', 'isMainNet'], function(data) {
-        console.log('data: \n', data)
         sendTransactionBuilder.sendTransaction(data.currentPrivateKey, $scope.transactionDetails, data.isMainNet);
       });
     };

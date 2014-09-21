@@ -2,9 +2,8 @@ angular.module('bitclip.utilitiesFactory', [])
 
 .factory('Utilities', ['$http', '$q', function($http, $q) {
   //create init object for each network object
-  //pseudoclassically instantiated
   //required because assigning obj.testNet to var initObj in initialize
-  //was not working
+  //was not working, testNet was still null after assignment
   var InitObj = function(){
     this.currentAddress = "";
     this.currentPrivateKey = "";
@@ -32,8 +31,11 @@ angular.module('bitclip.utilitiesFactory', [])
   };
 
   var httpGet = function(url, callback) {
+    console.log("http working");
     $http.get(url)
-      .success(callback(result))
+      .success(function(data){
+        callback(data);
+      })
       .error(function(data, status, headers, config) {
         callback('HTTP GET request failed: ', status);
       });
@@ -105,6 +107,7 @@ angular.module('bitclip.utilitiesFactory', [])
   return {
     initialize: initialize,
     isMainNet: isMainNet,
+    httpGet: httpGet,
     getCurrentAddress: getCurrentAddress,
     getCurrentPrivateKey: getCurrentPrivateKey,
     getAllAddresses: getAllAddresses,
