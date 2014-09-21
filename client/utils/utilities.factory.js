@@ -1,11 +1,16 @@
 angular.module('bitclip.utilitiesFactory', [])
 
 .factory('Utilities', ['$http', '$q', function($http, $q) {
+  //create init object for each network object
+  //pseudoclassically instantiated
+  //required because assigning obj.testNet to var initObj in initialize
+  //was not working
   var InitObj = function(){
     this.currentAddress = "";
     this.currentPrivateKey = "";
     this.allAddressesAndKeys = [];
   };
+
   var initialize = function() {
     var deferred = $q.defer();
     chrome.storage.local.get(['isMainNet', 'mainNet', 'testNet'], function(obj) {
