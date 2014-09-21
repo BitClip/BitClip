@@ -6,6 +6,7 @@ angular.module('bitclip.headerController', [])
       //queries HelloBlock to get Balance of Current Address;
       $scope.balanceMessage = "Loading Bitcoin address";
       HeaderDetails.getBalanceForCurrentAddress().then(function(data) {
+        console.log("I am data returned: ", data);
         var confirmedBalance = data.data.address.confirmedBalance;
         $scope.balanceMessage = "Balance: " + confirmedBalance + " BTC";
       }).catch(function(error) {
