@@ -2,8 +2,8 @@ angular.module('bitclip.sendController', [
   'ngMorph'
 ])
 
-.controller('sendController', ['$scope', 'persistentTransaction', 'sendTransactionBuilder',
-  function($scope, persistentTransaction, sendTransactionBuilder) {
+.controller('sendController', ['$scope', 'persistentTransaction', 'TxBuilder','Utilities',
+  function($scope, persistentTransaction, TxBuilder, Utilities) {
 
     //  ng morph modal
     $scope.send = {
@@ -28,11 +28,11 @@ angular.module('bitclip.sendController', [
 
     //TODO: sendPayment Functionality
     $scope.sendPayment = function() {
-      chrome.storage.local.get(['currentPrivateKey', 'isMainNet'], function(data) {
-        sendTransactionBuilder.sendTransaction(data.currentPrivateKey, $scope.transactionDetails, data.isMainNet);
+      Utilities.isMainNet().then(function(isMainNet){
+        Utilities.getCurrentPrivateKey().then(function(currentPrivateKey){
+          TxBuilder.sendTransaction(currentPrivateKey, $scope.transactionDetails, isMainNet);
+        });
       });
     };
-
-    //TODO: ng-validate destination input : starts with 1, base58, 52length
   }
 ]);

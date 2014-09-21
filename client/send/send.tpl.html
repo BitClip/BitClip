@@ -2,7 +2,7 @@
   <h2>Destination</h2>
   <input type="text" name="destination" placeholder="e.g. mq6c9hhyBmQwFe2k2KQtgSQZeKuPj56iJu" ng-model="transactionDetails.destination" required>
   <h2>Amount</h2>
-  <input type="text" name="amount" placeholder="" ng-model="transactionDetails.amount" required>
+  <input type="text" name="amount" placeholder="0" ng-model="transactionDetails.amount" required>
 </form>
 <br/>
 <button id="send" class="send sendButton btn btn-success" ng-click="updateTransactionDetails()" ng-morph-modal="send">Send</button>
