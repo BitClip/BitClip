@@ -1,19 +1,27 @@
 angular.module('bitclip.utilitiesFactory', [])
 
 .factory('Utilities', ['$http', '$q', function($http, $q) {
+  //create init object for each network object
+  //required because assigning obj.testNet to var initObj in initialize
+  //was not working, testNet was still null after assignment
+  var InitObj = function(){
+    this.currentAddress = "";
+    this.currentPrivateKey = "";
+    this.allAddressesAndKeys = [];
+  };
+
   var initialize = function() {
     var deferred = $q.defer();
     chrome.storage.local.get(['isMainNet', 'mainNet', 'testNet'], function(obj) {
-      var init = {
-        currentAddress: '',
-        currentPrivateKey: '',
-        allAddressesAndKeys: []
-      };
+      console.log("data before init: \n\n", obj)
+      if (obj.isMainNet === undefined){
+        obj.isMainNet = true;
+      }
       if (obj.mainNet === undefined) {
-        obj.mainNet = init;
+        obj.mainNet = new InitObj();
       }
       if (obj.testNet === undefined) {
-        obj.testNet = init;
+        obj.testNet = new InitObj();
       }
       chrome.storage.local.set(obj, function() {
         deferred.resolve('Initialization complete.');
@@ -23,8 +31,11 @@ angular.module('bitclip.utilitiesFactory', [])
   };
 
   var httpGet = function(url, callback) {
+    console.log("http working");
     $http.get(url)
-      .success(callback(result))
+      .success(function(data){
+        callback(data);
+      })
       .error(function(data, status, headers, config) {
         callback('HTTP GET request failed: ', status);
       });
@@ -96,6 +107,7 @@ angular.module('bitclip.utilitiesFactory', [])
   return {
     initialize: initialize,
     isMainNet: isMainNet,
+    httpGet: httpGet,
     getCurrentAddress: getCurrentAddress,
     getCurrentPrivateKey: getCurrentPrivateKey,
     getAllAddresses: getAllAddresses,

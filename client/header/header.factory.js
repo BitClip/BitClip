@@ -1,83 +1,28 @@
 angular.module('bitclip.headerFactory', [])
 
-.factory('GetBalance', ['$http', '$q', 'Utilities',
+.factory('HeaderDetails', ['$http', '$q', 'Utilities',
   function($http, $q, Utilities) {
 
     var setNetwork = function(isMainNet, callback) {
-      var deferred = $q.defer();
-      chrome.storage.local.set({
-        isMainNet: isMainNet
-      }, function() {
-        deferred.resolve();
-      });
-      return deferred.promise;
-    };
-
-    //query the helloblock api to get confirmed balance
-    //in all addresses
-    var httpGetToHB = function(url, callback) {
-      $http({
-        method: 'GET',
-        url: url
-      })
-        .success(function(data, status, headers, config) {
-          callback(data);
-        })
-        .error(function(data, status, headers, config) {
-          callback('Error: ', data);
-        });
-    };
-
-    //query the helloblock api to get confirmed balance
-    //in single address
-    var getBalanceForSingleAddress = function(address, isMainNet) {
-      var network = (isMainNet) ? "mainnet" : "testnet";
-      var deferred = $q.defer();
-      var url = 'http://' + network + '.helloblock.io/v1/addresses/' + address;
-      httpGetToHB(url, function(data) {
-        deferred.resolve(data);
-      });
-      return deferred.promise;
+      chrome.storage.local.set({ isMainNet: isMainNet }, callback);
     };
 
     //get currentAddress from chrome local storage
 
-    var getBalanceForCurrentAddress = function(callback) {
+    var getBalanceForCurrentAddress = function() {
       var deferred = $q.defer();
-      //find the currentAddress
-      //TODO: instead of saving currentAddress and network as
-      //separate keys, perhaps we should set a
-      //current settings object that contains
-      //currentAddress and the Netwrok??
-      Utilities.getCurrentAddress()
-        .then(function(address) {
-          console.log("current address: ", address);
-          //find the network the user is currently using
-          Utilities.isMainNet().then(function(isMainNet) {
-            //handle the case when the user has no network preference
-            //and isMainNet is undefined
-            //(this probably occurs when user has not generated
-            // an address)
-            if (isMainNet === undefined) {
-              deferred.resolve("Error! No network specified");
-            } else {
-              //handles the case where there is a network preference
-              //hence can get the balance of the address from HelloBlock
-              getBalanceForSingleAddress(address, isMainNet).then(function(data) {
-                deferred.resolve(data);
-              }).catch(function(error) {
-                console.log("xxxxxxxxxxxxxxxxxx: ", error);
-                deferred.resolve(error);
-              })
-            }
-          })
-        })
+        Utilities.getCurrentAddress().then(function(currentAddress){
+          var isMainNet = (currentAddress[0] === '1') ? true : false;
+          var url = 'http://' + (isMainNet ? 'mainnet' : 'testnet') + '.helloblock.io/v1/addresses/'+ currentAddress;
+          Utilities.httpGet(url, function(data){
+            deferred.resolve(data);
+          });
+        });
       return deferred.promise;
     };
 
     return {
       getBalanceForCurrentAddress: getBalanceForCurrentAddress,
       setNetwork: setNetwork
-    }
-  }
-])
+    };
+}])

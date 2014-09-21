@@ -8,9 +8,8 @@ angular.module('bitclip.sendFactory', [
 
   //maintain transaction details
   var transactionDetails = {
-    amount: 0,
-    //destination should be set to 0
-    destination: 'mq6c9hhyBmQwFe2k2KQtgSQZeKuPj56iJu'
+    amount: '',
+    destination: ''
   };
 
   //update transaction details with passed in object
@@ -18,14 +17,13 @@ angular.module('bitclip.sendFactory', [
     transactionDetails = transactionObj;
   };
 
-  //TODO: sendPayment logic
   return {
     transactionDetails: transactionDetails,
     updateTransaction: updateTransaction
   };
 })
 
-.factory('sendTransactionBuilder', function() {
+.factory('TxBuilder', function() {
   var sendTransaction = function(privateKeyWIF, transactionObj, isMainNet) {
     //this variable sets which bitcoin network to propagate
     //the current transaction to
