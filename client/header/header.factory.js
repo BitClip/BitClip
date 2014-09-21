@@ -1,7 +1,17 @@
-angular.module('bitclip.headerServices', [])
+angular.module('bitclip.headerFactory', [])
 
-.factory('GetBalance', ['$http', '$q', 'Address', 'LocalStorage',
-  function($http, $q, Address, LocalStorage) {
+.factory('GetBalance', ['$http', '$q', 'Utilities',
+  function($http, $q, Utilities) {
+
+    var setNetwork = function(isMainNet, callback) {
+      var deferred = $q.defer();
+      chrome.storage.local.set({
+        isMainNet: isMainNet
+      }, function() {
+        deferred.resolve();
+      });
+      return deferred.promise;
+    };
 
     //query the helloblock api to get confirmed balance
     //in all addresses
@@ -39,11 +49,11 @@ angular.module('bitclip.headerServices', [])
       //separate keys, perhaps we should set a
       //current settings object that contains
       //currentAddress and the Netwrok??
-      Address.findCurrentAddress()
+      Utilities.getCurrentAddress()
         .then(function(address) {
           console.log("current address: ", address);
           //find the network the user is currently using
-          LocalStorage.getNetwork().then(function(isMainNet) {
+          Utilities.isMainNet().then(function(isMainNet) {
             //handle the case when the user has no network preference
             //and isMainNet is undefined
             //(this probably occurs when user has not generated
@@ -66,7 +76,8 @@ angular.module('bitclip.headerServices', [])
     };
 
     return {
-      getBalanceForCurrentAddress: getBalanceForCurrentAddress
+      getBalanceForCurrentAddress: getBalanceForCurrentAddress,
+      setNetwork: setNetwork
     }
   }
 ])
