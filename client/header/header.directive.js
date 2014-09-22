@@ -6,6 +6,6 @@ angular.module('bitclip.headerDirective', [])
     scopes: {
       ngModel: '='
     },
-    templateUrl: 'header/header.html'
+    templateUrl: 'header/header.tpl.html'
   };
 });
