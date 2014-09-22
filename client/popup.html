@@ -9,15 +9,15 @@
     <link rel="stylesheet" href="lib/font-awesome-4.2.0/css/font-awesome.min.css">
   </head>
   <body ng-app="bitclip" ng-csp>
-      <div ng-controller="HeaderController" class="headerBanner">
-        <header-bar/>
-      </div>
-      <ul class="row headerTabs" role="tablist">
-        <li class="sendTab active"><a ui-sref="send">Send</a></li><li class="receiveTab"><a ui-sref="receive">Receive</a></li><li class="historyTab"><a ui-sref="market">History</a></li>
-      </ul>
-        <div ui-view></div>
+    <div ng-controller="headerController" class="headerBanner">
+      <header-bar/>
+    </div>
+    <ul class="row headerTabs" role="tablist">
+      <li class="sendTab active"><a ui-sref="send">Send</a></li><li class="receiveTab"><a ui-sref="receive">Receive</a></li><li class="historyTab"><a ui-sref="market">History</a></li>
+    </ul>
+    <div ui-view></div>
 
-
+    <!-- Library dependencies -->
     <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="lib/angular/angular.js"></script>
@@ -25,6 +25,7 @@
     <script src="lib/angular-morph/dist/angular-morph.min.js"></script>
     <script src="btclib/bitcoinjs-min.js"></script>
     <script src="btclib/helloblock-min.js"></script>
+    
     <!-- Client-side dependencies -->
     <script src="app.js"></script>
     <script src="receive/receive.controller.js"></script>

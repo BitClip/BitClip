@@ -1,28 +1,22 @@
 angular.module('bitclip.headerFactory', [])
 
-.factory('HeaderDetails', ['$http', '$q', 'Utilities',
-  function($http, $q, Utilities) {
+.factory('Header', ['$http', '$q', 'Utilities', function($http, $q, Utilities) {
+  var setNetwork = function(isMainNet, callback) {
+    chrome.storage.local.set({isMainNet: isMainNet}, callback);
+  };
 
-    var setNetwork = function(isMainNet, callback) {
-      chrome.storage.local.set({ isMainNet: isMainNet }, callback);
-    };
+  var getBalanceForCurrentAddress = function() {
+    var deferred = $q.defer();
+    Utilities.getCurrentAddress().then(function(currentAddress) {
+      Utilities.getBalances(currentAddress).then(function(arr) {
+        deferred.resolve(arr[0].confirmedBalance);
+      });
+    });
+    return deferred.promise;
+  };
 
-    //get currentAddress from chrome local storage
-
-    var getBalanceForCurrentAddress = function() {
-      var deferred = $q.defer();
-        Utilities.getCurrentAddress().then(function(currentAddress){
-          var isMainNet = (currentAddress[0] === '1') ? true : false;
-          var url = 'http://' + (isMainNet ? 'mainnet' : 'testnet') + '.helloblock.io/v1/addresses/'+ currentAddress;
-          Utilities.httpGet(url, function(data){
-            deferred.resolve(data);
-          });
-        });
-      return deferred.promise;
-    };
-
-    return {
-      getBalanceForCurrentAddress: getBalanceForCurrentAddress,
-      setNetwork: setNetwork
-    };
-}])
+  return {
+    setNetwork: setNetwork,
+    getBalanceForCurrentAddress: getBalanceForCurrentAddress
+  };
+}]);

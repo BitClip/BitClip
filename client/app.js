@@ -23,5 +23,10 @@ angular.module('bitclip', [
       url: '/receive',
       templateUrl: 'receive/receive.tpl.html',
       controller: 'receiveController'
-    });
+    })
+    // .state('history', {
+    //   url: '/history',
+    //   templateUrl: 'history/history.tpl.html',
+    //   constroller: 'historyController'
+    // });
 }]);

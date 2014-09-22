@@ -1,20 +1,16 @@
 angular.module('bitclip.utilitiesFactory', [])
 
 .factory('Utilities', ['$http', '$q', function($http, $q) {
-  //create init object for each network object
-  //required because assigning obj.testNet to var initObj in initialize
-  //was not working, testNet was still null after assignment
-  var InitObj = function(){
-    this.currentAddress = "";
-    this.currentPrivateKey = "";
+  var InitObj = function() {
+    this.currentAddress = '';
+    this.currentPrivateKey = '';
     this.allAddressesAndKeys = [];
   };
 
   var initialize = function() {
     var deferred = $q.defer();
     chrome.storage.local.get(['isMainNet', 'mainNet', 'testNet'], function(obj) {
-      console.log("data before init: \n\n", obj)
-      if (obj.isMainNet === undefined){
+      if (obj.isMainNet === undefined) {
         obj.isMainNet = true;
       }
       if (obj.mainNet === undefined) {
@@ -31,13 +27,12 @@ angular.module('bitclip.utilitiesFactory', [])
   };
 
   var httpGet = function(url, callback) {
-    console.log("http working");
     $http.get(url)
-      .success(function(data){
+      .success(function(data) {
         callback(data);
       })
       .error(function(data, status, headers, config) {
-        callback('HTTP GET request failed: ', status);
+        callback('HTTP GET request failed: ', data, status, headers, config);
       });
   };
 
@@ -52,7 +47,6 @@ angular.module('bitclip.utilitiesFactory', [])
   var getNetworkData = function(request) {
     var deferred = $q.defer();
     chrome.storage.local.get(['isMainNet', 'mainNet', 'testNet'], function(obj) {
-      console.log(obj, 'theseed');
       if (obj.isMainNet === true) {
         var result = obj.mainNet[request];
         deferred.resolve(result);
@@ -91,9 +85,11 @@ angular.module('bitclip.utilitiesFactory', [])
     isMainNet().then(function(bool) {
       getAllAddresses().then(function(arr) {
         var baseUrl = 'http://' + (bool ? 'mainnet' : 'testnet') + '.helloblock.io/v1/addresses?addresses=';
-        var requestString = arr[0];
+        var requestString = '';
         if (arr.length > 1) {
           requestString += arr.join('&addresses=');
+        } else {
+          requestString = arr[0];
         }
         baseUrl += requestString;
         httpGet(baseUrl, function(obj) {
