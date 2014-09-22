@@ -4,7 +4,6 @@ angular.module('bitclip.receiveFactory', [])
   var newAddress = function() {
     var that = this;
     Utilities.isMainNet().then(function(bool) {
-      // Fuck comments
       var isMainNet = bool;
       var network = isMainNet ? 'bitcoin' : 'testnet';
       var key = bitcoin.ECKey.makeRandom();
@@ -24,14 +23,14 @@ angular.module('bitclip.receiveFactory', [])
               obj[location].allAddressesAndKeys = [[currentAddress, currentPrivateKey]];
               chrome.storage.local.set(obj, function() {
                 that.$apply(function() {
-                  that.allAddresses = [[currentAddress]];
+                  that.allAddresses = [currentAddress];
                 });
               });
             } else {
               obj[location].allAddressesAndKeys.unshift([currentAddress, currentPrivateKey]);
               chrome.storage.local.set(obj, function() {
                 that.$apply(function() {
-                  that.allAddresses.unshift([currentAddress]);
+                  that.allAddresses.unshift(currentAddress);
                 });
               });
             }

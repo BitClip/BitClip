@@ -1,32 +1,26 @@
 angular.module('bitclip.headerController', [])
 
-.controller('HeaderController', ['$scope', 'HeaderDetails', 'Utilities',
-  function($scope, HeaderDetails, Utilities) {
-    Utilities.initialize().then(function(resolveMessage) {
-      //queries HelloBlock to get Balance of Current Address;
-      $scope.balanceMessage = "Loading Bitcoin address";
-      HeaderDetails.getBalanceForCurrentAddress().then(function(data) {
-        console.log("I am data returned: ", data);
-        var confirmedBalance = data.data.address.confirmedBalance;
-        $scope.balanceMessage = confirmedBalance + " BTC";
-      }).catch(function(error) {
-        //handles when HelloBlock returns error from HTTP request
-        $scope.balanceMessage = "No addresses found";
+.controller('headerController', ['$scope', 'Header', 'Utilities', function($scope, Header, Utilities) {
+  Utilities.initialize().then(function(resolveMessage) {
+    var setBalance = function() {
+      $scope.balanceMessage = "Loading balance ...";
+      Header.getBalanceForCurrentAddress().then(function(confirmedBalance) {
+        $scope.balanceMessage = "Balance: " + confirmedBalance + " BTC";
+      }).catch(function(err) {
+        $scope.balanceMessage = "No valid addresses found.";
       });
+    };
 
-      //Checks what network the user was last using
-      var getNetworkStatus = function(){
-        Utilities.isMainNet().then(function(isMainNet) {
-            $scope.isMainNet = isMainNet;
-        });
-      };
+    var getNetworkStatus = function() {
+      Utilities.isMainNet().then(function(isMainNet) {
+        $scope.isMainNet = isMainNet;
+        setBalance();
+      });
+    };
+    getNetworkStatus();
 
-      getNetworkStatus();
-      //when user click change to MainNet/TestNet
-      //toggle the isMainNet variable in chrome local storage
-      //and then update the $scope.isMainNet variable
-      $scope.toggleNetwork = function() {
-        HeaderDetails.setNetwork(!$scope.isMainNet, getNetworkStatus);
-      };
-    });
+    $scope.toggleNetwork = function() {
+      Header.setNetwork(!$scope.isMainNet, getNetworkStatus);
+    };
+  });
 }]);
