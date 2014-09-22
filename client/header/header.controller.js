@@ -8,7 +8,7 @@ angular.module('bitclip.headerController', [])
       HeaderDetails.getBalanceForCurrentAddress().then(function(data) {
         console.log("I am data returned: ", data);
         var confirmedBalance = data.data.address.confirmedBalance;
-        $scope.balanceMessage = "Balance: " + confirmedBalance + " BTC";
+        $scope.balanceMessage = confirmedBalance + " BTC";
       }).catch(function(error) {
         //handles when HelloBlock returns error from HTTP request
         $scope.balanceMessage = "No addresses found";
