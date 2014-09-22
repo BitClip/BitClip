@@ -2,12 +2,17 @@
 @import url(http://fonts.googleapis.com/css?family=Cabin:400,700);
 @import url(http://fonts.googleapis.com/css?family=Varela+Round);
 
+
 /* Colors:   
   Teal: #35A5A7;
   Orange: #F1A533;
   Red: #F13C3F;
-  Light: #F1F1F1;
-  Dark: #0B0B0B;
+  
+  Light-Dark Scale
+    Light: #F1F1F1;
+    -- #C2C2C2
+    -- #E8E8E8;
+    Dark: #0B0B0B;
 
 
   Green: #60C03C;
@@ -37,17 +42,20 @@ a {
 }
 
 
-.row{
+.headerBanner{
+  width:100%;
   box-sizing:border-box;
   position:relative;
   height:14%;
-  width:100%;
+  background-color: white;
 }
 
 /* ------- Header ------- */
 
-.banner{
+.banner {
   background-color: white;
+  top:0;
+  left:0;
 }
 
 .banner > ul {
@@ -65,6 +73,9 @@ a {
   left:10px;
   top:7px;
 }
+.btcBalance > i {
+  color: #F1A533;
+}
 
 .bitclipTitle {
   width:100%;
@@ -77,9 +88,126 @@ a {
   font-weight: 700;
 }
 
-.optionsNav {
+.optionsNav > i {
+  z-index: 1000;
+  position: fixed;
+  color: #F1A533;
+
   right:10px;
   top:7px;
+}
+
+.optionsNav > ul.dropdown-menu {
+  position: fixed;
+  list-style-type: none;
+  max-width: calc(33% - 6px);
+  height:66%;
+
+  right:6px;
+  top:3px;
+  background-color: white;
+  z-index: 999;
+  box-sizing:border-box;
+
+  padding:5px;
+  border: 1px solid #F1A533;
+  border-radius: 2px;
+  border-top-right-radius: 10px;
+  margin:0;
+  font-size: .8em;
+}
+
+.optionsNav > ul.dropdown-menu > li:first-child{
+
+  color: #0B0B0B;
+  font-size: 1.2em;
+  position: relative;
+  padding-left: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #E8E8E8;
+
+}
+.dropdown-menu li {
+  padding-bottom:10px;
+}
+.dropdown-menu > li > i {
+  color:#C2C2C2;
+  font-size: .8em;
+  letter-spacing: .5em;
+
+}
+
+.toggleNetwork{
+  display: inline-block;
+}
+
+.optionsNav > ul > li {
+  color: #0B0B0B;
+}
+
+.toggleNetwork > span {
+  color: #35A533;
+}
+.toggleNetwork > .testNetwork{
+  color: #F1A533;
+}
+
+
+
+/*  ------- Network Toggle Button -------  */
+
+.onoffswitch {
+    position: relative; width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 1px solid #0B0B0B; border-radius: 50px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 16px; padding: 0; line-height: 16px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "main";
+    padding-left: 14px;
+    background-color: #35A533; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "test";
+    padding-right: 14px;
+    background-color: #F1A533; color: #FFFFFF;
+    text-align: right;
+}
+.onoffswitch-switch {
+    text-align:center;
+    display: block; width: 30px; margin: -7px;
+    margin-right: -11px;
+    background: #E8E8E8;
+    border: 1px solid #0B0B0B; border-radius: 0px;
+    position: absolute; top: 0; bottom: 0; right: 70px;
+    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-switch > i {
+  color: #C2C2C2;
+  position: relative;
+  top:4px;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
 }
 
 /* ------- Tabs ------- */
@@ -88,9 +216,14 @@ a {
 .headerTabs {
   background-color: white;
   border-bottom: 1px solid #F1A533;
+  box-sizing:border-box;
+  position:relative;
+  height:14%;
+  width:100%;
 }
 
 .headerTabs > li{
+
   display:inline-block;
   text-align: center;
   position:relative;
@@ -126,7 +259,6 @@ li.active, li.active > a {
 .headerTabs li:hover:not(.active) a {
   background-color: #E8E8E8;
   color:#0B0B0B;
-
 }
 
 

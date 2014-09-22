@@ -7,12 +7,20 @@
     <meta name="viewport" content="width=device-width">
     <!-- <link rel="stylesheet" href="bootstrap.min.css"> -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="lib/font-awesome-4.2.0/css/font-awesome.min.css">
   </head>
   <body ng-app="bitclip" ng-csp>
-    <div class="container">
-      <div ng-controller="HeaderController">
+    <!-- <div class="container"> -->
+      <div ng-controller="HeaderController" class="headerBanner">
         <header-bar/>
       </div>
+       <!--  <div class="row banner">
+          <ul>
+          <li class="btcBalance">B 0.002</li>
+          <li class="bitclipTitle"> Bitclip </li>
+          <li class="optionsNav"> Options </li>
+          </ul>
+        </div> -->
       <ul class="row headerTabs" role="tablist">
         <li class="sendTab active"><a ui-sref="send">Send</a></li><li class="receiveTab"><a ui-sref="receive">Receive</a></li><li class="historyTab"><a ui-sref="market">History</a></li>
       </ul>
