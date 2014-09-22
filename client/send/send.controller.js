@@ -5,18 +5,13 @@ angular.module('bitclip.sendController', [
 .controller('sendController', ['$scope', 'persistentTransaction', 'TxBuilder','Utilities',
   function($scope, persistentTransaction, TxBuilder, Utilities) {
 
-    //  ng morph modal
-    $scope.send = {
-      closeEl: '.close',
-      modal: {
-        templateUrl: 'send/send.btn.html',
-        position: {
-          top: '85%',
-          left: '0%'
-        },
-        fade: false
-      }
-    };
+  //  ng morph modal
+  $scope.confirmed = false;
+  $scope.morph = function(){
+    console.log('changin: ', $scope.confirmed );
+    $scope.confirmed = !$scope.confirmed;
+    console.log('to? ', $scope.confirmed );
+  }
 
     //initialize transaction details (amount, destination)
     $scope.transactionDetails = persistentTransaction.transactionDetails;
