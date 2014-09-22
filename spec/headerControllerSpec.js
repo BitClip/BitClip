@@ -11,20 +11,32 @@ describe('HeaderController', function () {
     //$window = $injector.get('$window');//////////////////////this might have to be chrome storage
     GetBalance = $injector.get('GetBalance');
     $scope = $rootScope.$new();
+    $window = $injector.get('$window');
 
-    //var $controller = $injector.get('$controller');
+    $window.chrome = {
+                      storage:{
+                        local: sinon.stub({
+                            set: function(){ },
+                            get: function(){ },
+                            remove: function(){ },
+                            clear: function(){ }
+                        })
+                      }
+                    };
 
-    // used to create our AuthController for testing
-    // createController = function () {
-    //   return $controller('receiveController', {
-    //     $scope: $scope,
-    //    // $window: $window, ////////////////////might have to be chrome storage
-    //     $location: $location,
-    //     Address: Address
-    //   });
-    // };
+    var $controller = $injector.get('$controller');
 
-    //createController();
+    //used to create our AuthController for testing
+    createController = function () {
+      return $controller('receiveController', {
+        $scope: $scope,
+       // $window: $window, ////////////////////might have to be chrome storage
+        $location: $location,
+        GetBalance: GetBalance
+      });
+    };
+
+    createController();
   }));
 
   afterEach(function() {
