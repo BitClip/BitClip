@@ -1,11 +1,346 @@
-.sendButton {
-  width: 100%;
-  background-color: #24b662;
-  border: 3px dashed #0a833d;
+@import url(http://fonts.googleapis.com/css?family=Cabin+Condensed:400,500,600,700);
+@import url(http://fonts.googleapis.com/css?family=Cabin:400,700);
+@import url(http://fonts.googleapis.com/css?family=Varela+Round);
+
+
+/* Colors:   
+  Teal: #35A5A7;
+  Orange: #F1A533;
+  Red: #F13C3F;
+  
+  Light-Dark Scale
+    Light: #F1F1F1;
+    -- #C2C2C2
+    -- #E8E8E8;
+    Dark: #0B0B0B;
+
+
+  Green: #60C03C;
+         #35A533
+
+ */
+
+
+/* ------- Body Size ------- */
+
+body {
+  width:360px;
+  height: 270px;
+  margin:0;
+  font-family:"Cabin Condensed", sans-serif;
+  background-color: #F1F1F1;
+  /*border:2px solid #4F3632;*/
+}
+ul, li {
+  padding:0;
+  margin:0;
+  box-sizing:border-box;
+}
+a {
+  text-decoration: none;
+  color: #0B0B0B;
 }
 
-.sendButton:hover {
+
+.headerBanner{
+  width:100%;
+  box-sizing:border-box;
+  position:relative;
+  height:14%;
+  background-color: white;
+}
+
+/* ------- Header ------- */
+
+.banner {
+  background-color: white;
+  top:0;
+  left:0;
+}
+
+.banner > ul {
+  width:100%;
+  position: relative;
+}
+
+.banner > ul > li {
+  display: inline-block;
+  position: absolute;
+  color: #35A5A7;
+}
+
+.btcBalance{
+  left:10px;
+  top:7px;
+}
+.btcBalance > i {
+  color: #F1A533;
+}
+
+.bitclipTitle {
+  width:100%;
+  text-align: center;
+  top:3px;
+
+  font-family: 'Cabin', sans-serif;
+  font-size: 1.5em;
+  font-style: bold;
+  font-weight: 700;
+}
+
+.optionsNav > i {
+  z-index: 1000;
+  position: fixed;
+  color: #F1A533;
+
+  right:10px;
+  top:7px;
+}
+
+.optionsNav > ul.dropdown-menu {
+  position: fixed;
+  list-style-type: none;
+  max-width: calc(33% - 6px);
+  height:66%;
+
+  right:6px;
+  top:3px;
+  background-color: white;
+  z-index: 999;
+  box-sizing:border-box;
+
+  padding:5px;
+  border: 1px solid #F1A533;
+  border-radius: 2px;
+  border-top-right-radius: 10px;
+  margin:0;
+  font-size: .8em;
+}
+
+.optionsNav > ul.dropdown-menu > li:first-child{
+
+  color: #0B0B0B;
+  font-size: 1.2em;
+  position: relative;
+  padding-left: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #E8E8E8;
+
+}
+.dropdown-menu li {
+  padding-bottom:10px;
+}
+.dropdown-menu > li > i {
+  color:#C2C2C2;
+  font-size: .8em;
+  letter-spacing: .5em;
+
+}
+
+.toggleNetwork{
+  display: inline-block;
+}
+
+.optionsNav > ul > li {
+  color: #0B0B0B;
+}
+
+.toggleNetwork > span {
+  color: #35A533;
+}
+.toggleNetwork > .testNetwork{
+  color: #F1A533;
+}
+
+
+
+/*  ------- Network Toggle Button -------  */
+
+.onoffswitch {
+    position: relative; width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 1px solid #0B0B0B; border-radius: 50px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 16px; padding: 0; line-height: 16px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "main";
+    padding-left: 14px;
+    background-color: #35A533; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "test";
+    padding-right: 14px;
+    background-color: #F1A533; color: #FFFFFF;
+    text-align: right;
+}
+.onoffswitch-switch {
+    text-align:center;
+    display: block; width: 30px; margin: -7px;
+    margin-right: -11px;
+    background: #E8E8E8;
+    border: 1px solid #0B0B0B; border-radius: 0px;
+    position: absolute; top: 0; bottom: 0; right: 70px;
+    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-switch > i {
+  color: #C2C2C2;
+  position: relative;
+  top:4px;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+
+/* ------- Tabs ------- */
+
+
+.headerTabs {
+  background-color: white;
+  border-bottom: 1px solid #F1A533;
+  box-sizing:border-box;
+  position:relative;
+  height:14%;
+  width:100%;
+}
+
+.headerTabs > li{
+
+  display:inline-block;
+  text-align: center;
+  position:relative;
+  box-sizing:border-box;
+  width:33.3%;
+  height:100%;
+
+  font-size: 1.1em;
+  letter-spacing: .1em;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  background-color: #F1F1F1;
+}
+
+.headerTabs > li > a {
+  outline:none;
+  position: relative;
+  top:20%;
+  color:#C2C2C2;
+}
+
+.receiveTab {
+  border-right:1px solid white;
+  border-left:1px solid white;
+}
+
+li.active, li.active > a {
+  background-color: #F1A533;
+  color:white;
+}
+ 
+.headerTabs li:hover:not(.active),
+.headerTabs li:hover:not(.active) a {
+  background-color: #E8E8E8;
+  color:#0B0B0B;
+}
+
+
+/* ------- Send View ------- */
+
+form {
+  position:relative;
+  top:0;
+}
+
+label {
+  display: block;
+  position: relative;
+  font-size: 1.3em;
+  letter-spacing: .04em;
+  margin:4% 0 3% 8%;
+}
+
+form input {
+  margin: 0em;
+  color:#0B0B0B;
+  text-indent: 5px;
+  border:none;
+  padding: 2px;
+  border: 1px solid #E8E8E8;
+  display: block;
+  width:80%;
+  margin:auto;
+}
+
+input:focus{
+  outline:0;
+  box-shadow: inset 0 0 2px #35A533;
+}
+
+.sendViewButton{
+  height: 14%;
+  border:2px solid;
+  font-weight: 400;
+  font-size: .9em;
+  letter-spacing: .15em;
+  position: fixed;
+  padding:0;
+  color:white;
+  border-color: #35A533;
+}
+
+.sendButton {
+  width:100%;
+  bottom:.5%;
+  background-color: #35A533;
+}
+
+.sendButton:hover{
   background-color: #2ecc71;
   border: 3px double #0a833d;
-  color: #0a833d;
+  color:#0a833d;
 }
+
+.morphButton{
+  width:49%;
+  background-color: white;
+  border-width: .15em;
+  font-weight: 700;
+  font-size:.9em;
+  bottom:.5%;
+  z-index: 21000;
+}
+
+.send-confirm{
+  color: #35A533;
+  border-color: #35A533;
+  left:.5%;
+}
+
+.send-cancel{
+  color: #F13C3F;
+  border-color: #F13C3F;
+  right:.5%;
+}
+/*.close{
+  opacity: 1;
+}
+*/
+
