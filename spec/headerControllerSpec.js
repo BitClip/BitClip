@@ -1,30 +1,30 @@
-describe('receiveController', function () {
+describe('HeaderController', function () {
   // Load the module with MainController
   beforeEach(module('bitclip'));
 
-  var $scope, $rootScope, $location, $window, createController, Address;
+  var $scope, $rootScope, $location, $window, createController, GetBalance;
 
   beforeEach(inject(function($injector) {
     // mock out our dependencies
     $rootScope = $injector.get('$rootScope');
     $location = $injector.get('$location');
     //$window = $injector.get('$window');//////////////////////this might have to be chrome storage
-    Address = $injector.get('Address');
+    GetBalance = $injector.get('GetBalance');
     $scope = $rootScope.$new();
 
-    var $controller = $injector.get('$controller');
+    //var $controller = $injector.get('$controller');
 
     // used to create our AuthController for testing
-    createController = function () {
-      return $controller('receiveController', {
-        $scope: $scope,
-       // $window: $window, ////////////////////might have to be chrome storage
-        $location: $location,
-        Address: Address
-      });
-    };
+    // createController = function () {
+    //   return $controller('receiveController', {
+    //     $scope: $scope,
+    //    // $window: $window, ////////////////////might have to be chrome storage
+    //     $location: $location,
+    //     Address: Address
+    //   });
+    // };
 
-    createController();
+    //createController();
   }));
 
   afterEach(function() {

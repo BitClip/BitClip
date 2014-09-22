@@ -32,7 +32,7 @@ module.exports = function(config) {
 
       // our spec files
       'node_modules/expect.js/index.js',
-      'spec/**/*.js'
+      'spec/**/*.js'///////////////////////////may not want to test anything that has to do with chrome storage
     ],
 
 
