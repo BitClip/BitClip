@@ -1,40 +1,17 @@
-//not loaded into app.js yet
-
-angular.module('bitclip.sendFactory', [
-  'ui.router'
-])
-
-.factory('persistentTransaction', function() {
-
-  //maintain transaction details
-  var transactionDetails = {
-    amount: '',
-    destination: ''
-  };
-
-  //update transaction details with passed in object
-  var updateTransaction = function(transactionObj) {
-     console.log(transactionObj);
-    transactionDetails = transactionObj;
-     console.log(transactionDetails);
-  };
-
-  return {
-    transactionDetails: transactionDetails,
-    updateTransaction: updateTransaction
-  };
-})
-
+angular.module('bitclip.sendFactory', [])
 .factory('TxBuilder', ['$q', function($q) {
   var sendTransaction = function(privateKeyWIF, transactionObj, isMainNet) {
-
 
     var deferred = $q.defer();
 
     //this variable sets which bitcoin network to propagate
     //the current transaction to
-    var networkVar = (isMainNet) ? undefined : {
-      network: 'testnet'
+    var networkVar = (isMainNet) ? {
+      network:"mainnet",
+      debug: true
+    } : {
+      network: 'testnet',
+      debug: true
     };
 
     //instantiate a new helloblock transaction object with
@@ -58,7 +35,8 @@ angular.module('bitclip.sendFactory', [
     helloblocktx.addresses.getUnspents(ecKeyAddress, {
       value: txTargetValue + txFee
     }, function(err, res, unspents) {
-      if (err) throw new Error(err)
+      // if (err) throw new Error(err)
+      if (err) deferred.reject(err);
 
       var tx = new bitcoin.Transaction()
 
@@ -78,27 +56,15 @@ angular.module('bitclip.sendFactory', [
       })
 
       var rawTxHex = tx.toHex();
-
-      
-
       helloblocktx.transactions.propagate(rawTxHex, function(err, res, tx) {      
-      
-        var message = {};
         if (err) {
-          message.err = err;
-          message.errMessage = 'Transaction failed.'
-          deferred.reject(message);
-        } else if (res) {
-          message.successMessage = 'Transaction Complete!';
-          deferred.resolve(message)
+          deferred.reject(err);
+        } else if (tx) {
+          deferred.resolve("Transaction successfully propagated");
+          console.log('SUCCESS: https://test.helloblock.io/transactions/' + tx.txHash);
         }
-
-        //TODO: push success message to modal so that confirmation button morphs
-        // to success message
-        console.log('SUCCESS: https://test.helloblock.io/transactions/' + tx.txHash)
       });
-
-    })
+    });
     return deferred.promise;
   }
 

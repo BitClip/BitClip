@@ -24,9 +24,9 @@ angular.module('bitclip', [
       templateUrl: 'receive/receive.tpl.html',
       controller: 'receiveController'
     })
-    // .state('history', {
-    //   url: '/history',
-    //   templateUrl: 'history/history.tpl.html',
-    //   constroller: 'historyController'
-    // });
+    .state('history', {
+      url: '/history',
+      templateUrl: 'history/history.tpl.html',
+      constroller: 'historyController'
+    });
 }]);

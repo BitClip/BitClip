@@ -1,8 +1,8 @@
 <form ng-submit="document.getElementById('send').click()">
   <label>Destination:</label>
-  <input type="text" name="destination" placeholder="Recipient address" ng-model="transactionDetails.destination" required autofocus>
+  <input type="text" name="destination" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" ng-model="transactionDetails.destination" required autofocus>
   <label>Amount:</label>
-  <input type="text" name="amount" placeholder="Number of bitcoins to send" ng-model="transactionDetails.amount" required>
+  <input type="text" name="amount" placeholder="minimum 0.0001 BTC" ng-model="transactionDetails.amount" required>
 </form>
 
 <div ng-if="txSuccess" class="successModal">
@@ -10,9 +10,9 @@
   <p>{{txSuccessMessage}}</p>
 </div>
 
-<button ng-if="!confirmed" id="send" class="sendViewButton sendButton" ng-click="updateTransactionDetails(); morph();">Send</button>
+<button ng-if="!confirmed" id="send" class="sendViewButton sendButton" ng-click="morph();">Send</button>
 
-<button ng-if="confirmed" class="sendViewButton morphButton send-confirm"  ng-click="sendPayment(amount); morph();">confirm</button>
+<button ng-if="confirmed" class="sendViewButton morphButton send-confirm"  ng-click="sendPayment(); morph();">confirm</button>
 <button ng-if="confirmed" class="sendViewButton morphButton send-cancel" ng-click="morph();">cancel</button>
 
 

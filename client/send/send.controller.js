@@ -2,26 +2,24 @@ angular.module('bitclip.sendController', [
   'ngMorph'
 ])
 
-.controller('sendController', ['$scope', '$timeout', 'persistentTransaction', 'TxBuilder','Utilities',
-  function($scope, $timeout, persistentTransaction, TxBuilder, Utilities) {
+.controller('sendController', ['$scope', '$timeout', 'TxBuilder','Utilities',
+  function($scope, $timeout, TxBuilder, Utilities) {
 
-  //  ng morph modal
-  $scope.confirmed = false;
-  
-  $scope.confirmTransaction = function(message, success){
-      $scope.txSuccessMessage = message;
-      $scope.txSuccess = true;
-      $timeout(function(){ $scope.txSuccess = false }, 3000);
-  }
+    //  ng morph modal
+    $scope.confirmed = false;
+    
+    $scope.confirmTransaction = function(message, success){
+        $scope.txSuccessMessage = message;
+        $scope.txSuccess = true;
+        $timeout(function(){ $scope.txSuccess = false }, 3000);
+    };
 
-  $scope.morph = function(){
-    console.log('changin: ', $scope.confirmed );
-    $scope.confirmed = !$scope.confirmed;
-    console.log('to? ', $scope.confirmed );
-  }
+    $scope.morph = function(){
+      $scope.confirmed = !$scope.confirmed;
+    };
 
     //initialize transaction details (amount, destination)
-    $scope.transactionDetails = persistentTransaction.transactionDetails;
+    $scope.transactionDetails = {};
 
     //update the transaction details with input field values
     $scope.updateTransactionDetails = function() {
@@ -33,12 +31,9 @@ angular.module('bitclip.sendController', [
       Utilities.isMainNet().then(function(isMainNet){
         Utilities.getCurrentPrivateKey().then(function(currentPrivateKey){
           TxBuilder.sendTransaction(currentPrivateKey, $scope.transactionDetails, isMainNet).then(function(message){
-                if(message.successMessage) {
-                  $scope.confirmTransaction(message.successMessage, true);
-                } else {
-                  var err = message.errMessage || 'Transaction failed.';
-                  $scope.confirmTransaction(err, false)
-                }
+            $scope.confirmTransaction(message, true);
+          }).catch(function(err){
+            $scope.confirmTransaction('Transaction failed: ' + err.message, false);
           });
         });
       });
