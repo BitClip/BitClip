@@ -1,16 +1,14 @@
 <div class="row banner">
   <ul>
-    <li class="balanceDisplay btcBalance"><i class="fa fa-btc"></i> {{balanceMessage}}</li>
-    <li class="bitclipTitle"> BitClip </li>
+    <li class="balanceDisplay btcBalance"><i class="fa fa-btc"></i>{{ balanceMessage }}</li>
+    <li class="bitclipTitle">BitClip</li>
     <li class="optionsNav settingsDropDown"><i ng-click="isCollapsed = !isCollapsed" ng-init="isCollapsed = true" class="fa fa-cog"></i>
-
       <ul ng-if="!isCollapsed" class="dropdown-menu" role="menu">
-        <li> Options </li>
+        <li>Options</li>
         <li class="toggleNetwork">
-          <i class="fa fa-globe"></i> Network: 
+          <i class="fa fa-globe"></i>Network:
           <span ng-if="isMainNet">Main</span>
           <span class="testNetwork" ng-if="!isMainNet">Test</span>
-
           <div class="onoffswitch">
             <input type="checkbox" name="onoffswitch" ng-click="toggleNetwork()" class="onoffswitch-checkbox" id="myonoffswitch" ng-model="isMainNet">
             <label class="onoffswitch-label" for="myonoffswitch">
@@ -19,12 +17,9 @@
             </label>
           </div>
         </li>
-
-        <li ><i class="fa fa-lock"></i> <a href="#"> Two-Factor Authentication</a></li>
-        <li ><i class="fa fa-book"></i> <a href="#"> Backup Wallet</a></li>
+        <li><i class="fa fa-lock"></i><a href="#">Two-Factor Authentication</a></li>
+        <li><i class="fa fa-book"></i><a href="#">Backup Wallet</a></li>
       </ul>
     </li>
   </ul>
-
 </div>
-

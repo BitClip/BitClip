@@ -12,7 +12,6 @@ angular.module('bitclip', [
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/send');
-
   $stateProvider
     .state('send', {
       url: '/send',
