@@ -1,17 +1,17 @@
-describe('HeaderController', function () {
+describe('headerController', function () {
   // Load the module with MainController
   beforeEach(module('bitclip'));
 
-  var $scope, $rootScope, $location, $window, createController, HeaderDetails;
+  var $scope, $rootScope, $location, $window, createController, Header, Utilities;
 
   beforeEach(inject(function($injector) {
-    // mock out our dependencies
     $rootScope = $injector.get('$rootScope');
     $location = $injector.get('$location');
-    //$window = $injector.get('$window');//////////////////////this might have to be chrome storage
-    HeaderDetails = $injector.get('HeaderDetails');
     $scope = $rootScope.$new();
     $window = $injector.get('$window');
+
+    Header = $injector.get('Header');
+    Utilities = $injector.get('Utilities');
 
     $window.chrome = {
                       storage:{
@@ -28,11 +28,12 @@ describe('HeaderController', function () {
 
     //used to create our AuthController for testing
     createController = function () {
-      return $controller('HeaderController', {
+      return $controller('headerController', {
         $scope: $scope,
        // $window: $window, ////////////////////might have to be chrome storage
         $location: $location,
-        HeaderDetails: HeaderDetails
+        Header: Header,
+        Utilities: Utilities
       });
     };
 

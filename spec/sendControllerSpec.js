@@ -13,7 +13,7 @@ describe('sendController', function () {
     persistentTransaction = $injector.get('persistentTransaction');
     TxBuilder = $injector.get('TxBuilder');
     Utilities = $injector.get('Utilities');
-
+    console.log("persistenttx", persistentTransaction.transactionDetails);
     tempStore = {
                   isMainNet: true,
                   mainNet: {
@@ -69,12 +69,12 @@ describe('sendController', function () {
     expect(TxBuilder.sendTransaction).to.be.a('function');
   });
 
-  it('updateTransaction should update transactionDetails', function () {
+  xit('updateTransaction should update transactionDetails', function () {
     var thing = {
       amount: 'thingOne',
       destination: 'thingTwo'
     };
-    //console.log(thing);
+    console.log(thing);
     persistentTransaction.updateTransaction(thing);
     console.log(persistentTransaction.transactionDetails);
     expect(persistentTransaction.transactionDetails).to.equal("");

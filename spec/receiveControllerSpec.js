@@ -17,8 +17,6 @@ describe('receiveController', function () {
     Receive = $injector.get('Receive');
     Utilities = $injector.get('Utilities');
     
-    console.log("WINDOOOOOOOOOOOW2: " + $window);
-
     tempStore = {
                   isMainNet: true,
                   mainNet: {
