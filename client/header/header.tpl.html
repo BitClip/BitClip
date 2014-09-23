@@ -1,22 +1,30 @@
 <div class="row banner">
   <ul>
-    <li class="balanceDisplay btcBalance"><i class="fa fa-btc"></i>{{ balanceMessage }}</li>
-    <li class="bitclipTitle">BitClip</li>
-    <li class="optionsNav settingsDropDown"><i class="fa fa-cog" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed"></i>
-      <ul class="dropdown-menu" role="menu" ng-if="!isCollapsed">
-        <li>Options</li>
-        <li class="toggleNetwork"><i class="fa fa-globe"></i>Network:<span ng-if="isMainNet">Main</span><span class="testNetwork" ng-if="!isMainNet">Test</span>
+    <li class="balanceDisplay btcBalance"><i class="fa fa-btc"></i> {{balanceMessage}}</li>
+    <li class="bitclipTitle"> BitClip </li>
+    <li class="optionsNav settingsDropDown"><i ng-click="isCollapsed = !isCollapsed" ng-init="isCollapsed = true" class="fa fa-cog"></i>
+
+      <ul ng-if="!isCollapsed" class="dropdown-menu" role="menu">
+        <li> Options </li>
+        <li class="toggleNetwork">
+          <i class="fa fa-globe"></i> Network: 
+          <span ng-if="isMainNet">Main</span>
+          <span class="testNetwork" ng-if="!isMainNet">Test</span>
+
           <div class="onoffswitch">
-            <input id="myonoffswitch" class="onoffswitch-checkbox" type="checkbox" name="onoffswitch" ng-click="toggleNetwork()">
+            <input type="checkbox" name="onoffswitch" ng-click="toggleNetwork()" class="onoffswitch-checkbox" id="myonoffswitch" ng-model="isMainNet">
             <label class="onoffswitch-label" for="myonoffswitch">
               <span class="onoffswitch-inner"></span>
               <span class="onoffswitch-switch"><i class="fa fa-bars"></i></span>
             </label>
           </div>
         </li>
-        <li><i class="fa fa-lock"></i><a href="#">Two-Factor Authentication</a></li>
-        <li><i class="fa fa-book"></i><a href="#">Backup Wallet</a></li>
+
+        <li ><i class="fa fa-lock"></i> <a href="#"> Two-Factor Authentication</a></li>
+        <li ><i class="fa fa-book"></i> <a href="#"> Backup Wallet</a></li>
       </ul>
     </li>
   </ul>
+
 </div>
+

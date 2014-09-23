@@ -214,6 +214,7 @@ a {
 
 
 .headerTabs {
+  list-style-type: none;
   background-color: white;
   border-bottom: 1px solid #F1A533;
   box-sizing:border-box;
@@ -223,25 +224,20 @@ a {
 }
 
 .headerTabs > li{
-
-  display:inline-block;
+  line-height: 200%;
+  text-align: center;
+  float:left;
   text-align: center;
   position:relative;
   box-sizing:border-box;
   width:33.3%;
   height:100%;
-
   font-size: 1.1em;
   letter-spacing: .1em;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   background-color: #F1F1F1;
-}
-
-.headerTabs > li > a {
   outline:none;
-  position: relative;
-  top:20%;
   color:#C2C2C2;
 }
 
@@ -250,7 +246,7 @@ a {
   border-left:1px solid white;
 }
 
-li.active, li.active > a {
+li.active {
   background-color: #F1A533;
   color:white;
 }
