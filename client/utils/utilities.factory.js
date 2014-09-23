@@ -100,7 +100,8 @@ angular.module('bitclip.utilitiesFactory', [])
     return deferred.promise;
   };
 
-  // get reports when 
+  // use websocket to emit events when there is a change
+  // in balance on the currentAddress
   var getLiveBalanceForCurrentAddress = function(callback){
     isMainNet().then(function(bool) {
       getCurrentAddress().then(function(currentAddress){
@@ -130,7 +131,8 @@ angular.module('bitclip.utilitiesFactory', [])
             }, 1000);
           };
 
-          //possible reason for error: invalid address
+          //possible reason for error: invalid bitcoin address submited
+          //or if socket hosted by HelloBlock goes down
           ws.onerror = function(err) {
             console.error('Socket encountered error: ', err.message, 'Closing socket');
             callback(err.message, null);

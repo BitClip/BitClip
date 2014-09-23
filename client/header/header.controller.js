@@ -16,7 +16,7 @@ angular.module('bitclip.headerController', [])
     //set active tab to whichever is clicked
     $scope.setActiveTab = function(tab){
       $scope.activeTab = tab;
-    }
+    };
 
     var getNetworkStatus = function() {
       Utilities.isMainNet().then(function(isMainNet) {
