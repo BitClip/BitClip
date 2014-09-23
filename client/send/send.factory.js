@@ -33,8 +33,12 @@ angular.module('bitclip.sendFactory', [
 
     //this variable sets which bitcoin network to propagate
     //the current transaction to
-    var networkVar = (isMainNet) ? undefined : {
-      network: 'testnet'
+    var networkVar = (isMainNet) ? {
+      network:"mainnet",
+      debug: true
+    } : {
+      network: 'testnet',
+      debug: true
     };
 
     //instantiate a new helloblock transaction object with
@@ -78,27 +82,15 @@ angular.module('bitclip.sendFactory', [
       })
 
       var rawTxHex = tx.toHex();
-
-      
-
       helloblocktx.transactions.propagate(rawTxHex, function(err, res, tx) {      
-      
-        var message = {};
         if (err) {
-          message.err = err;
-          message.errMessage = 'Transaction failed.'
-          deferred.reject(message);
-        } else if (res) {
-          message.successMessage = 'Transaction Complete!';
-          deferred.resolve(message)
+          deferred.reject(err);
+        } else if (tx) {
+          deferred.resolve("Transaction successfully propagated");
+          console.log('SUCCESS: https://test.helloblock.io/transactions/' + tx.txHash);
         }
-
-        //TODO: push success message to modal so that confirmation button morphs
-        // to success message
-        console.log('SUCCESS: https://test.helloblock.io/transactions/' + tx.txHash)
       });
-
-    })
+    });
     return deferred.promise;
   }
 

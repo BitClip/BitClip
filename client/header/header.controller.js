@@ -3,9 +3,7 @@ angular.module('bitclip.headerController', [])
 .controller('headerController', ['$scope', 'Header', 'Utilities', function($scope, Header, Utilities) {
   Utilities.initialize().then(function(resolveMessage) {
 
-
     var setBalance = function() {
-      $scope.balanceMessage = "Loading balance ...";
       Header.getBalanceForCurrentAddress().then(function(confirmedBalance) {
         $scope.balanceMessage = confirmedBalance/100000000 + " BTC";
       }).catch(function(err) {
@@ -26,16 +24,15 @@ angular.module('bitclip.headerController', [])
         setBalance();
       });
     };
+    
     getNetworkStatus();
+
 
     Utilities.getLiveBalanceForCurrentAddress(function(err, data){
       if (err){
         console.error(err);
       } else {
-        console.log("header: ", data);
-        var newBalance = data.address.balance/10000;
-        console.log(newBalance);
-        $scope.balanceMessage = " Bal: " + newBalance + " BTC";
+        $scope.balanceMessage = " Bal: " + data.address.balance/100000000 + " BTC";
       }; 
     });
 
