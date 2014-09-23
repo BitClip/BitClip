@@ -9,16 +9,15 @@
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
   </head>
   <body ng-app="bitclip" ng-csp>
-      <div ng-controller="HeaderController" class="headerBanner">
-          <header-bar/>
-        </div>
-        <ul class="row headerTabs" ng-controller="HeaderController">
-          <li class="sendTab" ng-class="{'active': activeTab === 'send'}" ui-sref="send" ng-click="setActiveTab('send')">Send</li>
-          <li class="receiveTab" ng-class="{'active': activeTab === 'receive'}" ui-sref="receive" ng-click="setActiveTab('receive')">Receive </li>
-          <li class="historyTab" ng-class="{'active': activeTab === 'history'}" ng-click="setActiveTab('history')" ui-sref="history">History</li>
-        </ul>
-      <!-- </div> -->
-        <div ui-view></div>
+    <div ng-controller="HeaderController" class="headerBanner">
+      <header-bar/>
+    </div>
+    <ul class="row headerTabs" ng-controller="HeaderController">
+      <li class="sendTab" ng-class="{'active': activeTab === 'send'}" ui-sref="send" ng-click="setActiveTab('send')">Send</li>
+      <li class="receiveTab" ng-class="{'active': activeTab === 'receive'}" ui-sref="receive" ng-click="setActiveTab('receive')">Receive </li>
+      <li class="historyTab" ng-class="{'active': activeTab === 'history'}" ui-sref="history" ng-click="setActiveTab('history')">History</li>
+    </ul>
+    <div ui-view></div>
 
     <!-- Library dependencies -->
     <script src="lib/jquery/dist/jquery.min.js"></script>
