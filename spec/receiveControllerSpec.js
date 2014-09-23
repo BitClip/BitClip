@@ -61,13 +61,13 @@ describe('receiveController', function () {
     //$window.localStorage.removeItem('com.shortly'); //something like this but for chrome storage
   });
 
-  it('tacos', function () {
-    expect(true).to.equal(true);
-  });
+  // it('tacos', function () {
+  //   expect(true).to.equal(true);
+  // });
 
-  it('newAddress should exists', function () {
-    expect(Receive.newAddress).to.be.a('function');
-  });
+  // it('newAddress should exists', function () {
+  //   expect(Receive.newAddress).to.be.a('function');
+  // });
 
    // it('newAddress should ', function () {
   //   console.log("address: " + Address.findCurrentAddress());
