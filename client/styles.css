@@ -214,6 +214,7 @@ a {
 
 
 .headerTabs {
+  list-style-type: none;
   background-color: white;
   border-bottom: 1px solid #F1A533;
   box-sizing:border-box;
@@ -223,25 +224,20 @@ a {
 }
 
 .headerTabs > li{
-
-  display:inline-block;
+  line-height: 200%;
+  text-align: center;
+  float:left;
   text-align: center;
   position:relative;
   box-sizing:border-box;
   width:33.3%;
   height:100%;
-
   font-size: 1.1em;
   letter-spacing: .1em;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   background-color: #F1F1F1;
-}
-
-.headerTabs > li > a {
   outline:none;
-  position: relative;
-  top:20%;
   color:#C2C2C2;
 }
 
@@ -250,7 +246,7 @@ a {
   border-left:1px solid white;
 }
 
-li.active, li.active > a {
+li.active {
   background-color: #F1A533;
   color:white;
 }
@@ -294,7 +290,7 @@ input:focus{
   box-shadow: inset 0 0 2px #35A533;
 }
 
-.sendViewButton{
+.animate-if.sendViewButton{
   height: 14%;
   border:2px solid;
   font-weight: 400;
@@ -306,19 +302,19 @@ input:focus{
   border-color: #35A533;
 }
 
-.sendButton {
+.animate-if.sendButton {
   width:100%;
   bottom:.5%;
   background-color: #35A533;
 }
-
+/*
 .sendButton:hover{
   background-color: #2ecc71;
   border: 3px double #0a833d;
   color:#0a833d;
 }
-
-.morphButton{
+*/
+.animate-if.morphButton{
   width:49%;
   background-color: white;
   border-width: .15em;
@@ -339,8 +335,40 @@ input:focus{
   border-color: #F13C3F;
   right:.5%;
 }
-/*.close{
-  opacity: 1;
+
+.animate-if {
+  color:red;
 }
-*/
+.animate-if.ng-enter,.animate-if.ng-leave {
+  -webkit-transition:0.5s linear all;
+ -moz-transition:0.5s linear all;
+ -o-transition:0.5s linear all;
+ transition:0.5s linear all;
+ opacity:0;
+}
+
+.animate-if.ng-enter,
+.animate-if.ng-leave.ng-leave-active {
+  opacity:0;
+}
+
+.animate-if.ng-leave,
+.animate-if.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+
+.successModal{
+  position: absolute;
+  height:100px;
+  width: 100px;
+  background-color: green;
+  color:white;
+  z-index: 999999;
+}
+
+
+
+
+
 
