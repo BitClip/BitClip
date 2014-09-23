@@ -7,12 +7,12 @@ angular.module('bitclip.headerController', [])
     var setBalance = function() {
       $scope.balanceMessage = "Loading balance ...";
       Header.getBalanceForCurrentAddress().then(function(confirmedBalance) {
-        $scope.balanceMessage = "Balance: " + confirmedBalance + " BTC";
+        $scope.balanceMessage = confirmedBalance + " BTC";
       }).catch(function(err) {
         $scope.balanceMessage = "No valid addresses found.";
       });
     };
-    
+
     //initialize active tab to send
     $scope.activeTab = "send"
     //set active tab to whichever is clicked
