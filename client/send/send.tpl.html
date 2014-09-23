@@ -12,7 +12,7 @@
 
 <button ng-if="!confirmed" id="send" class="sendViewButton sendButton" ng-click="updateTransactionDetails(); morph();">Send</button>
 
-<button ng-if="confirmed" class="sendViewButton morphButton send-confirm"  ng-click="sendPayment(amount); morph();">confirm</button>
+<button ng-if="confirmed" class="sendViewButton morphButton send-confirm"  ng-click="sendPayment(); morph();">confirm</button>
 <button ng-if="confirmed" class="sendViewButton morphButton send-cancel" ng-click="morph();">cancel</button>
 
 

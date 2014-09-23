@@ -100,6 +100,47 @@ angular.module('bitclip.utilitiesFactory', [])
     return deferred.promise;
   };
 
+  // get reports when 
+  var getLiveBalanceForCurrentAddress = function(callback){
+    isMainNet().then(function(bool) {
+      getCurrentAddress().then(function(currentAddress){
+        var url = "wss://socket-" + (bool ? 'mainnet' : 'testnet') + ".helloblock.io";
+        console.log("socket url: ", url);
+        var ws = new WebSocket(url);
+        ws.onopen = function() {
+          ws.send(JSON.stringify({
+            "op": "subscribe",
+            "channel": "addresses",
+            "filters": [currentAddress]
+          }));
+
+          ws.onmessage = function(e) {
+            console.log("SOCKET RECEIVED MESSAGE: \n", e.data);
+            var data = JSON.parse(e.data);
+            if (data.data){
+              callback(null, data.data);
+            }
+          };
+
+          // we automatically reconnect if connection drops
+          ws.onclose = function(e) {
+            console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
+            setTimeout(function() {
+              connect();
+            }, 1000);
+          };
+
+          //possible reason for error: invalid address
+          ws.onerror = function(err) {
+            console.error('Socket encountered error: ', err.message, 'Closing socket');
+            callback(err.message, null);
+            ws.close();
+          };
+        };
+      });
+    });
+  };
+
   return {
     initialize: initialize,
     isMainNet: isMainNet,
@@ -107,6 +148,7 @@ angular.module('bitclip.utilitiesFactory', [])
     getCurrentAddress: getCurrentAddress,
     getCurrentPrivateKey: getCurrentPrivateKey,
     getAllAddresses: getAllAddresses,
-    getBalances: getBalances
+    getBalances: getBalances,
+    getLiveBalanceForCurrentAddress: getLiveBalanceForCurrentAddress
   };
 }]);
