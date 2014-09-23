@@ -1,33 +1,6 @@
-//not loaded into app.js yet
-
-angular.module('bitclip.sendFactory', [
-  'ui.router'
-])
-
-.factory('persistentTransaction', function() {
-
-  //maintain transaction details
-  var transactionDetails = {
-    amount: '',
-    destination: ''
-  };
-
-  //update transaction details with passed in object
-  var updateTransaction = function(transactionObj) {
-     console.log(transactionObj);
-    transactionDetails = transactionObj;
-     console.log(transactionDetails);
-  };
-
-  return {
-    transactionDetails: transactionDetails,
-    updateTransaction: updateTransaction
-  };
-})
-
+angular.module('bitclip.sendFactory', [])
 .factory('TxBuilder', ['$q', function($q) {
   var sendTransaction = function(privateKeyWIF, transactionObj, isMainNet) {
-
 
     var deferred = $q.defer();
 
@@ -62,7 +35,8 @@ angular.module('bitclip.sendFactory', [
     helloblocktx.addresses.getUnspents(ecKeyAddress, {
       value: txTargetValue + txFee
     }, function(err, res, unspents) {
-      if (err) throw new Error(err)
+      // if (err) throw new Error(err)
+      if (err) deferred.reject(err);
 
       var tx = new bitcoin.Transaction()
 

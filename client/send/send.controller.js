@@ -2,8 +2,8 @@ angular.module('bitclip.sendController', [
   'ngMorph'
 ])
 
-.controller('sendController', ['$scope', '$timeout', 'persistentTransaction', 'TxBuilder','Utilities',
-  function($scope, $timeout, persistentTransaction, TxBuilder, Utilities) {
+.controller('sendController', ['$scope', '$timeout', 'TxBuilder','Utilities',
+  function($scope, $timeout, TxBuilder, Utilities) {
 
     //  ng morph modal
     $scope.confirmed = false;
@@ -15,13 +15,11 @@ angular.module('bitclip.sendController', [
     };
 
     $scope.morph = function(){
-      console.log('changin: ', $scope.confirmed );
       $scope.confirmed = !$scope.confirmed;
-      console.log('to? ', $scope.confirmed );
     };
 
     //initialize transaction details (amount, destination)
-    $scope.transactionDetails = persistentTransaction.transactionDetails;
+    $scope.transactionDetails = {};
 
     //update the transaction details with input field values
     $scope.updateTransactionDetails = function() {
@@ -35,8 +33,7 @@ angular.module('bitclip.sendController', [
           TxBuilder.sendTransaction(currentPrivateKey, $scope.transactionDetails, isMainNet).then(function(message){
             $scope.confirmTransaction(message, true);
           }).catch(function(err){
-            console.error(err);
-            $scope.confirmTransaction('Transaction failed.', false);
+            $scope.confirmTransaction('Transaction failed: ' + err.message, false);
           });
         });
       });
