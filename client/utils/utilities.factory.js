@@ -88,8 +88,11 @@ angular.module('bitclip.utilitiesFactory', [])
         var requestString = '';
         if (arr.length > 1) {
           requestString += arr.join('&addresses=');
-        } else {
+        } else if (arr.length === 1) {
           requestString = arr[0];
+        } else {
+          deferred.resolve([]);
+          return deferred.promise;
         }
         baseUrl += requestString;
         httpGet(baseUrl, function(obj) {

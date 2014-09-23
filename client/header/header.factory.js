@@ -9,7 +9,12 @@ angular.module('bitclip.headerFactory', [])
     var deferred = $q.defer();
     Utilities.getCurrentAddress().then(function(currentAddress) {
       Utilities.getBalances(currentAddress).then(function(arr) {
-        deferred.resolve(arr[0].confirmedBalance);
+        if (!arr.length) {
+          deferred.resolve('No address found.');
+          return deferred.promise;
+        } else {
+          deferred.resolve(arr[0].confirmedBalance);
+        }
       });
     });
     return deferred.promise;

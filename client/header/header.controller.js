@@ -1,26 +1,29 @@
 angular.module('bitclip.headerController', [])
 
-.controller('headerController', ['$scope', 'Header', 'Utilities', function($scope, Header, Utilities) {
+.controller('headerController', ['$scope', '$state', 'Header', 'Utilities', function($scope, $state, Header, Utilities) {
   Utilities.initialize().then(function(resolveMessage) {
     var setBalance = function() {
-      $scope.balanceMessage = "Loading balance ...";
+      $scope.balanceMessage = 'Loading balance ...';
       Header.getBalanceForCurrentAddress().then(function(confirmedBalance) {
-        $scope.balanceMessage = "Balance: " + confirmedBalance + " BTC";
-      }).catch(function(err) {
-        $scope.balanceMessage = "No valid addresses found.";
+        if (typeof confirmedBalance === 'string') {
+          $scope.balanceMessage = confirmedBalance;
+        } else {
+          $scope.balanceMessage = 'Balance: ' + confirmedBalance + ' BTC';
+        }
       });
     };
 
-    var getNetworkStatus = function() {
+    $scope.getNetworkStatus = function() {
       Utilities.isMainNet().then(function(isMainNet) {
         $scope.isMainNet = isMainNet;
+        $state.reload();
         setBalance();
       });
     };
-    getNetworkStatus();
+    $scope.getNetworkStatus();
 
     $scope.toggleNetwork = function() {
-      Header.setNetwork(!$scope.isMainNet, getNetworkStatus);
+      Header.setNetwork(!$scope.isMainNet, $scope.getNetworkStatus);
     };
   });
 }]);

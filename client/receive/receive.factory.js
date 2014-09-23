@@ -19,28 +19,40 @@ angular.module('bitclip.receiveFactory', [])
             that.currentAddress = currentAddress;
           });
           chrome.storage.local.get(location, function(obj) {
-            if (!obj[location].allAddressesAndKeys) {
-              obj[location].allAddressesAndKeys = [[currentAddress, currentPrivateKey]];
-              chrome.storage.local.set(obj, function() {
-                that.$apply(function() {
-                  that.allAddresses = [currentAddress];
-                });
+            obj[location].allAddressesAndKeys.unshift([currentAddress, currentPrivateKey]);
+            chrome.storage.local.set(obj, function() {
+              that.$apply(function() {
+                that.allAddresses.unshift(currentAddress);
               });
-            } else {
-              obj[location].allAddressesAndKeys.unshift([currentAddress, currentPrivateKey]);
-              chrome.storage.local.set(obj, function() {
-                that.$apply(function() {
-                  that.allAddresses.unshift(currentAddress);
-                });
-              });
-            }
+            });
           });
         });
       });
     });
   };
 
+  var setAsCurrentAddress = function(address) {
+    var that = this;
+    Utilities.isMainNet().then(function(bool) {
+      var isMainNet = bool;
+      var location = isMainNet ? 'mainNet' : 'testNet';
+
+      chrome.storage.local.get(location, function(obj) {
+        for (var i = 0, l = obj[location].allAddressesAndKeys.length; i < l; i++) {
+          if (address === obj[location].allAddressesAndKeys[i][0]) {
+            obj[location].currentAddress = obj[location].allAddressesAndKeys[i][0];
+            obj[location].currentPrivateKey = obj[location].allAddressesAndKeys[i][1];
+            chrome.storage.local.set(obj, function() {
+              angular.element(document.getElementsByTagName('header-bar')).scope().getNetworkStatus();
+            });
+          }
+        }
+      });
+    });
+  };
+
   return {
-    newAddress: newAddress
+    newAddress: newAddress,
+    setAsCurrentAddress: setAsCurrentAddress
   };
 }]);
