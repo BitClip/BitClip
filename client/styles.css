@@ -23,9 +23,13 @@
 
 /* ------- Body Size ------- */
 
+html{
+  font-size: 14px;
+}
+
 body {
   width:360px;
-  height: 270px;
+  height: 360px;
   margin:0;
   font-family:"Cabin Condensed", sans-serif;
   background-color: #F1F1F1;
@@ -41,12 +45,20 @@ a {
   color: #0B0B0B;
 }
 
+h4, h5, h6{
+
+  font-size: 1rem;
+  font-weight: normal;
+  color:#0B0B0B;
+  padding: 0;
+  margin:0;
+}
 
 .headerBanner{
   width:100%;
   box-sizing:border-box;
   position:relative;
-  height:14%;
+  height:2.7rem;
   background-color: white;
 }
 
@@ -73,8 +85,9 @@ a {
   left:10px;
   top:7px;
 }
-.btcBalance > i {
+.banner > ul > li > i{
   color: #F1A533;
+  font-size: 1.4rem
 }
 
 .bitclipTitle {
@@ -83,7 +96,7 @@ a {
   top:3px;
 
   font-family: 'Cabin', sans-serif;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   font-style: bold;
   font-weight: 700;
 }
@@ -101,7 +114,7 @@ a {
   position: fixed;
   list-style-type: none;
   max-width: calc(33% - 6px);
-  height:66%;
+  height:50%;
 
   right:6px;
   top:3px;
@@ -114,13 +127,13 @@ a {
   border-radius: 2px;
   border-top-right-radius: 10px;
   margin:0;
-  font-size: .8em;
+  font-size: 1rem;
 }
 
 .optionsNav > ul.dropdown-menu > li:first-child{
 
   color: #0B0B0B;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   position: relative;
   padding-left: 5px;
   margin-bottom: 5px;
@@ -132,8 +145,8 @@ a {
 }
 .dropdown-menu > li > i {
   color:#C2C2C2;
-  font-size: .8em;
-  letter-spacing: .5em;
+  font-size: .8rem;
+  letter-spacing: .4rem;
 
 }
 
@@ -184,7 +197,7 @@ a {
 }
 .onoffswitch-inner:after {
     content: "test";
-    padding-right: 14px;
+    padding-right: 17px;
     background-color: #F1A533; color: #FFFFFF;
     text-align: right;
 }
@@ -219,7 +232,7 @@ a {
   border-bottom: 1px solid #F1A533;
   box-sizing:border-box;
   position:relative;
-  height:14%;
+  height:2.7rem;
   width:100%;
 }
 
@@ -232,8 +245,8 @@ a {
   box-sizing:border-box;
   width:33.3%;
   height:100%;
-  font-size: 1.1em;
-  letter-spacing: .1em;
+  font-size: 1.3rem;
+  letter-spacing: .1rem;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   background-color: #F1F1F1;
@@ -262,15 +275,15 @@ li.active {
 
 form {
   position:relative;
-  top:0;
+  top:-5px;
 }
 
 label {
   display: block;
   position: relative;
-  font-size: 1.3em;
-  letter-spacing: .04em;
-  margin:4% 0 3% 8%;
+  font-size: 1.5rem;
+  letter-spacing: .04rem;
+  margin:8% 0 4% 8%;
 }
 
 form input {
@@ -278,7 +291,7 @@ form input {
   color:#0B0B0B;
   text-indent: 5px;
   border:none;
-  padding: 2px;
+  padding: .5rem .2rem;
   border: 1px solid #E8E8E8;
   display: block;
   width:80%;
@@ -290,11 +303,12 @@ input:focus{
   box-shadow: inset 0 0 2px #35A533;
 }
 
-.animate-if.sendViewButton{
+.sendViewButton{
+  outline: 0;
   height: 14%;
   border:2px solid;
   font-weight: 400;
-  font-size: .9em;
+  font-size: .9rem;
   letter-spacing: .15em;
   position: fixed;
   padding:0;
@@ -302,9 +316,10 @@ input:focus{
   border-color: #35A533;
 }
 
-.animate-if.sendButton {
-  width:100%;
+.sendButton {
+  width:99%;
   bottom:.5%;
+  left:.5%;
   background-color: #35A533;
 }
 /*
@@ -314,9 +329,9 @@ input:focus{
   color:#0a833d;
 }
 */
-.animate-if.morphButton{
-  width:49%;
-  background-color: white;
+.morphButton{
+  width:49.25%;
+  background-color: transparent;
   border-width: .15em;
   font-weight: 700;
   font-size:.9em;
@@ -325,20 +340,17 @@ input:focus{
 }
 
 .send-confirm{
-  color: #35A533;
+  background-color: #35A533;
   border-color: #35A533;
   left:.5%;
 }
 
 .send-cancel{
-  color: #F13C3F;
+  background-color: #F13C3F;
   border-color: #F13C3F;
   right:.5%;
 }
 
-.animate-if {
-  color:red;
-}
 .animate-if.ng-enter,.animate-if.ng-leave {
   -webkit-transition:0.5s linear all;
  -moz-transition:0.5s linear all;
@@ -366,6 +378,121 @@ input:focus{
   color:white;
   z-index: 999999;
 }
+
+
+
+
+/* ----------------------------------------- */
+/*              Receive View                 */
+/* ----------------------------------------- */
+
+
+.receiveContainer {
+  position: fixed;
+  height: 100%;
+  width:100%;
+}
+
+.receiveContainer > ul,
+.receiveContainer > div {
+  position: relative;
+  width:90%;
+  border: 1px solid;
+  border-radius: 4px;
+  box-sizing:border-box;
+  background-color: white;
+  padding: .4rem;
+
+
+}
+
+div.currentAddress {
+  border-color:#35A5A7;
+  letter-spacing: .04rem;
+  color:#35A5A7;
+  margin:2% auto 2%;
+  height:22%;
+}
+
+.currentAddress > h3, 
+.addressScrollbox > h4 {
+  color:#0B0B0B;
+  position: relative;
+  font-size: 1.4rem;
+  font-weight: normal;
+  margin:0;
+  padding:0;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+.currentAddress > span {
+  position: relative;
+  font-size: 1rem;
+  font-weight: bold;
+  left:4px;
+}
+
+.currentAddress i {
+  color: #F1A533;
+}
+
+ul.addressScrollbox {
+  border-color: #35A5A7;
+  height: 36%;
+  overflow: auto;
+  margin:1% auto;
+  padding:6px;
+}
+
+.addressScrollbox > li {
+  position: relative;
+  font-size: .9rem;
+  letter-spacing: .08rem;
+  margin:auto;
+  padding-left: 10px;
+  left:0;
+}
+
+.addressScrollbox li:nth-child(2) {
+  color:#35A5A7;
+  padding-top: 2px;
+}
+
+.generateButton{
+  
+}
+
+
+
+
+
+
+
+
+
+
+/* Colors:   
+  Teal: #35A5A7;
+  Orange: #F1A533;
+  Red: #F13C3F;
+  
+  Light-Dark Scale
+    Light: #F1F1F1;
+    -- #C2C2C2
+    -- #E8E8E8;
+    Dark: #0B0B0B;
+
+
+  Green: #60C03C;
+         #35A533
+
+ */
+
+
+
+
+
 
 
 
