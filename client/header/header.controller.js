@@ -4,8 +4,8 @@ angular.module('bitclip.headerController', [])
   Utilities.initialize().then(function(resolveMessage) {
 
     var setBalance = function() {
-      Header.getBalanceForCurrentAddress().then(function(confirmedBalance) {
-        $scope.balanceMessage = confirmedBalance/100000000 + " BTC";
+      Header.getBalanceForCurrentAddress().then(function(balance) {
+        $scope.balanceMessage = "Bal: "+ balance/100000000 + " BTC";
       }).catch(function(err) {
         $scope.balanceMessage = "No valid addresses found.";
       });
@@ -32,7 +32,7 @@ angular.module('bitclip.headerController', [])
       if (err){
         console.error(err);
       } else {
-        $scope.balanceMessage = " Bal: " + data.address.balance/100000000 + " BTC";
+        $scope.balanceMessage = "Bal: " + data.address.balance/100000000 + " BTC";
       }; 
     });
 
