@@ -1,17 +1,32 @@
 describe('sendController', function () {
   // Load the module with MainController
   beforeEach(module('bitclip'));
-
-  var $scope, $rootScope, $location, $window, createController, persistentTransaction;
+  var tempStore;
+  var $scope, $rootScope, $location, $window, createController, persistentTransaction, TxBuilder, Utilities;
 
   beforeEach(inject(function($injector) {
-    // mock out our dependencies
     $rootScope = $injector.get('$rootScope');
     $location = $injector.get('$location');
-    //$window = $injector.get('$window');//////////////////////this might have to be chrome storage
-    persistentTransaction = $injector.get('persistentTransaction');
     $scope = $rootScope.$new();
     $window = $injector.get('$window');
+
+    persistentTransaction = $injector.get('persistentTransaction');
+    TxBuilder = $injector.get('TxBuilder');
+    Utilities = $injector.get('Utilities');
+
+    tempStore = {
+                  isMainNet: true,
+                  mainNet: {
+                              currentAddress: "",
+                              currentPrivateKey: "",
+                              allAddressesAndKeys: []
+                           },
+                  testNet: {
+                              currentAddress: "",
+                              currentPrivateKey: "",
+                              allAddressesAndKeys: []
+                           }
+                };
 
     $window.chrome = {
                       storage:{
@@ -28,11 +43,13 @@ describe('sendController', function () {
 
     //used to create our AuthController for testing
     createController = function () {
-      return $controller('receiveController', {
+      return $controller('sendController', {
         $scope: $scope,
        // $window: $window, ////////////////////might have to be chrome storage
         $location: $location,
-        persistentTransaction: persistentTransaction
+        persistentTransaction: persistentTransaction,
+        TxBuilder: TxBuilder,
+        Utilities: Utilities
       });
     };
 
@@ -46,39 +63,22 @@ describe('sendController', function () {
   it('tacos', function () {
     expect(true).to.equal(true);
   });
-  it('tacos', function () {
-    expect(true).to.equal(true);
-  });
-  it('tacos', function () {
-    expect(true).to.equal(true);
-  });
-  it('tacos', function () {
-    expect(true).to.equal(true);
-  });
-  it('tacos', function () {
-    expect(true).to.equal(true);
-  });
-  it('tacos', function () {
-    expect(true).to.equal(true);
-  });
-  it('tacos', function () {
-    expect(true).to.equal(true);
-  })
-  ;it('tacos', function () {
-    expect(true).to.equal(true);
-  });
-  it('tacos', function () {
-    expect(true).to.equal(true);
-  });
-  // it('findAddress and newAddress should exists', function () {
-  //   expect(Address.findAddress).to.be.a('function');
-  //   expect(Address.newAddress).to.be.a('function');
-  // });
 
-  // it('findAddress should return a blank string if local storage is empty', function () {
-  //   console.log("address: " + Address.findAddress());
-  //   expect(Address.findAddress()).to.equal("");
-  // });
+  it('updateTransaction and sendTransaction should exists', function () {
+    expect(persistentTransaction.updateTransaction).to.be.a('function');
+    expect(TxBuilder.sendTransaction).to.be.a('function');
+  });
+
+  it('updateTransaction should update transactionDetails', function () {
+    var thing = {
+      amount: 'thingOne',
+      destination: 'thingTwo'
+    };
+    //console.log(thing);
+    persistentTransaction.updateTransaction(thing);
+    console.log(persistentTransaction.transactionDetails);
+    expect(persistentTransaction.transactionDetails).to.equal("");
+  });
 
   // it('does something else', function () {
   //   expect(true).to.equal(false);

@@ -14,7 +14,9 @@ angular.module('bitclip.sendFactory', [
 
   //update transaction details with passed in object
   var updateTransaction = function(transactionObj) {
+    // console.log(transactionObj);
     transactionDetails = transactionObj;
+    // console.log(transactionDetails);
   };
 
   return {
