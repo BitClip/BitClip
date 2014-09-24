@@ -1,15 +1,17 @@
 describe('Unit: sendFactory - TxBuilder', function () {
   beforeEach(module('bitclip'));
 
-  var $scope, $rootScope, $location, $window, transactionDetails, createController, TxBuilder, tempStore;
+  var $scope, $rootScope, $location, $window, $q, $timeout, transactionDetails, createController, TxBuilder, tempStore;
 
   beforeEach(inject(function($injector) {
     $rootScope = $injector.get('$rootScope');
     $location = $injector.get('$location');
     $scope = $rootScope.$new();
     $window = $injector.get('$window');
+    $timeout = $injector.get('$timeout');
 
     TxBuilder = $injector.get('TxBuilder');
+    $q = $injector.get('$q');
 
     $window.chrome = {
                       storage:{
@@ -63,7 +65,6 @@ describe('Unit: sendFactory - TxBuilder', function () {
   });
 
   it('sendTransaction should be a function', function () {
-    //"cVJUMhpZopo9myE2KGtzAXeFoDdhqdMvt4Pm62BGtL2Zahh4qeAv"
 
     expect(TxBuilder.sendTransaction).to.be.a('function');
   });
@@ -71,14 +72,17 @@ describe('Unit: sendFactory - TxBuilder', function () {
 
   //this async test is not working properly
   //we need chai-as-promised to test promise resolution
-  it('should return success when sending a correctly stated transaction', function () {
+  it('should return success when sending a correctly stated transaction', function (done) {
     transactionDetails.amount = 0.01;
     transactionDetails.destination = "mpduks3B8ULftm1hcbEf3jQU7iGae7mEMS";
-    
+
     TxBuilder.sendTransaction(tempStore.testNet.currentPrivateKey, transactionDetails,false)
-    .then(function(message, error){
+    .then(function(message){
       expect(message).to.equal("Transaction successfully propagated");
-      expect(error).to.equal(undefined);
+      done();
+    })
+    .catch(function(error){
+      done(error);
     });
   });
 
