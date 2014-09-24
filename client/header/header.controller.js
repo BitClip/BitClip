@@ -1,15 +1,7 @@
 angular.module('bitclip.headerController', [])
 
 .controller('headerController', ['$scope', '$state', 'Header', 'Utilities', function($scope, $state, Header, Utilities) {
-  // $scope.balanceMessage = "";
   Utilities.initialize().then(function(resolveMessage) {
-    console.log("header is starting:::::");
-    $scope.activeTab = 'send';
-
-    $scope.setActiveTab = function(tab) {
-      $scope.activeTab = tab;
-    };
-
     var setBalance = function() {
       $scope.balanceMessage = 'Loading balance ...';
       Header.getBalanceForCurrentAddress().then(function(balance) {
@@ -17,6 +9,7 @@ angular.module('bitclip.headerController', [])
           $scope.balanceMessage = balance;
         } else {
           $scope.balanceMessage = 'Bal: ' + balance / 100000000 + ' BTC';
+          console.log("balance: ", $scope.balanceMessage);
         }
       });
     };
@@ -24,8 +17,8 @@ angular.module('bitclip.headerController', [])
     $scope.getNetworkStatus = function() {
       Utilities.isMainNet().then(function(isMainNet) {
         $scope.isMainNet = isMainNet;
-        $state.reload();
         setBalance();
+        $state.reload();
       });
     };
     $scope.getNetworkStatus();
