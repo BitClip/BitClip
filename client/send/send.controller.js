@@ -21,11 +21,6 @@ angular.module('bitclip.sendController', [
     //initialize transaction details (amount, destination)
     $scope.transactionDetails = {};
 
-  //update the transaction details with input field values
-  $scope.updateTransactionDetails = function() {
-    persistentTransaction.updateTransaction($scope.transactionDetails)
-  };
-
     //TODO: sendPayment Functionality
     $scope.sendPayment = function() {
       Utilities.isMainNet().then(function(isMainNet){
