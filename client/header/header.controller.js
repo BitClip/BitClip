@@ -2,6 +2,13 @@ angular.module('bitclip.headerController', [])
 
 .controller('headerController', ['$scope', '$state', 'Header', 'Utilities', function($scope, $state, Header, Utilities) {
   Utilities.initialize().then(function(resolveMessage) {
+
+    $scope.activeTab = 'send';
+
+    $scope.setActiveTab = function(tab) {
+      $scope.activeTab = tab;
+    };
+
     var setBalance = function() {
       $scope.balanceMessage = 'Loading balance ...';
       Header.getBalanceForCurrentAddress().then(function(balance) {
