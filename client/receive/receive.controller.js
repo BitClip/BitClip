@@ -8,4 +8,5 @@ angular.module('bitclip.receiveController', [])
     $scope.allAddresses = allAddresses;
   });
   $scope.newAddress = Receive.newAddress;
+  $scope.setAsCurrentAddress = Receive.setAsCurrentAddress;
 }]);

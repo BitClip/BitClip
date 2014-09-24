@@ -2,63 +2,44 @@
 @import url(http://fonts.googleapis.com/css?family=Cabin:400,700);
 @import url(http://fonts.googleapis.com/css?family=Varela+Round);
 
-
-/* Colors:   
-  Teal: #35A5A7;
-  Orange: #F1A533;
-  Red: #F13C3F;
-  
-  Light-Dark Scale
-    Light: #F1F1F1;
-    -- #C2C2C2
-    -- #E8E8E8;
-    Dark: #0B0B0B;
-
-
-  Green: #60C03C;
-         #35A533
-
- */
-
-
 /* ------- Body Size ------- */
 
-html{
+html {
   font-size: 14px;
 }
 
 body {
-  width:360px;
+  width: 360px;
   height: 360px;
-  margin:0;
-  font-family:"Cabin Condensed", sans-serif;
+  margin: 0;
+  font-family: 'Cabin Condensed', sans-serif;
   background-color: #F1F1F1;
-  /*border:2px solid #4F3632;*/
 }
+
 ul, li {
-  padding:0;
-  margin:0;
-  box-sizing:border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
+
 a {
   text-decoration: none;
   color: #0B0B0B;
 }
 
-h4, h5, h6{
-
+h4, h5, h6 {
   font-size: 1rem;
   font-weight: normal;
-  color:#0B0B0B;
+  color: #0B0B0B;
   padding: 0;
-  margin:0;
+  margin: 0;
 }
 
-.headerBanner{
-  width:100%;
-  box-sizing:border-box;
-  position:relative;
-  height:2.7rem;
+.headerBanner {
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  height: 2.7rem;
   background-color: white;
 }
 
@@ -66,12 +47,12 @@ h4, h5, h6{
 
 .banner {
   background-color: white;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
 }
 
 .banner > ul {
-  width:100%;
+  width: 100%;
   position: relative;
 }
 
@@ -81,20 +62,20 @@ h4, h5, h6{
   color: #35A5A7;
 }
 
-.btcBalance{
-  left:10px;
-  top:7px;
+.btcBalance {
+  left: 10px;
+  top: 7px;
 }
-.banner > ul > li > i{
+
+.banner > ul > li > i {
   color: #F1A533;
   font-size: 1.4rem
 }
 
 .bitclipTitle {
-  width:100%;
+  width: 100%;
   text-align: center;
-  top:3px;
-
+  top: 3px;
   font-family: 'Cabin', sans-serif;
   font-size: 1.5rem;
   font-style: bold;
@@ -105,52 +86,48 @@ h4, h5, h6{
   z-index: 1000;
   position: fixed;
   color: #F1A533;
-
-  right:10px;
-  top:7px;
+  right: 10px;
+  top: 7px;
 }
 
 .optionsNav > ul.dropdown-menu {
   position: fixed;
   list-style-type: none;
   max-width: calc(33% - 6px);
-  height:50%;
-
-  right:6px;
-  top:3px;
+  height: 50%;
+  right: 6px;
+  top: 3px;
   background-color: white;
   z-index: 999;
-  box-sizing:border-box;
-
-  padding:5px;
+  box-sizing: border-box;
+  padding: 5px;
   border: 1px solid #F1A533;
   border-radius: 2px;
   border-top-right-radius: 10px;
-  margin:0;
+  margin: 0;
   font-size: 1rem;
 }
 
-.optionsNav > ul.dropdown-menu > li:first-child{
-
+.optionsNav > ul.dropdown-menu > li:first-child {
   color: #0B0B0B;
   font-size: 1.2rem;
   position: relative;
   padding-left: 5px;
   margin-bottom: 5px;
   border-bottom: 1px solid #E8E8E8;
-
 }
+
 .dropdown-menu li {
-  padding-bottom:10px;
+  padding-bottom: 10px;
 }
+
 .dropdown-menu > li > i {
-  color:#C2C2C2;
-  font-size: .8rem;
-  letter-spacing: .4rem;
-
+  color: #C2C2C2;
+  font-size: 0.8rem;
+  letter-spacing: 0.4rem;
 }
 
-.toggleNetwork{
+.toggleNetwork {
   display: inline-block;
 }
 
@@ -161,267 +138,261 @@ h4, h5, h6{
 .toggleNetwork > span {
   color: #35A533;
 }
-.toggleNetwork > .testNetwork{
+
+.toggleNetwork > .testNetwork {
   color: #F1A533;
 }
-
-
 
 /*  ------- Network Toggle Button -------  */
 
 .onoffswitch {
-    position: relative; width: 90px;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+  position: relative; width: 90px;
+  -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;
 }
+
 .onoffswitch-checkbox {
-    display: none;
+  display: none;
 }
+
 .onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 1px solid #0B0B0B; border-radius: 50px;
+  display: block; overflow: hidden; cursor: pointer;
+  border: 1px solid #0B0B0B; border-radius: 50px;
 }
+
 .onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
-    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
-    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+  display: block; width: 200%; margin-left: -100%;
+  -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+  -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
 }
+
 .onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 16px; padding: 0; line-height: 16px;
-    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
-    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+  display: block; float: left; width: 50%; height: 16px; padding: 0; line-height: 16px;
+  font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
+
 .onoffswitch-inner:before {
-    content: "main";
-    padding-left: 14px;
-    background-color: #35A533; color: #FFFFFF;
+  content: 'main';
+  padding-left: 14px;
+  background-color: #35A533; color: #FFFFFF;
 }
+
 .onoffswitch-inner:after {
-    content: "test";
-    padding-right: 17px;
-    background-color: #F1A533; color: #FFFFFF;
-    text-align: right;
+  content: 'test';
+  padding-right: 17px;
+  background-color: #F1A533; color: #FFFFFF;
+  text-align: right;
 }
+
 .onoffswitch-switch {
-    text-align:center;
-    display: block; width: 30px; margin: -7px;
-    margin-right: -11px;
-    background: #E8E8E8;
-    border: 1px solid #0B0B0B; border-radius: 0px;
-    position: absolute; top: 0; bottom: 0; right: 70px;
-    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
-    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s; 
+  text-align: center;
+  display: block; width: 30px; margin: -7px;
+  margin-right: -11px;
+  background: #E8E8E8;
+  border: 1px solid #0B0B0B; border-radius: 0px;
+  position: absolute; top: 0; bottom: 0; right: 70px;
+  -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+  -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s;
 }
+
 .onoffswitch-switch > i {
   color: #C2C2C2;
   position: relative;
-  top:4px;
+  top: 4px;
 }
+
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
     margin-left: 0;
 }
+
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px; 
 }
 
 /* ------- Tabs ------- */
 
-
 .headerTabs {
   list-style-type: none;
   background-color: white;
   border-bottom: 1px solid #F1A533;
-  box-sizing:border-box;
-  position:relative;
-  height:2.7rem;
-  width:100%;
+  box-sizing: border-box;
+  position: relative;
+  height: 2.7rem;
+  width: 100%;
 }
 
-.headerTabs > li{
+.headerTabs > li {
   line-height: 200%;
   text-align: center;
-  float:left;
+  float: left;
   text-align: center;
-  position:relative;
-  box-sizing:border-box;
-  width:33.3%;
-  height:100%;
+  position: relative;
+  box-sizing: border-box;
+  width: 33.3%;
+  height: 100%;
   font-size: 1.3rem;
-  letter-spacing: .1rem;
+  letter-spacing: 0.1rem;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   background-color: #F1F1F1;
-  outline:none;
-  color:#C2C2C2;
+  outline: none;
+  color: #C2C2C2;
 }
 
 .receiveTab {
-  border-right:1px solid white;
-  border-left:1px solid white;
+  border-right: 1px solid white;
+  border-left: 1px solid white;
 }
 
 li.active {
   background-color: #F1A533;
-  color:white;
+  color: white;
 }
  
 .headerTabs li:hover:not(.active),
 .headerTabs li:hover:not(.active) a {
   background-color: #E8E8E8;
-  color:#0B0B0B;
+  color: #0B0B0B;
 }
-
 
 /* ------- Send View ------- */
 
 form {
-  position:relative;
-  top:-5px;
+  position: relative;
+  top: -5px;
 }
 
 label {
   display: block;
   position: relative;
   font-size: 1.5rem;
-  letter-spacing: .04rem;
-  margin:8% 0 4% 8%;
+  letter-spacing: 0.04rem;
+  margin: 8% 0 4% 8%;
 }
 
 form input {
   margin: 0em;
-  color:#0B0B0B;
+  color: #0B0B0B;
   text-indent: 5px;
-  border:none;
-  padding: .5rem .2rem;
+  border: none;
+  padding: 0.5rem 0.2rem;
   border: 1px solid #E8E8E8;
   display: block;
-  width:80%;
-  margin:auto;
+  width: 80%;
+  margin: auto;
 }
 
-input:focus{
-  outline:0;
+input:focus {
+  outline: 0;
   box-shadow: inset 0 0 2px #35A533;
 }
 
-.sendViewButton{
+.sendViewButton {
   outline: 0;
   height: 14%;
-  border:2px solid;
+  border: 2px solid;
   font-weight: 400;
-  font-size: .9rem;
-  letter-spacing: .15em;
+  font-size: 0.9rem;
+  letter-spacing: 0, 0.15em;
   position: fixed;
-  padding:0;
-  color:white;
+  padding: 0;
+  color: white;
   border-color: #35A533;
 }
 
 .sendButton {
-  width:99%;
-  bottom:.5%;
-  left:.5%;
+  width: 99%;
+  bottom: 0.5%;
+  left: 0.5%;
   background-color: #35A533;
 }
-/*
-.sendButton:hover{
-  background-color: #2ecc71;
-  border: 3px double #0a833d;
-  color:#0a833d;
-}
-*/
-.morphButton{
-  width:49.25%;
+
+.morphButton {
+  width: 49.25%;
   background-color: transparent;
-  border-width: .15em;
+  border-width: 0.15em;
   font-weight: 700;
-  font-size:.9em;
-  bottom:.5%;
+  font-size: 0.9em;
+  bottom: 0.5%;
   z-index: 21000;
 }
 
-.send-confirm{
+.send-confirm {
   background-color: #35A533;
   border-color: #35A533;
-  left:.5%;
+  left: 0.5%;
 }
 
-.send-cancel{
+.send-cancel {
   background-color: #F13C3F;
   border-color: #F13C3F;
-  right:.5%;
+  right: 0.5%;
 }
 
-.animate-if.ng-enter,.animate-if.ng-leave {
-  -webkit-transition:0.5s linear all;
- -moz-transition:0.5s linear all;
- -o-transition:0.5s linear all;
- transition:0.5s linear all;
- opacity:0;
+.animate-if.ng-enter, .animate-if.ng-leave {
+  -webkit-transition: 0.5s linear all;
+ -moz-transition: 0.5s linear all;
+ -o-transition: 0.5s linear all;
+ transition: 0.5s linear all;
+ opacity: 0;
 }
 
 .animate-if.ng-enter,
 .animate-if.ng-leave.ng-leave-active {
-  opacity:0;
+  opacity: 0;
 }
 
 .animate-if.ng-leave,
 .animate-if.ng-enter.ng-enter-active {
-  opacity:1;
+  opacity: 1;
 }
 
-
-.successModal{
+.successModal {
   position: absolute;
-  height:100px;
+  height: 100px;
   width: 100px;
   background-color: green;
-  color:white;
+  color: white;
   z-index: 999999;
 }
-
-
-
 
 /* ----------------------------------------- */
 /*              Receive View                 */
 /* ----------------------------------------- */
 
-
 .receiveContainer {
   position: fixed;
   height: 100%;
-  width:100%;
+  width: 100%;
 }
 
 .receiveContainer > ul,
 .receiveContainer > div {
   position: relative;
-  width:90%;
+  width: 90%;
   border: 1px solid;
   border-radius: 4px;
-  box-sizing:border-box;
+  box-sizing: border-box;
   background-color: white;
-  padding: .4rem;
-
-
+  padding: 0.4rem;
 }
 
 div.currentAddress {
-  border-color:#35A5A7;
-  letter-spacing: .04rem;
-  color:#35A5A7;
-  margin:2% auto 2%;
-  height:22%;
+  border-color: #35A5A7;
+  letter-spacing: 0.04rem;
+  color: #35A5A7;
+  margin: 2% auto 2%;
+  height: 22%;
 }
 
 .currentAddress > h3, 
 .addressScrollbox > h4 {
-  color:#0B0B0B;
+  color: #0B0B0B;
   position: relative;
   font-size: 1.4rem;
   font-weight: normal;
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
   padding-bottom: 10px;
   padding-left: 10px;
 }
@@ -430,7 +401,7 @@ div.currentAddress {
   position: relative;
   font-size: 1rem;
   font-weight: bold;
-  left:4px;
+  left: 4px;
 }
 
 .currentAddress i {
@@ -441,61 +412,23 @@ ul.addressScrollbox {
   border-color: #35A5A7;
   height: 36%;
   overflow: auto;
-  margin:1% auto;
-  padding:6px;
+  margin: 1% auto;
+  padding: 6px;
 }
 
 .addressScrollbox > li {
   position: relative;
-  font-size: .9rem;
-  letter-spacing: .08rem;
-  margin:auto;
+  font-size: 0.9rem;
+  letter-spacing: 0.08rem;
+  margin: auto;
   padding-left: 10px;
-  left:0;
+  left: 0;
 }
 
 .addressScrollbox li:nth-child(2) {
-  color:#35A5A7;
+  color: #35A5A7;
   padding-top: 2px;
 }
 
-.generateButton{
-  
+.generateButton {
 }
-
-
-
-
-
-
-
-
-
-
-/* Colors:   
-  Teal: #35A5A7;
-  Orange: #F1A533;
-  Red: #F13C3F;
-  
-  Light-Dark Scale
-    Light: #F1F1F1;
-    -- #C2C2C2
-    -- #E8E8E8;
-    Dark: #0B0B0B;
-
-
-  Green: #60C03C;
-         #35A533
-
- */
-
-
-
-
-
-
-
-
-
-
-

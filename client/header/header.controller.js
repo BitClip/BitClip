@@ -1,44 +1,34 @@
 angular.module('bitclip.headerController', [])
 
-.controller('headerController', ['$scope', 'Header', 'Utilities', function($scope, Header, Utilities) {
+.controller('headerController', ['$scope', '$state', 'Header', 'Utilities', function($scope, $state, Header, Utilities) {
   Utilities.initialize().then(function(resolveMessage) {
-
-    var setBalance = function() {
-      Header.getBalanceForCurrentAddress().then(function(balance) {
-        $scope.balanceMessage = "Bal: "+ balance/100000000 + " BTC";
-      }).catch(function(err) {
-        $scope.balanceMessage = "No valid addresses found.";
-      });
-    };
-
-    //initialize active tab to send
-    $scope.activeTab = "send"
-    //set active tab to whichever is clicked
-    $scope.setActiveTab = function(tab){
+    $scope.activeTab = 'send';
+    $scope.setActiveTab = function(tab) {
       $scope.activeTab = tab;
     };
 
-    var getNetworkStatus = function() {
+    var setBalance = function() {
+      $scope.balanceMessage = 'Loading balance ...';
+      Header.getBalanceForCurrentAddress().then(function(balance) {
+        if (typeof confirmedBalance === 'string') {
+          $scope.balanceMessage = balance;
+        } else {
+          $scope.balanceMessage = 'Bal: ' + balance / 100000000 + ' BTC';
+        }
+      });
+    };
+
+    $scope.getNetworkStatus = function() {
       Utilities.isMainNet().then(function(isMainNet) {
         $scope.isMainNet = isMainNet;
+        $state.reload();
         setBalance();
       });
     };
-    
-    getNetworkStatus();
-
-
-    Utilities.getLiveBalanceForCurrentAddress(function(err, data){
-      if (err){
-        console.error(err);
-      } else {
-        $scope.balanceMessage = "Bal: " + data.address.balance/100000000 + " BTC";
-      }; 
-    });
+    $scope.getNetworkStatus();
 
     $scope.toggleNetwork = function() {
-      Header.setNetwork(!$scope.isMainNet, getNetworkStatus);
+      Header.setNetwork(!$scope.isMainNet, $scope.getNetworkStatus);
     };
   });
-
 }]);

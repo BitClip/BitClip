@@ -88,8 +88,11 @@ angular.module('bitclip.utilitiesFactory', [])
         var requestString = '';
         if (arr.length > 1) {
           requestString += arr.join('&addresses=');
-        } else {
+        } else if (arr.length === 1) {
           requestString = arr[0];
+        } else {
+          deferred.resolve([]);
+          return deferred.promise;
         }
         baseUrl += requestString;
         httpGet(baseUrl, function(obj) {
@@ -100,41 +103,32 @@ angular.module('bitclip.utilitiesFactory', [])
     return deferred.promise;
   };
 
-  // use websocket to emit events when there is a change
-  // in balance on the currentAddress
-  var getLiveBalanceForCurrentAddress = function(callback){
+  var getLiveBalanceForCurrentAddress = function(callback) {
     isMainNet().then(function(bool) {
-      getCurrentAddress().then(function(currentAddress){
-        var url = "wss://socket-" + (bool ? 'mainnet' : 'testnet') + ".helloblock.io";
-        console.log("socket url: ", url);
+      getCurrentAddress().then(function(currentAddress) {
+        var url = 'wss://socket-' + (bool ? 'mainnet' : 'testnet') + '.helloblock.io';
         var ws = new WebSocket(url);
         ws.onopen = function() {
           ws.send(JSON.stringify({
-            "op": "subscribe",
-            "channel": "addresses",
-            "filters": [currentAddress]
+            'op': 'subscribe',
+            'channel': 'addresses',
+            'filters': [currentAddress]
           }));
 
           ws.onmessage = function(e) {
-            console.log("SOCKET RECEIVED MESSAGE: \n", e.data);
             var data = JSON.parse(e.data);
-            if (data.data){
+            if (data.data) {
               callback(null, data.data);
             }
           };
 
-          // we automatically reconnect if connection drops
           ws.onclose = function(e) {
-            console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
             setTimeout(function() {
               connect();
             }, 1000);
           };
 
-          //possible reason for error: invalid bitcoin address submited
-          //or if socket hosted by HelloBlock goes down
           ws.onerror = function(err) {
-            console.error('Socket encountered error: ', err.message, 'Closing socket');
             callback(err.message, null);
             ws.close();
           };
