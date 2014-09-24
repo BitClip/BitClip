@@ -1,5 +1,4 @@
 describe('sendController', function () {
-  // Load the module with MainController
   beforeEach(module('bitclip'));
   var $scope, $rootScope, $location, $window, createController, Header, TxBuilder, Receive, Utilities, tempStore, $http, $timeout;
 
@@ -8,7 +7,6 @@ describe('sendController', function () {
     $location = $injector.get('$location');
     $scope = $rootScope.$new();
     $window = $injector.get('$window');
-    $timeout = $injector.get('$timeout');
 
     Header = $injector.get('Header');
     Utilities = $injector.get('Utilities');
