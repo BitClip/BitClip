@@ -33,6 +33,7 @@ angular.module('bitclip.receiveFactory', [])
   };
 
   var setAsCurrentAddress = function(address) {
+    console.log("I am the address");
     var that = this;
     Utilities.isMainNet().then(function(bool) {
       var isMainNet = bool;
