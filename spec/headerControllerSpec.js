@@ -2,7 +2,7 @@ describe('headerController', function () {
   // Load the module with MainController
   beforeEach(module('bitclip'));
 
-  var $scope, $rootScope, $location, $window, createController, Header, Utilities, tempStore;
+  var $scope, $rootScope, $location, $window, createController, Header, Utilities, tempStore, $http;
 
   beforeEach(inject(function($injector) {
     $rootScope = $injector.get('$rootScope');
@@ -23,13 +23,16 @@ describe('headerController', function () {
                             get: function(propStrOrArray, callback){ 
                               console.log("GET JUST GOT INVOKED");
                               var result = {};
-                              //must also handle case when it is undefined
+                              //TODO later: must also handle case when key input
+                              //has no value in tempstore;
                               if (typeof propStrOrArray === 'string'){
                                 result[propStrOrArray] = tempStore[propStrOrArray];
                               } else if (Array.isArray(propStrOrArray)){
                                 propStrOrArray.forEach(function(propName){
                                   result[propName] = tempStore[propName];
                                 });
+                              } else if (propStrOrArray === null) {
+                                result = tempStore;
                               }
                               callback(result);
                             },
@@ -39,14 +42,14 @@ describe('headerController', function () {
                       }
                     };
     tempStore = {
-      isMainNet: true,
+      isMainNet: false,
       mainNet: {
                   currentAddress: "",
                   currentPrivateKey: "",
                   allAddressesAndKeys: []
                },
       testNet: {
-                  currentAddress: "",
+                  currentAddress: "mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG",
                   currentPrivateKey: "",
                   allAddressesAndKeys: []
                }
@@ -81,45 +84,23 @@ describe('headerController', function () {
   it('setNetwork should be a function', function () {
     expect(Header.setNetwork).to.be.a('function');
   });
-  it.only('setNetwork should save something into local storage', function () {
-    Header.setNetwork({hello:"world"}, function(){
-      console.log("finished setting");
+
+  it('setNetwork change isMainNet in chrome.storage.local', function () {
+    Header.setNetwork(true, function(){
+      console.log("tempStore", tempStore);
+      expect(tempStore.isMainNet).to.equal(true);
     });
-    console.log("AHAHAHAHHA: ", tempStore);
-    expect(tempStore.hello).to.equal("world");
   });
-  // it('tacos', function () {
-  //   expect(true).to.equal(true);
-  // });
-  // it('tacos', function () {
-  //   expect(true).to.equal(true);
-  // });
-  // it('tacos', function () {
-  //   expect(true).to.equal(true);
-  // });
-  // it('tacos', function () {
-  //   expect(true).to.equal(true);
-  // });
-  // it('tacos', function () {
-  //   expect(true).to.equal(true);
-  // })
-  // ;it('tacos', function () {
-  //   expect(true).to.equal(true);
-  // });
-  // it('tacos', function () {
-  //   expect(true).to.equal(true);
-  // });
-  // // it('findAddress and newAddress should exists', function () {
-  // //   expect(Address.findAddress).to.be.a('function');
-  // //   expect(Address.newAddress).to.be.a('function');
-  // // });
 
-  // // it('findAddress should return a blank string if local storage is empty', function () {
-  // //   console.log("address: " + Address.findAddress());
-  // //   expect(Address.findAddress()).to.equal("");
-  // // });
+  it('getBalanceForCurrentAddress should return the correct balance for the currentAddress', function () {
+    Header.getBalanceForCurrentAddress().then(function(currentBalance){
+      var currentBalance = currentBalance;
 
-  // // it('does something else', function () {
-  // //   expect(true).to.equal(false);
-  // // });
+    });
+  });
+
+  it('getNetworkStatus should set $scope.isMainNet variable identical to isMainNet in local storage', function () {
+    
+  });
+
 })
