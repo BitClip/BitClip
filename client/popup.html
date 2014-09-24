@@ -12,7 +12,7 @@
     <div ng-controller="headerController" class="headerBanner">
       <header-bar/>
     </div>
-    <ul class="row headerTabs" ng-controller="headerController">
+    <ul class="row headerTabs" ng-controller="navBarController">
       <li class="sendTab" ng-class="{'active': activeTab === 'send'}" ui-sref="send" ng-click="setActiveTab('send')">Send</li>
       <li class="receiveTab" ng-class="{'active': activeTab === 'receive'}" ui-sref="receive" ng-click="setActiveTab('receive')">Receive </li>
       <li class="historyTab" ng-class="{'active': activeTab === 'history'}" ui-sref="history" ng-click="setActiveTab('history')">History</li>

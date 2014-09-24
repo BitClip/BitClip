@@ -2,7 +2,7 @@ describe('headerController', function () {
   // Load the module with MainController
   beforeEach(module('bitclip'));
 
-  var $scope, $rootScope, $location, $window, createController, Header, Utilities;
+  var $scope, $rootScope, $location, $window, createController, Header, Utilities, tempStore, $http;
 
   beforeEach(inject(function($injector) {
     $rootScope = $injector.get('$rootScope');
@@ -15,25 +15,62 @@ describe('headerController', function () {
 
     $window.chrome = {
                       storage:{
-                        local: sinon.stub({
-                            set: function(){ },
-                            get: function(){ },
+                        local: {
+                            set: function(obj , callback){ 
+                              tempStore = obj;
+                              callback();
+                            },
+                            get: function(propStrOrArray, callback){ 
+                              console.log("GET JUST GOT INVOKED");
+                              var result = {};
+                              //TODO later: must also handle case when key input
+                              //has no value in tempstore;
+                              if (typeof propStrOrArray === 'string'){
+                                result[propStrOrArray] = tempStore[propStrOrArray];
+                              } else if (Array.isArray(propStrOrArray)){
+                                propStrOrArray.forEach(function(propName){
+                                  result[propName] = tempStore[propName];
+                                });
+                              } else if (propStrOrArray === null) {
+                                result = tempStore;
+                              }
+                              callback(result);
+                            },
                             remove: function(){ },
                             clear: function(){ }
-                        })
+                        }
                       }
                     };
+    tempStore = {
+      isMainNet: false,
+      mainNet: {
+                  currentAddress: "",
+                  currentPrivateKey: "",
+                  allAddressesAndKeys: []
+               },
+      testNet: {
+                  currentAddress: "mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG",
+                  currentPrivateKey: "",
+                  allAddressesAndKeys: []
+               }
+    };
 
     var $controller = $injector.get('$controller');
 
+    console.log("$window window, xxxxxxxxxxx", $window.chrome.storage.local);
+
+    $window.chrome.storage.local.get('isMainNet', function(data){
+      console.log("THIS IS RETURN OF ISMAINNET", data);
+    })
     //used to create our AuthController for testing
     createController = function () {
       return $controller('headerController', {
         $scope: $scope,
-       // $window: $window, ////////////////////might have to be chrome storage
+        $window: $window,
         $location: $location,
         Header: Header,
-        Utilities: Utilities
+        Utilities: Utilities,
+        tempStore: tempStore
       });
     };
 
@@ -44,44 +81,31 @@ describe('headerController', function () {
     //$window.localStorage.removeItem('com.shortly'); //something like this but for chrome storage
   });
 
-  it('tacos', function () {
-    expect(true).to.equal(true);
+  it('setNetwork should be a function', function () {
+    expect(Header.setNetwork).to.be.a('function');
   });
-  it('tacos', function () {
-    expect(true).to.equal(true);
-  });
-  it('tacos', function () {
-    expect(true).to.equal(true);
-  });
-  it('tacos', function () {
-    expect(true).to.equal(true);
-  });
-  it('tacos', function () {
-    expect(true).to.equal(true);
-  });
-  it('tacos', function () {
-    expect(true).to.equal(true);
-  });
-  it('tacos', function () {
-    expect(true).to.equal(true);
-  })
-  ;it('tacos', function () {
-    expect(true).to.equal(true);
-  });
-  it('tacos', function () {
-    expect(true).to.equal(true);
-  });
-  // it('findAddress and newAddress should exists', function () {
-  //   expect(Address.findAddress).to.be.a('function');
-  //   expect(Address.newAddress).to.be.a('function');
-  // });
 
-  // it('findAddress should return a blank string if local storage is empty', function () {
-  //   console.log("address: " + Address.findAddress());
-  //   expect(Address.findAddress()).to.equal("");
-  // });
+  it('setNetwork change isMainNet in chrome.storage.local', function () {
+    Header.setNetwork(true, function(){
+      console.log("tempStore", tempStore);
+      expect(tempStore.isMainNet).to.equal(true);
+    });
+  });
 
-  // it('does something else', function () {
-  //   expect(true).to.equal(false);
-  // });
+  it.only('getBalanceForCurrentAddress should return the correct balance for the currentAddress', function () {
+    Header.getBalanceForCurrentAddress().then(function(currentBalance){
+      var currentBalance1 = currentBalance;
+      Utilities.httpGet('http://testnet.helloblock.io/v1/addresses/mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG', function(data){
+        console.log("xxxxxxxx $scope xxxxxxxx", $scope.activeTab);
+
+        var currentBalance2 = data.data.address.balance;
+        expect(currentBalance1).to.equal(currentBalance2);
+      });
+    });
+  });
+
+  it('getNetworkStatus should set $scope.isMainNet variable identical to isMainNet in local storage', function () {
+    
+  });
+
 })

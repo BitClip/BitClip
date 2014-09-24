@@ -24,6 +24,7 @@ angular.module('bitclip.receiveFactory', [])
               that.$apply(function() {
                 that.allAddresses.unshift(currentAddress);
               });
+              angular.element(document.getElementsByTagName('header-bar')).scope().getNetworkStatus();
             });
           });
         });
@@ -32,6 +33,7 @@ angular.module('bitclip.receiveFactory', [])
   };
 
   var setAsCurrentAddress = function(address) {
+    console.log("I am the address");
     var that = this;
     Utilities.isMainNet().then(function(bool) {
       var isMainNet = bool;

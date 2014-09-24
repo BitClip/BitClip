@@ -83,21 +83,19 @@ angular.module('bitclip.utilitiesFactory', [])
   var getBalances = function(addresses) {
     var deferred = $q.defer();
     isMainNet().then(function(bool) {
-      getAllAddresses().then(function(arr) {
-        var baseUrl = 'http://' + (bool ? 'mainnet' : 'testnet') + '.helloblock.io/v1/addresses?addresses=';
-        var requestString = '';
-        if (arr.length > 1) {
-          requestString += arr.join('&addresses=');
-        } else if (arr.length === 1) {
-          requestString = arr[0];
-        } else {
-          deferred.resolve([]);
-          return deferred.promise;
-        }
-        baseUrl += requestString;
-        httpGet(baseUrl, function(obj) {
-          deferred.resolve(obj.data.addresses);
-        });
+      var baseUrl = 'http://' + (bool ? 'mainnet' : 'testnet') + '.helloblock.io/v1/addresses?addresses=';
+      var requestString = '';
+      if (addresses.length > 1) {
+        requestString += addresses.join('&addresses=');
+      } else if (addresses.length === 1) {
+        requestString = addresses[0];
+      } else {
+        deferred.resolve([]);
+        return deferred.promise;
+      }
+      baseUrl += requestString;
+      httpGet(baseUrl, function(obj) {
+        deferred.resolve(obj.data.addresses);
       });
     });
     return deferred.promise;

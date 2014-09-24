@@ -28,4 +28,11 @@ angular.module('bitclip', [
       templateUrl: 'history/history.tpl.html',
       constroller: 'historyController'
     });
-}]);
+}])
+
+.controller('navBarController', ['$scope', function($scope){
+  $scope.activeTab = 'send';
+  $scope.setActiveTab = function(tab) {
+    $scope.activeTab = tab;
+  };
+}])
