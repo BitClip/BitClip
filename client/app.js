@@ -7,6 +7,8 @@ angular.module('bitclip', [
   'bitclip.receiveFactory',
   'bitclip.sendController',
   'bitclip.sendFactory',
+  'bitclip.historyController',
+  'bitclip.historyFactory',
   'bitclip.utilitiesFactory'
 ])
 

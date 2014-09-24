@@ -1,0 +1,19 @@
+<h2>Transaction History</h2>
+{{ currentAddress }}
+{{test}}
+<div style="overflow: auto; height: 200px;">
+  <table> <!-- use ng-repeat or something here -->
+    <tr ng-repeat="trans in transactions">
+      <td> {{trans[0]}} </td> <td> {{trans[1]}} </td> <td> {{trans[2] | date:'medium'}} </td> <td> {{trans[3]}} </td>
+    </tr>
+  </table>
+</div>
+<!-- 
+this will have to be in a table.
+
+it should take the current address, query hello block,
+then it should grab the transaction history for the current address.
+
+this should be defined for a limit, but i would suggest using a scroll box.
+
+the table should have 3 collumns: time, destination, the amount -->
