@@ -1,7 +1,9 @@
 angular.module('bitclip.headerController', [])
 
 .controller('headerController', ['$scope', '$state', 'Header', 'Utilities', function($scope, $state, Header, Utilities) {
+  // $scope.balanceMessage = "";
   Utilities.initialize().then(function(resolveMessage) {
+    console.log("header is starting:::::");
     $scope.activeTab = 'send';
 
     $scope.setActiveTab = function(tab) {
