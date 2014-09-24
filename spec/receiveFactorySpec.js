@@ -1,17 +1,19 @@
-describe('Unit: headerFactory', function () {
+describe('Unit: receiveFactory', function () {
   // Load the module with MainController
   beforeEach(module('bitclip'));
 
-  var $scope, $rootScope, $location, $window, createController, Header, Utilities, tempStore, $http;
+  var $scope, $rootScope, $location, $window, createController, Header, Receive, Utilities, tempStore, $http, $timeout;
 
   beforeEach(inject(function($injector) {
     $rootScope = $injector.get('$rootScope');
     $location = $injector.get('$location');
     $scope = $rootScope.$new();
     $window = $injector.get('$window');
+    $timeout = $injector.get('$timeout');
 
     Header = $injector.get('Header');
     Utilities = $injector.get('Utilities');
+    Receive = $injector.get('Receive');
 
     $window.chrome = {
                       storage:{
@@ -21,7 +23,6 @@ describe('Unit: headerFactory', function () {
                               callback();
                             },
                             get: function(propStrOrArray, callback){ 
-                              console.log("GET JUST GOT INVOKED");
                               var result = {};
                               //TODO later: must also handle case when key input
                               //has no value in tempstore;
@@ -49,53 +50,37 @@ describe('Unit: headerFactory', function () {
                   allAddressesAndKeys: []
                },
       testNet: {
-                  currentAddress: "mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG",
-                  currentPrivateKey: "",
-                  allAddressesAndKeys: []
+                  currentAddress: "testAddress1",
+                  currentPrivateKey: "testPrivateKey1",
+                  allAddressesAndKeys: [["testAddress1","testPrivateKey1"],["testAddress2","testPrivateKey2"]]
                }
     };
-
-    var $controller = $injector.get('$controller');
-
-    //used to create our headerController for testing
-    //likely not needed because we're testing headerFactory
-    createController = function () {
-      return $controller('headerController', {
-        $scope: $scope,
-        $window: $window,
-        $location: $location,
-        Header: Header,
-        Utilities: Utilities,
-        tempStore: tempStore
-      });
-    };
-
-    createController();
   }));
 
   afterEach(function() {
-    //$window.localStorage.removeItem('com.shortly'); //something like this but for chrome storage
   });
 
-  it('setNetwork should be a function', function () {
-    expect(Header.setNetwork).to.be.a('function');
+  it('newAddress should be a function', function () {
+    expect(Receive.newAddress).to.be.a('function');
   });
 
-  it('setNetwork change isMainNet in chrome.storage.local', function () {
-    Header.setNetwork(true, function(){
-      console.log("tempStore", tempStore);
-      expect(tempStore.isMainNet).to.equal(true);
-    });
+  //this doesnt work
+  it('newAddress should generate a new key address pair and save them into local storage', function () {
+    console.log("hello");
+    Receive.newAddress();
+    // $timeout(function(){
+    //   console.log("haha");
+    //   expect(tempStore.testNet.currentAddress).not.to.equal('testAddress1')
+    // },1000);
+    $scope.$evalAsync(expect(tempStore.testNet.currentAddress).not.to.equal('testAddress1'));
+    $scope.$evalAsync(expect(tempStore.testNet.currentPrivateKey).not.to.equal('testPrivateKey1'));
+    $scope.evalAsync(expect(tempStore.testNet.allAddressesAndKeys.length).to.equal(3));
   });
 
-  it('getBalanceForCurrentAddress should return the correct balance for the currentAddress', function () {
-    Header.getBalanceForCurrentAddress().then(function(currentBalance){
-      var currentBalance1 = currentBalance;
-      Utilities.httpGet('http://testnet.helloblock.io/v1/addresses/mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG', function(data){
-        var currentBalance2 = data.data.address.balance;
-        expect(currentBalance1).to.equal(currentBalance2);
-      });
-    });
+  //this does not work
+  it('setAsCurrentAddress should change currentAddress and currentPrivateKey in local storage', function () {
+    Receive.setAsCurrentAddress('testAddress2');
+    $evalAsync(expect(tempStore.testNet.currentAddress).to.equal('testAddress2'));
+    $evalAsync(expect(tempStore.testNet.currentAddress).to.equal('testPrivateKey2'));
   });
-
-})
+});
