@@ -1,15 +1,12 @@
 <form ng-submit="document.getElementById('send').click()">
   <div ng-if="txSuccessMessage" >
-	<p>{{txSuccessMessage}}</p>
+	<p><b>{{txSuccessMessage}}</b></p>
   </div>
   <label>Destination:</label>
   <input type="text" name="destination" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" ng-model="transactionDetails.destination" required autofocus>
   <label>Amount:</label>
   <input type="text" name="amount" placeholder="minimum 0.0001 BTC" ng-model="transactionDetails.amount" required>
 </form>
-
-
-
 <button ng-if="!confirmed" id="send" class="sendViewButton sendButton" ng-click="morph();">Send</button>
 
 <button ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-confirm"  ng-click="sendPayment(); morph();">confirm</button>

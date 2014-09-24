@@ -1,4 +1,4 @@
-describe('headerFactory', function () {
+describe('Unit: headerFactory', function () {
   // Load the module with MainController
   beforeEach(module('bitclip'));
 
@@ -57,12 +57,8 @@ describe('headerFactory', function () {
 
     var $controller = $injector.get('$controller');
 
-    console.log("$window window, xxxxxxxxxxx", $window.chrome.storage.local);
-
-    $window.chrome.storage.local.get('isMainNet', function(data){
-      console.log("THIS IS RETURN OF ISMAINNET", data);
-    })
-    //used to create our AuthController for testing
+    //used to create our headerController for testing
+    //likely not needed because we're testing headerFactory
     createController = function () {
       return $controller('headerController', {
         $scope: $scope,
@@ -92,7 +88,7 @@ describe('headerFactory', function () {
     });
   });
 
-  it.only('getBalanceForCurrentAddress should return the correct balance for the currentAddress', function () {
+  it('getBalanceForCurrentAddress should return the correct balance for the currentAddress', function () {
     Header.getBalanceForCurrentAddress().then(function(currentBalance){
       var currentBalance1 = currentBalance;
       Utilities.httpGet('http://testnet.helloblock.io/v1/addresses/mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG', function(data){
