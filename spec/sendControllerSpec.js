@@ -1,41 +1,60 @@
 describe('sendController', function () {
   // Load the module with MainController
   beforeEach(module('bitclip'));
-  var tempStore;
-  var $scope, $rootScope, $location, $window, createController, TxBuilder, persistentTransaction,Utilities;
+  var $scope, $rootScope, $location, $window, createController, Header, TxBuilder, Receive, Utilities, tempStore, $http, $timeout;
 
   beforeEach(inject(function($injector) {
     $rootScope = $injector.get('$rootScope');
     $location = $injector.get('$location');
     $scope = $rootScope.$new();
     $window = $injector.get('$window');
-    TxBuilder = $injector.get('TxBuilder');
+    $timeout = $injector.get('$timeout');
+
+    Header = $injector.get('Header');
     Utilities = $injector.get('Utilities');
-    console.log("persistenttx", persistentTransaction.transactionDetails);
-    tempStore = {
-                  isMainNet: true,
-                  mainNet: {
-                              currentAddress: "",
-                              currentPrivateKey: "",
-                              allAddressesAndKeys: []
-                           },
-                  testNet: {
-                              currentAddress: "",
-                              currentPrivateKey: "",
-                              allAddressesAndKeys: []
-                           }
-                };
+    Receive = $injector.get('Receive');
+    TxBuilder = $injector.get('TxBuilder');
 
     $window.chrome = {
                       storage:{
-                        local: sinon.stub({
-                            set: function(){ },
-                            get: function(){ },
+                        local: {
+                            set: function(obj , callback){ 
+                              tempStore = obj;
+                              callback();
+                            },
+                            get: function(propStrOrArray, callback){ 
+                              var result = {};
+                              //TODO later: must also handle case when key input
+                              //has no value in tempstore;
+                              if (typeof propStrOrArray === 'string'){
+                                result[propStrOrArray] = tempStore[propStrOrArray];
+                              } else if (Array.isArray(propStrOrArray)){
+                                propStrOrArray.forEach(function(propName){
+                                  result[propName] = tempStore[propName];
+                                });
+                              } else if (propStrOrArray === null) {
+                                result = tempStore;
+                              }
+                              callback(result);
+                            },
                             remove: function(){ },
                             clear: function(){ }
-                        })
+                        }
                       }
                     };
+    tempStore = {
+      isMainNet: false,
+      mainNet: {
+                  currentAddress: "",
+                  currentPrivateKey: "",
+                  allAddressesAndKeys: []
+               },
+      testNet: {
+                  currentAddress: "testAddress1",
+                  currentPrivateKey: "testPrivateKey1",
+                  allAddressesAndKeys: [["testAddress1","testPrivateKey1"],["testAddress2","testPrivateKey2"]]
+               }
+    };
 
     var $controller = $injector.get('$controller');
 
@@ -43,9 +62,8 @@ describe('sendController', function () {
     createController = function () {
       return $controller('sendController', {
         $scope: $scope,
-       // $window: $window, ////////////////////might have to be chrome storage
+        $window: $window, 
         $location: $location,
-        persistentTransaction: persistentTransaction,
         TxBuilder: TxBuilder,
         Utilities: Utilities
       });
@@ -58,27 +76,17 @@ describe('sendController', function () {
     //$window.localStorage.removeItem('com.shortly'); //something like this but for chrome storage
   });
 
-  // it('tacos', function () {
-  //   expect(true).to.equal(true);
-  // });
+  it('$scope.transactionDetails should exist as object', function () {
+    expect($scope.transactionDetails).to.be.an('object');
+  });
 
-  // it('updateTransaction and sendTransaction should exists', function () {
-  //   expect(persistentTransaction.updateTransaction).to.be.a('function');
-  //   expect(TxBuilder.sendTransaction).to.be.a('function');
-  // });
+  it('$scope.morph should toggle as $scope.confirm', function () {
+    $scope.morph();
+    expect($scope.confirmed).to.equal(true);
+  });
 
-  // xit('updateTransaction should update transactionDetails', function () {
-  //   var thing = {
-  //     amount: 'thingOne',
-  //     destination: 'thingTwo'
-  //   };
-  //   console.log(thing);
-  //   persistentTransaction.updateTransaction(thing);
-  //   console.log(persistentTransaction.transactionDetails);
-  //   expect(persistentTransaction.transactionDetails).to.equal("");
-  // });
+  it('$scope.sendPayment should trigger Tx.Builder sendPayment', function(){
+    //to be written
+  })
 
-  // it('does something else', function () {
-  //   expect(true).to.equal(false);
-  // });
 })
