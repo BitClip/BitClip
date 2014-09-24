@@ -1,8 +1,7 @@
 describe('Unit: headerFactory', function () {
-  // Load the module with MainController
   beforeEach(module('bitclip'));
 
-  var $scope, $rootScope, $location, $window, createController, Header, Utilities, tempStore, $http;
+  var $scope, $rootScope, $location, $window, createController, Header, Utilities, tempStore;
 
   beforeEach(inject(function($injector) {
     $rootScope = $injector.get('$rootScope');
@@ -21,7 +20,6 @@ describe('Unit: headerFactory', function () {
                               callback();
                             },
                             get: function(propStrOrArray, callback){ 
-                              console.log("GET JUST GOT INVOKED");
                               var result = {};
                               //TODO later: must also handle case when key input
                               //has no value in tempstore;
@@ -54,23 +52,6 @@ describe('Unit: headerFactory', function () {
                   allAddressesAndKeys: []
                }
     };
-
-    var $controller = $injector.get('$controller');
-
-    //used to create our headerController for testing
-    //likely not needed because we're testing headerFactory
-    createController = function () {
-      return $controller('headerController', {
-        $scope: $scope,
-        $window: $window,
-        $location: $location,
-        Header: Header,
-        Utilities: Utilities,
-        tempStore: tempStore
-      });
-    };
-
-    createController();
   }));
 
   afterEach(function() {
