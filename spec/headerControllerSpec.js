@@ -1,5 +1,4 @@
-describe('headerController', function () {
-  // Load the module with MainController
+describe('Unit: headerController', function () {
   beforeEach(module('bitclip'));
 
   var $scope, $rootScope, $location, $window, createController, Header, Utilities, tempStore, $http;
@@ -57,12 +56,6 @@ describe('headerController', function () {
 
     var $controller = $injector.get('$controller');
 
-    console.log("$window window, xxxxxxxxxxx", $window.chrome.storage.local);
-
-    $window.chrome.storage.local.get('isMainNet', function(data){
-      console.log("THIS IS RETURN OF ISMAINNET", data);
-    })
-    //used to create our AuthController for testing
     createController = function () {
       return $controller('headerController', {
         $scope: $scope,
@@ -81,31 +74,4 @@ describe('headerController', function () {
     //$window.localStorage.removeItem('com.shortly'); //something like this but for chrome storage
   });
 
-  it('setNetwork should be a function', function () {
-    expect(Header.setNetwork).to.be.a('function');
-  });
-
-  it('setNetwork change isMainNet in chrome.storage.local', function () {
-    Header.setNetwork(true, function(){
-      console.log("tempStore", tempStore);
-      expect(tempStore.isMainNet).to.equal(true);
-    });
-  });
-
-  it.only('getBalanceForCurrentAddress should return the correct balance for the currentAddress', function () {
-    Header.getBalanceForCurrentAddress().then(function(currentBalance){
-      var currentBalance1 = currentBalance;
-      Utilities.httpGet('http://testnet.helloblock.io/v1/addresses/mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG', function(data){
-        console.log("xxxxxxxx $scope xxxxxxxx", $scope.activeTab);
-
-        var currentBalance2 = data.data.address.balance;
-        expect(currentBalance1).to.equal(currentBalance2);
-      });
-    });
-  });
-
-  it('getNetworkStatus should set $scope.isMainNet variable identical to isMainNet in local storage', function () {
-    
-  });
-
-})
+});

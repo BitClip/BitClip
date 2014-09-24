@@ -1,4 +1,4 @@
-describe("Midway: Testing Routes", function() {
+describe("Unit Test: App Module", function() {
 
 
 // Need to change below to test App.js has right dependencies
