@@ -1,11 +1,7 @@
-
 describe('receiveController', function () {
-  // Load the module with MainController
   beforeEach(module('bitclip'));
 
-  var $scope, $rootScope, $location, $window, createController, Receive, Utilities;
-  var tempStore;
-  var window, chromeStorageApi;
+  var $scope, $rootScope, $location, $window, tempStore, createController, Receive, Utilities;
 
   beforeEach(inject(function($injector) {
     // mock out our dependencies

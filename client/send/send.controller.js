@@ -19,7 +19,8 @@ angular.module('bitclip.sendController', [
           TxBuilder.sendTransaction(currentPrivateKey, $scope.transactionDetails, isMainNet).then(function(message){
             $scope.txSuccessMessage = message;
             $timeout(function() { $scope.txSuccessMessage = false }, 2000);
-          }).catch(function(err){
+          })
+          .catch(function(err){
             $scope.txSuccessMessage = "Transaction Failed: "+ err.message;
             $timeout(function() { $scope.txSuccessMessage = false }, 2000);
           });

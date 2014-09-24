@@ -1,5 +1,4 @@
 describe('Unit: navBarController', function () {
-  // Load the module with MainController
   beforeEach(module('bitclip'));
 
   var $scope, $rootScope, $location, $window, createController;
@@ -12,7 +11,6 @@ describe('Unit: navBarController', function () {
 
     var $controller = $injector.get('$controller');
 
-    //used to create our AuthController for testing
     createController = function () {
       return $controller('navBarController', {
         $scope: $scope,
@@ -30,7 +28,7 @@ describe('Unit: navBarController', function () {
     expect($scope.activeTab).to.equal('send');
   });
 
-  it.only('$scope.setActiveTab should be able to set new $scope.activeTab variables', function () {
+  it('$scope.setActiveTab should be able to set new $scope.activeTab variables', function () {
     $scope.setActiveTab('receive');
     expect($scope.activeTab).to.equal('receive');
   });

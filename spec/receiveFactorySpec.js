@@ -1,5 +1,4 @@
 describe('Unit: receiveFactory', function () {
-  // Load the module with MainController
   beforeEach(module('bitclip'));
 
   var $scope, $rootScope, $location, $window, createController, Header, Receive, Utilities, tempStore, $http, $timeout;
