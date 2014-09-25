@@ -1,6 +1,6 @@
 <form ng-submit="document.getElementById('send').click()">
-  <div ng-if="txSuccessMessage" >
-	<p><b>{{txSuccessMessage}}</b></p>
+  <div ng-if="txSuccessMessage" class="successMessagePopup">
+	{{txSuccessMessage}}
   </div>
   <label>Destination:</label>
   <input type="text" name="destination" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" ng-model="transactionDetails.destination" required autofocus>

@@ -1,8 +1,9 @@
+<div ng-if="!isCollapsed" class="optionsOffclick" ng-click="menu()"></div>
 <div class="row banner">
   <ul>
     <li class="balanceDisplay btcBalance"><i class="fa fa-btc"></i>{{ balanceMessage }}</li>
     <li class="bitclipTitle">BitClip</li>
-    <li class="optionsNav settingsDropDown"><i ng-click="isCollapsed = !isCollapsed" ng-init="isCollapsed = true" class="fa fa-cog"></i>
+    <li class="optionsNav settingsDropDown"><i ng-click="menu()" ng-init="isCollapsed = true" class="fa fa-cog"></i>
       <ul ng-if="!isCollapsed" class="dropdown-menu" role="menu">
         <li>Options</li>
         <li class="toggleNetwork">
@@ -17,9 +18,8 @@
             </label>
           </div>
         </li>
-        <li><i class="fa fa-lock"></i><a href="#">Two-Factor Authentication</a></li>
-        <li><i class="fa fa-book"></i><a href="#">Backup Wallet</a></li>
       </ul>
     </li>
   </ul>
+
 </div>

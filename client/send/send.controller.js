@@ -18,11 +18,11 @@ angular.module('bitclip.sendController', [
         Utilities.getCurrentPrivateKey().then(function(currentPrivateKey){
           TxBuilder.sendTransaction(currentPrivateKey, $scope.transactionDetails, isMainNet).then(function(message){
             $scope.txSuccessMessage = message;
-            $timeout(function() { $scope.txSuccessMessage = false }, 2000);
+            $timeout(function() { $scope.txSuccessMessage = false }, 2000000);
           })
           .catch(function(err){
             $scope.txSuccessMessage = "Transaction Failed: "+ err.message;
-            $timeout(function() { $scope.txSuccessMessage = false }, 2000);
+            $timeout(function() { $scope.txSuccessMessage = false }, 2000000);
           });
         });
       });

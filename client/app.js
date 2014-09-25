@@ -3,6 +3,8 @@ angular.module('bitclip', [
   'bitclip.headerController',
   'bitclip.headerDirective',
   'bitclip.headerFactory',
+  'bitclip.viewTabsController',
+  'bitclip.viewTabsDirective',
   'bitclip.receiveController',
   'bitclip.receiveFactory',
   'bitclip.sendController',
@@ -36,12 +38,7 @@ angular.module('bitclip', [
       url: '/market',
       templateUrl: 'market/market.tpl.html',
       controller: 'marketController'
-    })
+    });
 }])
 
-.controller('navBarController', ['$scope', function($scope){
-  $scope.activeTab = 'send';
-  $scope.setActiveTab = function(tab) {
-    $scope.activeTab = tab;
-  };
-}])
+
