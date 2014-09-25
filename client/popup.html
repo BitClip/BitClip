@@ -6,7 +6,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/font-awesome-4.2.0/css/font-awesome.min.css">
+
   </head>
   <body ng-app="bitclip" ng-csp>
     <div ng-controller="headerController" class="headerBanner">
@@ -15,7 +16,8 @@
     <ul class="row headerTabs" ng-controller="navBarController">
       <li class="sendTab" ng-class="{'active': activeTab === 'send'}" ui-sref="send" ng-click="setActiveTab('send')">Send</li>
       <li class="receiveTab" ng-class="{'active': activeTab === 'receive'}" ui-sref="receive" ng-click="setActiveTab('receive')">Receive </li>
-      <li class="history" ng-class="{'active': activeTab === 'history'}" ui-sref="history" ng-click="setActiveTab('history')">History</li>
+      <li class="historyTab" ng-class="{'active': activeTab === 'history'}" ui-sref="history" ng-click="setActiveTab('history')">History</li>
+      <li class="marketTab" ng-class="{'active': activeTab === 'market'}" ui-sref="market" ng-click="setActiveTab('market')">Market</li>
     </ul>
     <div ui-view></div>
 
@@ -38,6 +40,8 @@
     <script src="send/send.factory.js"></script>
     <script src="history/history.controller.js"></script>
     <script src="history/history.factory.js"></script>
+    <script src="market/market.controller.js"></script>
+    <script src="market/market.factory.js"></script>
     <script src="utils/utilities.factory.js"></script>
   </body>
 </html>
