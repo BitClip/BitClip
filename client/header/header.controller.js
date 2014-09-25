@@ -39,7 +39,6 @@ angular.module('bitclip.headerController', [])
       $scope.isCollapsed = !$scope.isCollapsed;
     }
     $scope.toggleNetwork = function() {
-      console.log('lol')
       Header.setNetwork(!$scope.isMainNet, $scope.getNetworkStatus);
     };
   });

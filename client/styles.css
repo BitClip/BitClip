@@ -27,6 +27,10 @@ a {
   color: #0B0B0B;
 }
 
+i {
+  color:#F1A533;
+}
+
 h4, h5, h6 {
   font-size: 1rem;
   font-weight: normal;
@@ -68,7 +72,7 @@ h4, h5, h6 {
 }
 
 .banner > ul > li > i {
-  color: #F1A533;
+  padding-right: 5px;
   font-size: 1.4rem
 }
 
@@ -99,7 +103,6 @@ anywhere outside of the dropdown */
 .optionsNav > i {
   z-index: 1000;
   position: fixed;
-  color: #F1A533;
   right: 10px;
   top: 7px;
 }
@@ -160,7 +163,7 @@ anywhere outside of the dropdown */
 /*  ------- Network Toggle Button -------  */
 
 .onoffswitch {
-  position: relative; width: 90px;
+  position: relative; width: 90px; padding-top: 5px;
   -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;
 }
 
@@ -171,6 +174,7 @@ anywhere outside of the dropdown */
 .onoffswitch-label {
   display: block; overflow: hidden; cursor: pointer;
   border: 1px solid #0B0B0B; border-radius: 50px;
+  padding:0;
 }
 
 .onoffswitch-inner {
@@ -212,7 +216,7 @@ anywhere outside of the dropdown */
 .onoffswitch-switch > i {
   color: #C2C2C2;
   position: relative;
-  top: 4px;
+  top: 2px;
 }
 
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
@@ -437,7 +441,6 @@ div.currentAddress {
 
 .currentAddress i {
   padding-right:4px;
-  color: #F1A533;
 }
 
 ul.addressScrollbox {
