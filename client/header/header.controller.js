@@ -24,6 +24,7 @@ angular.module('bitclip.headerController', [])
       });
     };
 
+
     $scope.getNetworkStatus = function() {
       console.log("getNetworkStatus invoked");
       Utilities.isMainNet().then(function(isMainNet) {
@@ -34,7 +35,11 @@ angular.module('bitclip.headerController', [])
     };
     $scope.getNetworkStatus();
 
+    $scope.menu = function(){
+      $scope.isCollapsed = !$scope.isCollapsed;
+    }
     $scope.toggleNetwork = function() {
+      console.log('lol')
       Header.setNetwork(!$scope.isMainNet, $scope.getNetworkStatus);
     };
   });

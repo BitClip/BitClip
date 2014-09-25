@@ -82,6 +82,20 @@ h4, h5, h6 {
   font-weight: 700;
 }
 
+/* Allows user to close options window by clicking
+anywhere outside of the dropdown */
+.optionsOffclick{
+  position:absolute;
+  background-color: transparent;
+  z-index: 997;
+  
+  /*back up width/height for unsupported browsers*/
+  width:360px; 
+  height:360px;
+  width:100vh;
+  height:100vw;
+}
+
 .optionsNav > i {
   z-index: 1000;
   position: fixed;
@@ -93,8 +107,8 @@ h4, h5, h6 {
 .optionsNav > ul.dropdown-menu {
   position: fixed;
   list-style-type: none;
-  max-width: calc(33% - 6px);
-  height: 50%;
+  width: 108px;
+  height: 108px;
   right: 6px;
   top: 3px;
   background-color: white;
@@ -136,7 +150,7 @@ h4, h5, h6 {
 }
 
 .toggleNetwork > span {
-  color: #35A533;
+  color: #35A5A7;
 }
 
 .toggleNetwork > .testNetwork {
@@ -174,7 +188,7 @@ h4, h5, h6 {
 .onoffswitch-inner:before {
   content: 'main';
   padding-left: 14px;
-  background-color: #35A533; color: #FFFFFF;
+  background-color: #35A5A7; color: #FFFFFF;
 }
 
 .onoffswitch-inner:after {
@@ -256,6 +270,34 @@ li.active {
   color: #0B0B0B;
 }
 
+
+/*  #3DBDBF  
+    #DAF1F1
+3AB5B8
+E3F1F1
+*/
+.headerTabs > .marketTab{
+  background-color:#35A5A7;
+  border-bottom:2px solid #F1A533;
+}
+
+.headerTabs li:hover:not(.active).marketTab,
+.headerTabs li:hover:not(.active) .marketTabImage{
+  background-color: #3DBDBF;
+  fill:white;
+}
+
+.marketTabImage {
+  fill:white;
+  width:50%;
+  height:100%;
+}
+
+  /*background-color: #35A533*/
+  fill:red;
+
+}
+
 /* ------- Send View ------- */
 
 form {
@@ -268,7 +310,8 @@ label {
   position: relative;
   font-size: 1.5rem;
   letter-spacing: 0.04rem;
-  margin: 8% 0 4% 8%;
+  margin: 0 0 4% 8%;
+  padding-top: 8%;
 }
 
 form input {
@@ -330,31 +373,18 @@ input:focus {
   right: 0.5%;
 }
 
-.animate-if.ng-enter, .animate-if.ng-leave {
-  -webkit-transition: 0.5s linear all;
- -moz-transition: 0.5s linear all;
- -o-transition: 0.5s linear all;
- transition: 0.5s linear all;
- opacity: 0;
-}
-
-.animate-if.ng-enter,
-.animate-if.ng-leave.ng-leave-active {
-  opacity: 0;
-}
-
-.animate-if.ng-leave,
-.animate-if.ng-enter.ng-enter-active {
-  opacity: 1;
-}
-
-.successModal {
+.successMessagePopup {
   position: absolute;
-  height: 100px;
-  width: 100px;
-  background-color: green;
+  height: 20px;
+  width: 100%;
+
+  text-align: center;
+  line-height: 150%;
+  font-family: 'Cabin', sans-serif;
+
+  background-color: #35A5A7;
   color: white;
-  z-index: 999999;
+  z-index: 9999;
 }
 
 /* ----------------------------------------- */
@@ -406,6 +436,7 @@ div.currentAddress {
 }
 
 .currentAddress i {
+  padding-right:4px;
   color: #F1A533;
 }
 
@@ -426,10 +457,10 @@ ul.addressScrollbox {
   left: 0;
 }
 
-.addressScrollbox li:nth-child(2) {
+/*.addressScrollbox li:nth-child(2) {
   color: #35A5A7;
   padding-top: 2px;
-}
+}*/
 
 .generateButton {
 }

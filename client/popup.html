@@ -13,12 +13,9 @@
     <div ng-controller="headerController" class="headerBanner">
       <header-bar/>
     </div>
-    <ul class="row headerTabs" ng-controller="navBarController">
-      <li class="sendTab" ng-class="{'active': activeTab === 'send'}" ui-sref="send" ng-click="setActiveTab('send')">Send</li>
-      <li class="receiveTab" ng-class="{'active': activeTab === 'receive'}" ui-sref="receive" ng-click="setActiveTab('receive')">Receive </li>
-      <li class="historyTab" ng-class="{'active': activeTab === 'history'}" ui-sref="history" ng-click="setActiveTab('history')">History</li>
-      <li class="marketTab" ng-class="{'active': activeTab === 'market'}" ui-sref="market" ng-click="setActiveTab('market')">Market</li>
-    </ul>
+    <div ng-controller="viewTabsController">
+      <view-tabs/>
+    </div>
     <div ui-view></div>
 
     <!-- Library dependencies -->
@@ -41,6 +38,8 @@
     <script src="header/header.controller.js"></script>
     <script src="header/header.directive.js"></script>
     <script src="header/header.factory.js"></script>
+    <script src="viewTabs/viewTabs.controller.js"></script>
+    <script src="viewTabs/viewTabs.directive.js"></script>
     <script src="send/send.controller.js"></script>
     <script src="send/send.factory.js"></script>
     <script src="history/history.controller.js"></script>
