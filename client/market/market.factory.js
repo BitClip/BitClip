@@ -1,5 +1,4 @@
 angular.module('bitclip.marketFactory', [])
-
 .factory('Market', ['Utilities', function(Utilities){
 
   var getGraphData = function(baseUrl, numHrs , callback){
