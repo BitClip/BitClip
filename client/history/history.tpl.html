@@ -4,19 +4,19 @@
       <span><i class="fa fa-chevron-circle-right"></i>{{ currentAddress }}</span>
   </div>
 
-  <div style="margin: 0 auto">
+  <div class="historyBox">
 
-    <div style="margin-bottom: 10px; border-bottom: 1px solid-black">
+    <div class="historyHeader">
       Inbound transaction: 
-      <i id="inbound" ng-class="{'fa fa-chevron-circle-right': true}" style="margin-right: 10px"></i>
-      Outbound transaction: 
+      <i id="inbound" ng-class="{'fa fa-chevron-circle-right': true}" ></i>
+      Outbound transaction:  
       <i id="outbound" ng-class="{'fa fa-chevron-circle-left': true}"></i>
     </div>
 
-    <div style="overflow-y: scroll; height: 180px;" >
+    <div class="historyTable">
       <table class="addressScrollbox"> 
           <tbody ng-repeat="trans in transactions">
-          <tr style="border: 1px solid black">
+          <tr>
             <td> <i id="inbound" ng-class="{'fa fa-chevron-circle-right': trans[0] === 'inbound'}"></i>     
                  <i id="outbound" ng-class="{'fa fa-chevron-circle-left': trans[0] === 'outbound'}"></i>
                  Amount: {{trans[1]}}
@@ -24,19 +24,13 @@
             <td colspan="2"> Date: {{trans[2] | date:'short'}} </td> 
           </tr>
           <tr>
-            <td colspan="3">Address: {{trans[3]}} </td>
+            <td colspan="3"> 
+              <i ng-if="trans[0] === 'inbound'">From: {{trans[3]}}</i>
+              <i ng-if="trans[0] === 'outbound'">To: {{trans[3]}}</i>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
-<!-- 
-this will have to be in a table.
-
-it should take the current address, query hello block,
-then it should grab the transaction history for the current address.
-
-this should be defined for a limit, but i would suggest using a scroll box.
-
-the table should have 3 collumns: time, destination, the amount -->
