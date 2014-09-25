@@ -7,6 +7,8 @@ angular.module('bitclip', [
   'bitclip.receiveFactory',
   'bitclip.sendController',
   'bitclip.sendFactory',
+  'bitclip.historyController',
+  'bitclip.historyFactory',
   'bitclip.utilitiesFactory'
 ])
 
@@ -26,7 +28,7 @@ angular.module('bitclip', [
     .state('history', {
       url: '/history',
       templateUrl: 'history/history.tpl.html',
-      constroller: 'historyController'
+      controller: 'historyController'
     });
 }])
 
