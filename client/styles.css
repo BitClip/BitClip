@@ -507,6 +507,7 @@ ul.scrollbox {
   color:#35A5A7;
 }
 
+<<<<<<< HEAD
 .scrollbox li.currentAddressMatch::before{
   content:">";
   position:absolute;
@@ -514,6 +515,8 @@ ul.scrollbox {
   top:0px;
 }
 
+=======
+>>>>>>> Add structure for market graph
 /* ----------------------------------------- */
 /*              History View                 */
 /* ----------------------------------------- */
