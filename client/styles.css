@@ -8,6 +8,23 @@ html {
   font-size: 14px;
 }
 
+tbody{
+    display:block;
+    border: 1px solid black;
+    border-collapse: separate;
+    /*border-spacing: 2px; */
+    margin-bottom: 10px;
+}
+
+#inbound {
+  /*color:#F1A533*/
+  color: green
+}
+
+#outbound {
+  color: red
+}
+
 body {
   width: 360px;
   height: 360px;
@@ -431,4 +448,16 @@ ul.addressScrollbox {
 }
 
 .generateButton {
+}
+
+
+table,
+tbody,
+tr {
+  position:relative;
+}
+
+td {
+  position:relative;
+  width:20%;
 }
