@@ -7,7 +7,7 @@ angular.module('bitclip.historyController', [])
       $scope.currentAddress = currentAddress;
     });
 
-    History.getTransactionHist('16ps38WzmDhEWMPQecVndrWZADekC4FU42').then(function(trans){
+    History.getTransactionHist('1H5c667tFHPFNJUnjAACWKicGke6b21VTY').then(function(trans){
       var transaction = [];
 
       for(var i = 0; i < trans.length; i++){

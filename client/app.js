@@ -28,7 +28,7 @@ angular.module('bitclip', [
     .state('history', {
       url: '/history',
       templateUrl: 'history/history.tpl.html',
-      constroller: 'historyController'
+      controller: 'historyController'
     });
 }])
 

@@ -1,12 +1,35 @@
-<h2>Transaction History</h2>
-{{ currentAddress }}
-{{test}}
-<div style="overflow: auto; height: 200px;">
-  <table> <!-- use ng-repeat or something here -->
-    <tr ng-repeat="trans in transactions">
-      <td> {{trans[0]}} </td> <td> {{trans[1]}} </td> <td> {{trans[2] | date:'medium'}} </td> <td> {{trans[3]}} </td>
-    </tr>
-  </table>
+<div class="receiveContainer">
+  <div class="currentAddress">
+      <h3>Current Address:</h3>
+      <span><i class="fa fa-chevron-circle-right"></i>{{ currentAddress }}</span>
+  </div>
+
+  <div style="margin: 0 auto">
+
+    <div style="margin-bottom: 10px; border-bottom: 1px solid-black">
+      Inbound transaction: 
+      <i id="inbound" ng-class="{'fa fa-chevron-circle-right': true}" style="margin-right: 10px"></i>
+      Outbound transaction: 
+      <i id="outbound" ng-class="{'fa fa-chevron-circle-left': true}"></i>
+    </div>
+
+    <div style="overflow-y: scroll; height: 180px;" >
+      <table class="addressScrollbox"> 
+          <tbody ng-repeat="trans in transactions">
+          <tr style="border: 1px solid black">
+            <td> <i id="inbound" ng-class="{'fa fa-chevron-circle-right': trans[0] === 'inbound'}"></i>     
+                 <i id="outbound" ng-class="{'fa fa-chevron-circle-left': trans[0] === 'outbound'}"></i>
+                 Amount: {{trans[1]}}
+            </td> 
+            <td colspan="2"> Date: {{trans[2] | date:'short'}} </td> 
+          </tr>
+          <tr>
+            <td colspan="3">Address: {{trans[3]}} </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 <!-- 
 this will have to be in a table.
