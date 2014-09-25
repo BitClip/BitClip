@@ -1,6 +1,7 @@
-describe('sendController', function () {
+describe('Unit: headerFactory', function () {
   beforeEach(module('bitclip'));
-  var $scope, $rootScope, $location, $window, createController, Header, TxBuilder, Receive, Utilities, tempStore, $http, $timeout;
+
+  var $scope, $rootScope, $location, $window, createController, Header, Utilities, tempStore;
 
   beforeEach(inject(function($injector) {
     $rootScope = $injector.get('$rootScope');
@@ -10,8 +11,6 @@ describe('sendController', function () {
 
     Header = $injector.get('Header');
     Utilities = $injector.get('Utilities');
-    Receive = $injector.get('Receive');
-    TxBuilder = $injector.get('TxBuilder');
 
     $window.chrome = {
                       storage:{
@@ -48,43 +47,41 @@ describe('sendController', function () {
                   allAddressesAndKeys: []
                },
       testNet: {
-                  currentAddress: "testAddress1",
-                  currentPrivateKey: "testPrivateKey1",
-                  allAddressesAndKeys: [["testAddress1","testPrivateKey1"],["testAddress2","testPrivateKey2"]]
+                  currentAddress: "mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG",
+                  currentPrivateKey: "",
+                  allAddressesAndKeys: []
                }
     };
-
-    var $controller = $injector.get('$controller');
-
-    //used to create our AuthController for testing
-    createController = function () {
-      return $controller('sendController', {
-        $scope: $scope,
-        $window: $window, 
-        $location: $location,
-        TxBuilder: TxBuilder,
-        Utilities: Utilities
-      });
-    };
-
-    createController();
   }));
 
   afterEach(function() {
     //$window.localStorage.removeItem('com.shortly'); //something like this but for chrome storage
   });
 
-  it('$scope.transactionDetails should exist as object', function () {
-    expect($scope.transactionDetails).to.be.an('object');
+  it('setNetwork should be a function', function () {
+    expect(Header.setNetwork).to.be.a('function');
   });
 
-  it('$scope.morph should toggle as $scope.confirm', function () {
-    $scope.morph();
-    expect($scope.confirmed).to.equal(true);
+  // This async test totally works!!
+  it('setNetwork change isMainNet in chrome.storage.local', function (done) {
+    Header.setNetwork(true, function(){
+      expect(tempStore.isMainNet).to.equal(true);
+      done();
+    });
   });
 
-  it('$scope.sendPayment should trigger Tx.Builder sendPayment', function(){
-    //to be written
-  })
+  //this test does not work
+  it('getBalanceForCurrentAddress should return the correct balance for the currentAddress', function (done) {
+    Header.getBalanceForCurrentAddress().then(function(currentBalance){
+      var currentBalance1 = currentBalance;
+      Utilities.httpGet('http://testnet.helloblock.io/v1/addresses/mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG', function(data){
+        var currentBalance2 = data.data.address.balance;
+        expect(currentBalance1).to.equal(currentBalance2);
+        done();
+      });
+    }).catch(function(error){
+      done(error);
+    })
+  });
 
 })

@@ -61,7 +61,6 @@ angular.module('bitclip.sendFactory', [])
           deferred.reject(err);
         } else if (tx) {
           deferred.resolve("Transaction successfully propagated");
-          console.log('SUCCESS: https://test.helloblock.io/transactions/' + tx.txHash);
         }
       });
     });

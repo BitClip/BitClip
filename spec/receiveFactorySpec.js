@@ -1,17 +1,18 @@
-describe('sendController', function () {
+describe('Unit: receiveFactory', function () {
   beforeEach(module('bitclip'));
-  var $scope, $rootScope, $location, $window, createController, Header, TxBuilder, Receive, Utilities, tempStore, $http, $timeout;
+
+  var $scope, $rootScope, $location, $window, createController, Header, Receive, Utilities, tempStore, $http, $timeout;
 
   beforeEach(inject(function($injector) {
     $rootScope = $injector.get('$rootScope');
     $location = $injector.get('$location');
     $scope = $rootScope.$new();
     $window = $injector.get('$window');
+    $timeout = $injector.get('$timeout');
 
     Header = $injector.get('Header');
     Utilities = $injector.get('Utilities');
     Receive = $injector.get('Receive');
-    TxBuilder = $injector.get('TxBuilder');
 
     $window.chrome = {
                       storage:{
@@ -53,38 +54,32 @@ describe('sendController', function () {
                   allAddressesAndKeys: [["testAddress1","testPrivateKey1"],["testAddress2","testPrivateKey2"]]
                }
     };
-
-    var $controller = $injector.get('$controller');
-
-    //used to create our AuthController for testing
-    createController = function () {
-      return $controller('sendController', {
-        $scope: $scope,
-        $window: $window, 
-        $location: $location,
-        TxBuilder: TxBuilder,
-        Utilities: Utilities
-      });
-    };
-
-    createController();
   }));
 
   afterEach(function() {
-    //$window.localStorage.removeItem('com.shortly'); //something like this but for chrome storage
   });
 
-  it('$scope.transactionDetails should exist as object', function () {
-    expect($scope.transactionDetails).to.be.an('object');
+  it('newAddress should be a function', function () {
+    expect(Receive.newAddress).to.be.a('function');
   });
 
-  it('$scope.morph should toggle as $scope.confirm', function () {
-    $scope.morph();
-    expect($scope.confirmed).to.equal(true);
+  //this doesnt work
+  it('newAddress should generate a new key address pair and save them into local storage', function () {
+    console.log("hello");
+    Receive.newAddress();
+    // $timeout(function(){
+    //   console.log("haha");
+    //   expect(tempStore.testNet.currentAddress).not.to.equal('testAddress1')
+    // },1000);
+    $scope.$evalAsync(expect(tempStore.testNet.currentAddress).not.to.equal('testAddress1'));
+    $scope.$evalAsync(expect(tempStore.testNet.currentPrivateKey).not.to.equal('testPrivateKey1'));
+    $scope.evalAsync(expect(tempStore.testNet.allAddressesAndKeys.length).to.equal(3));
   });
 
-  it('$scope.sendPayment should trigger Tx.Builder sendPayment', function(){
-    //to be written
-  })
-
-})
+  //this does not work
+  it('setAsCurrentAddress should change currentAddress and currentPrivateKey in local storage', function () {
+    Receive.setAsCurrentAddress('testAddress2');
+    $evalAsync(expect(tempStore.testNet.currentAddress).to.equal('testAddress2'));
+    $evalAsync(expect(tempStore.testNet.currentAddress).to.equal('testPrivateKey2'));
+  });
+});
