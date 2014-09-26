@@ -48,8 +48,8 @@ describe('Unit: sendFactory - TxBuilder', function () {
                   allAddressesAndKeys: []
                },
       testNet: {
-                  currentAddress: "morpWFtSj2LBMUxLfxHJ7U4s5dnqn2QBa6",
-                  currentPrivateKey: "cVJUMhpZopo9myE2KGtzAXeFoDdhqdMvt4Pm62BGtL2Zahh4qeAv",
+                  currentAddress: "mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf",
+                  currentPrivateKey: "cRqGMD3MDfkEJit4HTtA3tUDcAtQkmogqrLAnuu4aBaefXCp1J79",
                   allAddressesAndKeys: []
                }
     };
@@ -72,18 +72,45 @@ describe('Unit: sendFactory - TxBuilder', function () {
 
   //this async test is not working properly
   //we need chai-as-promised to test promise resolution
-  it('should return success when sending a correctly stated transaction', function (done) {
-    transactionDetails.amount = 0.01;
-    transactionDetails.destination = "mpduks3B8ULftm1hcbEf3jQU7iGae7mEMS";
+  it.only('should return success when sending a correctly stated transaction', function (done) {
+    // var async = function(){
+    //   var deferred = $q.defer();
+    //   setTimeout(function(){
+    //     deferred.resolve("hello");
+    //     $rootScope.$apply();
+    //   },300)
+    //   return deferred.promise
+    // };
 
-    TxBuilder.sendTransaction(tempStore.testNet.currentPrivateKey, transactionDetails,false)
-    .then(function(message){
-      expect(message).to.equal("Transaction successfully propagated");
+    // async().then(console.log)
+
+
+
+
+
+    // this.timeout(10000);
+    var finish = function(err){
+      console.log("finish");
+      setTimeout(function(){
+        done(err);
+      },0)
+    };
+
+    transactionDetails.amount = 0.001;
+    transactionDetails.destination = "mpduks3B8ULftm1hcbEf3jQU7iGae7mEMS";
+    console.log("before sendTx");
+    var sendTx = TxBuilder.sendTransaction(tempStore.testNet.currentPrivateKey, transactionDetails,false)
+    
+    sendTx.then(function(message){
+      console.log("then")
+      expect(message).to.equal("tx");
       done();
     })
     .catch(function(error){
-      done(error);
+      console.log("catch")
+      finish(error);
     });
+    console.log("sendTx: ", sendTx);
   });
 
   it('should return error when sending transaction with 0 amount', function () {
