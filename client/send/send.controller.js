@@ -1,5 +1,5 @@
 angular.module('bitclip.sendController', [
-  'ngMorph'
+  'ngFx'
   ])
 
 .controller('sendController', ['$scope', '$timeout', 'TxBuilder','Utilities',

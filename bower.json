@@ -25,7 +25,8 @@
     "sinon": "^1.10.3",
     "d3": "~3.4.11",
     "nvd3": "~1.1.15-beta",
-    "angularjs-nvd3-directives": "~0.0.7"
+    "angularjs-nvd3-directives": "~0.0.7",
+    "ngFx": "~1.0.4"
   },
   "resolutions": {
     "d3": "~3.4.11"

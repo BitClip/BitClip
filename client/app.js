@@ -1,5 +1,6 @@
 angular.module('bitclip', [
   'ui.router',
+  'ngFx',
   'bitclip.headerController',
   'bitclip.headerDirective',
   'bitclip.headerFactory',
