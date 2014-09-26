@@ -8,16 +8,16 @@
 
     <div class="historyHeader">
       Inbound transaction: 
-      <i id="inbound" ng-class="{'fa fa-chevron-circle-right': true}" ></i>
+      <i class="inbound" ng-class="{'fa fa-chevron-circle-right': true}" ></i>
       Outbound transaction:  
-      <i id="outbound" ng-class="{'fa fa-chevron-circle-left': true}"></i>
+      <i class="outbound" ng-class="{'fa fa-chevron-circle-left': true}"></i>
     </div>
 
     <div class="historyTable">
       <table class="addressScrollbox"> 
           <tbody ng-repeat="trans in transactions">
           <tr>
-            <td> <i class="inbound" ng-class="{'fa fa-chevron-circle-right': trans[0] === 'inbound'}"></i>     
+            <td> <i class="inbound" ng-class="{'fa fa-chevron-circle-right inbound': trans[0] === 'inbound'}"></i>     
                  <i class="outbound" ng-class="{'fa fa-chevron-circle-left': trans[0] === 'outbound'}"></i>
                  Amount: {{trans[1]}}
             </td> 
