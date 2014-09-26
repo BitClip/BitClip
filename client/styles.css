@@ -2,7 +2,25 @@
 @import url(http://fonts.googleapis.com/css?family=Cabin:400,700);
 @import url(http://fonts.googleapis.com/css?family=Varela+Round);
 
-/* ------- Body Size ------- */
+/* ---------------------------------------------- */
+/*                    Colors                      */
+/* ---------------------------------------------- */
+
+/*
+  Teal:   #35A5A7;
+  Orange: #F1A533;
+  Green:  #35A533;
+  Red:    #F13C3F;
+  Light:  #F1F1F1;
+          #C2C2C2
+          #E8E8E8;
+  Dark:   #0B0B0B;
+  Teal2:  #3DBDBF;
+
+ */
+
+
+/* ------- Style Fallbacks ------- */
 
 html {
   font-size: 14px;
@@ -39,6 +57,9 @@ h4, h5, h6 {
   margin: 0;
 }
 
+
+/* ------- Header ------- */
+
 .headerBanner {
   width: 100%;
   box-sizing: border-box;
@@ -46,8 +67,6 @@ h4, h5, h6 {
   height: 2.7rem;
   background-color: white;
 }
-
-/* ------- Header ------- */
 
 .banner {
   background-color: white;
@@ -84,20 +103,6 @@ h4, h5, h6 {
   font-size: 1.5rem;
   font-style: bold;
   font-weight: 700;
-}
-
-/* Allows user to close options window by clicking
-anywhere outside of the dropdown */
-.optionsOffclick{
-  position:absolute;
-  background-color: transparent;
-  z-index: 997;
-  
-  /*back up width/height for unsupported browsers*/
-  width:360px; 
-  height:360px;
-  width:100vh;
-  height:100vw;
 }
 
 .optionsNav > i {
@@ -160,7 +165,21 @@ anywhere outside of the dropdown */
   color: #F1A533;
 }
 
-/*  ------- Network Toggle Button -------  */
+/* Allows user to close options window by clicking
+anywhere outside of the dropdown */
+.optionsOffclick{
+  position:absolute;
+  background-color: transparent;
+  z-index: 997;
+  
+  /*back up width/height for unsupported browsers*/
+  width:360px; 
+  height:360px;
+  width:100vh;
+  height:100vw;
+}
+
+/*  ------- Network Toggle Switch -------  */
 
 .onoffswitch {
   position: relative; width: 90px; padding-top: 5px;
@@ -273,13 +292,7 @@ li.active {
   background-color: #E8E8E8;
   color: #0B0B0B;
 }
-
-
-/*  #3DBDBF  
-    #DAF1F1
-3AB5B8
-E3F1F1
-*/
+  
 .headerTabs > .marketTab{
   background-color:#35A5A7;
   border-bottom:2px solid #F1A533;
@@ -288,7 +301,6 @@ E3F1F1
 .headerTabs li:hover:not(.active).marketTab,
 .headerTabs li:hover:not(.active) .marketTabImage{
   background-color: #3DBDBF;
-  fill:white;
 }
 
 .marketTabImage {
@@ -297,12 +309,9 @@ E3F1F1
   height:100%;
 }
 
-  /*background-color: #35A533*/
-  fill:red;
-
-}
-
-/* ------- Send View ------- */
+/* ----------------------------------------- */
+/*                Send View                  */
+/* ----------------------------------------- */
 
 form {
   position: relative;
@@ -481,11 +490,16 @@ ul.addressScrollbox {
 /* ----------------------------------------- */
 /*              History View                 */
 /* ----------------------------------------- */
-tbody{
+
+tbody {
     display:block;
     border: 1px solid black;
     border-collapse: separate;
     margin-bottom: 10px;
+}
+
+tr {
+  border: 1px solid black;
 }
 
 .historyBox {
@@ -506,15 +520,11 @@ tbody{
   padding-right: 10px;
 }
 
-tr {
-  border: 1px solid black;
-}
-
-#inbound {
+.inbound {
   color: green;
 }
 
-#outbound {
+.outbound {
   color: red;
 }
 
