@@ -7,8 +7,10 @@ angular.module('bitclip', [
   'bitclip.receiveFactory',
   'bitclip.sendController',
   'bitclip.sendFactory',
-  'bitclip.historyController',
-  'bitclip.historyFactory',
+  // 'bitclip.historyController',
+  // 'bitclip.historyFactory',
+  // 'bitclip.marketController',
+  // 'bitclip.marketFactory',
   'bitclip.utilitiesFactory'
 ])
 
@@ -29,7 +31,12 @@ angular.module('bitclip', [
       url: '/history',
       templateUrl: 'history/history.tpl.html',
       controller: 'historyController'
-    });
+    })
+    .state('market', {
+      url: '/market',
+      templateUrl: 'market/market.tpl.html',
+      controller: 'marketController'
+    })
 }])
 
 .controller('navBarController', ['$scope', function($scope){

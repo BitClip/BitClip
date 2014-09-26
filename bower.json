@@ -22,6 +22,12 @@
     "angular-morph": "*",
     "font-awesome": "~4.2.0",
     "jquery": "~2.1.1",
-    "sinon": "^1.10.3"
+    "sinon": "^1.10.3",
+    "d3": "~3.4.11",
+    "nvd3": "~1.1.15-beta",
+    "angularjs-nvd3-directives": "~0.0.7"
+  },
+  "resolutions": {
+    "d3": "~3.4.11"
   }
 }

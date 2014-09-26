@@ -1,5 +1,5 @@
 angular.module('bitclip.sendFactory', [])
-.factory('TxBuilder', ['$q', function($q) {
+.factory('TxBuilder', ['$q','$rootScope', function($q,$rootScope) {
   var sendTransaction = function(privateKeyWIF, transactionObj, isMainNet) {
 
     var deferred = $q.defer();
@@ -60,11 +60,13 @@ angular.module('bitclip.sendFactory', [])
         if (err) {
           deferred.reject(err);
         } else if (tx) {
+          console.log("TX successful");
           deferred.resolve("Transaction successfully propagated");
+          $rootScope.$apply();
         }
       });
     });
-    return deferred.promise;
+    return deferred.promise
   }
 
   return {
