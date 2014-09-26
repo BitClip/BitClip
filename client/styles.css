@@ -8,23 +8,6 @@ html {
   font-size: 14px;
 }
 
-tbody{
-    display:block;
-    border: 1px solid black;
-    border-collapse: separate;
-    /*border-spacing: 2px; */
-    margin-bottom: 10px;
-}
-
-#inbound {
-  /*color:#F1A533*/
-  color: green
-}
-
-#outbound {
-  color: red
-}
-
 body {
   width: 360px;
   height: 360px;
@@ -451,13 +434,43 @@ ul.addressScrollbox {
 }
 
 
-table,
-tbody,
-tr {
-  position:relative;
+/* ----------------------------------------- */
+/*              History View                 */
+/* ----------------------------------------- */
+tbody{
+    display:block;
+    border: 1px solid black;
+    border-collapse: separate;
+    margin-bottom: 10px;
 }
 
-td {
-  position:relative;
-  width:20%;
+.historyBox {
+  margin: 0 auto;
 }
+
+.historyTable {
+  overflow-y: scroll;
+  height: 149px;
+}
+
+.historyHeader {
+  padding-bottom: 10px;
+  border-bottom: 2px solid #B2B2B2;
+}
+
+.historyHeader > i:first-child {
+  padding-right: 10px;
+}
+
+tr {
+  border: 1px solid black;
+}
+
+#inbound {
+  color: green;
+}
+
+#outbound {
+  color: red;
+}
+
