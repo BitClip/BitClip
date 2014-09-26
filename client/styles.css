@@ -112,6 +112,7 @@ h4, h5, h6 {
   position: fixed;
   right: 10px;
   top: 7px;
+  cursor: pointer; cursor: hand;
 }
 
 .optionsNav > ul.dropdown-menu {
@@ -260,6 +261,8 @@ anywhere outside of the dropdown */
   position: relative;
   height: 2.7rem;
   width: 100%;
+  cursor: pointer; 
+  cursor: hand;
 }
 
 .headerTabs > li {
@@ -457,6 +460,16 @@ div.currentAddress {
   padding-right:4px;
 }
 
+
+.allAddressesHeader::after{
+  content:"Double-click to select address";
+  position: absolute;
+  font-size: .8rem;
+  right:16px;
+  top:.3rem;
+  color:#C2C2C2;
+}
+
 ul.scrollbox {
   border-color: #35A5A7;
   height: 36%;
@@ -489,7 +502,7 @@ ul.scrollbox {
   content:">";
   position:absolute;
   left:0;
-  top:-2px;
+  top:0px;
 }
 
 /* ----------------------------------------- */
