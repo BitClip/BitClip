@@ -17,8 +17,8 @@
       <table class="addressScrollbox"> 
           <tbody ng-repeat="trans in transactions">
           <tr>
-            <td> <i id="inbound" ng-class="{'fa fa-chevron-circle-right': trans[0] === 'inbound'}"></i>     
-                 <i id="outbound" ng-class="{'fa fa-chevron-circle-left': trans[0] === 'outbound'}"></i>
+            <td> <i class="inbound" ng-class="{'fa fa-chevron-circle-right': trans[0] === 'inbound'}"></i>     
+                 <i class="outbound" ng-class="{'fa fa-chevron-circle-left': trans[0] === 'outbound'}"></i>
                  Amount: {{trans[1]}}
             </td> 
             <td colspan="2"> Date: {{trans[2] | date:'short'}} </td> 
