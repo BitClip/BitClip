@@ -1,9 +1,12 @@
-<div class="currentAddress">
-  meow {{interval}} ksjda
-<ul>
-  <li ng-click="changeInterval('24hr')"> 24hr </li>
-  <li ng-click="changeInterval('1 month')"> 1 month </li>
-  <li ng-click="changeInterval('45 years')"> 45 years </li>
-</ul>
+<div>
+    <nvd3-line-chart
+        data="exampleData"
+        showXAxis="true"
+        showYAxis="true"
+        tooltips="true"
+        interactive="true"
+        width="340"
+        height="300"
+        >
+    </nvd3-line-chart>
 </div>
-<div class='div_chart'></div>
