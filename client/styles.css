@@ -459,13 +459,23 @@ ul.addressScrollbox {
   padding-left: 10px;
   left: 0;
 }
+.addressScrollbox:hover{
+  cursor: pointer; cursor: hand;
+}
 
-/*.addressScrollbox li:nth-child(2) {
-  color: #35A5A7;
+.addressScrollbox li:nth-child(2) {
   padding-top: 2px;
-}*/
+}
+.addressScrollbox li.currentAddressMatch,
+.addressScrollbox li.currentAddressMatch::before {
+  color:#35A5A7;
+}
 
-.generateButton {
+.addressScrollbox li.currentAddressMatch::before{
+  content:">";
+  position:absolute;
+  left:0;
+  top:-1px;
 }
 
 /* ----------------------------------------- */
