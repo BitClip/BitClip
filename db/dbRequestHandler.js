@@ -2,7 +2,6 @@ var q = require('q');
 var http = require('http');
 var Pusher = require('pusher-client');
 var db = require('./dbSchema.js');
-
 var BitstampData = require('./models/bitstampModel.js');
 
 // List of all API sockets we want to connect to
