@@ -12,25 +12,24 @@ angular.module('bitclip.headerController', [])
           console.log("balance: ", $scope.balanceMessage);
         }
       });
+      Utilities.getLiveBalanceForCurrentAddress(function(err, data){
+        if (err){
+          console.error(err);
+        } else {
+          $scope.balanceMessage = "Bal: " + data.address.balance/100000000 + " BTC";
+        } 
+      });
     };
 
     $scope.getNetworkStatus = function() {
+      console.log("getNetworkStatus invoked");
       Utilities.isMainNet().then(function(isMainNet) {
         $scope.isMainNet = isMainNet;
         setBalance();
-        $state.reload();
+        $state.go($state.current.name, $state.params, { reload: true });
       });
     };
     $scope.getNetworkStatus();
-
-    Utilities.getLiveBalanceForCurrentAddress(function(err, data){
-      if (err){
-        console.error(err);
-      } else {
-        console.log("I am data returned: ", data);
-        $scope.balanceMessage = "Bal: " + data.address.balance/100000000 + " BTC";
-      }; 
-    });
 
     $scope.toggleNetwork = function() {
       Header.setNetwork(!$scope.isMainNet, $scope.getNetworkStatus);

@@ -5,7 +5,7 @@
   </div>
   <ul class="addressScrollbox">
     <h4 class="allAddressesHeader">All Addresses:</h4>
-    <li ng-repeat="address in allAddresses" ng-click="setAsCurrentAddress(address)">{{ address }}</li>
+    <li ng-repeat="address in allAddresses" ng-dblclick="setAsCurrentAddress(address)">{{ address }}</li>
   </ul>
   <button class="sendViewButton sendButton generateButton" ng-click="newAddress()">Generate Address</button>
 </div>
