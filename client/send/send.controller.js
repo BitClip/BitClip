@@ -12,6 +12,11 @@ angular.module('bitclip.sendController', [
     //initialize transaction details (amount, destination)
     $scope.transactionDetails = {};
 
+    $scope.clearAmount = function(){
+      $scope.transactionDetails.amount = "";
+
+    }
+
     //TODO: sendPayment Functionality
     $scope.sendPayment = function() {
       Utilities.isMainNet().then(function(isMainNet){
