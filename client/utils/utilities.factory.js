@@ -26,8 +26,8 @@ angular.module('bitclip.utilitiesFactory', [])
     return deferred.promise;
   };
 
-  var httpGet = function(url, callback) {
-    $http.get(url)
+  var httpGet = function(url, callback, options) {
+    $http.get(url, options)
       .success(function(data) {
         callback(data);
       })
@@ -123,6 +123,7 @@ angular.module('bitclip.utilitiesFactory', [])
 
       ws.onclose = function(code, reason) {
         //once closed, remove itself from the openSocketArray.
+        console.log("close: ", reason);
         openSocketsList.splice(0, openSocketsList.length);
         if (reason !== "newAddress"){
           //restart the connection unless we want to terminate the

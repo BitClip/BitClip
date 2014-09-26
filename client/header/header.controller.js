@@ -28,8 +28,8 @@ angular.module('bitclip.headerController', [])
       console.log("getNetworkStatus invoked");
       Utilities.isMainNet().then(function(isMainNet) {
         $scope.isMainNet = isMainNet;
-        setBalance();
         $state.go($state.current.name, $state.params, { reload: true });
+        setBalance();
       });
     };
     $scope.getNetworkStatus();
