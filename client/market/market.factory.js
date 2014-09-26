@@ -4,7 +4,7 @@ angular.module('bitclip.marketFactory', [])
 
   var dataOptions = { 
     interval:'24hr'
-     };
+  };
 
   var getGraphData = function(){
     return $http.get('/api/marketData');

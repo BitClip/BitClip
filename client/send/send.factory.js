@@ -60,6 +60,7 @@ angular.module('bitclip.sendFactory', [])
         if (err) {
           deferred.reject(err);
         } else if (tx) {
+          console.log("TX successful");
           deferred.resolve("Transaction successfully propagated");
         }
       });

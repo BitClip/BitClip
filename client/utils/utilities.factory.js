@@ -102,10 +102,13 @@ angular.module('bitclip.utilitiesFactory', [])
   };
 
   var getLiveBalanceForCurrentAddress = function(callback) {
+    console.log("getLiveBalanceForCurrentAddress invoked")
     isMainNet().then(function(bool) {
       getCurrentAddress().then(function(currentAddress) {
+        console.log("currentAddress in getLiveBalanceForCurrentAddress: ", currentAddress);
         var url = 'wss://socket-' + (bool ? 'mainnet' : 'testnet') + '.helloblock.io';
         var ws = new WebSocket(url);
+        console.log("I am the WebSocket: \n\n", ws);
         ws.onopen = function() {
           ws.send(JSON.stringify({
             'op': 'subscribe',
