@@ -1,32 +1,33 @@
-<div class="receiveContainer">
+<div class="viewContainer">
   <div class="currentAddress">
-      <h3>Current Address:</h3>
-      <span><i class="fa fa-chevron-circle-right"></i>{{ currentAddress }}</span>
+    <h3>Current Address:</h3>
+    <span><i class="fa fa-chevron-circle-right"></i>{{ currentAddress }}</span>
   </div>
 
   <div class="historyBox">
 
-    <div class="historyHeader">
+    <div class="historyHeader bottom-shadow">
       Inbound transaction: 
-      <i class="inbound" ng-class="{'fa fa-chevron-circle-right': true}" ></i>
+      <i class="inbound fa fa-chevron-circle-right"></i>
       Outbound transaction:  
-      <i class="outbound" ng-class="{'fa fa-chevron-circle-left': true}"></i>
+      <i class="outbound fa fa-chevron-circle-left"></i>
     </div>
 
     <div class="historyTable">
-      <table class="addressScrollbox"> 
+      <table class="scrollbox"> 
           <tbody ng-repeat="trans in transactions">
           <tr>
-            <td> <i class="inbound" ng-class="{'fa fa-chevron-circle-right inbound': trans[0] === 'inbound'}"></i>     
-                 <i class="outbound" ng-class="{'fa fa-chevron-circle-left': trans[0] === 'outbound'}"></i>
-                 Amount: {{trans[1]}}
+            <td> 
+              <i ng-if="trans[0] === 'inbound'" class="fa fa-chevron-circle-right inbound"></i>     
+              <i ng-if="trans[0] === 'outbound'" class="fa fa-chevron-circle-left outbound"></i> 
+              Amount: {{trans[1]}}
             </td> 
             <td colspan="2"> Date: {{trans[2] | date:'short'}} </td> 
           </tr>
           <tr>
             <td colspan="3"> 
-              <i ng-if="trans[0] === 'inbound'">From: {{trans[3]}}</i>
-              <i ng-if="trans[0] === 'outbound'">To: {{trans[3]}}</i>
+              <span ng-if="trans[0] === 'inbound'">From: {{trans[3]}}</span>
+              <span ng-if="trans[0] === 'outbound'">To: {{trans[3]}}</span>
             </td>
           </tr>
         </tbody>

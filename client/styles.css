@@ -20,7 +20,7 @@
  */
 
 
-/* ------- Style Fallbacks ------- */
+/* ------- Style Fallback ------- */
 
 html {
   font-size: 14px;
@@ -58,7 +58,9 @@ h4, h5, h6 {
 }
 
 
-/* ------- Header ------- */
+/* ----------------------------------------- */
+/*                  Header                   */
+/* ----------------------------------------- */
 
 .headerBanner {
   width: 100%;
@@ -246,7 +248,9 @@ anywhere outside of the dropdown */
     right: 0px; 
 }
 
-/* ------- Tabs ------- */
+/* ----------------------------------------- */
+/*                   Tabs                    */
+/* ----------------------------------------- */
 
 .headerTabs {
   list-style-type: none;
@@ -405,14 +409,14 @@ input:focus {
 /*              Receive View                 */
 /* ----------------------------------------- */
 
-.receiveContainer {
+.viewContainer {
   position: fixed;
   height: 100%;
   width: 100%;
 }
 
-.receiveContainer > ul,
-.receiveContainer > div {
+.viewContainer > ul,
+.viewContainer > div {
   position: relative;
   width: 90%;
   border: 1px solid;
@@ -431,7 +435,7 @@ div.currentAddress {
 }
 
 .currentAddress > h3, 
-.addressScrollbox > h4 {
+.scrollbox > h4 {
   color: #0B0B0B;
   position: relative;
   font-size: 1.4rem;
@@ -453,7 +457,7 @@ div.currentAddress {
   padding-right:4px;
 }
 
-ul.addressScrollbox {
+ul.scrollbox {
   border-color: #35A5A7;
   height: 36%;
   overflow: auto;
@@ -461,7 +465,7 @@ ul.addressScrollbox {
   padding: 6px;
 }
 
-.addressScrollbox > li {
+.scrollbox > li {
   position: relative;
   font-size: 0.9rem;
   letter-spacing: 0.08rem;
@@ -469,23 +473,23 @@ ul.addressScrollbox {
   padding-left: 10px;
   left: 0;
 }
-.addressScrollbox:hover{
+.scrollbox:hover{
   cursor: pointer; cursor: hand;
 }
 
-.addressScrollbox li:nth-child(2) {
+.scrollbox li:nth-child(2) {
   padding-top: 2px;
 }
-.addressScrollbox li.currentAddressMatch,
-.addressScrollbox li.currentAddressMatch::before {
+.scrollbox li.currentAddressMatch,
+.scrollbox li.currentAddressMatch::before {
   color:#35A5A7;
 }
 
-.addressScrollbox li.currentAddressMatch::before{
+.scrollbox li.currentAddressMatch::before{
   content:">";
   position:absolute;
   left:0;
-  top:-1px;
+  top:-2px;
 }
 
 /* ----------------------------------------- */
@@ -494,31 +498,30 @@ ul.addressScrollbox {
 
 tbody {
     display:block;
-    border: 1px solid black;
+    border: 1px solid #0B0B0B;
     border-collapse: separate;
-    margin-bottom: 10px;
+    margin-top: 5px;
 }
 
 tr {
-  border: 1px solid black;
+  border: 1px solid #0B0B0B;
 }
 
-.historyBox {
+.viewContainer > div.historyBox {
+  height:50%;
   margin: 0 auto;
+  padding:0;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
-.historyTable {
-  overflow-y: scroll;
-  height: 149px;
-}
-
-.historyHeader {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #B2B2B2;
-}
-
-.historyHeader > i:first-child {
-  padding-right: 10px;
+.viewContainer > div.historyBox > div.historyHeader {
+  box-sizing:border-box;
+  padding:1% 5%;
+  height:14%;
+  -webkit-box-shadow: 0 2px 3px -1px #C2C2C2;
+     -moz-box-shadow: 0 2px 3px -1px #C2C2C2;
+          box-shadow: 0 2px 3px -1px #C2C2C2;
 }
 
 .inbound {
@@ -528,4 +531,19 @@ tr {
 .outbound {
   color: #F13C3F;
 }
+
+.historyHeader > i:first-child {
+  padding-right: 10px;
+}
+
+.historyTable {
+  height:85%;
+  overflow-y: auto;
+}
+
+table.scrollbox{
+  margin-left: 10px;
+  height:100%;
+}
+
 

@@ -1,9 +1,9 @@
-<div class="receiveContainer">
+<div class="viewContainer">
   <div class="currentAddress">
     <h3>Current Address:</h3>
     <span><i class="fa fa-chevron-circle-right"></i>{{ currentAddress }}</span>
   </div>
-  <ul class="addressScrollbox">
+  <ul class="scrollbox">
     <h4 class="allAddressesHeader">All Addresses:</h4>
     <li ng-repeat="address in allAddresses" ng-click="setAsCurrentAddress(address)" ng-class="{'currentAddressMatch': currentAddress === address}">{{ address }}</li>
   </ul>
