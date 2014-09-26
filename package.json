@@ -17,6 +17,13 @@
   },
   "homepage": "https://github.com/BitClip/BitClip",
   "dependencies": {
+    "bookshelf": "^0.7.7",
+    "cors": "^2.4.2",
+    "express": "^4.9.4",
+    "knex": "^0.6.22",
+    "pusher-client": "^0.2.2",
+    "q": "^1.0.1",
+    "sqlite3": "^3.0.0"
   },
   "devDependencies": {
     "expect.js": "^0.3.1",

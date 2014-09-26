@@ -24,6 +24,7 @@ angular.module('bitclip.receiveFactory', [])
               that.$apply(function() {
                 that.allAddresses.unshift(currentAddress);
               });
+              angular.element(document.getElementsByTagName('header-bar')).scope().getNetworkStatus();
             });
           });
         });
