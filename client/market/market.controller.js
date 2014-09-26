@@ -1,6 +1,6 @@
 angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
-.controller('marketController', ['$scope', 'Market', '$http', function($scope, Market, $http){
-    
+
+.controller('marketController', ['$scope', 'Market', '$http', function($scope, Market, $http){    
     $scope.getGraphData = function(hours){
         Market.getGraphData(hours, function(data){
             console.log("DATA FROM SERVER: ", data);

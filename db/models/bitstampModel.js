@@ -6,3 +6,4 @@ var BitstampData = db.Model.extend({
 });
 
 module.exports = BitstampData;
+

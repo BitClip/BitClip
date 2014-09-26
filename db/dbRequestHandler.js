@@ -157,3 +157,4 @@ dbRequests.deliverMarketData = function(req) {
 };
 
 module.exports = dbRequests;
+
