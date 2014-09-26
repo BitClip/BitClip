@@ -1,17 +1,20 @@
 angular.module('bitclip.marketFactory', [])
 
-.factory('marketFactory', ['$http', function($http){
+.factory('Market', ['Utilities', function(Utilities){
 
-  var dataOptions = { 
-    interval:'24hr'
-  };
-
-  var getGraphData = function(){
-    return $http.get('/api/marketData');
+  var getGraphData = function(baseUrl, numHrs , callback){
+    var url = baseUrl + "/api/marketdata";
+    var dataObj = {
+      timePeriod: numHrs*3600000,
+      time: new Date().getTime() //get current time in milliseconds
+    };
+    var options = JSON.stringify({
+      data:dataObj
+    });
+    Utilities.httpGet(url, callback, options);
   };
 
   return {
-    dataOptions:dataOptions,
     getGraphData:getGraphData
   };
 
