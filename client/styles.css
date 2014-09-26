@@ -301,11 +301,13 @@ li.active {
 .headerTabs li:hover:not(.active).marketTab,
 .headerTabs li:hover:not(.active) .marketTabImage{
   background-color: #3DBDBF;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
 .marketTabImage {
   fill:white;
-  width:50%;
+  width:100%;
   height:100%;
 }
 
@@ -521,10 +523,10 @@ tr {
 }
 
 .inbound {
-  color: green;
+  color: #35A533;
 }
 
 .outbound {
-  color: red;
+  color: #F13C3F;
 }
 
