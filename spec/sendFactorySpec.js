@@ -70,25 +70,12 @@ describe('Unit: sendFactory - TxBuilder', function () {
   });
 
 
-  //this async test is not working properly
+  //this async test works!! Follow this pattern
   //we need chai-as-promised to test promise resolution
-  it.only('should return success when sending a correctly stated transaction', function (done) {
-    // var async = function(){
-    //   var deferred = $q.defer();
-    //   setTimeout(function(){
-    //     deferred.resolve("hello");
-    //     $rootScope.$apply();
-    //   },300)
-    //   return deferred.promise
-    // };
-
-    // async().then(console.log)
-
-
-
-
-
-    // this.timeout(10000);
+  it('should return success when sending a correctly stated transaction', function (done) {
+    //we should put this in the beforeEach block;
+    //TxBuilder.sendTx needs to have $rootScope.apply() after
+    //the deferred.resolve();
     var finish = function(err){
       console.log("finish");
       setTimeout(function(){
@@ -103,14 +90,13 @@ describe('Unit: sendFactory - TxBuilder', function () {
     
     sendTx.then(function(message){
       console.log("then")
-      expect(message).to.equal("tx");
+      expect(message).to.equal("Transaction successfully propagated");
       done();
     })
     .catch(function(error){
       console.log("catch")
       finish(error);
     });
-    console.log("sendTx: ", sendTx);
   });
 
   it('should return error when sending transaction with 0 amount', function () {
