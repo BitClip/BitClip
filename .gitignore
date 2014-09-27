@@ -1,3 +1,6 @@
+### data file
+db/data
+
 ### bower install components ###
 client/lib
 
