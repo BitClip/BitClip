@@ -7,25 +7,31 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/nvd3/src/nv.d3.css"/>
   </head>
   <body ng-app="bitclip" ng-csp>
     <div ng-controller="headerController" class="headerBanner">
       <header-bar/>
     </div>
-    <ul class="row headerTabs" ng-controller="navBarController">
-      <li class="sendTab" ng-class="{'active': activeTab === 'send'}" ui-sref="send" ng-click="setActiveTab('send')">Send</li>
-      <li class="receiveTab" ng-class="{'active': activeTab === 'receive'}" ui-sref="receive" ng-click="setActiveTab('receive')">Receive </li>
-      <li class="history" ng-class="{'active': activeTab === 'history'}" ui-sref="history" ng-click="setActiveTab('history')">History</li>
-    </ul>
+    <div ng-controller="viewTabsController">
+      <view-tabs/>
+    </div>
     <div ui-view></div>
 
     <!-- Library dependencies -->
     <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="lib/angular/angular.js"></script>
+    <script src="lib/ngFx/dist/ngFx.min.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="lib/angular-morph/dist/angular-morph.min.js"></script>
     <script src="btclib/bitcoinjs-min.js"></script>
     <script src="btclib/helloblock-min.js"></script>
+    <script src="lib/d3/d3.min.js"></script>
+    <script src="lib/nvd3/nv.d3.min.js"></script>
+    <script src="lib/moment/moment.js"></script>
+    <script src="lib/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js"></script>
+
+
     
     <!-- Client-side dependencies -->
     <script src="app.js"></script>
@@ -34,10 +40,14 @@
     <script src="header/header.controller.js"></script>
     <script src="header/header.directive.js"></script>
     <script src="header/header.factory.js"></script>
+    <script src="viewTabs/viewTabs.controller.js"></script>
+    <script src="viewTabs/viewTabs.directive.js"></script>
     <script src="send/send.controller.js"></script>
     <script src="send/send.factory.js"></script>
     <script src="history/history.controller.js"></script>
     <script src="history/history.factory.js"></script>
+    <script src="market/market.controller.js"></script>
+    <script src="market/market.factory.js"></script>
     <script src="utils/utilities.factory.js"></script>
   </body>
 </html>

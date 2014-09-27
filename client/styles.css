@@ -2,7 +2,25 @@
 @import url(http://fonts.googleapis.com/css?family=Cabin:400,700);
 @import url(http://fonts.googleapis.com/css?family=Varela+Round);
 
-/* ------- Body Size ------- */
+/* ---------------------------------------------- */
+/*                    Colors                      */
+/* ---------------------------------------------- */
+
+/*
+  Teal:   #35A5A7;
+  Orange: #F1A533;
+  Green:  #35A533;
+  Red:    #F13C3F;
+  Light:  #F1F1F1;
+          #C2C2C2
+          #E8E8E8;
+  Dark:   #0B0B0B;
+  Teal2:  #3DBDBF;
+
+ */
+
+
+/* ------- Style Fallback ------- */
 
 html {
   font-size: 14px;
@@ -27,6 +45,10 @@ a {
   color: #0B0B0B;
 }
 
+i {
+  color:#F1A533;
+}
+
 h4, h5, h6 {
   font-size: 1rem;
   font-weight: normal;
@@ -35,6 +57,11 @@ h4, h5, h6 {
   margin: 0;
 }
 
+
+/* ----------------------------------------- */
+/*                  Header                   */
+/* ----------------------------------------- */
+
 .headerBanner {
   width: 100%;
   box-sizing: border-box;
@@ -42,8 +69,6 @@ h4, h5, h6 {
   height: 2.7rem;
   background-color: white;
 }
-
-/* ------- Header ------- */
 
 .banner {
   background-color: white;
@@ -68,7 +93,7 @@ h4, h5, h6 {
 }
 
 .banner > ul > li > i {
-  color: #F1A533;
+  padding-right: 5px;
   font-size: 1.4rem
 }
 
@@ -85,16 +110,16 @@ h4, h5, h6 {
 .optionsNav > i {
   z-index: 1000;
   position: fixed;
-  color: #F1A533;
   right: 10px;
   top: 7px;
+  cursor: pointer; cursor: hand;
 }
 
 .optionsNav > ul.dropdown-menu {
   position: fixed;
   list-style-type: none;
-  max-width: calc(33% - 6px);
-  height: 50%;
+  width: 108px;
+  height: 108px;
   right: 6px;
   top: 3px;
   background-color: white;
@@ -136,17 +161,31 @@ h4, h5, h6 {
 }
 
 .toggleNetwork > span {
-  color: #35A533;
+  color: #35A5A7;
 }
 
 .toggleNetwork > .testNetwork {
   color: #F1A533;
 }
 
-/*  ------- Network Toggle Button -------  */
+/* Allows user to close options window by clicking
+anywhere outside of the dropdown */
+.optionsOffclick{
+  position:absolute;
+  background-color: transparent;
+  z-index: 997;
+  
+  /*back up width/height for unsupported browsers*/
+  width:360px; 
+  height:360px;
+  width:100vh;
+  height:100vw;
+}
+
+/*  ------- Network Toggle Switch -------  */
 
 .onoffswitch {
-  position: relative; width: 90px;
+  position: relative; width: 90px; padding-top: 5px;
   -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;
 }
 
@@ -157,6 +196,7 @@ h4, h5, h6 {
 .onoffswitch-label {
   display: block; overflow: hidden; cursor: pointer;
   border: 1px solid #0B0B0B; border-radius: 50px;
+  padding:0;
 }
 
 .onoffswitch-inner {
@@ -174,7 +214,7 @@ h4, h5, h6 {
 .onoffswitch-inner:before {
   content: 'main';
   padding-left: 14px;
-  background-color: #35A533; color: #FFFFFF;
+  background-color: #35A5A7; color: #FFFFFF;
 }
 
 .onoffswitch-inner:after {
@@ -198,7 +238,7 @@ h4, h5, h6 {
 .onoffswitch-switch > i {
   color: #C2C2C2;
   position: relative;
-  top: 4px;
+  top: 2px;
 }
 
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
@@ -209,7 +249,9 @@ h4, h5, h6 {
     right: 0px; 
 }
 
-/* ------- Tabs ------- */
+/* ----------------------------------------- */
+/*                   Tabs                    */
+/* ----------------------------------------- */
 
 .headerTabs {
   list-style-type: none;
@@ -219,6 +261,8 @@ h4, h5, h6 {
   position: relative;
   height: 2.7rem;
   width: 100%;
+  cursor: pointer; 
+  cursor: hand;
 }
 
 .headerTabs > li {
@@ -228,7 +272,7 @@ h4, h5, h6 {
   text-align: center;
   position: relative;
   box-sizing: border-box;
-  width: 33.3%;
+  width: 25%;
   height: 100%;
   font-size: 1.3rem;
   letter-spacing: 0.1rem;
@@ -239,8 +283,9 @@ h4, h5, h6 {
   color: #C2C2C2;
 }
 
-.receiveTab {
-  border-right: 1px solid white;
+.receiveTab,
+.historyTab,
+.marketTab {
   border-left: 1px solid white;
 }
 
@@ -254,12 +299,31 @@ li.active {
   background-color: #E8E8E8;
   color: #0B0B0B;
 }
+  
+.headerTabs > .marketTab{
+  background-color:#35A5A7;
+  border-bottom:2px solid #F1A533;
+}
 
-/* ------- Send View ------- */
+.headerTabs li:hover:not(.active).marketTab,
+.headerTabs li:hover:not(.active) .marketTabImage{
+  background-color: #3DBDBF;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.marketTabImage {
+  fill:white;
+  width:100%;
+  height:100%;
+}
+
+/* ----------------------------------------- */
+/*                Send View                  */
+/* ----------------------------------------- */
 
 form {
   position: relative;
-  top: -5px;
 }
 
 label {
@@ -267,7 +331,8 @@ label {
   position: relative;
   font-size: 1.5rem;
   letter-spacing: 0.04rem;
-  margin: 8% 0 4% 8%;
+  margin: 0 0 4% 8%;
+  padding-top: 8%;
 }
 
 form input {
@@ -285,6 +350,10 @@ form input {
 input:focus {
   outline: 0;
   box-shadow: inset 0 0 2px #35A533;
+}
+ 
+.has-error:focus{
+  box-shadow: inset 0 0 1px #F15633;
 }
 
 .sendViewButton {
@@ -324,50 +393,42 @@ input:focus {
 }
 
 .send-cancel {
-  background-color: #F13C3F;
-  border-color: #F13C3F;
+  background-color: #F15633;
+  border-color: #F15633;
   right: 0.5%;
 }
 
-.animate-if.ng-enter, .animate-if.ng-leave {
-  -webkit-transition: 0.5s linear all;
- -moz-transition: 0.5s linear all;
- -o-transition: 0.5s linear all;
- transition: 0.5s linear all;
- opacity: 0;
-}
-
-.animate-if.ng-enter,
-.animate-if.ng-leave.ng-leave-active {
-  opacity: 0;
-}
-
-.animate-if.ng-leave,
-.animate-if.ng-enter.ng-enter-active {
-  opacity: 1;
-}
-
-.successModal {
+.txMessagePopup {
   position: absolute;
-  height: 100px;
-  width: 100px;
-  background-color: green;
+  height: 20px;
+  width: 100%;
+  top:2px;
+
+  text-align: center;
+  line-height: 150%;
+  font-family: 'Cabin', sans-serif;
+
+  background-color: #35A5A7;
   color: white;
-  z-index: 999999;
+  z-index: 9999;
+}
+
+.errorMessagePopup{
+  background-color:#F15633;
 }
 
 /* ----------------------------------------- */
 /*              Receive View                 */
 /* ----------------------------------------- */
 
-.receiveContainer {
+.viewContainer {
   position: fixed;
   height: 100%;
   width: 100%;
 }
 
-.receiveContainer > ul,
-.receiveContainer > div {
+.viewContainer > ul,
+.viewContainer > div {
   position: relative;
   width: 90%;
   border: 1px solid;
@@ -386,7 +447,7 @@ div.currentAddress {
 }
 
 .currentAddress > h3, 
-.addressScrollbox > h4 {
+.scrollbox > h4 {
   color: #0B0B0B;
   position: relative;
   font-size: 1.4rem;
@@ -405,10 +466,20 @@ div.currentAddress {
 }
 
 .currentAddress i {
-  color: #F1A533;
+  padding-right:4px;
 }
 
-ul.addressScrollbox {
+
+.allAddressesHeader::after{
+  content:"Double-click to select address";
+  position: absolute;
+  font-size: .8rem;
+  right:16px;
+  top:.3rem;
+  color:#C2C2C2;
+}
+
+ul.scrollbox {
   border-color: #35A5A7;
   height: 36%;
   overflow: auto;
@@ -416,7 +487,7 @@ ul.addressScrollbox {
   padding: 6px;
 }
 
-.addressScrollbox > li {
+.scrollbox > li {
   position: relative;
   font-size: 0.9rem;
   letter-spacing: 0.08rem;
@@ -424,53 +495,147 @@ ul.addressScrollbox {
   padding-left: 10px;
   left: 0;
 }
+.scrollbox:hover{
+  cursor: pointer; cursor: hand;
+}
 
-.addressScrollbox li:nth-child(2) {
-  color: #35A5A7;
+.scrollbox li:nth-child(2) {
   padding-top: 2px;
 }
-
-.generateButton {
+.scrollbox li.currentAddressMatch,
+.scrollbox li.currentAddressMatch::before {
+  color:#35A5A7;
 }
 
+.scrollbox li.currentAddressMatch::before{
+  content:">";
+  position:absolute;
+  left:0;
+  top:0px;
+}
 
 /* ----------------------------------------- */
 /*              History View                 */
 /* ----------------------------------------- */
-tbody{
+
+tbody {
     display:block;
-    border: 1px solid black;
+    border: 1px solid #0B0B0B;
     border-collapse: separate;
-    margin-bottom: 10px;
+    margin-top: 5px;
 }
 
-.historyBox {
+tr {
+  border: 1px solid #0B0B0B;
+}
+
+.viewContainer > div.historyBox {
+  height:50%;
   margin: 0 auto;
+  padding:0;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
-.historyTable {
-  overflow-y: scroll;
-  height: 149px;
+.viewContainer > div.historyBox > div.historyHeader {
+  box-sizing:border-box;
+  padding:1% 5%;
+  height:14%;
+  -webkit-box-shadow: 0 2px 3px -1px #C2C2C2;
+     -moz-box-shadow: 0 2px 3px -1px #C2C2C2;
+          box-shadow: 0 2px 3px -1px #C2C2C2;
 }
 
-.historyHeader {
-  padding-bottom: 10px;
-  border-bottom: 2px solid #B2B2B2;
+.inbound {
+  color: #35A533;
+}
+
+.outbound {
+  color: #F15633;
 }
 
 .historyHeader > i:first-child {
   padding-right: 10px;
 }
 
-tr {
-  border: 1px solid black;
+.historyTable {
+  height:85%;
+  overflow-y: auto;
 }
 
-#inbound {
-  color: green;
+table.scrollbox{
+  margin-left: 10px;
+  height:100%;
 }
 
-#outbound {
-  color: red;
+
+/* ----------------------------------------- */
+/*              Markets View                 */
+/* ----------------------------------------- */
+
+.graphView
+{
+   background-color: #f2f2f2;
+   padding: 10px 5px;
+   overflow: auto;
+}
+.sideTab
+{
+   float: left;
+   margin: 5px 0 0 0;
+   width: 20px;
+}
+.sideTab ul
+{
+   list-style: none;
+   text-align: center;
+}
+.sideTab ul li
+{
+   border-top: 1px solid #666;
+   border-right: 1px solid #666;
+   border-bottom: 1px solid #666;
+   border-left: 8px solid #666;
+   background-color: #ddd;
+   margin: 8px 0;
+}
+.sideTab ul li a,
+.sideTab ul li a:visited
+{
+   text-decoration: none;
+   color: #666;
+   display: block;
+   padding: 15px 5px;
+}
+.sideTab ul li:hover
+{
+   border-left: 8px solid #333;
+}
+.sideTab ul li a:hover
+{
+   color: #000;
+}
+.sideTab ul li.selected
+{
+   border-right: none;
+   background-color: #fff;
+   border-left: 8px solid #006699;
+}
+.graphDisplayContainer
+{
+   min-height: 300px;
+   margin: 0 0 0 30px;
+   padding: 5px;
+   background-color: #fff;
+   border: 1px solid #888;
 }
 
+.marketStats table
+{
+  width: 90%;
+}
+
+.toolTipHeader
+{
+  text-align: center;
+}

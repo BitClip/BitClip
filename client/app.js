@@ -1,14 +1,19 @@
 angular.module('bitclip', [
   'ui.router',
+  'ngFx',
   'bitclip.headerController',
   'bitclip.headerDirective',
   'bitclip.headerFactory',
+  'bitclip.viewTabsController',
+  'bitclip.viewTabsDirective',
   'bitclip.receiveController',
   'bitclip.receiveFactory',
   'bitclip.sendController',
   'bitclip.sendFactory',
   'bitclip.historyController',
   'bitclip.historyFactory',
+  'bitclip.marketController',
+  'bitclip.marketFactory',
   'bitclip.utilitiesFactory'
 ])
 
@@ -29,12 +34,12 @@ angular.module('bitclip', [
       url: '/history',
       templateUrl: 'history/history.tpl.html',
       controller: 'historyController'
+    })
+    .state('market', {
+      url: '/market',
+      templateUrl: 'market/market.tpl.html',
+      controller: 'marketController'
     });
 }])
 
-.controller('navBarController', ['$scope', function($scope){
-  $scope.activeTab = 'send';
-  $scope.setActiveTab = function(tab) {
-    $scope.activeTab = tab;
-  };
-}])
+

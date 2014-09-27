@@ -16,7 +16,15 @@
     "url": "https://github.com/BitClip/BitClip/issues"
   },
   "homepage": "https://github.com/BitClip/BitClip",
-  "dependencies": {},
+  "dependencies": {
+    "bookshelf": "^0.7.7",
+    "cors": "^2.4.2",
+    "express": "^4.9.4",
+    "knex": "^0.6.22",
+    "pusher-client": "^0.2.2",
+    "q": "^1.0.1",
+    "sqlite3": "^3.0.0"
+  },
   "devDependencies": {
     "chai": "^1.9.1",
     "chai-as-promised": "^4.1.1",

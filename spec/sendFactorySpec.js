@@ -48,8 +48,8 @@ describe('Unit: sendFactory - TxBuilder', function () {
                   allAddressesAndKeys: []
                },
       testNet: {
-                  currentAddress: "morpWFtSj2LBMUxLfxHJ7U4s5dnqn2QBa6",
-                  currentPrivateKey: "cVJUMhpZopo9myE2KGtzAXeFoDdhqdMvt4Pm62BGtL2Zahh4qeAv",
+                  currentAddress: "mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf",
+                  currentPrivateKey: "cRqGMD3MDfkEJit4HTtA3tUDcAtQkmogqrLAnuu4aBaefXCp1J79",
                   allAddressesAndKeys: []
                }
     };
@@ -70,19 +70,32 @@ describe('Unit: sendFactory - TxBuilder', function () {
   });
 
 
-  //this async test is not working properly
+  //this async test works!! Follow this pattern
   //we need chai-as-promised to test promise resolution
   it('should return success when sending a correctly stated transaction', function (done) {
-    transactionDetails.amount = 0.01;
-    transactionDetails.destination = "mpduks3B8ULftm1hcbEf3jQU7iGae7mEMS";
+    //we should put this in the beforeEach block;
+    //TxBuilder.sendTx needs to have $rootScope.apply() after
+    //the deferred.resolve();
+    var finish = function(err){
+      console.log("finish");
+      setTimeout(function(){
+        done(err);
+      },0)
+    };
 
-    TxBuilder.sendTransaction(tempStore.testNet.currentPrivateKey, transactionDetails,false)
-    .then(function(message){
+    transactionDetails.amount = 0.001;
+    transactionDetails.destination = "mpduks3B8ULftm1hcbEf3jQU7iGae7mEMS";
+    console.log("before sendTx");
+    var sendTx = TxBuilder.sendTransaction(tempStore.testNet.currentPrivateKey, transactionDetails,false)
+    
+    sendTx.then(function(message){
+      console.log("then")
       expect(message).to.equal("Transaction successfully propagated");
       done();
     })
     .catch(function(error){
-      done(error);
+      console.log("catch")
+      finish(error);
     });
   });
 

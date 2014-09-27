@@ -26,8 +26,8 @@ angular.module('bitclip.utilitiesFactory', [])
     return deferred.promise;
   };
 
-  var httpGet = function(url, callback) {
-    $http.get(url)
+  var httpGet = function(url, callback, options) {
+    $http.get(url, options)
       .success(function(data) {
         callback(data);
       })
@@ -101,36 +101,64 @@ angular.module('bitclip.utilitiesFactory', [])
     return deferred.promise;
   };
 
+  var openSocketsList = [];
+
+  var openSocketToGetLiveBalance = function(url, currentAddress, callback){
+    var ws = new WebSocket(url);
+    openSocketsList.push(ws);
+    ws.onopen = function() {
+      console.log("ws open: ", openSocketsList);
+      ws.send(JSON.stringify({
+        'op': 'subscribe',
+        'channel': 'addresses',
+        'filters': [currentAddress]
+      }));
+
+      ws.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        if (data.data) {
+          callback(null, data.data);
+        }
+      };
+
+      ws.onclose = function(code, reason) {
+        //once closed, remove itself from the openSocketArray.
+        console.log("close: ", reason);
+        openSocketsList.splice(0, openSocketsList.length);
+        if (reason !== "newAddress"){
+          //restart the connection unless we want to terminate the
+          //connection permanently when a new address is being
+          //set as currentAddress
+          setTimeout(function() {
+            openSocketToGetLiveBalance(url, currentAddress, callback);
+          }, 1000);
+        }
+      };
+
+      ws.onerror = function(err) {
+        callback(err.message, null);
+        ws.close();
+      };
+    };
+  };
+
+  var closeExistingSocketsPermanently = function(){
+    openSocketsList.forEach(function(websocket){
+      websocket.close(1000,"newAddress")
+    });
+    openSocketsList.splice(0, openSocketsList.length);
+  };
+
   var getLiveBalanceForCurrentAddress = function(callback) {
+    console.log("getLiveBalanceForCurrentAddress invoked")
     isMainNet().then(function(bool) {
       getCurrentAddress().then(function(currentAddress) {
+        console.log("currentAddress in getLiveBalanceForCurrentAddress: ", currentAddress);
         var url = 'wss://socket-' + (bool ? 'mainnet' : 'testnet') + '.helloblock.io';
-        var ws = new WebSocket(url);
-        ws.onopen = function() {
-          ws.send(JSON.stringify({
-            'op': 'subscribe',
-            'channel': 'addresses',
-            'filters': [currentAddress]
-          }));
-
-          ws.onmessage = function(e) {
-            var data = JSON.parse(e.data);
-            if (data.data) {
-              callback(null, data.data);
-            }
-          };
-
-          ws.onclose = function(e) {
-            setTimeout(function() {
-              connect();
-            }, 1000);
-          };
-
-          ws.onerror = function(err) {
-            callback(err.message, null);
-            ws.close();
-          };
-        };
+        //close existing sockets for previous addresses before
+        //opening new socket for new currentAddress
+        closeExistingSocketsPermanently();
+        openSocketToGetLiveBalance(url,currentAddress, callback);
       });
     });
   };
@@ -143,6 +171,7 @@ angular.module('bitclip.utilitiesFactory', [])
     getCurrentPrivateKey: getCurrentPrivateKey,
     getAllAddresses: getAllAddresses,
     getBalances: getBalances,
+    openSocketsList: openSocketsList,
     getLiveBalanceForCurrentAddress: getLiveBalanceForCurrentAddress
   };
 }]);

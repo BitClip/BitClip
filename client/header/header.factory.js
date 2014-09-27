@@ -8,10 +8,9 @@ angular.module('bitclip.headerFactory', [])
   var getBalanceForCurrentAddress = function() {
     var deferred = $q.defer();
     Utilities.getCurrentAddress().then(function(currentAddress) {
-      console.log("I am the current address: ", currentAddress);
+      console.log("current address in getBalanceForCurrentAddress: ", currentAddress);
       //getBalances expects an array
       Utilities.getBalances([currentAddress]).then(function(arr) {
-        console.log("for current address: ", arr);
         if (!arr.length) {
           deferred.resolve('No address found.');
           return deferred.promise;

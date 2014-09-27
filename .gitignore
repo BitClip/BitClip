@@ -1,6 +1,5 @@
-### temp server for x-origin ###
-server.js
-
+### data file
+db/data/db.sqlite
 
 ### bower install components ###
 client/lib

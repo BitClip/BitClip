@@ -1,16 +1,27 @@
-<form ng-submit="document.getElementById('send').click()">
-  <div ng-if="txSuccessMessage" >
-	<p><b>{{txSuccessMessage}}</b></p>
+<form ng-submit="document.getElementById('send').click()" name="sendForm" novalidate>
+  <div ng-if="txSuccessMessage" class="fx-fade-left fx-easing-cubic fx-speed-200 txMessagePopup">
+	{{txSuccessMessage}}
   </div>
+  <div ng-if="txErrorMessage" class="fx-fade-left fx-easing-cubic fx-speed-200 txMessagePopup errorMessagePopup">
+  {{txErrorMessage}}
+  </div>
+
   <label>Destination:</label>
-  <input type="text" name="destination" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" ng-model="transactionDetails.destination" required autofocus>
+  <input ng-if="network" type="text" name="destination" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" ng-model="transactionDetails.destination" ng-pattern="/^[13][a-km-zA-HJ-NP-Z0-9]{26,33}$/" ng-class="{'has-error': sendForm.destination.$invalid && !sendForm.destination.$pristine}" required autofocus>
+
+  <input ng-if="!network"type="text" name="destination" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" ng-model="transactionDetails.destination" ng-pattern="/^[mn][a-km-zA-HJ-NP-Z0-9]{26,33}$/" ng-class="{'has-error': sendForm.destination.$invalid && !sendForm.destination.$pristine}" required autofocus>
+
   <label>Amount:</label>
-  <input type="text" name="amount" placeholder="minimum 0.0001 BTC" ng-model="transactionDetails.amount" required>
+  <input type="text" name="amount" placeholder="minimum 0.0001 BTC" ng-model="transactionDetails.amount" 
+  ng-pattern="/^(\d+\.?\d*|\.\d+)$/" ng-class="{'has-error': sendForm.amount.$invalid && !sendForm.amount.$pristine}" required>
+
+
+
 </form>
-<button ng-if="!confirmed" id="send" class="sendViewButton sendButton" ng-click="morph();">Send</button>
+<button ng-if="!confirmed" id="send" class="sendViewButton sendButton" ng-click="sendForm.$valid && morph();">Send</button>
 
 <button ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-confirm"  ng-click="sendPayment(); morph();">confirm</button>
-<button ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-cancel" ng-click="morph();">cancel</button>
+<button ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-cancel" ng-click="clearAmount(); morph();">cancel</button>
 
 
 
