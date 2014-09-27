@@ -569,3 +569,73 @@ table.scrollbox{
 }
 
 
+/* ----------------------------------------- */
+/*              Markets View                 */
+/* ----------------------------------------- */
+
+.graphView
+{
+   background-color: #f2f2f2;
+   padding: 10px 5px;
+   overflow: auto;
+}
+.sideTab
+{
+   float: left;
+   margin: 5px 0 0 0;
+   width: 20px;
+}
+.sideTab ul
+{
+   list-style: none;
+   text-align: center;
+}
+.sideTab ul li
+{
+   border-top: 1px solid #666;
+   border-right: 1px solid #666;
+   border-bottom: 1px solid #666;
+   border-left: 8px solid #666;
+   background-color: #ddd;
+   margin: 8px 0;
+}
+.sideTab ul li a,
+.sideTab ul li a:visited
+{
+   text-decoration: none;
+   color: #666;
+   display: block;
+   padding: 15px 5px;
+}
+.sideTab ul li:hover
+{
+   border-left: 8px solid #333;
+}
+.sideTab ul li a:hover
+{
+   color: #000;
+}
+.sideTab ul li.selected
+{
+   border-right: none;
+   background-color: #fff;
+   border-left: 8px solid #006699;
+}
+.graphDisplayContainer
+{
+   min-height: 300px;
+   margin: 0 0 0 30px;
+   padding: 5px;
+   background-color: #fff;
+   border: 1px solid #888;
+}
+
+.marketStats table
+{
+  width: 90%;
+}
+
+.updateTime 
+{
+  color:;
+}

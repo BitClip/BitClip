@@ -1,15 +1,37 @@
-<div>
-    <button class="8hrView" ng-click="getGraphData(8)">8 Hrs</button>
-    <button class="24hrView" ng-click="getGraphData(8)">24 Hrs</button>
-    <hr>
-    <nvd3-line-chart
-        data="mktData"
-        showXAxis="true"
-        showYAxis="true"
-        tooltips="true"
-        interactive="true"
-        width="340"
-        height="300"
-        >
-    </nvd3-line-chart>
+<div class="marketView">
+    <p>Last updated at: {{ updateTime | date:'short' }}</p> 
+    <table class="marketStats">
+      <tr>
+        <td>Last Trade: ${{ lastTrade }}</td>
+        <td>VWAP: ${{ vwap }}</td> 
+      </tr>
+      <tr>
+        <td>Std. Dev: ${{ stdDeviation }}</td>
+        <td>Max:  ${{ max }}</td> 
+      </tr>
+      <tr>
+        <td>Vol: {{ volume }} BTC</td>
+        <td>Min: ${{ min }}</td> 
+      </tr>
+    </table>
+    <div class="graphView">
+       <div class="sideTab">
+          <ul>
+             <li><a ng-click="getGraphData(8)">8 Hr</a></li>
+             <li><a ng-click="getGraphData(24)">24 Hr</a></li>
+          </ul>
+       </div>
+       <div class="graphDisplayContainer">
+            <nvd3-line-chart
+                data="transactions"
+                showXAxis="true"
+                showYAxis="true"
+                tooltips="true"
+                interactive="true"
+                width="340"
+                height="300"
+                >
+            </nvd3-line-chart>
+       </div>
+    </div>
 </div>
