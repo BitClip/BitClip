@@ -1,17 +1,12 @@
-var Bookshelf = require('bookshelf');
 var path = require('path');
-
-var db = Bookshelf.initialize({
+var knex = require('knex')({
   client: 'sqlite3',
   connection: {
-    host: 'localhost',
-    user: 'default',
-    password: 'password',
-    database: 'main',
-    charset: 'utf8',
-    filename: path.join(__dirname, './data/main.sqlite')
+    filename: path.join(__dirname, './data/db.sqlite')
   }
 });
+
+var db = require('bookshelf')(knex);
 
 /************************************************************/
 // Market data aggregation tables
@@ -24,7 +19,7 @@ db.knex.schema.hasTable('aggregatedMarketData').then(function(exists) {
       marketData.integer('sourceKey').unsigned().references('sourceKey').inTable('sources');
       marketData.float('amount');
       marketData.decimal('price', 18, 2);
-      marketData.dateTime('created_at');
+      marketData.integer('createdAt');
     }).then(function(table) {
       console.log('Created aggregatedMarketData', table);
     });
@@ -37,8 +32,7 @@ db.knex.schema.hasTable('bitstampMarketData').then(function(exists) {
       marketData.increments('bitstampTradeKey').primary();
       marketData.float('amount');
       marketData.decimal('price', 18, 2);
-      marketData.dateTime('created_at');
-      marketData.dateTime('updated_at');
+      marketData.integer('createdAt');
     }).then(function(table) {
       console.log('Created bitstampMarketData', table);
     });

@@ -25,17 +25,8 @@ setInterval(function() {
 // Sending a GET request to /api/marketdata will return
 // an answer from our aggregated market data table,
 // based on user-specified parameters
-// http.get('http://127.0.0.1:8080/api/marketdata', function() {
-//  console.log("I called stuff");
-//  //Will prolly have to change this to post to send the object.
-// });
 app.get('/api/marketdata', function(req, res) {
-  dbRequest.deliverMarketData(req
-    // {
-    // "timePeriod": 28800000, // this is 8 hours in milliseconds
-    // "time": 1411700196372 // equivalent to Wed Sep 24 2014 16:28:32 GMT-0700 (PDT)
-    // }
-    ).then(function(data) {
+  dbRequest.deliverMarketData(req).then(function(data) {
     res.status(200).send(data);
   });
 });

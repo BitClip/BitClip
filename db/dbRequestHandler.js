@@ -1,4 +1,4 @@
-var Q = require('q');
+var q = require('q');
 var http = require('http');
 var Pusher = require('pusher-client');
 var db = require('./dbSchema.js');
@@ -17,7 +17,6 @@ var apiGetRequests = {
 // Format: [APIModelName, APITableName]
 var apiDbSetup = {
   bitstamp: [BitstampData, 'bitstampMarketData']
-
 };
 
 // The obj is the JSON object we receive from the API.
@@ -40,7 +39,7 @@ var apiTableInfo = {
       sourceKey: row.sourceKey,
       amount: row.amount,
       price: row.price,
-      created_at: row.created_at
+      createdAt: row.createdAt
     };
   }
 };
@@ -99,12 +98,11 @@ dbRequests.aggregateTables = function() {
 // Truncates the API market data table and inserts its
 // data into the aggregate market data table
 dbRequests.insertDataIntoAggregateTable = function(api) {
-  db.knex.raw('SELECT b.sourceKey, a.* FROM ' + apiDbSetup[api][1] + ' a INNER JOIN sources b ON "' + api + '" = b.source')
+  db.knex.raw('SELECT b.sourceKey, a.amount, a.price, a.createdAt FROM ' + apiDbSetup[api][1] + ' a INNER JOIN sources b ON "' + api + '" = b.source')
     .then(function(rows) {
-      db.knex.raw('DELETE FROM ' + apiDbSetup[api][1] + '; VACUUM;')
+      db.knex.raw('DELETE FROM ' + apiDbSetup[api][1] + '; VACUUM')
         .then(function() {
           rows.forEach(function(row) {
-            console.log(row);
             db.knex('aggregatedMarketData').insert(apiTableInfo[api](row))
               .then(function() {});
           });
@@ -113,15 +111,45 @@ dbRequests.insertDataIntoAggregateTable = function(api) {
 };
 
 dbRequests.deliverMarketData = function(req) {
-  var deferred = $q.defer();
-  console.log(req);
-  // var amountOfTime = req.timePeriod; //amount of time requested to view
-  // var currentTime = req.time; //current time at time of request.
-  // var timeSegment = currentTime - amountOfTime; //start time of data gathering
+  var deferred = q.defer();
+  var time = req.params.time;
+  var timePeriod = req.params.timePeriod;
 
-  db.knex.raw('SELECT * FROM aggregatedMarketData WHERE created_at BETWEEN "' + 0 + '" AND "' + 150000000000 + '";')
-    .then(function(rows) { 
-      deferred.resolve(rows);
+  db.knex.raw('SELECT source, MAX(createdAt) AS createdAt, (SUM(amount * price) / SUM(amount)) AS volumeWeightedAvgPrice FROM aggregatedMarketData a INNER JOIN sources b ON a.sourceKey = b.sourceKey WHERE createdAt BETWEEN "' + (time - timePeriod) + '" AND "' + time + '" GROUP BY a.sourceKey, ROUND(createdAt / 900000)')
+    .then(function(rows) {
+      var exchanges = {};
+      var transactions = [];
+
+      for (var i = 0, l = rows.length; i < l; i++) {
+        if (!exchanges.hasOwnProperty(rows[i].source)) {
+          exchanges[rows[i].source] = [[rows[i].createdAt, rows[i].volumeWeightedAvgPrice]];
+        } else {
+          exchanges[rows[i].source].push([rows[i].createdAt, rows[i].volumeWeightedAvgPrice]);
+        }
+      }
+
+      for (var key in exchanges) {
+        transactions.push({key: key, values: exchanges[key]});
+      }
+
+      db.knex.raw('SELECT AVG(price) AS avgPrice FROM aggregatedMarketData WHERE createdAt BETWEEN "' + (time - timePeriod) + '" AND "' + time + '"')
+        .then(function(rows) {
+          var avgPrice = rows[0].avgPrice;
+          db.knex.raw('SELECT MAX(price) AS maxPrice, MIN(price) AS minPrice, SUM(amount) AS volume, (SUM(price * amount) / SUM(amount)) AS volumeWeightedAvgPrice, SUM((price - ' + avgPrice + ') * (price - ' + avgPrice + ')) AS stdDeviationNumerator, COUNT(price) AS stdDeviationDenominator FROM aggregatedMarketData WHERE createdAt BETWEEN "' + (time - timePeriod) + '" AND "' + time + '"')
+          .then(function(rows) {
+            var result = { 
+              timePeriod: timePeriod,
+              time: new Date().getTime();
+              transactions: transactions,
+              stdDeviation: Math.sqrt(rows[0].stdDeviationNumerator / rows[0].stdDeviationDenominator);
+              vwap: rows[0].volumeWeightedAvgPrice;
+              max: rows[0].maxPrice;
+              min: rows[0].minPrice;
+              volume: rows[0].volume;
+            };
+            deferred.resolve(result);
+          });
+        });
     });
   return deferred.promise;
 };
