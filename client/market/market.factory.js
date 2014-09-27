@@ -32,7 +32,6 @@ angular.module('bitclip.marketFactory', [])
       }
     };
     result[1] = +result[1].toFixed(2);
-    //we only need to return trading price, not the time of trade
     return result[1];
   };
 
@@ -42,6 +41,7 @@ angular.module('bitclip.marketFactory', [])
     for (var exchange in txObj){
       var tradesForExchange = txObj[exchange].values;
       tradesForExchange.forEach(function(tradeArr, index, collection){
+        tradeArr[0] = new Date(tradeArr[0]);
         tradeArr[1] = +tradeArr[1].toFixed(2);
       });
     }
