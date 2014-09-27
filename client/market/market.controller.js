@@ -25,5 +25,29 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
         };
     };
 
+    $scope.xAxisTickValuesFunction = function(){
+        return function(d){
+            var tickVals = [];
+            var values = d[0].values;
+            var interestedTimeValuesArray = [0, 00, 15, 30, 45];
+            for(var i in values){
+                if(interestedTimeValuesArray.indexOf(moment.unix(values[i][0]/1000).minute()) >= 0){
+                    tickVals.push(values[i][0]);
+                }
+            }
+            console.log('xAxisTickValuesFunction', d);
+            return tickVals;
+        };
+    };
+
+    //took this out of the directive, because otherwise
+    //cannot show both tooltip content
+    // xAxisTickFormat="xAxisTickFormatFunction()"
+    $scope.xAxisTickFormatFunction = function(){
+        return function(d){
+            return d3.time.format('%H:%M')(moment.unix(d).toDate());
+        }
+    };
+
 
 }]);
