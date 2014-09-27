@@ -9,7 +9,7 @@ angular.module('bitclip.marketFactory', [])
           time: new Date().getTime() //get current time in milliseconds
     };
     var options = {
-      data : dataObj,
+      params : dataObj,
       'Content-type': 'application/json'
     };
 
