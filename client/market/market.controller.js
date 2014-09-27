@@ -3,7 +3,7 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
     
     $scope.getGraphData = function(hours){
         Market.getGraphData(hours, function(data){
-            console.log(data);
+            console.log("DATA FROM SERVER: ", data);
             if (data !== "Error with HTTP request"){
                 $scope.transactions = Market.parseTxIntoTwoDecimals(data.transactions);
                 $scope.updateTime = data.time || 1411777376752;
