@@ -5,16 +5,16 @@ angular.module('bitclip.headerController', [])
 
     var setBalance = function() {
       $scope.balanceMessage = 'Loading balance ...';
-      Header.getBalanceForCurrentAddress().then(function(balance) {
-        if (typeof confirmedBalance === 'string') {
-          $scope.balanceMessage = balance;
-        } else {
-          $scope.balanceMessage = 'Bal: ' + balance / 100000000 + ' BTC';
-          console.log("balance: ", $scope.balanceMessage);
-        }
-      });
       //open a socket for the current address and
       //close socket for previous address
+      Header.getBalanceForCurrentAddress().then(function(balance) {
+          if (typeof confirmedBalance === 'string') {
+            $scope.balanceMessage = balance;
+          } else {
+            $scope.balanceMessage = 'Bal: ' + balance / 100000000 + ' BTC';
+            console.log("balance: ", $scope.balanceMessage);
+          }
+      });
       Utilities.getLiveBalanceForCurrentAddress(function(err, data){
         if (err){
           console.error(err);
@@ -29,8 +29,8 @@ angular.module('bitclip.headerController', [])
       console.log("getNetworkStatus invoked");
       Utilities.isMainNet().then(function(isMainNet) {
         $scope.isMainNet = isMainNet;
-        $state.go($state.current.name, $state.params, { reload: true });
         setBalance();
+        $state.go($state.current.name, $state.params, { reload: true });
       });
     };
     $scope.getNetworkStatus();
