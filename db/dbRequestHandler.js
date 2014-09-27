@@ -102,6 +102,7 @@ dbRequests.insertDataIntoAggregateTable = function(api) {
       db.knex.raw('DELETE FROM ' + apiDbSetup[api][1] + '; VACUUM')
         .then(function() {
           rows.forEach(function(row) {
+            console.log(row);
             db.knex('aggregatedMarketData').insert(apiTableInfo[api](row))
               .then(function() {});
           });
@@ -111,9 +112,9 @@ dbRequests.insertDataIntoAggregateTable = function(api) {
 
 dbRequests.deliverMarketData = function(req) {
   var deferred = q.defer();
-  var time = req.params.time;
-  var timePeriod = req.params.timePeriod;
-
+  var time = parseInt(req.query.time);
+  var timePeriod = parseInt(req.query.timePeriod);
+  
   db.knex.raw('SELECT source, MAX(createdAt) AS createdAt, (SUM(amount * price) / SUM(amount)) AS volumeWeightedAvgPrice FROM aggregatedMarketData a INNER JOIN sources b ON a.sourceKey = b.sourceKey WHERE createdAt BETWEEN "' + (time - timePeriod) + '" AND "' + time + '" GROUP BY a.sourceKey, ROUND(createdAt / 900000)')
     .then(function(rows) {
       var exchanges = {};
@@ -136,16 +137,18 @@ dbRequests.deliverMarketData = function(req) {
           var avgPrice = rows[0].avgPrice;
           db.knex.raw('SELECT MAX(price) AS maxPrice, MIN(price) AS minPrice, SUM(amount) AS volume, (SUM(price * amount) / SUM(amount)) AS volumeWeightedAvgPrice, SUM((price - ' + avgPrice + ') * (price - ' + avgPrice + ')) AS stdDeviationNumerator, COUNT(price) AS stdDeviationDenominator FROM aggregatedMarketData WHERE createdAt BETWEEN "' + (time - timePeriod) + '" AND "' + time + '"')
           .then(function(rows) {
+            console.log("THIS IS ROWS: ", rows);
             var result = { 
               timePeriod: timePeriod,
-              time: new Date().getTime();
+              time: new Date().getTime(),
               transactions: transactions,
-              stdDeviation: Math.sqrt(rows[0].stdDeviationNumerator / rows[0].stdDeviationDenominator);
-              vwap: rows[0].volumeWeightedAvgPrice;
-              max: rows[0].maxPrice;
-              min: rows[0].minPrice;
-              volume: rows[0].volume;
+              stdDeviation: Math.sqrt(rows[0].stdDeviationNumerator / rows[0].stdDeviationDenominator),
+              vwap: rows[0].volumeWeightedAvgPrice,
+              max: rows[0].maxPrice,
+              min: rows[0].minPrice,
+              volume: rows[0].volume
             };
+            console.log("RESULT TO BE DELIVERED: ", result);
             deferred.resolve(result);
           });
         });

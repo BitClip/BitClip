@@ -3,17 +3,20 @@ angular.module('bitclip.marketFactory', [])
 .factory('Market', ['$http', function($http){
 
   var getGraphData = function(hours, callback){
-    var url = "http://localhost:3000/api/marketdata";
+    var url = "http://localhost:8080/api/marketdata";
+    // var newDate = JSON.stringify(new Date().getTime());
+    // console.log("DATE: ", JSON.stringify(newDate));
     var dataObj = {
           timePeriod: hours * 3600000,
           time: new Date().getTime() //get current time in milliseconds
     };
-    var options = {
-      params : dataObj,
-      'Content-type': 'application/json'
+    var config = {
+      url: url,
+      method: 'GET',
+      params: dataObj
     };
-
-    $http.get(url, options).success(function(data){
+    console.log("this is the config obj: ", config);
+    $http(config).success(function(data){
       callback(data);
     }).error(function(data, statusCode){
       callback("Error with HTTP request");
