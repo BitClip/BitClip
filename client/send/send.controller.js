@@ -14,8 +14,11 @@ angular.module('bitclip.sendController', [
 
     $scope.clearAmount = function(){
       $scope.transactionDetails.amount = "";
-
     }
+
+    Utilities.isMainNet().then(function(isMainNet){
+      $scope.network = isMainNet;
+    })
 
     //TODO: sendPayment Functionality
     $scope.sendPayment = function() {
@@ -26,8 +29,8 @@ angular.module('bitclip.sendController', [
             $timeout(function() { $scope.txSuccessMessage = false }, 2000);
           })
           .catch(function(err){
-            $scope.txSuccessMessage = "Transaction Failed: "+ err.message;
-            $timeout(function() { $scope.txSuccessMessage = false }, 2000);
+            $scope.txErrorMessage = "Transaction Failed: "+ err.message;
+            $timeout(function() { $scope.txErrorMessage = false }, 2000);
           });
         });
       });

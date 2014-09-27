@@ -351,6 +351,10 @@ input:focus {
   outline: 0;
   box-shadow: inset 0 0 2px #35A533;
 }
+ 
+.has-error:focus{
+  box-shadow: inset 0 0 1px #F15633;
+}
 
 .sendViewButton {
   outline: 0;
@@ -389,15 +393,16 @@ input:focus {
 }
 
 .send-cancel {
-  background-color: #F13C3F;
-  border-color: #F13C3F;
+  background-color: #F15633;
+  border-color: #F15633;
   right: 0.5%;
 }
 
-.successMessagePopup {
+.txMessagePopup {
   position: absolute;
   height: 20px;
   width: 100%;
+  top:2px;
 
   text-align: center;
   line-height: 150%;
@@ -406,6 +411,10 @@ input:focus {
   background-color: #35A5A7;
   color: white;
   z-index: 9999;
+}
+
+.errorMessagePopup{
+  background-color:#F15633;
 }
 
 /* ----------------------------------------- */
@@ -542,7 +551,7 @@ tr {
 }
 
 .outbound {
-  color: #F13C3F;
+  color: #F15633;
 }
 
 .historyHeader > i:first-child {
