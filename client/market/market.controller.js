@@ -20,7 +20,7 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
     $scope.toolTipContentFunction = function(){
         return function(exchangeName, date, price, e, graph) {
             var dateFormatted = date.toLocaleTimeString() + " "+ date.toLocaleDateString(); 
-            var template = "<h4 class='toolTipHeader'><b>" + exchangeName +"</b></h4>" + "<p>$"+ price + " @ "+ dateFormatted +"</p>" 
+            var template = "<h4 class='toolTipHeader'><b>" + exchangeName +"</b></h4>" + "<p>$"+ price + " @ "+ dateFormatted +"</p>"; 
             return template;
         };
     };

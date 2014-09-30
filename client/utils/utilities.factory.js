@@ -1,6 +1,6 @@
 angular.module('bitclip.utilitiesFactory', [])
 
-.factory('Utilities', ['$http', '$q', '$rootScope',function($http, $q, $rootScope) {
+.factory('Utilities', ['$http', '$q',function($http, $q) {
   var InitObj = function() {
     this.currentAddress = '';
     this.currentPrivateKey = '';
@@ -10,7 +10,6 @@ angular.module('bitclip.utilitiesFactory', [])
   var initialize = function() {
     var deferred = $q.defer();
     chrome.storage.local.get(['isMainNet', 'mainNet', 'testNet'], function(obj) {
-      console.log("I am the obj in initialize: ", obj);
       if (obj.isMainNet === undefined) {
         obj.isMainNet = true;
       }
@@ -20,12 +19,8 @@ angular.module('bitclip.utilitiesFactory', [])
       if (obj.testNet === undefined) {
         obj.testNet = new InitObj();
       }
-      console.log("obj after initialize: ", obj);
       chrome.storage.local.set(obj, function() {
-        console.log("I am in set cb");
         deferred.resolve('Initialization complete.');
-        console.log("I am after the cb");
-        // $rootScope.$apply(); // VERIFY IF NEED TO DO $APPLY HERE??
       });
     });
     return deferred.promise;
@@ -88,7 +83,6 @@ angular.module('bitclip.utilitiesFactory', [])
   var getBalances = function(addresses) {
     var deferred = $q.defer();
     isMainNet().then(function(bool) {
-      console.log("I am in mainnet");
       var baseUrl = 'http://' + (bool ? 'mainnet' : 'testnet') + '.helloblock.io/v1/addresses?addresses=';
       var requestString = '';
       if (addresses.length > 1) {
@@ -101,9 +95,7 @@ angular.module('bitclip.utilitiesFactory', [])
       }
       baseUrl += requestString;
       httpGet(baseUrl, function(obj) {
-        console.log("obj from hB:", obj);
         deferred.resolve(obj.data.addresses);
-        $rootScope.$apply();
       });
     });
     return deferred.promise;

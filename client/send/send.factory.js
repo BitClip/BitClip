@@ -48,13 +48,10 @@ angular.module('bitclip.sendFactory', [])
         tx.addInput(unspent.txHash, unspent.index)
         totalUnspentsValue += unspent.value
       })
-      console.log("I am before addOutput");
       tx.addOutput(toAddress, txTargetValue);
 
       //there is uncaught error if invalid btc address inputed;
       //we need to modify helloblock .addOutput code
-      
-      console.log("I am after addOutput");
       var txChangeValue = totalUnspentsValue - txTargetValue - txFee
       tx.addOutput(ecKeyAddress, txChangeValue)
 
