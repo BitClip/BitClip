@@ -256,16 +256,28 @@ anywhere outside of the dropdown */
 .headerTabs {
   list-style-type: none;
   background-color: white;
-  border-bottom: 1px solid #F1A533;
   box-sizing: border-box;
   position: relative;
   height: 2.7rem;
   width: 100%;
   cursor: pointer; 
   cursor: hand;
+  
+}
+
+.headerTabs::before{
+  content:"";
+  box-sizing:border-box;
+  position: absolute;
+  bottom:0;
+  height:1px;
+  width:75%;
+  z-index: 1;
+  border-bottom:1px solid #F1A533;
 }
 
 .headerTabs > li {
+  /*border-bottom: 1px solid #F1A533;*/
   line-height: 200%;
   text-align: center;
   float: left;
@@ -302,12 +314,14 @@ li.active {
   
 .headerTabs > .marketTab{
   background-color:#35A5A7;
-  border-bottom:2px solid #F1A533;
+  border-bottom: 1px solid transparent;
+  
 }
 
 .headerTabs li:hover:not(.active).marketTab,
 .headerTabs li:hover:not(.active) .marketTabImage{
   background-color: #3DBDBF;
+  border-bottom: 1px solid transparent;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
 }
@@ -351,9 +365,13 @@ input:focus {
   outline: 0;
   box-shadow: inset 0 0 2px #35A533;
 }
- 
+
 .has-error:focus{
   box-shadow: inset 0 0 1px #F15633;
+}
+
+input.hasTimedError{
+  box-shadow: inset 0 0 1px #F15633; 
 }
 
 .sendViewButton {
@@ -415,6 +433,12 @@ input:focus {
 
 .errorMessagePopup{
   background-color:#F15633;
+}
+
+.sendFormError{
+  position: absolute;
+  margin-left: 20%;
+  color:#F15633;
 }
 
 /* ----------------------------------------- */
@@ -507,6 +531,7 @@ ul.scrollbox {
   color:#35A5A7;
 }
 
+<<<<<<< HEAD
 .scrollbox li.currentAddressMatch::before{
   content:">";
   position:absolute;
@@ -514,6 +539,8 @@ ul.scrollbox {
   top:0px;
 }
 
+=======
+>>>>>>> Add structure for market graph
 /* ----------------------------------------- */
 /*              History View                 */
 /* ----------------------------------------- */

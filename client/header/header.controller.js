@@ -15,6 +15,8 @@ angular.module('bitclip.headerController', [])
             console.log("balance: ", $scope.balanceMessage);
           }
       });
+      //open a socket for the current address and
+      //close socket for previous address
       Utilities.getLiveBalanceForCurrentAddress(function(err, data){
         if (err){
           console.error(err);
