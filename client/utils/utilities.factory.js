@@ -1,6 +1,6 @@
 angular.module('bitclip.utilitiesFactory', [])
 
-.factory('Utilities', ['$http', '$q', function($http, $q) {
+.factory('Utilities', ['$http', '$q', '$rootScope',function($http, $q, $rootScope) {
   var InitObj = function() {
     this.currentAddress = '';
     this.currentPrivateKey = '';
@@ -10,6 +10,7 @@ angular.module('bitclip.utilitiesFactory', [])
   var initialize = function() {
     var deferred = $q.defer();
     chrome.storage.local.get(['isMainNet', 'mainNet', 'testNet'], function(obj) {
+      console.log("I am the obj in initialize: ", obj);
       if (obj.isMainNet === undefined) {
         obj.isMainNet = true;
       }
@@ -19,8 +20,12 @@ angular.module('bitclip.utilitiesFactory', [])
       if (obj.testNet === undefined) {
         obj.testNet = new InitObj();
       }
+      console.log("obj after initialize: ", obj);
       chrome.storage.local.set(obj, function() {
+        console.log("I am in set cb");
         deferred.resolve('Initialization complete.');
+        console.log("I am after the cb");
+        // $rootScope.$apply(); // VERIFY IF NEED TO DO $APPLY HERE??
       });
     });
     return deferred.promise;

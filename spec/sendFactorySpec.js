@@ -71,12 +71,7 @@ describe('Unit: sendFactory - TxBuilder', function () {
   });
 
 
-  //this async test works!! Follow this pattern
-  //we need chai-as-promised to test promise resolution
   it('should return success when sending a correctly stated transaction', function (done) {
-    //we should put this in the beforeEach block;
-    //TxBuilder.sendTx needs to have $rootScope.apply() after
-    //the deferred.resolve();
 
     //self-made digest loop no longer necessary 
     //finish = function(err){
@@ -160,7 +155,7 @@ describe('Unit: sendFactory - TxBuilder', function () {
       done();
     })
     .catch(function(error){
-      console.log("In the catcafdafdach");
+      console.log("In the catch");
       expect(error).not.to.equal(undefined);
       done();
     })
