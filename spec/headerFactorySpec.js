@@ -63,8 +63,9 @@ describe('Unit: headerFactory', function () {
   });
 
   // This async test totally works!!
-  it('setNetwork change isMainNet in chrome.storage.local', function (done) {
+  it('setNetwork change should change isMainNet in chrome.storage.local', function (done) {
     Header.setNetwork(true, function(){
+      console.log("in the callback");
       expect(tempStore.isMainNet).to.equal(true);
       done();
     });

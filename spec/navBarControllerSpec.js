@@ -1,4 +1,4 @@
-describe.only('Unit: navBarController', function () {
+describe('Unit: navBarController', function () {
   beforeEach(module('bitclip'));
 
   var $scope, $rootScope, $location, $window, createController;
