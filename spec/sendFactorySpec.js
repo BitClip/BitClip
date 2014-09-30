@@ -13,7 +13,6 @@ describe('Unit: sendFactory - TxBuilder', function () {
     TxBuilder = $injector.get('TxBuilder');
     $q = $injector.get('$q');
 
-
     //mock up of WinJS .done function
     finish = function(err){
       console.log("finish");
@@ -81,7 +80,7 @@ describe('Unit: sendFactory - TxBuilder', function () {
 
   //this async test works!! Follow this pattern
   //we need chai-as-promised to test promise resolution
-  it('should return success when sending a correctly stated transaction', function (done) {
+  it.only('should return success when sending a correctly stated transaction', function (done) {
     //we should put this in the beforeEach block;
     //TxBuilder.sendTx needs to have $rootScope.apply() after
     //the deferred.resolve();

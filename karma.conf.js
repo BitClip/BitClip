@@ -21,12 +21,16 @@ module.exports = function(config) {
       'client/lib/angular-mocks/angular-mocks.js',
       'client/lib/angular-ui-router/release/angular-ui-router.js',
       'client/lib/angular-morph/dist/angular-morph.js',
+      'client/lib/ngFx/dist/ngFx.min.js',
 
       // our app code
       'client/receive/*.js',
       'client/send/*.js',
       'client/btclib/*.js',
       'client/header/*.js',
+      'client/history/*.js',
+      'client/market/*.js',
+      'client/viewTabs/*.js',
       'client/app.js',
       'client/utils/*.js',
 
