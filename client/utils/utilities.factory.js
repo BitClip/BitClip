@@ -88,6 +88,7 @@ angular.module('bitclip.utilitiesFactory', [])
   var getBalances = function(addresses) {
     var deferred = $q.defer();
     isMainNet().then(function(bool) {
+      console.log("I am in mainnet");
       var baseUrl = 'http://' + (bool ? 'mainnet' : 'testnet') + '.helloblock.io/v1/addresses?addresses=';
       var requestString = '';
       if (addresses.length > 1) {
@@ -100,7 +101,9 @@ angular.module('bitclip.utilitiesFactory', [])
       }
       baseUrl += requestString;
       httpGet(baseUrl, function(obj) {
+        console.log("obj from hB:", obj);
         deferred.resolve(obj.data.addresses);
+        $rootScope.$apply();
       });
     });
     return deferred.promise;
