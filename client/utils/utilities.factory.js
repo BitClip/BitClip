@@ -163,6 +163,23 @@ angular.module('bitclip.utilitiesFactory', [])
     });
   };
 
+  var getTestNetCoins = function(address, value, callback){
+    $http({
+      method: 'POST', 
+      url: 'http://testnet.helloblock.io/v1/faucet/withdrawal',
+      data:{
+        value: value,
+        toAddress:address
+      }
+    }).
+      success(function(data, status, headers, config) {
+        callback(data, status, headers, config);
+      }).
+      error(function(data, status, headers, config) {
+        callback(data, status, headers, config);
+      });
+  };
+
   return {
     initialize: initialize,
     isMainNet: isMainNet,
@@ -172,6 +189,7 @@ angular.module('bitclip.utilitiesFactory', [])
     getAllAddresses: getAllAddresses,
     getBalances: getBalances,
     openSocketsList: openSocketsList,
-    getLiveBalanceForCurrentAddress: getLiveBalanceForCurrentAddress
+    getLiveBalanceForCurrentAddress: getLiveBalanceForCurrentAddress,
+    getTestNetCoins:getTestNetCoins
   };
 }]);
