@@ -36,8 +36,14 @@ angular.module('bitclip.sendFactory', [])
       value: txTargetValue + txFee
     }, function(err, res, unspents) {
       // if (err) throw new Error(err)
+      console.log("err: ", err);
+      console.log("res: ", res);
+      console.log("unspents: ", unspents);
       if (err) {
+        console.log("in the if err: ", err);
         deferred.reject(err);
+        $rootScope.$apply();
+        return;
       };
 
       var tx = new bitcoin.Transaction();
@@ -51,6 +57,7 @@ angular.module('bitclip.sendFactory', [])
       console.log("I am before addOutput");
       tx.addOutput(toAddress, txTargetValue);
       //there is uncaught error if invalid btc address inputed;
+      //we need to modify helloblock .addOutput code
       console.log("I am after addOutput");
       var txChangeValue = totalUnspentsValue - txTargetValue - txFee
       tx.addOutput(ecKeyAddress, txChangeValue)
@@ -66,8 +73,8 @@ angular.module('bitclip.sendFactory', [])
         } else if (tx) {
           console.log("TX successful");
           deferred.resolve("Transaction successfully propagated");
-          $rootScope.$apply();
         }
+        $rootScope.$apply();
       });
     });
     return deferred.promise
