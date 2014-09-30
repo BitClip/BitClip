@@ -73,52 +73,57 @@ describe('Unit: sendFactory - TxBuilder', function () {
   });
 
   it('sendTransaction should be a function', function () {
-
     expect(TxBuilder.sendTransaction).to.be.a('function');
   });
 
 
   //this async test works!! Follow this pattern
   //we need chai-as-promised to test promise resolution
-  it.only('should return success when sending a correctly stated transaction', function (done) {
+  it('should return success when sending a correctly stated transaction', function (done) {
     //we should put this in the beforeEach block;
     //TxBuilder.sendTx needs to have $rootScope.apply() after
     //the deferred.resolve();
     
-
     transactionDetails.amount = 0.001;
     transactionDetails.destination = "mpduks3B8ULftm1hcbEf3jQU7iGae7mEMS";
-    console.log("before sendTx");
-    var sendTx = TxBuilder.sendTransaction(tempStore.testNet.currentPrivateKey, transactionDetails,false)
-    
-    sendTx.then(function(message){
-      console.log("then")
+    TxBuilder.sendTransaction(tempStore.testNet.currentPrivateKey, transactionDetails,false)
+    .then(function(message){
+      console.log("I am message in then!!!: ", message);
       expect(message).to.equal("Transaction successfully propagated");
       done();
     })
     .catch(function(error){
-      console.log("catch")
       finish(error);
     });
   });
 
-  it('should return error when sending transaction with 0 amount', function () {
+  // this test is broken, does first if err in txBuilder is not invoked
+  // and then deferred.reject is not resolved
+  it('should return error when sending transaction with 0 amount', function (done) {
+    
     transactionDetails.amount = 0;
     transactionDetails.destination = "mpduks3B8ULftm1hcbEf3jQU7iGae7mEMS";
     
-    TxBuilder.sendTransaction(tempStore.testNet.currentPrivateKey, transactionDetails,false)
-    .then(function(message, error){
-      expect(error).not.to.equal(undefined);
+    TxBuilder.sendTransaction(tempStore.testNet.currentPrivateKey, transactionDetails, false)
+    .then(function(message){
+      console.log("I am in then: \n\n", message);
+      done();
+    })
+    .catch(function(error){
+      console.log("ERROR!!   ", error)
+      finish(error);
     });
   });
 
-  it('should return error when sending transaction with improper address', function () {
-    transactionDetails.amount = 0;
+  //
+  it.only('should return error when sending transaction with improper address', function (done) {
+    transactionDetails.amount = 0.01;
     transactionDetails.destination = "non-btc address";
     
-    TxBuilder.sendTransaction(tempStore.testNet.currentPrivateKey, transactionDetails,false)
+    TxBuilder.sendTransaction(tempStore.testNet.currentPrivateKey, transactionDetails, false)
     .then(function(message, error){
       expect(error).not.to.equal(undefined);
+      done();
     });
   });
 

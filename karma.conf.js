@@ -22,6 +22,10 @@ module.exports = function(config) {
       'client/lib/angular-ui-router/release/angular-ui-router.js',
       'client/lib/angular-morph/dist/angular-morph.js',
       'client/lib/ngFx/dist/ngFx.min.js',
+      'client/lib/d3/d3.min.js',
+      'client/lib/nvd3/nv.d3.min.js',
+      'client/lib/moment/moment.js', //to be removed later when date-axis in market view finalised
+      'client/lib/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js',
 
       // our app code
       'client/receive/*.js',
@@ -36,7 +40,7 @@ module.exports = function(config) {
 
       // our spec files
       'node_modules/expect.js/index.js',
-      'spec/**/*.js'///////////////////////////may not want to test anything that has to do with chrome storage
+      'spec/**/*.js'
     ],
 
 

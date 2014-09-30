@@ -36,18 +36,22 @@ angular.module('bitclip.sendFactory', [])
       value: txTargetValue + txFee
     }, function(err, res, unspents) {
       // if (err) throw new Error(err)
-      if (err) deferred.reject(err);
+      if (err) {
+        deferred.reject(err);
+      };
 
-      var tx = new bitcoin.Transaction()
-
+      var tx = new bitcoin.Transaction();
+      console.log("ecKeyAddress: ", ecKeyAddress);
+      console.log("I am unspentsxxxxx:", unspents);
       var totalUnspentsValue = 0
       unspents.forEach(function(unspent) {
         tx.addInput(unspent.txHash, unspent.index)
         totalUnspentsValue += unspent.value
       })
-
-      tx.addOutput(toAddress, txTargetValue)
-
+      console.log("I am before addOutput");
+      tx.addOutput(toAddress, txTargetValue);
+      //there is uncaught error if invalid btc address inputed;
+      console.log("I am after addOutput");
       var txChangeValue = totalUnspentsValue - txTargetValue - txFee
       tx.addOutput(ecKeyAddress, txChangeValue)
 
