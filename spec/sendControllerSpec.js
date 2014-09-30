@@ -7,6 +7,7 @@ describe('sendController', function () {
     $location = $injector.get('$location');
     $scope = $rootScope.$new();
     $window = $injector.get('$window');
+    $timeout = $injector.get('$timeout');
 
     Header = $injector.get('Header');
     Utilities = $injector.get('Utilities');
@@ -85,15 +86,17 @@ describe('sendController', function () {
 
   // not working, need to test all of the Utilities factory functions first
   // ensure digest loop is being notified of their async nature
-  it('$scope.sendPayment should trigger Tx.Builder sendPayment', function ( done ){
-    console.log("Trigger TxBuilder");
-    $scope.transactionDetails = {
-      amount: 0.0012,
-      destination: "mpduks3B8ULftm1hcbEf3jQU7iGae7mEMS"
-    };
-    $scope.sendPayment();
-    setTimeout(function(){
-      expect($scope.txSuccessMessage).to.equal("Transaction successfully propagated");
-    }, 1500);
-  });
+  
+  // it('$scope.sendPayment should trigger Tx.Builder sendPayment', function ( done ){
+  //   $scope.transactionDetails = {
+  //     amount: 0.01,
+  //     destination: "mpduks3B8ULftm1hcbEf3jQU7iGae7mEMS"
+  //   };
+  //   $scope.sendPayment();
+  //   $rootScope.$apply();
+  //   expect($scope.txSuccessMessage).to.equal("Transaction successfully propagated");
+  //   done();
+  // });
+  
+
 });

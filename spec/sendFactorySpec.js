@@ -72,13 +72,8 @@ describe('Unit: sendFactory - TxBuilder', function () {
 
 
   it('should return success when sending a correctly stated transaction', function (done) {
-
+    this.timeout(5000);
     //self-made digest loop no longer necessary 
-    //finish = function(err){
-    //   setTimeout(function(){
-    //     done(err);
-    //   },0)
-    // };
     
     transactionDetails.amount = 0.001;
     transactionDetails.destination = "mpduks3B8ULftm1hcbEf3jQU7iGae7mEMS";
@@ -88,14 +83,15 @@ describe('Unit: sendFactory - TxBuilder', function () {
       done();
     })
     .catch(function(error){
-      finish(error);
+      expect(error).to.be(undefined);
+      done();
     });
   });
 
   // this test is broken, does first if err in txBuilder is not invoked
   // and then deferred.reject is not resolved
   it('should return error when sending transaction with 0 amount', function (done) {
-    
+    this.timeout(5000);
     transactionDetails.amount = 0;
     transactionDetails.destination = "mpduks3B8ULftm1hcbEf3jQU7iGae7mEMS";
     
@@ -130,6 +126,7 @@ describe('Unit: sendFactory - TxBuilder', function () {
   // });
 
   it('should return error when propagating to the incorrect network', function (done) {
+    this.timeout(5000);
     transactionDetails.amount = 0.01;
     transactionDetails.destination = "mpduks3B8ULftm1hcbEf3jQU7iGae7mEMS";
     
@@ -146,6 +143,7 @@ describe('Unit: sendFactory - TxBuilder', function () {
   });
 
   it('should return error when tx amount is more than available amount in address', function (done) {
+    this.timeout(5000);
     transactionDetails.amount = 1000;
     transactionDetails.destination = "mpduks3B8ULftm1hcbEf3jQU7iGae7mEMS";
     

@@ -96,8 +96,8 @@ describe('Unit: headerController', function () {
     });
   });
 
-  it('getNetworkStatus should set $scope.isMainNet variable identical to isMainNet in local storage', function () {
+  // it('getNetworkStatus should set $scope.isMainNet variable identical to isMainNet in local storage', function () {
     
-  });
+  // });
 
 })

@@ -35,6 +35,7 @@ angular.module('bitclip.sendFactory', [])
     helloblocktx.addresses.getUnspents(ecKeyAddress, {
       value: txTargetValue + txFee
     }, function(err, res, unspents) {
+      console.log("in get unspents");
       if (err) {
         deferred.reject(err);
         $rootScope.$apply();
@@ -60,14 +61,16 @@ angular.module('bitclip.sendFactory', [])
       })
 
       var rawTxHex = tx.toHex();
-      helloblocktx.transactions.propagate(rawTxHex, function(err, res, tx) {      
+      helloblocktx.transactions.propagate(rawTxHex, function(err, res, tx) { 
+        console.log("in propagate");     
         if (err) {
           deferred.reject(err);
+          $rootScope.$apply();
         } else if (tx) {
           console.log("Transaction was successful!");
           deferred.resolve("Transaction successfully propagated");
+          $rootScope.$apply();
         }
-        $rootScope.$apply();
       });
     });
     return deferred.promise
