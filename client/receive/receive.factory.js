@@ -4,6 +4,7 @@ angular.module('bitclip.receiveFactory', [])
   var newAddress = function() {
     var that = this;
     Utilities.isMainNet().then(function(bool) {
+      console.log("In newAddress receive");
       var isMainNet = bool;
       var network = isMainNet ? 'bitcoin' : 'testnet';
       var key = bitcoin.ECKey.makeRandom();
@@ -33,7 +34,6 @@ angular.module('bitclip.receiveFactory', [])
   };
 
   var setAsCurrentAddress = function(address) {
-    console.log("I am the address");
     var that = this;
     Utilities.isMainNet().then(function(bool) {
       var isMainNet = bool;

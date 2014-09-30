@@ -134,7 +134,6 @@ describe('Unit: Utilities Factory', function () {
     $rootScope.$apply();
   });
 
-
   it('getCurrentAddress returns correct currentPrivateKey for mainNet', function (done) {
     tempStore.isMainNet = true;
 

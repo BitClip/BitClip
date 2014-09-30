@@ -19,7 +19,7 @@ angular.module('bitclip.historyFactory', [])
         });
     });
     return deferred.promise;
-  }
+  };
 
   var isContainedinArrayMatrix = function(inputOrOutputMatrix){
   for (var i = 0; i < inputOrOutputMatrix.length; i++ ){

@@ -1,4 +1,4 @@
-describe('Unit: navBarController', function () {
+describe.only('Unit: navBarController', function () {
   beforeEach(module('bitclip'));
 
   var $scope, $rootScope, $location, $window, createController;
@@ -12,7 +12,7 @@ describe('Unit: navBarController', function () {
     var $controller = $injector.get('$controller');
 
     createController = function () {
-      return $controller('navBarController', {
+      return $controller('viewTabsController', {
         $scope: $scope,
         $window: $window,
         $location: $location
