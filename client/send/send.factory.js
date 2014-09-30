@@ -1,7 +1,7 @@
 angular.module('bitclip.sendFactory', [])
 .factory('TxBuilder', ['$q','$rootScope', function($q,$rootScope) {
   var sendTransaction = function(privateKeyWIF, transactionObj, isMainNet) {
-
+    console.log("sendTransaction invoked");
     var deferred = $q.defer();
 
     //this variable sets which bitcoin network to propagate
@@ -35,19 +35,24 @@ angular.module('bitclip.sendFactory', [])
     helloblocktx.addresses.getUnspents(ecKeyAddress, {
       value: txTargetValue + txFee
     }, function(err, res, unspents) {
-      // if (err) throw new Error(err)
-      if (err) deferred.reject(err);
+      console.log("in get unspents");
+      if (err) {
+        deferred.reject(err);
+        $rootScope.$apply();
+        return;
+      };
 
-      var tx = new bitcoin.Transaction()
+      var tx = new bitcoin.Transaction();
 
       var totalUnspentsValue = 0
       unspents.forEach(function(unspent) {
         tx.addInput(unspent.txHash, unspent.index)
         totalUnspentsValue += unspent.value
       })
+      tx.addOutput(toAddress, txTargetValue);
 
-      tx.addOutput(toAddress, txTargetValue)
-
+      //there is uncaught error if invalid btc address inputed;
+      //we need to modify helloblock .addOutput code
       var txChangeValue = totalUnspentsValue - txTargetValue - txFee
       tx.addOutput(ecKeyAddress, txChangeValue)
 
@@ -56,11 +61,13 @@ angular.module('bitclip.sendFactory', [])
       })
 
       var rawTxHex = tx.toHex();
-      helloblocktx.transactions.propagate(rawTxHex, function(err, res, tx) {      
+      helloblocktx.transactions.propagate(rawTxHex, function(err, res, tx) { 
+        console.log("in propagate");     
         if (err) {
           deferred.reject(err);
+          $rootScope.$apply();
         } else if (tx) {
-          console.log("TX successful");
+          console.log("Transaction was successful!");
           deferred.resolve("Transaction successfully propagated");
           $rootScope.$apply();
         }

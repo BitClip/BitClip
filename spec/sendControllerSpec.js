@@ -7,6 +7,7 @@ describe('sendController', function () {
     $location = $injector.get('$location');
     $scope = $rootScope.$new();
     $window = $injector.get('$window');
+    $timeout = $injector.get('$timeout');
 
     Header = $injector.get('Header');
     Utilities = $injector.get('Utilities');
@@ -40,6 +41,7 @@ describe('sendController', function () {
                         }
                       }
                     };
+    
     tempStore = {
       isMainNet: false,
       mainNet: {
@@ -48,9 +50,9 @@ describe('sendController', function () {
                   allAddressesAndKeys: []
                },
       testNet: {
-                  currentAddress: "testAddress1",
-                  currentPrivateKey: "testPrivateKey1",
-                  allAddressesAndKeys: [["testAddress1","testPrivateKey1"],["testAddress2","testPrivateKey2"]]
+                  currentAddress: "mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf",
+                  currentPrivateKey: "cRqGMD3MDfkEJit4HTtA3tUDcAtQkmogqrLAnuu4aBaefXCp1J79",
+                  allAddressesAndKeys: []
                }
     };
 
@@ -71,7 +73,6 @@ describe('sendController', function () {
   }));
 
   afterEach(function() {
-    //$window.localStorage.removeItem('com.shortly'); //something like this but for chrome storage
   });
 
   it('$scope.transactionDetails should exist as object', function () {
@@ -83,8 +84,20 @@ describe('sendController', function () {
     expect($scope.confirmed).to.equal(true);
   });
 
-  it('$scope.sendPayment should trigger Tx.Builder sendPayment', function(){
-    //to be written
-  })
+  // not working, need to test all of the Utilities factory functions first
+  // ensure digest loop is being notified of their async nature
+  
+  // it('$scope.sendPayment should trigger Tx.Builder sendPayment', function ( done ){
+  //   $scope.transactionDetails = {
+  //     amount: 0.01,
+  //     destination: "mpduks3B8ULftm1hcbEf3jQU7iGae7mEMS"
+  //   };
+  //   $scope.sendPayment();
+  //   $rootScope.$apply();
+  //   expect($scope.txSuccessMessage).to.equal("Transaction successfully propagated");
+  //   done();
+  // });
+  
+  
 
-})
+});

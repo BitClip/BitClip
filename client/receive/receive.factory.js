@@ -1,16 +1,18 @@
 angular.module('bitclip.receiveFactory', [])
 
 .factory('Receive', ['$q', 'Utilities', function($q, Utilities) {
+  
   var newAddress = function() {
     var that = this;
     Utilities.isMainNet().then(function(bool) {
+      console.log("In newAddress receive");
       var isMainNet = bool;
       var network = isMainNet ? 'bitcoin' : 'testnet';
       var key = bitcoin.ECKey.makeRandom();
       var currentPrivateKey = key.toWIF(bitcoin.networks[network]);
       var currentAddress = key.pub.getAddress(bitcoin.networks[network]).toString();
-
       var location = isMainNet ? 'mainNet' : 'testNet';
+      
       chrome.storage.local.get(location, function(obj) {
         obj[location].currentAddress = currentAddress;
         obj[location].currentPrivateKey = currentPrivateKey;
@@ -24,7 +26,12 @@ angular.module('bitclip.receiveFactory', [])
               that.$apply(function() {
                 that.allAddresses.unshift(currentAddress);
               });
-              angular.element(document.getElementsByTagName('header-bar')).scope().getNetworkStatus();
+              //load testnet addresses with 0.99 BTC
+              if (network === "testnet"){
+                Utilities.getTestNetCoins(currentAddress, 99000000, function(data){
+                  angular.element(document.getElementsByTagName('header-bar')).scope().getNetworkStatus();
+                });
+              }
             });
           });
         });
@@ -33,7 +40,6 @@ angular.module('bitclip.receiveFactory', [])
   };
 
   var setAsCurrentAddress = function(address) {
-    console.log("I am the address");
     var that = this;
     Utilities.isMainNet().then(function(bool) {
       var isMainNet = bool;

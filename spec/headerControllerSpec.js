@@ -85,20 +85,19 @@ describe('Unit: headerController', function () {
     });
   });
 
-  it.only('getBalanceForCurrentAddress should return the correct balance for the currentAddress', function () {
+  it('getBalanceForCurrentAddress should return the correct balance for the currentAddress', function () {
     Header.getBalanceForCurrentAddress().then(function(currentBalance){
       var currentBalance1 = currentBalance;
       Utilities.httpGet('http://testnet.helloblock.io/v1/addresses/mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG', function(data){
         console.log("xxxxxxxx $scope xxxxxxxx", $scope.activeTab);
-
         var currentBalance2 = data.data.address.balance;
         expect(currentBalance1).to.equal(currentBalance2);
       });
     });
   });
 
-  it('getNetworkStatus should set $scope.isMainNet variable identical to isMainNet in local storage', function () {
+  // it('getNetworkStatus should set $scope.isMainNet variable identical to isMainNet in local storage', function () {
     
-  });
+  // });
 
 })

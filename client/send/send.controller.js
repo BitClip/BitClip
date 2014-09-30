@@ -1,6 +1,6 @@
 angular.module('bitclip.sendController', [
   'ngFx'
-  ])
+])
 
 .controller('sendController', ['$scope', '$timeout', 'TxBuilder','Utilities',
   function($scope, $timeout, TxBuilder, Utilities) {
@@ -36,7 +36,7 @@ angular.module('bitclip.sendController', [
 
     Utilities.isMainNet().then(function(isMainNet){
       $scope.network = isMainNet;
-    })
+    });
 
     //TODO: sending animation
     $scope.sendPayment = function() {
@@ -44,11 +44,13 @@ angular.module('bitclip.sendController', [
         Utilities.getCurrentPrivateKey().then(function(currentPrivateKey){
           TxBuilder.sendTransaction(currentPrivateKey, $scope.transactionDetails, isMainNet).then(function(message){
             $scope.txSuccessMessage = message;
+            $scope.$apply();
             $timeout(function() { $scope.txSuccessMessage = false }, 2000);
             $scope.morph();
           })
           .catch(function(err){
             $scope.txErrorMessage = "Transaction Failed: "+ err.message;
+            $scope.$apply();
             $timeout(function() { $scope.txErrorMessage = false }, 2000);
             $scope.morph();
           });

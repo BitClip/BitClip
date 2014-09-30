@@ -5,21 +5,18 @@ angular.module('bitclip.historyFactory', [])
 
   var getTransactionHist = function(currentAddress){
     var deferred = $q.defer();
-
     current = currentAddress; 
-    
     Utilities.isMainNet().then(function(bool) {
         var baseUrl = 'http://' + (bool ? 'mainnet' : 'testnet') + '.helloblock.io/v1/addresses/';
         var requestString = currentAddress;
         baseUrl += requestString;
         baseUrl += '/transactions?limit=15';
         Utilities.httpGet(baseUrl, function(obj) {
-          console.log(obj);
           deferred.resolve(obj.data.transactions);
         });
     });
     return deferred.promise;
-  }
+  };
 
   var isContainedinArrayMatrix = function(inputOrOutputMatrix){
   for (var i = 0; i < inputOrOutputMatrix.length; i++ ){

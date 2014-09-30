@@ -12,7 +12,7 @@ describe('Unit: navBarController', function () {
     var $controller = $injector.get('$controller');
 
     createController = function () {
-      return $controller('navBarController', {
+      return $controller('viewTabsController', {
         $scope: $scope,
         $window: $window,
         $location: $location
