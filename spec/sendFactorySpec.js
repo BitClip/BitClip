@@ -1,7 +1,7 @@
 describe('Unit: sendFactory - TxBuilder', function () {
   beforeEach(module('bitclip'));
 
-  var $scope, $rootScope, $location, $window, $q, $timeout, transactionDetails, createController, TxBuilder, tempStore;
+  var $scope, $rootScope, $location, $window, $q, $timeout, finish, transactionDetails, createController, TxBuilder, tempStore;
 
   beforeEach(inject(function($injector) {
     $rootScope = $injector.get('$rootScope');
@@ -12,6 +12,15 @@ describe('Unit: sendFactory - TxBuilder', function () {
 
     TxBuilder = $injector.get('TxBuilder');
     $q = $injector.get('$q');
+
+
+    //mock up of WinJS .done function
+    finish = function(err){
+      console.log("finish");
+      setTimeout(function(){
+        done(err);
+      },0)
+    };
 
     $window.chrome = {
                       storage:{
@@ -76,12 +85,7 @@ describe('Unit: sendFactory - TxBuilder', function () {
     //we should put this in the beforeEach block;
     //TxBuilder.sendTx needs to have $rootScope.apply() after
     //the deferred.resolve();
-    var finish = function(err){
-      console.log("finish");
-      setTimeout(function(){
-        done(err);
-      },0)
-    };
+    
 
     transactionDetails.amount = 0.001;
     transactionDetails.destination = "mpduks3B8ULftm1hcbEf3jQU7iGae7mEMS";
