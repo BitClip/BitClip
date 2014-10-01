@@ -40,7 +40,7 @@ angular.module('bitclip.sendFactory', [])
       if (err) {
         console.log('in err')
         deferred.reject(err);
-        // that.$apply();
+        $rootScope.$apply();
         return;
       };
 
@@ -67,11 +67,11 @@ angular.module('bitclip.sendFactory', [])
         console.log("in propagate");     
         if (err) {
           deferred.reject(err);
-          // that.$apply();
+          $rootScope.$apply();
         } else if (tx) {
           console.log("Transaction was successful!");
           deferred.resolve("Transaction successfully propagated");
-          // that.$apply();
+          $rootScope.$apply();
         }
       });
     });

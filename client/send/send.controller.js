@@ -40,12 +40,10 @@ angular.module('bitclip.sendController', [
           TxBuilder.sendTransaction(currentPrivateKey, $scope.transactionDetails, isMainNet).then(function(message){
             $scope.txCompleteMessage = "Transaction Successfully Propogated";
             $timeout(function() { $scope.txCompleteMessage = false }, 2000);
-            // setTimeout(function() { $scope.txCompleteMessage = false }, 2000)
             $scope.morph();
           })
           .catch(function(err){
             $scope.txCompleteMessage = "Transaction Failed: "+ err.message;
-            // setTimeout(function() { $scope.txCompleteMessage = false }, 2000)
             $timeout(function() { $scope.txCompleteMessage = false }, 2000);
             $scope.morph();
           });

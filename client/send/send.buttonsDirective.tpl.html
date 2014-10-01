@@ -1,4 +1,0 @@
-<button ng-if="!confirmed" id="send" class="sendViewButton sendButton" ng-click="(sendForm.$valid) ? morph() : displayError()">SEND</button>
-
-<button ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-confirm"  ng-click="sendPayment();">confirm</button>
-<button ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-cancel" ng-click="clearAmount();">cancel</button>
