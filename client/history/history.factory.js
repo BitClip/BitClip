@@ -7,49 +7,47 @@ angular.module('bitclip.historyFactory', [])
     var deferred = $q.defer();
     current = currentAddress; 
     Utilities.isMainNet().then(function(bool) {
-        var baseUrl = 'http://' + (bool ? 'mainnet' : 'testnet') + '.helloblock.io/v1/addresses/';
-        var requestString = currentAddress;
-        baseUrl += requestString;
-        baseUrl += '/transactions?limit=15';
-        Utilities.httpGet(baseUrl, function(obj) {
-          deferred.resolve(obj.data.transactions);
-        });
+      var baseUrl = 'http://' + (bool ? 'mainnet' : 'testnet') + '.helloblock.io/v1/addresses/';
+      var requestString = currentAddress;
+      baseUrl += requestString;
+      baseUrl += '/transactions?limit=15';
+      Utilities.httpGet(baseUrl, function(obj) {
+        deferred.resolve(obj.data.transactions);
+      });
     });
     return deferred.promise;
   };
 
   var isContainedinArrayMatrix = function(inputOrOutputMatrix){
-  for (var i = 0; i < inputOrOutputMatrix.length; i++ ){
+    for (var i = 0; i < inputOrOutputMatrix.length; i++ ){
 
-    var returnedAddress = inputOrOutputMatrix[i][0];
-    var returnedValue = inputOrOutputMatrix[i][1];
+      var returnedAddress = inputOrOutputMatrix[i][0];
+      var returnedValue = inputOrOutputMatrix[i][1];
 
-    var txTime = inputOrOutputMatrix[i][2];
-    if (current === returnedAddress) {
-      return [returnedAddress, returnedValue, txTime];
+      var txTime = inputOrOutputMatrix[i][2];
+      if (current === returnedAddress) {
+        return [returnedAddress, returnedValue, txTime];
+      }
     }
-  }
-  return false;
-};
- 
- 
- 
+    return false;
+  };  
+
 //transObj is each object in the transactions array returned by the
 //helloBlock, e.g. helloBlockData.data.transactions, where helloBlockData is the 
 //JSON object returned by helloblock
 var getUsableTransData = function(transObj){
   var direction, amount, time, address;
- 
+
   var addressObj = {
     inputs: [],
     outputs: []
   };
- 
+
   //push address from inputs into addressObj;
   transObj.inputs.forEach(function(tx){
     addressObj.inputs.push([tx.address, tx.value, transObj.estimatedTxTime]);
   });
- 
+
   //push address from outputs into addressObj;
   transObj.outputs.forEach(function(tx){
     addressObj.outputs.push([tx.address, tx.value, transObj.estimatedTxTime]);
@@ -102,10 +100,10 @@ var getUsableTransData = function(transObj){
   return [direction, amount/100000000, time*1000, address]
 };
 
-  return {
-    getTransactionHist: getTransactionHist,
-    getUsableTransData: getUsableTransData,
-    current: current
-  };
+return {
+  getTransactionHist: getTransactionHist,
+  getUsableTransData: getUsableTransData,
+  current: current
+};
 }])
 
