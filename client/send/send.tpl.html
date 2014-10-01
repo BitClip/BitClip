@@ -1,10 +1,37 @@
 <form ng-submit="morph();" name="sendForm" novalidate>
-  <div ng-if="txSuccessMessage" class="fx-fade-left fx-easing-cubic fx-speed-200 txMessagePopup">
-	{{txSuccessMessage}}
+
+  <div ng-if="txCompleteMessage" class="fx-fade-left fx-easing-cubic fx-speed-200 txMessagePopup" ng-class="{'txErrorMessagePopup': txCompleteMessage !== 'Transaction Successfully Propogated'}">
+  {{txCompleteMessage}}
   </div>
-  <div ng-if="txErrorMessage" class="fx-fade-left fx-easing-cubic fx-speed-200 txMessagePopup errorMessagePopup">
-  {{txErrorMessage}}
-  </div>
-  <transaction-input></transaction-input>
+
+
+
+  <div ng-if="destinationError" class="fx-fade-left fx-easing-cubic fx-speed-200 txMessagePopup errorMessagePopup">
+  {{destinationError}}
+</div>
+
+<div ng-if="amountError" class="fx-fade-left fx-easing-cubic fx-speed-200 txMessagePopup errorMessagePopup">
+  {{amountError}}
+</div>
+
+<label>Destination:</label>
+
+<input ng-if="network" type="text" name="destination" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" ng-model="transactionDetails.destination" ng-pattern="/^[13][a-km-zA-HJ-NP-Z0-9]{26,33}$/" ng-class="{'has-error': sendForm.destination.$invalid && !sendForm.destination.$pristine, 'hasTimedError': destinationError}" required autofocus>
+
+<input ng-if="!network"type="text" name="destination" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" ng-model="transactionDetails.destination" ng-pattern="/^[mn][a-km-zA-HJ-NP-Z0-9]{26,33}$/" ng-class="{'has-error': sendForm.destination.$invalid && !sendForm.destination.$pristine, 'hasTimedError': destinationError}" required autofocus>
+
+<label>Amount:</label>
+
+<input type="text" name="amount" placeholder="minimum 0.0001 BTC" ng-model="transactionDetails.amount" 
+ng-pattern="/^(\d+\.?\d*|\.\d+)$/" ng-class="{'has-error': sendForm.amount.$invalid && !sendForm.amount.$pristine, 'hasTimedError': amountError}" required>
+
+  <!-- <transaction-input></transaction-input> -->
 </form>
-<transaction-buttons></transaction-buttons>
+
+<button ng-if="!confirmed" id="send" class="sendViewButton sendButton" ng-click="(sendForm.$valid) ? morph() : displayError()">SEND</button>
+
+<button ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-confirm"  ng-click="sendPayment();">confirm</button>
+<button ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-cancel" ng-click="transactionDetails.amount = ''; morph();">cancel</button>
+
+
+<!-- <transaction-buttons></transaction-buttons> -->

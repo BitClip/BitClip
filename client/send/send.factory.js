@@ -37,6 +37,7 @@ angular.module('bitclip.sendFactory', [])
     }, function(err, res, unspents) {
       console.log("in get unspents");
       if (err) {
+        console.log('in err')
         deferred.reject(err);
         $rootScope.$apply();
         return;
