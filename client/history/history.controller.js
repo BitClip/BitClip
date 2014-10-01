@@ -7,7 +7,7 @@ angular.module('bitclip.historyController', [])
       var transaction = [];
 
       for(var i = 0; i < trans.length; i++){
-        transaction.push(History.getUsableTransData(trans[i]));
+        transaction.push(History.getUsableTransData(trans[i], currentAddress));
       }
       $scope.transactions = transaction;
     });

@@ -1,11 +1,12 @@
 angular.module('bitclip.historyFactory', [])
 
 .factory('History', ['$http', 'Utilities', '$q', function($http, Utilities, $q){
-  var current;
 
+  //Function queries helloblock with current address 
+  //and returns the last 15 transactions from the transaction 
+  //history.
   var getTransactionHist = function(currentAddress){
     var deferred = $q.defer();
-    current = currentAddress; 
     Utilities.isMainNet().then(function(bool) {
       var baseUrl = 'http://' + (bool ? 'mainnet' : 'testnet') + '.helloblock.io/v1/addresses/';
       var requestString = currentAddress;
@@ -18,7 +19,10 @@ angular.module('bitclip.historyFactory', [])
     return deferred.promise;
   };
 
-  var isContainedinArrayMatrix = function(inputOrOutputMatrix){
+  //Function tests to see if the current address is part of
+  //inbound data or outbound.
+  //Used to decide if transactions were inbound or outbound.
+  var isContainedinArrayMatrix = function(inputOrOutputMatrix, current){
     for (var i = 0; i < inputOrOutputMatrix.length; i++ ){
 
       var returnedAddress = inputOrOutputMatrix[i][0];
@@ -35,7 +39,7 @@ angular.module('bitclip.historyFactory', [])
 //transObj is each object in the transactions array returned by the
 //helloBlock, e.g. helloBlockData.data.transactions, where helloBlockData is the 
 //JSON object returned by helloblock
-var getUsableTransData = function(transObj){
+var getUsableTransData = function(transObj ,current){
   var direction, amount, time, address;
 
   var addressObj = {
@@ -54,9 +58,9 @@ var getUsableTransData = function(transObj){
   });
   
   //check if currentAddress appears in both outpus and inputs
-  if (isContainedinArrayMatrix(addressObj.inputs) && isContainedinArrayMatrix(addressObj.outputs)){
-    var matchedInputs = isContainedinArrayMatrix(addressObj.inputs);
-    var matchedOutputs = isContainedinArrayMatrix(addressObj.outputs);
+  if (isContainedinArrayMatrix(addressObj.inputs, current) && isContainedinArrayMatrix(addressObj.outputs, current)){
+    var matchedInputs = isContainedinArrayMatrix(addressObj.inputs, current);
+    var matchedOutputs = isContainedinArrayMatrix(addressObj.outputs, current);
     
     var inputAmount = matchedInputs[1];
     var outputAmount = matchedOutputs[1];
@@ -73,11 +77,11 @@ var getUsableTransData = function(transObj){
       time = matchedInputs[2];
     }
   }
-  // check if currentAddress only appears in inputs
-  // means currentAddress is sending all its btc to another address
+  //check if currentAddress only appears in inputs
+  //means currentAddress is sending all its btc to another address
   //therefore we need outputs[i].address
-  else if (isContainedinArrayMatrix(addressObj.inputs) && !isContainedinArrayMatrix(addressObj.outputs)){
-    var matchedInputs = isContainedinArrayMatrix(addressObj.inputs);
+  else if (isContainedinArrayMatrix(addressObj.inputs, current) && !isContainedinArrayMatrix(addressObj.outputs, current)){
+    var matchedInputs = isContainedinArrayMatrix(addressObj.inputs, current);
     if(addressObj.outputs[0][0] === current){
       address = addressObj.outputs[1].address;
     }
@@ -89,8 +93,8 @@ var getUsableTransData = function(transObj){
     time = matchedInputs[2];
   }
   //check if currentAddress only appears in outputs
-  else if (!isContainedinArrayMatrix(addressObj.inputs) && isContainedinArrayMatrix(addressObj.outputs)){
-    var matchedOutputs = isContainedinArrayMatrix(addressObj.outputs);
+  else if (!isContainedinArrayMatrix(addressObj.inputs, current) && isContainedinArrayMatrix(addressObj.outputs, current)){
+    var matchedOutputs = isContainedinArrayMatrix(addressObj.outputs, current);
     address = addressObj.inputs[0][0];
     direction = "inbound";
     amount = matchedOutputs[1];
@@ -103,7 +107,6 @@ var getUsableTransData = function(transObj){
 return {
   getTransactionHist: getTransactionHist,
   getUsableTransData: getUsableTransData,
-  current: current
 };
 }])
 
