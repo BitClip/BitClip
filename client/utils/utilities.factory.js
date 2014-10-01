@@ -103,11 +103,10 @@ angular.module('bitclip.utilitiesFactory', [])
 
   var openSocketsList = [];
 
-  var openSocketToGetLiveBalance = function(url, currentAddress, callback){
+  var openSocketToGetLiveBalance = function(url, currentAddress, callback) {
     var ws = new WebSocket(url);
     openSocketsList.push(ws);
     ws.onopen = function() {
-      console.log("ws open: ", openSocketsList);
       ws.send(JSON.stringify({
         'op': 'subscribe',
         'channel': 'addresses',
@@ -122,13 +121,8 @@ angular.module('bitclip.utilitiesFactory', [])
       };
 
       ws.onclose = function(code, reason) {
-        //once closed, remove itself from the openSocketArray.
-        console.log("close: ", reason);
         openSocketsList.splice(0, openSocketsList.length);
-        if (reason !== "newAddress"){
-          //restart the connection unless we want to terminate the
-          //connection permanently when a new address is being
-          //set as currentAddress
+        if (reason !== 'newAddress') {
           setTimeout(function() {
             openSocketToGetLiveBalance(url, currentAddress, callback);
           }, 1000);
@@ -142,23 +136,19 @@ angular.module('bitclip.utilitiesFactory', [])
     };
   };
 
-  var closeExistingSocketsPermanently = function(){
-    openSocketsList.forEach(function(websocket){
-      websocket.close(1000,"newAddress")
+  var closeExistingSocketsPermanently = function() {
+    openSocketsList.forEach(function(websocket) {
+      websocket.close(1000, 'newAddress');
     });
     openSocketsList.splice(0, openSocketsList.length);
   };
 
   var getLiveBalanceForCurrentAddress = function(callback) {
-    console.log("getLiveBalanceForCurrentAddress invoked")
     isMainNet().then(function(bool) {
       getCurrentAddress().then(function(currentAddress) {
-        console.log("currentAddress in getLiveBalanceForCurrentAddress: ", currentAddress);
         var url = 'wss://socket-' + (bool ? 'mainnet' : 'testnet') + '.helloblock.io';
-        //close existing sockets for previous addresses before
-        //opening new socket for new currentAddress
         closeExistingSocketsPermanently();
-        openSocketToGetLiveBalance(url,currentAddress, callback);
+        openSocketToGetLiveBalance(url, currentAddress, callback);
       });
     });
   };

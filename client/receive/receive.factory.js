@@ -59,8 +59,19 @@ angular.module('bitclip.receiveFactory', [])
     });
   };
 
+  var prepareBalances = function(allAddresses, allBalances) {
+    var deferred = $q.defer();
+    var result = {};
+    for (var i = 0, l = allAddresses.length; i < l; i++) {
+      result[allAddresses[i]] = allBalances[i].balance;
+    }
+    deferred.resolve(result);
+    return deferred.promise;
+  };
+
   return {
     newAddress: newAddress,
-    setAsCurrentAddress: setAsCurrentAddress
+    setAsCurrentAddress: setAsCurrentAddress,
+    prepareBalances: prepareBalances
   };
 }]);
