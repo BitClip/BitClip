@@ -375,31 +375,41 @@ input.hasTimedError{
 }
 
 .sendViewButton {
-  outline: 0;
-  height: 14%;
-  border: 2px solid;
-  font-weight: 400;
-  font-size: 0.9rem;
-  letter-spacing: 0, 0.15em;
   position: fixed;
+  bottom: 0.5%;
+  height: 14%;
   padding: 0;
+
+  border: 2px solid transparent;
+  /*border-color: #35A533;*/
+  outline: 0;
+
+  font-weight: 400;
+  
   color: white;
-  border-color: #35A533;
 }
 
 .sendButton {
   width: 99%;
-  bottom: 0.5%;
   left: 0.5%;
   background-color: #35A533;
+  font-size: 1.6rem;
+  letter-spacing: 0.2rem;
+}
+
+.sendButton:active {
+  width:97%;
+  left:1.5%;
 }
 
 .morphButton {
+  letter-spacing: 0.12rem;
+  font-size: 1.2rem;
   width: 49.25%;
   background-color: transparent;
-  border-width: 0.15em;
+  
   font-weight: 700;
-  font-size: 0.9em;
+  /*font-size: 0.9em;*/
   bottom: 0.5%;
   z-index: 21000;
 }
@@ -409,12 +419,21 @@ input.hasTimedError{
   border-color: #35A533;
   left: 0.5%;
 }
+.send-confirm:active{
+  width:47.25%;
+  left:1.5%;
+}
 
 .send-cancel {
   background-color: #F15633;
   border-color: #F15633;
   right: 0.5%;
 }
+.send-cancel:active{
+  width:47.25%;
+  right:1.5%;
+}
+
 
 .txMessagePopup {
   position: absolute;
@@ -527,20 +546,23 @@ ul.scrollbox {
   padding-top: 2px;
 }
 .scrollbox li.currentAddressMatch,
-.scrollbox li.currentAddressMatch::before {
+.scrollbox li.currentAddressMatch::before{
   color:#35A5A7;
 }
 
-<<<<<<< HEAD
 .scrollbox li.currentAddressMatch::before{
-  content:">";
+  content:">";  
   position:absolute;
   left:0;
   top:0px;
 }
 
-=======
->>>>>>> Add structure for market graph
+.generateButton{
+  font-size: 1.2rem;
+  letter-spacing: .12rem;
+
+}
+
 /* ----------------------------------------- */
 /*              History View                 */
 /* ----------------------------------------- */
@@ -548,6 +570,7 @@ ul.scrollbox {
 tbody {
     display:block;
     border: 1px solid #0B0B0B;
+    border-radius: 2px;
     border-collapse: separate;
     margin-top: 5px;
 }
