@@ -56,4 +56,4 @@ angular.module('bitclip.marketFactory', [])
     getLastTrade: getLastTrade,
     parseTxIntoTwoDecimals: parseTxIntoTwoDecimals
   };
-  
+}])
