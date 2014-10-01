@@ -2,6 +2,7 @@ angular.module('bitclip.sendFactory', [])
 .factory('TxBuilder', ['$q','$rootScope', function($q,$rootScope) {
   var sendTransaction = function(privateKeyWIF, transactionObj, isMainNet) {
     console.log("sendTransaction invoked");
+    var that = this;
     var deferred = $q.defer();
 
     //this variable sets which bitcoin network to propagate
@@ -39,7 +40,7 @@ angular.module('bitclip.sendFactory', [])
       if (err) {
         console.log('in err')
         deferred.reject(err);
-        $rootScope.$apply();
+        // that.$apply();
         return;
       };
 
@@ -66,11 +67,11 @@ angular.module('bitclip.sendFactory', [])
         console.log("in propagate");     
         if (err) {
           deferred.reject(err);
-          $rootScope.$apply();
+          // that.$apply();
         } else if (tx) {
           console.log("Transaction was successful!");
           deferred.resolve("Transaction successfully propagated");
-          $rootScope.$apply();
+          // that.$apply();
         }
       });
     });
