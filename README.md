@@ -3,18 +3,18 @@
 #BitClip
 #### The most easy-to-use client-side Bitcoin wallet on the internet.
 
-## Just got into Bitcoin and need a secure, light-weight wallet?
 
-Download BitClip!
-We got tired of clunky wallets with a bazillion form fields. 
-We built BitClip to give you a safe way to store and spend Bitcoins without the clutter:
+
+## Interested in Bitcoin and need a simple, secure wallet?
+
+We got tired of clunky wallets with a bazillion form fields. BitClip is built to provide a safe way to store and spend Bitcoins without any clutter:
   - All private keys managed client-side
   - Encrypted storage of address-key pairs
   - Encrypted propagation of transactions through HelloBlock API
   - Testnet support (Testnet addresses come preloaded with Bitcoins)
 
 Soon to be released:
-  - Backup
+  - Backup wallet
   - Import/Export address-key pairs
 
 
@@ -29,14 +29,16 @@ Soon to be released:
 1. [Usage](#Usage)
 2. [Requirements](#requirements)
 3. [Development](#development)
+
     a. [Installing Dependencies](#installing-dependencies)
+
     b. [Tasks](#tasks)
 4. [Team](#team)
 5. [Contributing](#contributing)
 
-## Usage
+## Download Working Copy
 
-You can download a working version of this App [here](https://chrome.google.com/webstore/category/apps).
+You can download a deployed version of this App [here](https://chrome.google.com/webstore/category/apps).
 
 
 ## Requirements
