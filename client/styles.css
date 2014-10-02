@@ -625,64 +625,70 @@ table.scrollbox{
 
 .graphView
 {
+  position: relative;
+  display: block;
    background-color: #f2f2f2;
-   padding: 10px 5px;
-   overflow: auto;
+   padding: 0 5px 5px 5px;
+   clear: left;
 }
-.sideTab
-{
-   float: left;
-   margin: 5px 0 0 0;
-   width: 20px;
-}
-.sideTab ul
-{
-   list-style: none;
-   text-align: center;
-}
-.sideTab ul li
-{
-   border-top: 1px solid #666;
-   border-right: 1px solid #666;
-   border-bottom: 1px solid #666;
-   border-left: 8px solid #666;
-   background-color: #ddd;
-   margin: 8px 0;
-}
-.sideTab ul li a,
-.sideTab ul li a:visited
-{
-   text-decoration: none;
-   color: #666;
-   display: block;
-   padding: 15px 5px;
-}
-.sideTab ul li:hover
-{
-   border-left: 8px solid #333;
-}
-.sideTab ul li a:hover
-{
-   color: #000;
-}
-.sideTab ul li.selected
-{
-   border-right: none;
-   background-color: #fff;
-   border-left: 8px solid #006699;
-}
+
+
 .graphDisplayContainer
 {
-   min-height: 300px;
-   margin: 0 0 0 30px;
-   padding: 5px;
+   max-height: 250px;
+   max-width: 400px;
+   min-height: 220px;
+   min-width: 250px;
+   /*margin: 5 5 5 5px;*/
+   /*padding: 5px;*/
    background-color: #fff;
    border: 1px solid #888;
+   border-color: #35A5A7;
 }
 
 .marketStats table
 {
-  width: 90%;
+  position: relative;
+  display: block;
+}
+
+.marketView {
+  max-height: 72%;
+}
+
+.marketView p {
+  position: relative;
+  display: block;
+  margin: auto;
+  font-size: smaller;
+  margin-left: 210px;
+}
+
+.sideTab {
+  padding-left: 5px;
+}
+
+.marketButtons {
+  position: relative;
+  display: inline-block;
+  margin: 0px;
+  float: left;
+  color: white;
+  background-color: #35A5A7;
+  border-color: #35A5A7;
+  width: 90px;
+  height: 30px;
+  border-radius: 2px;
+}
+
+tbody {
+  width: 350px;
+  background-color: white;
+  border-color: #35A5A7;
+}
+
+.marketCol {
+  width: 20%;
 }
 
 .toolTipHeader
