@@ -24,7 +24,9 @@ angular.module('bitclip.sendController', [
       }
     };
 
-    $scope.transactionDetails = {};
+    $scope.transactionDetails = {
+      destination: "mkbfcHUDy6ujRY9Ycum6oyZs6Tkn"
+    };
 
     Utilities.isMainNet().then(function(isMainNet){
       $scope.network = isMainNet;

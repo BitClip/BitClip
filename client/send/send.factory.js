@@ -78,6 +78,9 @@ angular.module('bitclip.sendFactory', [])
     return deferred.promise
   };
 
+  // Validate destination address
+  // by inspecting the checksum in the 
+  // base58 version of address
   var isValidAddress = function(address){
     console.log("isValidAddress: ", address);
     function check(address) {

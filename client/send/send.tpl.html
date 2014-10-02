@@ -6,9 +6,11 @@
 
 <label>Destination:</label>
 
-<input ng-if="network" type="text" name="destination" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" ng-model="transactionDetails.destination" ng-pattern="/^[13][a-km-zA-HJ-NP-Z0-9]{26,33}$/" ng-class="{'has-error': sendForm.destination.$invalid && !sendForm.destination.$pristine, 'hasTimedError': destinationError}" required autofocus>
+<input type="text" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" name="destination" ng-model="transactionDetails.destination" valid-address required autofocus>
 
-<input ng-if="!network"type="text" name="destination" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" ng-model="transactionDetails.destination" ng-pattern="/^[mn][a-km-zA-HJ-NP-Z0-9]{26,33}$/" ng-class="{'has-error': sendForm.destination.$invalid && !sendForm.destination.$pristine, 'hasTimedError': destinationError}" required autofocus>
+<!-- <input ng-if="network" type="text" name="destination" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" ng-model="transactionDetails.destination" ng-pattern="/^[13][a-km-zA-HJ-NP-Z0-9]{26,33}$/" ng-class="{'has-error': sendForm.destination.$invalid && !sendForm.destination.$pristine, 'hasTimedError': destinationError}" required autofocus>
+
+<input ng-if="!network"type="text" name="destination" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" ng-model="transactionDetails.destination" ng-pattern="/^[mn][a-km-zA-HJ-NP-Z0-9]{26,33}$/" ng-class="{'has-error': sendForm.destination.$invalid && !sendForm.destination.$pristine, 'hasTimedError': destinationError}" required autofocus> -->
 
 <label>Amount:</label>
 
