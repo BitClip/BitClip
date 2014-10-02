@@ -1,16 +1,17 @@
 <div class="marketView">
     <table class="marketStats">
-      <tr>
-        <td class="marketCol">Last Trade: ${{ lastTrade }}</td>
-        <td class="marketCol">VWAP: ${{ vwap }}</td> 
-        <td class="marketCol">Vol: {{ volume }} BTC</td>
-      </tr>
-      <tr>
-        <td class="marketCol">Std. Dev: ${{ stdDeviation }}</td>
-        <td class="marketCol">Max:  ${{ max }}</td> 
-        <td class="marketCol">Min: ${{ min }}</td> 
-      </tr>
-  
+      <tbody class="marketsTable">
+        <tr>
+          <td class="marketCol">Last Trade: ${{ lastTrade }}</td>
+          <td class="marketCol">VWAP: ${{ vwap }}</td> 
+          <td class="marketCol">Vol: {{ volume }} BTC</td>
+        </tr>
+        <tr>
+          <td class="marketCol">Std. Dev: ${{ stdDeviation }}</td>
+          <td class="marketCol">Max:  ${{ max }}</td> 
+          <td class="marketCol">Min: ${{ min }}</td> 
+        </tr>
+      </tbody>
     </table>
     <p>Last updated at: {{ updateTime | date:'short' }}</p> 
 
