@@ -4,57 +4,54 @@ angular.module('bitclip.sendController', [
 
 .controller('sendController', ['$scope', '$timeout', 'TxBuilder','Utilities',
   function($scope, $timeout, TxBuilder, Utilities) {
-
-    $scope.morph = function(){
-      $scope.confirmed = !$scope.confirmed;
-    };
-
-    $scope.displayError = function(){
+    
+    var displayError = function(){
       if ($scope.sendForm.destination.$invalid && $scope.sendForm.amount.$invalid){
-        $scope.amountError = 'Invalid Destination and Transaction Amount';
-        $scope.destinationError = true;
-      } else {
-        if ($scope.sendForm.destination.$invalid) $scope.destinationError = 'Invalid Destination';
-        if ($scope.sendForm.amount.$invalid) $scope.amountError = 'Invalid Transaction Amount';
+        $scope.notification = 'Invalid Destination and Transaction Amount';
+      } else if ($scope.sendForm.destination.$invalid){
+        $scope.notification = 'Invalid Destination';
+      } else if ($scope.sendForm.amount.$invalid){
+        $scope.notification = 'Invalid Transaction Amount';
       }
-
-      if($scope.destinationError || $scope.amountError){
+      if($scope.notification){
         $timeout(function() { 
-          $scope.destinationError = false;
-          $scope.amountError = false;
-        }, 4000);
+          $scope.notification = false;
+        }, 2000);
+      } else {
+        $scope.morph();
       }
     };
 
-    //initialize transaction details (amount, destination)
     $scope.transactionDetails = {};
-
-    $scope.clearAmount = function(){
-      $scope.transactionDetails.amount = "";
-      $scope.morph();
-    }
 
     Utilities.isMainNet().then(function(isMainNet){
       $scope.network = isMainNet;
     });
 
+    $scope.morph = function(){
+      $scope.confirmed = !$scope.confirmed;
+    };
+
+    $scope.validateInput = function(){
+      TxBuilder.updateTx($scope.transactionDetails);
+      $scope.transactionDetails = TxBuilder.getTransactionDetails();
+      displayError();
+    };
+
     //TODO: sending animation
     $scope.sendPayment = function() {
-      Utilities.isMainNet().then(function(isMainNet){
-        Utilities.getCurrentPrivateKey().then(function(currentPrivateKey){
-          TxBuilder.sendTransaction(currentPrivateKey, $scope.transactionDetails, isMainNet).then(function(message){
-            $scope.txSuccessMessage = message;
-            $scope.$apply();
-            $timeout(function() { $scope.txSuccessMessage = false }, 2000);
-            $scope.morph();
-          })
-          .catch(function(err){
-            $scope.txErrorMessage = "Transaction Failed: "+ err.message;
-            $scope.$apply();
-            $timeout(function() { $scope.txErrorMessage = false }, 2000);
-            $scope.morph();
-          });
+      var updatedTxDetails = TxBuilder.getTransactionDetails();
+      Utilities.getCurrentPrivateKey().then(function(currentPrivateKey){
+        TxBuilder.sendTransaction(currentPrivateKey, updatedTxDetails, $scope.network)
+        .then(function(message){
+          $scope.notification = message;
+          $timeout(function() { $scope.notification = false }, 2000);
+        })
+        .catch(function(err){
+          $scope.notification = "Transaction Failed: "+ err.message;
+          $timeout(function() { $scope.notification = false }, 2000);
         });
       });
-  };
+      $scope.morph();
+    };
 }]);

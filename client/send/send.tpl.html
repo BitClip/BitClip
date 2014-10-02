@@ -1,10 +1,23 @@
-<form ng-submit="morph();" name="sendForm" novalidate>
-  <div ng-if="txSuccessMessage" class="fx-fade-left fx-easing-cubic fx-speed-200 txMessagePopup">
-	{{txSuccessMessage}}
+<form name="sendForm" ng-submit="sendPayment()" >
+  <div ng-if="notification" class="fx-fade-left fx-easing-cubic fx-speed-200 txMessagePopup" ng-class="{'errorMessagePopup': notification !== 'Transaction successfully propagated'}">
+  {{notification}}
   </div>
-  <div ng-if="txErrorMessage" class="fx-fade-left fx-easing-cubic fx-speed-200 txMessagePopup errorMessagePopup">
-  {{txErrorMessage}}
-  </div>
-  <transaction-input></transaction-input>
+  
+  <label>Destination:</label>
+  <input type="text" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" name="destination" ng-model="transactionDetails.destination" required autofocus>
+  
+  <label>Amount:</label>
+  <input type="text" placeholder="minimum 0.0001 BTC" name="amount" ng-model="transactionDetails.amount" ng-pattern="/^(\d+\.?\d*|\.\d+)$/" required>
+  
+  <input type="submit" value="confirm" ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-confirm">
+  
+  <button ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-cancel" ng-click="transactionDetails.amount = ''; morph();">cancel</button>
+
 </form>
-<transaction-buttons></transaction-buttons>
+
+<button ng-if="!confirmed" ng-model="transactionDetails.destination" id="send" class="sendViewButton sendButton" ng-click="validateInput()" valid-address>SEND</button>
+
+
+
+
+

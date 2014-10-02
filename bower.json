@@ -25,8 +25,7 @@
     "d3": "~3.4.11",
     "nvd3": "~1.1.15-beta",
     "angularjs-nvd3-directives": "~0.0.7",
-    "ngFx": "~1.0.4",
-    "moment": "~2.8.3"
+    "ngFx": "~1.0.4"
   },
   "resolutions": {
     "d3": "~3.4.11"
