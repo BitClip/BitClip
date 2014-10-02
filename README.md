@@ -1,5 +1,20 @@
 [![Stories in Ready](https://badge.waffle.io/BitClip/BitClip.png?label=ready&title=Ready)](https://waffle.io/BitClip/BitClip)
-BitClip
+
+#BitClip:
+### The most easy-to-use client-side Bitcoin wallet on the internet.
+
+# Just got into Bitcoin and need a secure, light-weight wallet?
+
+Download BitClip!
+We got tired of clunky wallets with a bazillion form fields. 
+We built BitClip to give you a safe way to store and spend Bitcoins without the clutter:
+  - All private keys managed client-side
+  - Encrypted storage of address-key pairs
+  - Encrypted propagation of transactions through HelloBlock API
+  - Testnet support (Testnet addresses come preloaded with Bitcoins)
+
+Soon to be released:
+  - ...
 
 
 ## Team
@@ -20,14 +35,16 @@ BitClip
 
 ## Usage
 
-> Some usage instructions
+You can download a working version of this App [here](https://chrome.google.com/webstore/category/apps).
+
 
 ## Requirements
 
-- Node 0.10.31
 - BitcoinJS 1.0.2
-- HelloBlock
-
+- HelloBlock 1.0.0
+- AngularJS ~1.2.25,
+- Nvd3 ~1.1.15-beta,
+- ngFx ~1.0.4
 
 ## Development
 
@@ -40,6 +57,20 @@ sudo npm install -g bower
 npm install
 bower install
 ```
+
+### Tasks
+
+
+1. Visit chrome://extensions in your browser (or open up the Chrome menu by clicking the icon to the far right of the URL box and select Extensions under the Tools menu to get to the same place).
+
+2. Ensure that the Developer mode checkbox in the top right-hand corner is checked.
+
+3. Click Load unpacked extension to pop up a file-selection dialog.
+
+4. Navigate to the 'client' directory of BitClip (path/BitClip_Directory/client)
+
+5. Click Select on 'client' directory, and BitClip will be loaded into your Browser.
+
 
 ### Roadmap
 
