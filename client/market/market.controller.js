@@ -18,7 +18,7 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
 
   $scope.toolTipContentFunction = function(){
     return function(exchangeName, date, price, e, graph) {
-      var template = "<h4 class='toolTipHeader'><b>" + exchangeName +"</b></h4>" + "<p>$"+ price + " @ "+ date +"</p>" 
+      var template = "<div> <h4 class='toolTipHeader'><b>" + exchangeName +"</b></h4>" + "<p class='toolTip'>$"+ price + " @ "+ date +"</p> </div>" 
       return template;
     };
   };
@@ -38,10 +38,16 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
   $scope.xAxisTickFormatFunction = function(){
     return function(d){
       var time = new Date(d);
-      return time.toLocaleTimeString();
+      time = time.slice(0, 4) + time.slice(7, time.length);
+      return time;
     }
   };
 
+  $scope.setActiveTab = function(tab) {
+    $scope.activeTab = tab;
+  };
+
   $scope.getGraphData(8);
+  $scope.activeTab = 'eightHour';
 
 }]);

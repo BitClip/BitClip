@@ -13,11 +13,15 @@
         </tr>
       </tbody>
     </table>
-    <p>Last updated at: {{ updateTime | date:'short' }}</p> 
+
+    <p class="marketUpdated">Last updated at: {{ updateTime | date:'short' }}</p> 
 
     <div class="sideTab">
-      <button class="marketButtons" ng-click="getGraphData(8)">8 Hr</button>
-      <button class="marketButtons" ng-click="getGraphData(24)">24 Hr</button>
+
+      <button class="marketButtons" ng-class="{'active': activeTab === 'eightHour'}" ng-click="getGraphData(8); setActiveTab('eightHour');">8 Hr</button>
+
+      <button class="marketButtons" ng-class="{'active': activeTab === 'twentyfourHour'}" ng-click="getGraphData(24); setActiveTab('twentyfourHour');">24 Hr</button>
+
     </div>
 
     <div class="graphView">
@@ -31,7 +35,7 @@
                 interactive="true"
                 forcey="[370,410]"
                 width="300"
-                height="200"
+                height="170"
                 xAxisTickFormat="xAxisTickFormatFunction()"
                 xAxisTickValues="xAxisTickValuesFunction()"
                 margin="{left:40,top:15,bottom:0,right:0}"
