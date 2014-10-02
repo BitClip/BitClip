@@ -93,7 +93,7 @@ angular.module('bitclip.sendFactory', [])
   // by inspecting the checksum in the 
   // base58 version of address
   var isValidAddress = function(address){
-    console.log("isValidAddress: ", address);
+    console.log("I am address in isValidAddress: ", address);
     function check(address) {
       var decoded = base58_decode(address);     
       if (decoded.length != 25) return false;

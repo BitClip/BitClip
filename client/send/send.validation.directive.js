@@ -4,16 +4,13 @@ angular.module('bitclip.validateAddressDirective', [])
     return {
         restrict: 'A',
         require: 'ngModel',
-        link: function (scope, elm, attr, ngModelCtrl) {
-            //destination is the modelValue
-            console.log("scope: ", scope);
-            console.log("elm: ", elm);
-            console.log("atr: ", attr);
-            console.log("controller: ", ngModelCtrl);
-            var transactionDetails = TxBuilder.getTransactionDetails();
-            console.log("i am transactionDetails: ", transactionDetails);
-            var isValidAddress = TxBuilder.isValidAddress(transactionDetails.destination);
-            ngModelCtrl.$setValidity('validAddress', isValidAddress);
+        link: function (scope, formElement, attr, ngModelCtrl) {
+            formElement.bind('click', function(event){
+                var transactionDetails = TxBuilder.getTransactionDetails();
+                var isValidAddress = TxBuilder.isValidAddress(scope.transactionDetails.destination);
+                scope.sendForm.destination.$invalid = !isValidAddress;
+                scope.sendForm.destination.$valid = isValidAddress;
+            });
         }
     };
 }])

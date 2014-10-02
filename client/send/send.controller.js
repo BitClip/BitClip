@@ -5,22 +5,7 @@ angular.module('bitclip.sendController', [
 .controller('sendController', ['$scope', '$timeout', 'TxBuilder','Utilities',
   function($scope, $timeout, TxBuilder, Utilities) {
     
-    $scope.transactionDetails = {};
-
-    Utilities.isMainNet().then(function(isMainNet){
-      $scope.network = isMainNet;
-    });
-
-    $scope.updateTransactionDetails = function(){
-      TxBuilder.updateTx($scope.transactionDetails);
-      $scope.morph();
-    };
-
-    $scope.morph = function(){
-      $scope.confirmed = !$scope.confirmed;
-    };
-
-    $scope.displayError = function(){
+    var displayError = function(){
       if ($scope.sendForm.destination.$invalid && $scope.sendForm.amount.$invalid){
         $scope.notification = 'Invalid Destination and Transaction Amount';
       } else if ($scope.sendForm.destination.$invalid){
@@ -32,7 +17,25 @@ angular.module('bitclip.sendController', [
         $timeout(function() { 
           $scope.notification = false;
         }, 2000);
+      } else {
+        $scope.morph();
       }
+    };
+
+    $scope.transactionDetails = {};
+
+    Utilities.isMainNet().then(function(isMainNet){
+      $scope.network = isMainNet;
+    });
+
+    $scope.morph = function(){
+      $scope.confirmed = !$scope.confirmed;
+    };
+
+    $scope.validateInput = function(){
+      TxBuilder.updateTx($scope.transactionDetails);
+      $scope.transactionDetails = TxBuilder.getTransactionDetails();
+      displayError();
     };
 
     //TODO: sending animation
