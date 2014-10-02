@@ -14,7 +14,8 @@ We built BitClip to give you a safe way to store and spend Bitcoins without the 
   - Testnet support (Testnet addresses come preloaded with Bitcoins)
 
 Soon to be released:
-  - ...
+  - Backup
+  - Import/Export address-key pairs
 
 
 ## Team
