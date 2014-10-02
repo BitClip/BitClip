@@ -11,18 +11,16 @@ angular.module('bitclip.sendController', [
 
     $scope.displayError = function(){
       if ($scope.sendForm.destination.$invalid && $scope.sendForm.amount.$invalid){
-        $scope.amountError = 'Invalid Destination and Transaction Amount';
-        $scope.destinationError = true;
-      } else {
-        if ($scope.sendForm.destination.$invalid) $scope.destinationError = 'Invalid Destination';
-        if ($scope.sendForm.amount.$invalid) $scope.amountError = 'Invalid Transaction Amount';
+        $scope.notification = 'Invalid Destination and Transaction Amount';
+      } else if ($scope.sendForm.destination.$invalid){
+        $scope.notification = 'Invalid Destination';
+      } else if ($scope.sendForm.amount.$invalid){
+        $scope.notification = 'Invalid Transaction Amount';
       }
-
-      if($scope.destinationError || $scope.amountError){
+      if($scope.notification){
         $timeout(function() { 
-          $scope.destinationError = false;
-          $scope.amountError = false;
-        }, 4000);
+          $scope.notification = false;
+        }, 2000);
       }
     };
 
@@ -38,13 +36,13 @@ angular.module('bitclip.sendController', [
       Utilities.isMainNet().then(function(isMainNet){
         Utilities.getCurrentPrivateKey().then(function(currentPrivateKey){
           TxBuilder.sendTransaction(currentPrivateKey, $scope.transactionDetails, isMainNet).then(function(message){
-            $scope.txCompleteMessage = "Transaction Successfully Propogated";
-            $timeout(function() { $scope.txCompleteMessage = false }, 2000);
+            $scope.notification = message;
+            $timeout(function() { $scope.notification = false }, 2000);
             $scope.morph();
           })
           .catch(function(err){
-            $scope.txCompleteMessage = "Transaction Failed: "+ err.message;
-            $timeout(function() { $scope.txCompleteMessage = false }, 2000);
+            $scope.notification = "Transaction Failed: "+ err.message;
+            $timeout(function() { $scope.notification = false }, 2000);
             $scope.morph();
           });
         });
