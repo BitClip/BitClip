@@ -1,21 +1,20 @@
-<form ng-submit="morph();" name="sendForm" novalidate>
+<form name="sendForm" ng-submit="sendPayment()" novalidate>
   <div ng-if="notification" class="fx-fade-left fx-easing-cubic fx-speed-200 txMessagePopup" ng-class="{'errorMessagePopup': notification !== 'Transaction successfully propagated'}">
   {{notification}}
   </div>
-
-<label>Destination:</label>
-
-<input type="text" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" name="destination" ng-model="transactionDetails.destination" valid-address required autofocus>
-
-<label>Amount:</label>
-
-<input type="text" name="amount" placeholder="minimum 0.0001 BTC" ng-model="transactionDetails.amount" 
-ng-pattern="/^(\d+\.?\d*|\.\d+)$/" ng-class="{'has-error': sendForm.amount.$invalid && !sendForm.amount.$pristine, 'hasTimedError': amountError}" required>
-
+  
+  <label>Destination:</label>
+  <input type="text" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" name="destination" ng-model="transactionDetails.destination" valid-address required autofocus>
+  
+  <label>Amount:</label>
+  <input type="text" placeholder="minimum 0.0001 BTC" name="amount" ng-model="transactionDetails.amount" ng-pattern="/^(\d+\.?\d*|\.\d+)$/" required>
+  
+  <input type="submit" value="confirm" ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-confirm">
+  
+  <button ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-cancel" ng-click="transactionDetails.amount = ''; morph();">cancel</button>
 </form>
 
-<button ng-if="!confirmed" id="send" class="sendViewButton sendButton" ng-click="(sendForm.$valid) ? morph() : displayError()">SEND</button>
+<button ng-if="!confirmed" id="send" class="sendViewButton sendButton" ng-click="(sendForm.$valid) ? updateTransactionDetails() : displayError()">SEND</button>
 
-<button ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-confirm"  ng-click="sendPayment();">confirm</button>
-<button ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-cancel" ng-click="transactionDetails.amount = ''; morph();">cancel</button>
+
 

@@ -29,7 +29,6 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
       var tickVals = [];
       var values = d[0].values;
       var valLength = values.length;
-
       var mid = Math.ceil(valLength/2)
       tickVals.push(values[mid][0])
 

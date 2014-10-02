@@ -1,5 +1,16 @@
 angular.module('bitclip.sendFactory', [])
 .factory('TxBuilder', ['$q','$rootScope', function($q,$rootScope) {
+  
+  var transactionDetails = {};
+
+  var updateTx = function(transactionObj){
+    transactionDetails = transactionObj;
+  };
+
+  var getTransactionDetails = function(){
+    return transactionDetails;
+  }
+
   var sendTransaction = function(privateKeyWIF, transactionObj, isMainNet) {
     console.log("sendTransaction invoked");
     var that = this;
@@ -175,7 +186,9 @@ angular.module('bitclip.sendFactory', [])
 
   return {
     sendTransaction: sendTransaction,
-    isValidAddress: isValidAddress
+    isValidAddress: isValidAddress,
+    updateTx : updateTx,
+    getTransactionDetails : getTransactionDetails
   };
 
  }

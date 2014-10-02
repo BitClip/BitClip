@@ -4,6 +4,17 @@ angular.module('bitclip.sendController', [
 
 .controller('sendController', ['$scope', '$timeout', 'TxBuilder','Utilities',
   function($scope, $timeout, TxBuilder, Utilities) {
+    
+    $scope.transactionDetails = {};
+
+    Utilities.isMainNet().then(function(isMainNet){
+      $scope.network = isMainNet;
+    });
+
+    $scope.updateTransactionDetails = function(){
+      TxBuilder.updateTx($scope.transactionDetails);
+      $scope.morph();
+    };
 
     $scope.morph = function(){
       $scope.confirmed = !$scope.confirmed;
@@ -24,28 +35,20 @@ angular.module('bitclip.sendController', [
       }
     };
 
-    $scope.transactionDetails = {
-      destination: ""
-    };
-
-    Utilities.isMainNet().then(function(isMainNet){
-      $scope.network = isMainNet;
-    });
-
     //TODO: sending animation
     $scope.sendPayment = function() {
+      var updatedTxDetails = TxBuilder.getTransactionDetails();
       Utilities.getCurrentPrivateKey().then(function(currentPrivateKey){
-        TxBuilder.sendTransaction(currentPrivateKey, $scope.transactionDetails, $scope.network)
+        TxBuilder.sendTransaction(currentPrivateKey, updatedTxDetails, $scope.network)
         .then(function(message){
           $scope.notification = message;
           $timeout(function() { $scope.notification = false }, 2000);
-          $scope.morph();
         })
         .catch(function(err){
           $scope.notification = "Transaction Failed: "+ err.message;
           $timeout(function() { $scope.notification = false }, 2000);
-          $scope.morph();
         });
       });
+      $scope.morph();
     };
 }]);

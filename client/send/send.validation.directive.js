@@ -10,7 +10,9 @@ angular.module('bitclip.validateAddressDirective', [])
             console.log("elm: ", elm);
             console.log("atr: ", attr);
             console.log("controller: ", ngModelCtrl);
-            var isValidAddress = TxBuilder.isValidAddress(scope.transactionDetails.destination);
+            var transactionDetails = TxBuilder.getTransactionDetails();
+            console.log("i am transactionDetails: ", transactionDetails);
+            var isValidAddress = TxBuilder.isValidAddress(transactionDetails.destination);
             ngModelCtrl.$setValidity('validAddress', isValidAddress);
         }
     };
