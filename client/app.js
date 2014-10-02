@@ -10,8 +10,6 @@ angular.module('bitclip', [
   'bitclip.receiveFactory',
   'bitclip.sendController',
   'bitclip.sendFactory',
-  // 'bitclip.inputDirective',
-  // 'bitclip.sendButtonsDirective',
   'bitclip.historyController',
   'bitclip.historyFactory',
   'bitclip.marketController',
