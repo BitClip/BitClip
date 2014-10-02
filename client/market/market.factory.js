@@ -3,7 +3,7 @@ angular.module('bitclip.marketFactory', [])
 .factory('Market', ['$http', function($http){
 
   var getGraphData = function(hours, callback){
-    var url = "http://localhost:8080/api/marketdata"; //http://bitscrape.azurewebsites.net/api/marketdata";
+    var url = "http://bitscrape.azurewebsites.net/api/marketdata";
     var dataObj = {
       timePeriod: hours * 3600000,
           time: new Date().getTime() //get current time in milliseconds
