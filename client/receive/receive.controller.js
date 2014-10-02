@@ -5,7 +5,7 @@ angular.module('bitclip.receiveController', [])
     $scope.currentAddress = currentAddress;
   });
   Utilities.getAllAddresses().then(function(allAddresses) {
-    $scope.allAddresses = allAddresses;
+    $scope.allAddressesAndBalances = Receive.prepareDefault(allAddresses);
     Utilities.getBalances(allAddresses).then(function(allBalances) {
       Receive.prepareBalances(allAddresses, allBalances).then(function(allAddressesAndBalances) {
         $scope.allAddressesAndBalances = allAddressesAndBalances;
@@ -14,4 +14,14 @@ angular.module('bitclip.receiveController', [])
   });
   $scope.newAddress = Receive.newAddress;
   $scope.setAsCurrentAddress = Receive.setAsCurrentAddress;
-}]);
+}])
+
+.filter('toArray', function() {
+  return function(obj) {
+    var result = [];
+    angular.forEach(obj, function(val, key) {
+      result.push(val);
+    });
+    return result;
+  };
+});

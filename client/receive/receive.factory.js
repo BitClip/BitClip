@@ -5,7 +5,6 @@ angular.module('bitclip.receiveFactory', [])
   var newAddress = function() {
     var that = this;
     Utilities.isMainNet().then(function(bool) {
-      console.log("In newAddress receive");
       var isMainNet = bool;
       var network = isMainNet ? 'bitcoin' : 'testnet';
       var key = bitcoin.ECKey.makeRandom();
@@ -17,20 +16,16 @@ angular.module('bitclip.receiveFactory', [])
         obj[location].currentAddress = currentAddress;
         obj[location].currentPrivateKey = currentPrivateKey;
         chrome.storage.local.set(obj, function() {
-          that.$apply(function() {
-            that.currentAddress = currentAddress;
-          });
           chrome.storage.local.get(location, function(obj) {
             obj[location].allAddressesAndKeys.unshift([currentAddress, currentPrivateKey]);
             chrome.storage.local.set(obj, function() {
-              that.$apply(function() {
-                that.allAddresses.unshift(currentAddress);
-              });
-              //load testnet addresses with 0.99 BTC
-              if (network === "testnet"){
-                Utilities.getTestNetCoins(currentAddress, 99000000, function(data){
+              // Load testnet address with 0.99 BTC
+              if (network === 'testnet') {
+                Utilities.getTestNetCoins(currentAddress, 99000000, function(data) {
                   angular.element(document.getElementsByTagName('header-bar')).scope().getNetworkStatus();
                 });
+              } else {
+                angular.element(document.getElementsByTagName('header-bar')).scope().getNetworkStatus();
               }
             });
           });
@@ -59,11 +54,19 @@ angular.module('bitclip.receiveFactory', [])
     });
   };
 
+  var prepareDefault = function(allAddresses) {
+    var result = {};
+    for (var i = 0, l = allAddresses.length; i < l; i++) {
+      result[i] = {address: allAddresses[i], balance: ''};
+    }
+    return result;
+  };
+
   var prepareBalances = function(allAddresses, allBalances) {
     var deferred = $q.defer();
     var result = {};
     for (var i = 0, l = allAddresses.length; i < l; i++) {
-      result[allAddresses[i]] = allBalances[i].balance;
+      result[i] = {address: allAddresses[i], balance: allBalances[i].balance};
     }
     deferred.resolve(result);
     return deferred.promise;
@@ -72,6 +75,7 @@ angular.module('bitclip.receiveFactory', [])
   return {
     newAddress: newAddress,
     setAsCurrentAddress: setAsCurrentAddress,
+    prepareDefault: prepareDefault,
     prepareBalances: prepareBalances
   };
 }]);
