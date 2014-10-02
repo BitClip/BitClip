@@ -10,6 +10,7 @@ angular.module('bitclip', [
   'bitclip.receiveFactory',
   'bitclip.sendController',
   'bitclip.sendFactory',
+  'bitclip.validateAddressDirective',
   'bitclip.historyController',
   'bitclip.historyFactory',
   'bitclip.marketController',
