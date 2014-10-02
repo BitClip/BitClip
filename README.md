@@ -1,9 +1,9 @@
 [![Stories in Ready](https://badge.waffle.io/BitClip/BitClip.png?label=ready&title=Ready)](https://waffle.io/BitClip/BitClip)
 
-#BitClip:
-### The most easy-to-use client-side Bitcoin wallet on the internet.
+#BitClip
+#### The most easy-to-use client-side Bitcoin wallet on the internet.
 
-# Just got into Bitcoin and need a secure, light-weight wallet?
+## Just got into Bitcoin and need a secure, light-weight wallet?
 
 Download BitClip!
 We got tired of clunky wallets with a bazillion form fields. 
