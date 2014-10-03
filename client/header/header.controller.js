@@ -7,17 +7,16 @@ angular.module('bitclip.headerController', [])
       $scope.balanceMessage = 'Loading balance ...';
 
       Header.getBalanceForCurrentAddress().then(function(balance) {
-          if (typeof confirmedBalance === 'string') {
-            $scope.balanceMessage = balance;
-          } else {
-            $scope.balanceMessage = 'Bal: ' + balance / 100000000 + ' BTC';
-            console.log("balance: ", $scope.balanceMessage);
-          }
+        if (typeof confirmedBalance === 'string') {
+          $scope.balanceMessage = balance;
+        } else {
+          $scope.balanceMessage = 'Bal: ' + balance / 100000000 + ' BTC';
+        }
       });
       //open a socket for the current address and
       //close socket for previous address
-      Utilities.getLiveBalanceForCurrentAddress(function(err, data){
-        if (err){
+      Utilities.getLiveBalanceForCurrentAddress(function(err, data) {
+        if (err) {
           console.error(err);
         } else {
           $scope.balanceMessage = "Bal: " + data.address.balance/100000000 + " BTC";
@@ -37,7 +36,7 @@ angular.module('bitclip.headerController', [])
 
     $scope.getNetworkStatus();
 
-    $scope.menu = function(){
+    $scope.menu = function() {
       $scope.isCollapsed = !$scope.isCollapsed;
     };
     

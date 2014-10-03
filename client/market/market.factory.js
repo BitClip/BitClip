@@ -3,7 +3,7 @@ angular.module('bitclip.marketFactory', [])
 .factory('Market', ['$http', function($http){
 
   var getGraphData = function(hours, callback){
-    var url = "http://bitscrape.azurewebsites.net/api/marketdata";
+    var url = "http://bitscrape.azurewebsites.net/api/marketdata"; 
     var dataObj = {
       timePeriod: hours * 3600000,
           time: new Date().getTime() //get current time in milliseconds
@@ -38,7 +38,6 @@ angular.module('bitclip.marketFactory', [])
   //round prices to 2 dec
   //need to round time to local timezone
   var parseTxIntoTwoDecimals = function(txObj){
-    console.log(txObj);
     for (var exchange in txObj){
       var tradesForExchange = txObj[exchange].values;
       tradesForExchange.forEach(function(tradeArr, index, collection){
