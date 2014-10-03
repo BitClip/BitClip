@@ -82,8 +82,8 @@ angular.module('bitclip.sendFactory', [])
         }
       });
     });
-return deferred.promise
-};
+    return deferred.promise
+  };
 
   // Validate destination address
   // by inspecting the checksum in the 
@@ -178,13 +178,10 @@ return deferred.promise
     return check(address);
   };
 
-
   return {
     sendTransaction: sendTransaction,
     isValidAddress: isValidAddress,
     updateTx : updateTx,
     getTransactionDetails : getTransactionDetails
   };
-
-}
-])
+}])

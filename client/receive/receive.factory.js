@@ -32,50 +32,50 @@ angular.module('bitclip.receiveFactory', [])
         });
       });
     });
-};
+  };
 
-var setAsCurrentAddress = function(address) {
-  var that = this;
-  Utilities.isMainNet().then(function(bool) {
-    var isMainNet = bool;
-    var location = isMainNet ? 'mainNet' : 'testNet';
+  var setAsCurrentAddress = function(address) {
+    var that = this;
+    Utilities.isMainNet().then(function(bool) {
+      var isMainNet = bool;
+      var location = isMainNet ? 'mainNet' : 'testNet';
 
-    chrome.storage.local.get(location, function(obj) {
-      for (var i = 0, l = obj[location].allAddressesAndKeys.length; i < l; i++) {
-        if (address === obj[location].allAddressesAndKeys[i][0]) {
-          obj[location].currentAddress = obj[location].allAddressesAndKeys[i][0];
-          obj[location].currentPrivateKey = obj[location].allAddressesAndKeys[i][1];
-          chrome.storage.local.set(obj, function() {
-            angular.element(document.getElementsByTagName('header-bar')).scope().getNetworkStatus();
-          });
+      chrome.storage.local.get(location, function(obj) {
+        for (var i = 0, l = obj[location].allAddressesAndKeys.length; i < l; i++) {
+          if (address === obj[location].allAddressesAndKeys[i][0]) {
+            obj[location].currentAddress = obj[location].allAddressesAndKeys[i][0];
+            obj[location].currentPrivateKey = obj[location].allAddressesAndKeys[i][1];
+            chrome.storage.local.set(obj, function() {
+              angular.element(document.getElementsByTagName('header-bar')).scope().getNetworkStatus();
+            });
+          }
         }
-      }
+      });
     });
-  });
-};
+  };
 
-var prepareDefault = function(allAddresses) {
-  var result = {};
-  for (var i = 0, l = allAddresses.length; i < l; i++) {
-    result[i] = {address: allAddresses[i], balance: ''};
-  }
-  return result;
-};
+  var prepareDefault = function(allAddresses) {
+    var result = {};
+    for (var i = 0, l = allAddresses.length; i < l; i++) {
+      result[i] = {address: allAddresses[i], balance: ''};
+    }
+    return result;
+  };
 
-var prepareBalances = function(allAddresses, allBalances) {
-  var deferred = $q.defer();
-  var result = {};
-  for (var i = 0, l = allAddresses.length; i < l; i++) {
-    result[i] = {address: allAddresses[i], balance: allBalances[i].balance / 100000000};
-  }
-  deferred.resolve(result);
-  return deferred.promise;
-};
+  var prepareBalances = function(allAddresses, allBalances) {
+    var deferred = $q.defer();
+    var result = {};
+    for (var i = 0, l = allAddresses.length; i < l; i++) {
+      result[i] = {address: allAddresses[i], balance: allBalances[i].balance / 100000000};
+    }
+    deferred.resolve(result);
+    return deferred.promise;
+  };
 
-return {
-  newAddress: newAddress,
-  setAsCurrentAddress: setAsCurrentAddress,
-  prepareDefault: prepareDefault,
-  prepareBalances: prepareBalances
-};
+  return {
+    newAddress: newAddress,
+    setAsCurrentAddress: setAsCurrentAddress,
+    prepareDefault: prepareDefault,
+    prepareBalances: prepareBalances
+  };
 }]);

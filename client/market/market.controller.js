@@ -30,28 +30,28 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
 
       if(valLength < 2) { //default if server hasn't collected enough data
         return [0, 0];
-    }
+      }
 
-    var mid = Math.ceil(valLength/2)
-    tickVals.push(values[mid][0])
+      var mid = Math.ceil(valLength/2)
+      tickVals.push(values[mid][0])
 
-    return tickVals;
+      return tickVals;
+    };
   };
-};
 
-$scope.xAxisTickFormatFunction = function() {
-  return function(d) {
-    var time = new Date(d);
-    time = time.toLocaleTimeString()
-    return time.slice(0, 4) + time.slice(7, time.length);
-  }
-};
+  $scope.xAxisTickFormatFunction = function() {
+    return function(d) {
+      var time = new Date(d);
+      time = time.toLocaleTimeString()
+      return time.slice(0, 4) + time.slice(7, time.length);
+    }
+  };
 
-$scope.setActiveTab = function(tab) {
-  $scope.activeTab = tab;
-};
+  $scope.setActiveTab = function(tab) {
+    $scope.activeTab = tab;
+  };
 
-$scope.getGraphData(24);
-$scope.activeTab = 'twentyfourHour';
+  $scope.getGraphData(24);
+  $scope.activeTab = 'twentyfourHour';
 
 }]);
