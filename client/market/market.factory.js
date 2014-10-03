@@ -38,6 +38,7 @@ angular.module('bitclip.marketFactory', [])
   //round prices to 2 dec
   //need to round time to local timezone
   var parseTxIntoTwoDecimals = function(txObj){
+    console.log(txObj);
     for (var exchange in txObj){
       var tradesForExchange = txObj[exchange].values;
       tradesForExchange.forEach(function(tradeArr, index, collection){

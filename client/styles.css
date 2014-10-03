@@ -436,7 +436,6 @@ input.hasTimedError {
   right:1.5%;
 }
 
-
 .txMessagePopup {
   position: absolute;
   height: 20px;
@@ -692,12 +691,11 @@ table.scrollbox {
 .marketsTable {
   width: 350px;
   background-color: white;
-  border-color: #35A5A7;
   display:block;
-  border: 1px solid #0B0B0B;
+  border: 1px solid #35A5A7;
   border-radius: 2px;
-  border-collapse: separate;
   margin-top: 5px;
+  margin-left: 3px
 }
 
 .marketCol {
