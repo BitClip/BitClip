@@ -3,16 +3,15 @@ angular.module('bitclip.sendFactory', [])
   
   var transactionDetails = {};
 
-  var updateTx = function(transactionObj){
+  var updateTx = function(transactionObj) {
     transactionDetails = transactionObj;
   };
 
-  var getTransactionDetails = function(){
+  var getTransactionDetails = function() {
     return transactionDetails;
   }
 
   var sendTransaction = function(privateKeyWIF, transactionObj, isMainNet) {
-    console.log("sendTransaction invoked");
     var that = this;
     var deferred = $q.defer();
 
@@ -47,7 +46,6 @@ angular.module('bitclip.sendFactory', [])
     helloblocktx.addresses.getUnspents(ecKeyAddress, {
       value: txTargetValue + txFee
     }, function(err, res, unspents) {
-      console.log("in get unspents");
       if (err) {
         console.log('in err')
         deferred.reject(err);
@@ -75,12 +73,10 @@ angular.module('bitclip.sendFactory', [])
 
       var rawTxHex = tx.toHex();
       helloblocktx.transactions.propagate(rawTxHex, function(err, res, tx) { 
-        console.log("in propagate");     
         if (err) {
           deferred.reject(err);
           $rootScope.$apply();
         } else if (tx) {
-          console.log("Transaction was successful!");
           deferred.resolve("Transaction successfully propagated");
           $rootScope.$apply();
         }
@@ -92,8 +88,7 @@ angular.module('bitclip.sendFactory', [])
   // Validate destination address
   // by inspecting the checksum in the 
   // base58 version of address
-  var isValidAddress = function(address){
-    console.log("I am address in isValidAddress: ", address);
+  var isValidAddress = function(address) {
     function check(address) {
       var decoded = base58_decode(address);     
       if (decoded.length != 25) return false;
@@ -134,55 +129,54 @@ angular.module('bitclip.sendFactory', [])
       var nPad;
       for (nPad = 0; string[nPad] == table[0]; nPad++);  
 
-      var output = str;
+        var output = str;
       if (nPad > 0) output = repeat("\0", nPad) + str;
 
       return output;
     }
 
     function hex2a(hex) {
-        var str = '';
-        for (var i = 0; i < hex.length; i += 2)
-            str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
-        return str;
+      var str = '';
+      for (var i = 0; i < hex.length; i += 2)
+        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+      return str;
     }
 
     function a2hex(str) {
-        var aHex = "0123456789abcdef";
-        var l = str.length;
-        var nBuf;
-        var strBuf;
-        var strOut = "";
-        for (var i = 0; i < l; i++) {
-          nBuf = str.charCodeAt(i);
-          strBuf = aHex[Math.floor(nBuf/16)];
-          strBuf += aHex[nBuf % 16];
-          strOut += strBuf;
-        }
-        return strOut;
+      var aHex = "0123456789abcdef";
+      var l = str.length;
+      var nBuf;
+      var strBuf;
+      var strOut = "";
+      for (var i = 0; i < l; i++) {
+        nBuf = str.charCodeAt(i);
+        strBuf = aHex[Math.floor(nBuf/16)];
+        strBuf += aHex[nBuf % 16];
+        strOut += strBuf;
+      }
+      return strOut;
     }
 
     function pow(big, exp) {
-        if (exp == 0) return int2bigInt(1, 1, 0);
-        var i;
-        var newbig = big;
-        for (i = 1; i < exp; i++) {
-            newbig = mult(newbig, big);
-        }
+      if (exp == 0) return int2bigInt(1, 1, 0);
+      var i;
+      var newbig = big;
+      for (i = 1; i < exp; i++) {
+        newbig = mult(newbig, big);
+      }
 
-        return newbig;
+      return newbig;
     }
 
-    function repeat(s, n){
-        var a = [];
-        while(a.length < n){
-            a.push(s);
-        }
-        return a.join('');
+    function repeat(s, n) {
+      var a = [];
+      while(a.length < n) {
+        a.push(s);
+      }
+      return a.join('');
     }
     return check(address);
   };
-
 
   return {
     sendTransaction: sendTransaction,
@@ -190,6 +184,4 @@ angular.module('bitclip.sendFactory', [])
     updateTx : updateTx,
     getTransactionDetails : getTransactionDetails
   };
-
- }
-])
+}])

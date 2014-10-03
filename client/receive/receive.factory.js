@@ -66,7 +66,7 @@ angular.module('bitclip.receiveFactory', [])
     var deferred = $q.defer();
     var result = {};
     for (var i = 0, l = allAddresses.length; i < l; i++) {
-      result[i] = {address: allAddresses[i], balance: allBalances[i].balance};
+      result[i] = {address: allAddresses[i], balance: allBalances[i].balance / 100000000};
     }
     deferred.resolve(result);
     return deferred.promise;

@@ -8,7 +8,6 @@ angular.module('bitclip.headerFactory', [])
   var getBalanceForCurrentAddress = function() {
     var deferred = $q.defer();
     Utilities.getCurrentAddress().then(function(currentAddress) {
-      console.log("current address in getBalanceForCurrentAddress: ", currentAddress);
       //getBalances expects an array
       Utilities.getBalances([currentAddress]).then(function(arr) {
         if (!arr.length) {
