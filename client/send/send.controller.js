@@ -1,25 +1,17 @@
 angular.module('bitclip.sendController', [
   'ngFx'
-  ])
+])
 
-.controller('sendController', ['$scope', '$timeout', 'TxBuilder','Utilities',
-  function($scope, $timeout, TxBuilder, Utilities) {
-    
-  var displayError = function() {
-    if ($scope.sendForm.destination.$invalid && $scope.sendForm.amount.$invalid) {
+.controller('sendController', ['$scope', '$timeout', 'TxBuilder','Utilities', function($scope, $timeout, TxBuilder, Utilities) {  
+  var displayError = function(){
+    if ($scope.sendForm.destination.$invalid && $scope.sendForm.amount.$invalid){
       $scope.notification = 'Invalid Destination and Transaction Amount';
-    } else if ($scope.sendForm.destination.$invalid) {
+    } else if ($scope.sendForm.destination.$invalid){
       $scope.notification = 'Invalid Destination';
-    } else if ($scope.sendForm.amount.$invalid) {
+    } else if ($scope.sendForm.amount.$invalid){
       $scope.notification = 'Invalid Transaction Amount';
     }
-    if($scope.notification) {
-      $timeout(function() { 
-        $scope.notification = false;
-      }, 2000);
-    } else {
-      $scope.morph();
-    }
+    if(!$scope.notification) $scope.morph(); 
   };
 
   $scope.transactionDetails = {};

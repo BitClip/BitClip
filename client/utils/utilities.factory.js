@@ -120,25 +120,15 @@ angular.module('bitclip.utilitiesFactory', [])
         }
       };
 
-      ws.onclose = function(code, reason) {
-        openSocketsList.splice(0, openSocketsList.length);
-        if (reason !== 'newAddress') {
-          setTimeout(function() {
-            openSocketToGetLiveBalance(url, currentAddress, callback);
-          }, 1000);
-        }
-      };
-
       ws.onerror = function(err) {
         callback(err.message, null);
-        ws.close();
       };
     };
   };
 
   var closeExistingSocketsPermanently = function() {
     openSocketsList.forEach(function(websocket) {
-      websocket.close(1000, 'newAddress');
+      websocket.close();
     });
     openSocketsList.splice(0, openSocketsList.length);
   };
