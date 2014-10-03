@@ -20,7 +20,7 @@ angular.module('bitclip.marketFactory', [])
         });
       };
 
-      var getLastTrade = function(txObj){
+  var getLastTrade = function(txObj){
     //first element is time of trade
     //second element is price of trade
     var result = [0,0];

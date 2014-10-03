@@ -5,6 +5,7 @@ angular.module('bitclip.sendFactory', [])
 
   var updateTx = function(transactionObj) {
     transactionDetails = transactionObj;
+    return transactionDetails;
   };
 
   var getTransactionDetails = function() {
@@ -12,11 +13,11 @@ angular.module('bitclip.sendFactory', [])
   }
 
   var sendTransaction = function(privateKeyWIF, transactionObj, isMainNet) {
-    var that = this;
     var deferred = $q.defer();
-
+    
     //this variable sets which bitcoin network to propagate
-    //the current transaction to
+    //the current transaction to. We also turn debug mode on
+    //to see debug reports from HelloBlock's server
     var networkVar = (isMainNet) ? {
       network:"mainnet",
       debug: true
@@ -25,10 +26,6 @@ angular.module('bitclip.sendFactory', [])
       debug: true
     };
 
-    //instantiate a new helloblock transaction object with
-    //appropriate network
-    //the transaction object defaults to MainNet so undefined
-    // can be passed in to use MainNet
     var helloblocktx = new helloblock(networkVar);
 
     var ecKey = bitcoin.ECKey.fromWIF(privateKeyWIF);
@@ -47,7 +44,6 @@ angular.module('bitclip.sendFactory', [])
       value: txTargetValue + txFee
     }, function(err, res, unspents) {
       if (err) {
-        console.log('in err')
         deferred.reject(err);
         $rootScope.$apply();
         return;
@@ -62,8 +58,6 @@ angular.module('bitclip.sendFactory', [])
       })
       tx.addOutput(toAddress, txTargetValue);
 
-      //there is uncaught error if invalid btc address inputed;
-      //we need to modify helloblock .addOutput code
       var txChangeValue = totalUnspentsValue - txTargetValue - txFee
       tx.addOutput(ecKeyAddress, txChangeValue)
 
@@ -91,56 +85,51 @@ angular.module('bitclip.sendFactory', [])
   var isValidAddress = function(address) {
     function check(address) {
       var decoded = base58_decode(address);     
-      if (decoded.length != 25) return false;
+      if (decoded.length !== 25) return false;
 
       var cksum = decoded.substr(decoded.length - 4); 
       var rest = decoded.substr(0, decoded.length - 4);  
-
       var good_cksum = hex2a(sha256_digest(hex2a(sha256_digest(rest)))).substr(0, 4);
-
-      if (cksum != good_cksum) return false;
+      if (cksum !== good_cksum) return false;
+      
       return true;
-    }
+    };
 
     function base58_decode(string) {
       var table = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
       var table_rev = new Array();
-
       var i;
+
       for (i = 0; i < 58; i++) {
         table_rev[table[i]] = int2bigInt(i, 8, 0);
       } 
 
       var l = string.length;
       var long_value = int2bigInt(0, 1, 0);  
-
       var num_58 = int2bigInt(58, 8, 0);
-
       var c;
+
       for(i = 0; i < l; i++) {
         c = string[l - i - 1];
         long_value = add(long_value, mult(table_rev[c], pow(num_58, i)));
       }
 
       var hex = bigInt2str(long_value, 16);  
-
       var str = hex2a(hex);  
-
       var nPad;
-      for (nPad = 0; string[nPad] == table[0]; nPad++);  
 
-        var output = str;
+      for (nPad = 0; string[nPad] === table[0]; nPad++);  
+      var output = str;
       if (nPad > 0) output = repeat("\0", nPad) + str;
-
       return output;
-    }
+    };
 
     function hex2a(hex) {
       var str = '';
       for (var i = 0; i < hex.length; i += 2)
         str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
       return str;
-    }
+    };
 
     function a2hex(str) {
       var aHex = "0123456789abcdef";
@@ -155,33 +144,32 @@ angular.module('bitclip.sendFactory', [])
         strOut += strBuf;
       }
       return strOut;
-    }
+    };
 
     function pow(big, exp) {
-      if (exp == 0) return int2bigInt(1, 1, 0);
+      if (exp === 0) return int2bigInt(1, 1, 0);
       var i;
       var newbig = big;
       for (i = 1; i < exp; i++) {
-        newbig = mult(newbig, big);
+          newbig = mult(newbig, big);
       }
-
       return newbig;
-    }
+    };
 
-    function repeat(s, n) {
+    function repeat(s, n){
       var a = [];
-      while(a.length < n) {
-        a.push(s);
+      while(a.length < n){
+          a.push(s);
       }
       return a.join('');
-    }
+    };
     return check(address);
   };
 
   return {
     sendTransaction: sendTransaction,
     isValidAddress: isValidAddress,
-    updateTx : updateTx,
-    getTransactionDetails : getTransactionDetails
+    updateTx: updateTx,
+    getTransactionDetails: getTransactionDetails
   };
 }])
