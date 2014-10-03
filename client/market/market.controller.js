@@ -5,12 +5,12 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
     Market.getGraphData(hours, function(data) {
       $scope.setYAxis = [Math.ceil((+data.min * 0.98)), Math.ceil((+data.max * 1.02))];
       $scope.transactions = Market.parseTxIntoTwoDecimals(data.transactions);
-      $scope.updateTime = data.time || 1411777376752;
-      $scope.vwap = +(data.vwap).toFixed(2) || '400';
-      $scope.stdDeviation = +data.stdDeviation.toFixed(2) || '15';
-      $scope.max = +data.max.toFixed(2) || '500';
-      $scope.min = +data.min.toFixed(2) || '200';
-      $scope.volume = +data.volume.toFixed(2) || '2000';
+      $scope.updateTime = data.time;
+      $scope.vwap = +(data.vwap).toFixed(2);
+      $scope.stdDeviation = +data.stdDeviation.toFixed(2);
+      $scope.max = +data.max.toFixed(2);
+      $scope.min = +data.min.toFixed(2);
+      $scope.volume = +data.volume.toFixed(2);
       $scope.lastTrade = Market.getLastTrade(data.transactions);
     });
   };
