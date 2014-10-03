@@ -1,47 +1,53 @@
 <div class="marketView">
-  <table class="marketStats">
-    <tbody class="marketsTable">
-      <tr>
-        <td class="marketCol">Last Trade: ${{ lastTrade }}</td>
-        <td class="marketCol">VWAP: ${{ vwap }}</td> 
-        <td class="marketCol">Vol: {{ volume }} BTC</td>
-      </tr>
-      <tr>
-        <td class="marketCol">Std. Dev: ${{ stdDeviation }}</td>
-        <td class="marketCol">Max:  ${{ max }}</td> 
-        <td class="marketCol">Min: ${{ min }}</td> 
-      </tr>
-    </tbody>
-  </table>
 
-  <p class="marketUpdated">Last updated at: {{ updateTime | date:'short' }}</p> 
+  <div class="marketViewInfo">
+  
+    <table class="marketStatsTable">
+      <tbody class="marketStatsTableBody">
+        <tr>
+          <td class="marketCol">Last Trade: <i class="fa fa-usd"></i>{{ lastTrade }}</td>
+          <td class="marketCol">VWAP: <i class="fa fa-usd"></i>{{ vwap }}</td> 
+          <td class="marketCol">Vol: <i class="fa fa-btc"></i> {{ volume }}</td>
+        </tr>
+        <tr>
+          <td class="marketCol">Std. Dev: <i class="fa fa-usd"></i>{{ stdDeviation }}</td>
+          <td class="marketCol">Max:  <i class="fa fa-usd"></i>{{ max }}</td> 
+          <td class="marketCol">Min: <i class="fa fa-usd"></i>{{ min }}</td> 
+        </tr>
+      </tbody>
+    </table>
 
-  <div class="sideTab">
+    <aside class="marketUpdate">Last updated at: {{ updateTime | date:'short' }}</aside> 
 
-    <button class="marketButtons" ng-class="{'active': activeTab === 'twentyfourHour'}" ng-click="getGraphData(24); setActiveTab('twentyfourHour');">24 Hr</button>
-    
-    <button class="marketButtons" ng-class="{'active': activeTab === 'eightHour'}" ng-click="getGraphData(8); setActiveTab('eightHour');">8 Hr</button>
+    <div class="sideTab">
+      <button class="marketButtons" ng-class="{'active': activeTab === 'twentyfourHour'}" ng-click="getGraphData(24); setActiveTab('twentyfourHour');">24 Hr</button>
+      <button class="marketButtons" ng-class="{'active': activeTab === 'eightHour'}" ng-click="getGraphData(8); setActiveTab('eightHour');">8 Hr</button>
+    </div>
 
   </div>
 
+
+
   <div class="graphView">
-   <div class="graphDisplayContainer">
-    <nvd3-line-chart
-    data="transactions"
-    showXAxis="true"
-    showYAxis="true"
-    tooltips="true"
-    tooltipcontent="toolTipContentFunction()"
-    interactive="true"
-    forcey="{{ setYAxis }}"
-    width="300"
-    height="170"
-    xAxisTickFormat="xAxisTickFormatFunction()"
-    xAxisTickValues="xAxisTickValuesFunction()"
-    margin="{left:40,top:15,bottom:0,right:0}"
-    >
-  </nvd3-line-chart>
-</div>
-</div>
+
+    <div class="graphDisplayContainer">
+      <nvd3-line-chart
+      data="transactions"
+      showXAxis="true"
+      showYAxis="true"
+      tooltips="true"
+      tooltipcontent="toolTipContentFunction()"
+      interactive="true"
+      forcey="{{ setYAxis }}"
+      width="300"
+      height="170"
+      xAxisTickFormat="xAxisTickFormatFunction()"
+      xAxisTickValues="xAxisTickValuesFunction()"
+      margin="{left:40,top:15,bottom:0,right:0}"
+      ></nvd3-line-chart>
+    </div>
+
+  </div>
+
 </div>
 
