@@ -1,11 +1,11 @@
 angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
 
 .controller('marketController', ['$scope', 'Market', '$http', function($scope, Market, $http){
-
   $scope.getGraphData = function(hours){
     Market.getGraphData(hours, function(data){
       if (data !== "Error with HTTP request"){
         $scope.transactions = Market.parseTxIntoTwoDecimals(data.transactions);
+        console.log(data);
         $scope.updateTime = data.time || 1411777376752;
         $scope.vwap = +(data.vwap).toFixed(2) || '400';
         $scope.stdDeviation = +data.stdDeviation.toFixed(2) || '15';
@@ -19,7 +19,7 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
 
   $scope.toolTipContentFunction = function(){
     return function(exchangeName, date, price, e, graph) {
-      var template = "<h4 class='toolTipHeader'><b>" + exchangeName +"</b></h4>" + "<p>$"+ price + " @ "+ date +"</p>" 
+      var template = "<div> <h4 class='toolTipHeader'><b>" + exchangeName +"</b></h4>" + "<p class='toolTip'>$"+ price + " @ "+ date +"</p> </div>" 
       return template;
     };
   };
@@ -29,6 +29,7 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
       var tickVals = [];
       var values = d[0].values;
       var valLength = values.length;
+
       var mid = Math.ceil(valLength/2)
       tickVals.push(values[mid][0])
 
@@ -39,8 +40,16 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
   $scope.xAxisTickFormatFunction = function(){
     return function(d){
       var time = new Date(d);
-      return time.toLocaleTimeString();
+      time = time.toLocaleTimeString()
+      return time.slice(0, 4) + time.slice(7, time.length);
     }
   };
+
+  $scope.setActiveTab = function(tab) {
+    $scope.activeTab = tab;
+  };
+
+  $scope.getGraphData(8);
+  $scope.activeTab = 'eightHour';
 
 }]);

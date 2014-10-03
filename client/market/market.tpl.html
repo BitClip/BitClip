@@ -1,26 +1,30 @@
 <div class="marketView">
-    <p>Last updated at: {{ updateTime | date:'short' }}</p> 
     <table class="marketStats">
-      <tr>
-        <td>Last Trade: ${{ lastTrade }}</td>
-        <td>VWAP: ${{ vwap }}</td> 
-      </tr>
-      <tr>
-        <td>Std. Dev: ${{ stdDeviation }}</td>
-        <td>Max:  ${{ max }}</td> 
-      </tr>
-      <tr>
-        <td>Vol: {{ volume }} BTC</td>
-        <td>Min: ${{ min }}</td> 
-      </tr>
+      <tbody class="marketsTable">
+        <tr>
+          <td class="marketCol">Last Trade: ${{ lastTrade }}</td>
+          <td class="marketCol">VWAP: ${{ vwap }}</td> 
+          <td class="marketCol">Vol: {{ volume }} BTC</td>
+        </tr>
+        <tr>
+          <td class="marketCol">Std. Dev: ${{ stdDeviation }}</td>
+          <td class="marketCol">Max:  ${{ max }}</td> 
+          <td class="marketCol">Min: ${{ min }}</td> 
+        </tr>
+      </tbody>
     </table>
+
+    <p class="marketUpdated">Last updated at: {{ updateTime | date:'short' }}</p> 
+
+    <div class="sideTab">
+
+      <button class="marketButtons" ng-class="{'active': activeTab === 'eightHour'}" ng-click="getGraphData(8); setActiveTab('eightHour');">8 Hr</button>
+
+      <button class="marketButtons" ng-class="{'active': activeTab === 'twentyfourHour'}" ng-click="getGraphData(24); setActiveTab('twentyfourHour');">24 Hr</button>
+
+    </div>
+
     <div class="graphView">
-       <div class="sideTab">
-          <ul>
-             <li><a ng-click="getGraphData(8)">8 Hr</a></li>
-             <li><a ng-click="getGraphData(24)">24 Hr</a></li>
-          </ul>
-       </div>
        <div class="graphDisplayContainer">
             <nvd3-line-chart
                 data="transactions"
@@ -29,11 +33,12 @@
                 tooltips="true"
                 tooltipcontent="toolTipContentFunction()"
                 interactive="true"
-                forcey="[380,420]"
-                width="325"
-                height="300"
+                forcey="[370,410]"
+                width="300"
+                height="170"
                 xAxisTickFormat="xAxisTickFormatFunction()"
                 xAxisTickValues="xAxisTickValuesFunction()"
+                margin="{left:40,top:15,bottom:0,right:0}"
                 >
             </nvd3-line-chart>
        </div>
