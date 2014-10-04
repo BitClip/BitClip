@@ -18,6 +18,8 @@ angular.module('bitclip.sendController', [
     } 
   };
 
+  $scope.loading;
+
   $scope.transactionDetails = {};
 
   Utilities.isMainNet().then(function(isMainNet) {
@@ -35,16 +37,19 @@ angular.module('bitclip.sendController', [
   };
 
   $scope.sendPayment = function() {
+    $scope.loading = true;
     var updatedTxDetails = TxBuilder.getTransactionDetails();
     Utilities.getCurrentPrivateKey().then(function(currentPrivateKey) {
       TxBuilder.sendTransaction(currentPrivateKey, updatedTxDetails, $scope.network)
       .then(function(message) {
         $scope.notification = message;
         $timeout(function() { $scope.notification = false }, 2000);
+        $scope.loading = false;
       })
       .catch(function(err) {
         $scope.notification = "Transaction Failed: "+ err.message;
         $timeout(function() { $scope.notification = false }, 2000);
+        $scope.loading = false;
       });
     });
     $scope.morph();
