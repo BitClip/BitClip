@@ -730,11 +730,11 @@ table.scrollbox {
 
   font-size: .6rem;
   text-align: center;
-  line-height: 1.1rem;
+  line-height: 1.2rem;
 
   border-radius: 5px;
   border:1px solid #35A5A7;
-  border-bottom:10px solid #35A5A7;
+  border-bottom:5px solid #35A5A7;
 }
 .graphToolTip::after{
   content:"";
@@ -746,25 +746,32 @@ table.scrollbox {
   top:42px;
   left:45px;
 }
-.toolTipHeader {
+
+.graphToolTip > small {
+  font-size: .9rem;
+}
+
+
+.graphToolTip > .toolTipHeader {
   padding-top: 2px;
   display: block;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.1rem;
   text-align: center;
   color:#0B0B0B;
 }
 
-small.toolTipPrice{
-  color:#A2A2A2;
+.graphToolTip > .toolTipPrice{
   padding-right:4px;
-  font-size: .6rem;
   font-weight: bold;
+  color:#35A533;
 }
 
-small.toolTipPrice > span {
-  font-size: 1rem;
-  color:#35A533;
+.graphToolTip > .toolTipPrice > span {
+}
+
+.graphToolTip > .toolTipTime {
+  color:#A2A2A2;
 }
 
 .div_chart {

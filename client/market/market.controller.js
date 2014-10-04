@@ -16,8 +16,12 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
   };
 
   $scope.toolTipContentFunction = function() {
+
     return function(exchangeName, date, price, e, graph) {
-      var template = "<div> <h4 class='toolTipHeader'><b>" + exchangeName.charAt(0).toUpperCase() + exchangeName.slice(1) +"</b></h4>" + "<p class='toolTip'>$"+ price + " @ "+ date +"</p> </div>" 
+      exchangeName = exchangeName.charAt(0).toUpperCase() + exchangeName.slice(1);
+      var template = "<div class='graphToolTip'><small class='toolTipHeader'>" + exchangeName + 
+        "</small><small class='toolTipPrice'><span>" + price + "</span></small>" + 
+        "<small class='toolTipTime'>" + date + "</small></div>";
       return template;
     };
   };
