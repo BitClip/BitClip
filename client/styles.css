@@ -48,6 +48,9 @@
   i {
     color:#F1A533;
   }
+  i.fa-usd {
+    color:#35A533;
+  }
 
   h4, h5, h6 {
     font-size: 1rem;
@@ -625,6 +628,80 @@ table.scrollbox {
 /*              Markets View                 */
 /* ----------------------------------------- */
 
+.marketView {
+  position: relative;
+  max-height: 72%;
+}
+
+.marketViewInfo {
+  padding-top: 5px;
+  position: relative;
+}
+
+.marketStatsTable {
+  margin-left: 1%;
+  width:98%;
+  position: relative;
+}
+.marketStatsTableBody {
+  position: relative;
+  background-color: white;
+  display:block;
+  border: 1px solid #35A5A7;
+  border-radius: 2px;
+}
+
+.marketCol {
+  width: 20%;
+}
+
+.marketView .marketUpdate {
+  position: absolute;
+  left:60%;
+  bottom:-20%;
+  max-width: 40%;
+  font-size: .7rem;
+  color:#A2A2A2;
+}
+
+
+
+.marketCol > i.fa-usd {
+  top:-.05rem;
+  font-size: .85rem;
+  padding-right: 2px;
+  position: relative;
+}
+.sideTab {
+  padding-left: 5px;
+}
+.marketButtons {
+  position: relative;
+  display: inline-block;
+  margin: 0px;
+  float: left;
+  width: 50px;
+  height: 20px;
+  margin-right: 1px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  outline: none;
+  border: 1px solid #35A5A7;
+  border-bottom: none;
+  color: #35A5A7;
+  font-family: "Cabin", sans-serif;
+  background-color: white;
+}
+
+.marketButtons.active {
+  color: white;
+  background-color: #35A5A7;
+}
+.marketUpdated {
+  padding-right: 5px;
+}
+
+
 .graphView {
   position: relative;
   display: block;
@@ -633,87 +710,68 @@ table.scrollbox {
   clear: left;
 }
 
-
 .graphDisplayContainer {
- max-height: 400px;
- max-width: 400px;
- min-height: 200px;
- min-width: 250px;
- background-color: #fff;
- border: 1px solid #888;
- border-color: #35A5A7;
+   max-height: 400px;
+   max-width: 400px;
+   min-height: 200px;
+   min-width: 250px;
+   background-color: #fff;
+   border: 1px solid #888;
+   border-color: #35A5A7;
 }
-
-.marketStats table {
-  position: relative;
-  display: block;
-}
-
-.marketView {
-  position: relative;
-  max-height: 72%;
-}
-
-.marketView p {
+.graphToolTip {
+  box-sizing:border-box;
   position: absolute;
-  right: 0px;
-  top: 20%;
-  margin: auto;
-  font-size: smaller;
-  margin-left: 100px;
-}
-
-.sideTab {
-  padding-left: 5px;
-}
-
-.marketButtons {
-  position: relative;
-  display: inline-block;
-  margin: 0px;
-  float: left;
-  width: 50px;
-  height: 20px;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-  outline: none;
-  border-style: none;
-  color: rgb(241, 234, 234);
-  background-color: #BBBAB7;
-}
-
-.marketButtons.active {
-  border-style: 
-  color: white;
-  background-color: #35A5A7;
-}
-
-.marketsTable {
-  width: 350px;
+  width:100px;
+  height:45px;
+  left:-50px;
+  top:-30px;
   background-color: white;
-  display:block;
-  border: 1px solid #35A5A7;
-  border-radius: 2px;
-  margin-top: 5px;
-  margin-left: 3px
-}
 
-.marketCol {
-  width: 20%;
-}
-
-.marketUpdated {
-  padding-right: 5px;
-}
-
-.toolTipHeader {
-  height: 10px;
+  font-size: .6rem;
   text-align: center;
-  position: relative;
+  line-height: 1.2rem;
+
+  border-radius: 5px;
+  border:1px solid #35A5A7;
+  border-bottom:5px solid #35A5A7;
+}
+.graphToolTip::after{
+  content:"";
+  position:absolute;
+  width:0;
+  height:0;
+  border: 5px solid transparent;
+  border-top:5px solid #35A5A7;
+  top:42px;
+  left:45px;
 }
 
-div > p.toolTip {
-  position: relative;
+.graphToolTip > small {
+  font-size: .9rem;
+}
+
+
+.graphToolTip > .toolTipHeader {
+  padding-top: 2px;
+  display: block;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-align: center;
+  color:#0B0B0B;
+}
+
+.graphToolTip > .toolTipPrice{
+  padding-right:4px;
+  font-weight: bold;
+  color:#35A533;
+}
+
+.graphToolTip > .toolTipPrice > span {
+}
+
+.graphToolTip > .toolTipTime {
+  color:#A2A2A2;
 }
 
 .div_chart {
