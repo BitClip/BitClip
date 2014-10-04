@@ -11,7 +11,11 @@ angular.module('bitclip.sendController', [
     } else if ($scope.sendForm.amount.$invalid){
       $scope.notification = 'Invalid Transaction Amount';
     }
-    if(!$scope.notification) $scope.morph(); 
+    if($scope.notification) {
+      $timeout(function() { $scope.notification = false }, 2000);
+    } else {
+      $scope.morph();
+    } 
   };
 
   $scope.transactionDetails = {};
