@@ -5,7 +5,14 @@
   </div>
   <ul class="scrollbox">
     <h4 class="allAddressesHeader">All Addresses:</h4>
-    <li ng-repeat="addressAndBalance in allAddressesAndBalances" ng-dblclick="setAsCurrentAddress(addressAndBalance.address)" ng-class="{'currentAddressMatch': currentAddress === addressAndBalance.address}" ng-mouseenter="show = true" ng-mouseleave="show = false"><span ng-if="!show">{{ addressAndBalance.address | limitTo: 20 }}... <i class="fa fa-btc"></i> Bal: {{ addressAndBalance.balance }} BTC</span><span ng-if="show">{{ addressAndBalance.address }}</span></li>
+    <li ng-repeat="addressAndBalance in allAddressesAndBalances" 
+        ng-class="{'currentAddressMatch': currentAddress === addressAndBalance.address}" 
+        ng-init="tooltip=false"
+        ng-mouseenter="tooltip = true" 
+        ng-mouseleave="tooltip = false">
+      <div class="receiveTooltip" ng-if="tooltip">{{ addressAndBalance.address }} </div>
+      <span ng-dblclick="setAsCurrentAddress(addressAndBalance.address)" >{{ addressAndBalance.address | limitTo: 23 }}... <i class="fa fa-btc"></i>: {{ addressAndBalance.balance }} BTC</span>
+    </li>
   </ul>
   <button class="sendViewButton sendButton generateButton" ng-click="newAddress()">Generate Address</button>
 </div>

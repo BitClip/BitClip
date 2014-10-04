@@ -617,7 +617,7 @@ div.currentAddress {
 }
 
 .allAddressesHeader::after {
-  content:"Double-click to select address";
+  content:"Double-click an address to select";
   position: absolute;
   font-size: .8rem;
   right:16px;
@@ -646,6 +646,18 @@ ul.scrollbox {
   cursor: pointer; cursor: hand;
 }
 
+.scrollbox > li > div.receiveTooltip {
+  position:absolute;
+  box-sizing:border-box;
+  top:-25px;
+  left:40px;
+  padding:2px;
+  padding-right: 15px;
+  height:25px;
+  background: white;
+  border:2px solid #E8E8E8;
+} 
+
 .scrollbox li:nth-child(2) {
   padding-top: 2px;
 }
@@ -665,6 +677,7 @@ ul.scrollbox {
 .generateButton {
   font-size: 1.2rem;
   letter-spacing: .12rem;
+  cursor:pointer;
 
 }
 
