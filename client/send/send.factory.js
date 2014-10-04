@@ -163,6 +163,11 @@ angular.module('bitclip.sendFactory', [])
       }
       return a.join('');
     };
+    
+    var regex = /[^a-zA-Z0-9]/
+    if (regex.test(address)){
+      return false;
+    }
     return check(address);
   };
 
