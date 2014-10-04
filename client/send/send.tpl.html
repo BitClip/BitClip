@@ -1,3 +1,12 @@
+<div ng-if="loading" class="loaderBackground">
+  <div class="loaderBlur"></div>
+  <div class="loaderAnimation">
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square last"></div>
+  </div>
+</div>
+
 <form name="sendForm" ng-submit="sendPayment()" >
   <div ng-if="notification" class="fx-fade-left fx-easing-cubic fx-speed-200 txMessagePopup" ng-class="{'errorMessagePopup': notification !== 'Transaction successfully propagated'}">
   {{ notification }}
@@ -14,8 +23,4 @@
 </form>
 
 <button ng-if="!confirmed" ng-model="transactionDetails.destination" id="send" class="sendViewButton sendButton" ng-click="validateInput()" valid-address>SEND</button>
-
-
-
-
 
