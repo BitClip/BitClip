@@ -158,4 +158,31 @@ describe('Unit: sendFactory - TxBuilder', function () {
       done();
     })
   });
+
+
+  it('isValidAddress should return true for valid testNet address', function(){
+    expect(TxBuilder.isValidAddress('mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf')).to.equal(true);
+    expect(TxBuilder.isValidAddress('misSCxTCxnxdfYSD5qdsMyd72zDrYpZcoV')).to.equal(true);
+    expect(TxBuilder.isValidAddress('muaDVYfm1S711Aaj7MjZNv1XyhEXovMtK1')).to.equal(true);
+  });
+
+  it('isValidAddress should return true for valid mainNet address', function(){
+    expect(TxBuilder.isValidAddress('1111111111111111111114oLvT2')).to.equal(true);
+    expect(TxBuilder.isValidAddress('1L7krXWHm2ax124oj8y8ZFGuYNEib5YDWy')).to.equal(true);
+    expect(TxBuilder.isValidAddress('1CfKjwNZMgT8UeoUd9CdXbEGUNwWsVQG4Y')).to.equal(true);
+  });
+
+  it('isValidAddress should return false for invalid address composed of alphanumeric characters', function(){
+    expect(TxBuilder.isValidAddress('11111111111111114oLvT2')).to.equal(false);
+    expect(TxBuilder.isValidAddress('muaDVYfm1S711Aaj7K1')).to.equal(false);
+  });
+
+  it('isValidAddress should return false for invalid address that includes non-alphanumeric characters', function(){
+    expect(TxBuilder.isValidAddress('!mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf')).to.equal(false);
+    expect(TxBuilder.isValidAddress('?mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf')).to.equal(false);
+    expect(TxBuilder.isValidAddress('hello world')).to.equal(false);
+    expect(TxBuilder.isValidAddress('?mieyV4Y8ba87pZ YJKsJRz8qcZP4b2HvWLf')).to.equal(false);
+    expect(TxBuilder.isValidAddress('?mieyV4Y8ba87pZ-YJKsJRz8qcZP4b2HvWLf')).to.equal(false);
+    expect(TxBuilder.isValidAddress('?mieyV4Y8ba87pZ++YJKsJRz8qcZP4b2HvWLf')).to.equal(false);
+  });
 });
