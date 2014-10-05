@@ -532,8 +532,8 @@ input.hasTimedError {
   margin-top: 5px;
   position: relative;
   opacity: 0;
-  -webkit-animation: enter 3s infinite;
-  animation: enter 3s infinite;
+  -webkit-animation: enter 2.15s infinite;
+  animation: enter 2.15s infinite;
 }
 
 .enter {
@@ -545,13 +545,13 @@ input.hasTimedError {
 }
 
 .square:nth-child(2) {
-  -webkit-animation-delay: .33s;
-  animation-delay: .33s;
+  -webkit-animation-delay: .2s;
+  animation-delay: .2s;
 }
 
 .square:nth-child(3) {
-  -webkit-animation-delay: .66s;
-  animation-delay: .66s;
+  -webkit-animation-delay: .4s;
+  animation-delay: .4s;
   background: #F1A533;
 }
 

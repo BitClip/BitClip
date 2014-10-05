@@ -12,7 +12,12 @@ angular.module('bitclip.receiveController', [])
       });
     });
   });
-  $scope.newAddress = Receive.newAddress;
+
+  $scope.newAddress = function(){
+    Utilities.isMainNet().then(function(isMainNet){$scope.loading = !isMainNet})
+    Receive.newAddress();
+  };
+
   $scope.setAsCurrentAddress = Receive.setAsCurrentAddress;
 }])
 
