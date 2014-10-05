@@ -16,3 +16,11 @@
   </ul>
   <button class="sendViewButton sendButton generateButton" ng-click="newAddress()">Generate Address</button>
 </div>
+<div ng-if="loading" class="loaderBackground">
+  <div class="loaderBlur"></div>
+  <div class="loaderAnimation">
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square last"></div>
+  </div>
+</div> 
