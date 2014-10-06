@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "BitClip",
-  "description": "This extension makes it easy to send and receive Bitcoins. We give you the information you need to spend your Bitcoins wisely.",
+  "description": "BitClip: A simple, secure client-side Bitcoin wallet.",
   "version": "0.1",
 
   "icons": {
