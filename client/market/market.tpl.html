@@ -1,7 +1,5 @@
 <div class="marketView">
-
   <div class="marketViewInfo">
-  
     <table class="marketStatsTable">
       <tbody class="marketStatsTableBody">
         <tr>
@@ -16,20 +14,13 @@
         </tr>
       </tbody>
     </table>
-
     <aside class="marketUpdate">Last updated at: {{ updateTime | date:'short' }}</aside> 
-
     <div class="sideTab">
       <button class="marketButtons" ng-class="{'active': activeTab === 'twentyfourHour'}" ng-click="getGraphData(24); setActiveTab('twentyfourHour');">24 Hr</button>
       <button class="marketButtons" ng-class="{'active': activeTab === 'eightHour'}" ng-click="getGraphData(8); setActiveTab('eightHour');">8 Hr</button>
     </div>
-
   </div>
-
-
-
   <div class="graphView">
-
     <div class="graphDisplayContainer">
       <nvd3-line-chart
       data="transactions"
@@ -46,8 +37,9 @@
       margin="{left:40,top:15,bottom:0,right:0}"
       ></nvd3-line-chart>
     </div>
-
   </div>
-
 </div>
-
+<div ng-if="loading" class="marketLoaderBackground">
+  <div class="marketSpinner">
+  </div>
+</div> 
