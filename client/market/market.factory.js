@@ -48,9 +48,23 @@ angular.module('bitclip.marketFactory', [])
     return txObj;
   };
 
+  //returns the next nearest second hour
+  //ie 9.24, returns 11:00
+  var returnNext2Hour = function(msSinceEpoch){
+    return Math.ceil(msSinceEpoch/7200000) * 7200000;
+  };
+
+  //returns the immediately previous second last hour
+  //ie 9.24, returns 8:00
+  var returnLast2Hour = function(msSinceEpoch){
+    return Math.floor(msSinceEpoch/7200000) * 7200000;
+  }
+
   return {
     getGraphData:getGraphData,
     getLastTrade: getLastTrade,
-    parseTxIntoTwoDecimals: parseTxIntoTwoDecimals
+    parseTxIntoTwoDecimals: parseTxIntoTwoDecimals,
+    returnNext2Hour:returnNext2Hour,
+    returnLast2Hour: returnLast2Hour
   };
 }])
