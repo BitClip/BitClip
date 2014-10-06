@@ -19,11 +19,9 @@ angular.module('bitclip.sendFactory', [])
     //the current transaction to. We also turn debug mode on
     //to see debug reports from HelloBlock's server
     var networkVar = (isMainNet) ? {
-      network:"mainnet",
-      debug: true
+      network:"mainnet"
     } : {
-      network: 'testnet',
-      debug: true
+      network: 'testnet'
     };
 
     var helloblocktx = new helloblock(networkVar);
