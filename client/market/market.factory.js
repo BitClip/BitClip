@@ -54,8 +54,8 @@ angular.module('bitclip.marketFactory', [])
     return Math.ceil(msSinceEpoch/7200000) * 7200000;
   };
 
-  //returns the immediately previous second last hour
-  //ie 9.24, returns 8:00
+  //returns the immediately previous hour
+  //ie 9.24, returns 9:00
   var returnLast2Hour = function(msSinceEpoch){
     return Math.floor(msSinceEpoch/7200000) * 7200000;
   }

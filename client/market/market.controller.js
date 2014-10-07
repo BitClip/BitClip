@@ -34,8 +34,9 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
       var finalTime = d[0].values[numTrades-1][0].getTime();
       var first = Market.returnNext2Hour(beginningTime);
       var last = Market.returnLast2Hour(finalTime);
-      var second = first + (last - first)/2;
-      return [first, second, last];
+      var second = first + (last - first)/3;
+      var third = first + 2 * (last - first)/3;
+      return [first, second, third, last];
     };
   };
 

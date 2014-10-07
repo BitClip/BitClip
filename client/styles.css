@@ -910,17 +910,11 @@ table.scrollbox {
 @-webkit-keyframes marketSpinner {
   0% {
     -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
     transform: rotate(0deg);
   }
 
   100% {
     -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
@@ -928,17 +922,11 @@ table.scrollbox {
 @-moz-keyframes marketSpinner {
   0% {
     -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
     transform: rotate(0deg);
   }
 
   100% {
     -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
@@ -946,17 +934,11 @@ table.scrollbox {
 @-o-keyframes marketSpinner {
   0% {
     -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
     transform: rotate(0deg);
   }
 
   100% {
     -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
@@ -964,17 +946,11 @@ table.scrollbox {
 @keyframes marketSpinner {
   0% {
     -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
     transform: rotate(0deg);
   }
 
   100% {
     -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
@@ -982,9 +958,6 @@ table.scrollbox {
 /* :not(:required) hides this rule from IE9 and below */
 .marketSpinner:not(:required) {
   -webkit-animation: marketSpinner 1250ms infinite linear;
-  -moz-animation: marketSpinner 1250ms infinite linear;
-  -ms-animation: marketSpinner 1250ms infinite linear;
-  -o-animation: marketSpinner 1250ms infinite linear;
   animation: marketSpinner 1250ms infinite linear;
   border: 5px solid #35A5A7;
   border-right-color: transparent;
