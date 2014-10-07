@@ -5,4 +5,4 @@ angular.module('bitclip.viewTabsController', [])
   $scope.setActiveTab = function(tab) {
     $scope.activeTab = tab;
   };
-}])
+}]);

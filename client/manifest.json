@@ -11,7 +11,6 @@
     "128": "assets/bitcoin_128.png"
   },
 
-
   "browser_action": {
     "default_icon": {
       "19": "assets/bitcoin_19.png",

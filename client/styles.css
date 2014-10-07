@@ -11,14 +11,12 @@
   Orange: #F1A533;
   Green:  #35A533;
   Red:    #F13C3F;
-  Light:  #F1F1F1;
-          #C2C2C2
+  Light:  #F1F1F1,
+          #C2C2C2,
           #E8E8E8;
   Dark:   #0B0B0B;
   Teal2:  #3DBDBF;
-
-  */
-
+*/
 
   /* ------- Style Fallback ------- */
 
@@ -46,10 +44,11 @@
   }
 
   i {
-    color:#F1A533;
+    color: #F1A533;
   }
+
   i.fa-usd {
-    color:#35A533;
+    color: #35A533;
   }
 
   h4, h5, h6 {
@@ -59,7 +58,6 @@
     padding: 0;
     margin: 0;
   }
-
 
   /* ----------------------------------------- */
   /*                  Header                   */
@@ -174,15 +172,15 @@
 /* Allows user to close options window by clicking
 anywhere outside of the dropdown */
 .optionsOffclick {
-  position:absolute;
+  position: absolute;
   background-color: transparent;
   z-index: 997;
   
-  /*back up width/height for unsupported browsers*/
-  width:360px; 
-  height:360px;
-  width:100vh;
-  height:100vw;
+  /* Backup width/height for unsupported browsers */
+  width: 360px; 
+  height: 360px;
+  width: 100vh;
+  height: 100vw;
 }
 
 /*  ------- Network Toggle Switch -------  */
@@ -199,7 +197,7 @@ anywhere outside of the dropdown */
 .onoffswitch-label {
   display: block; overflow: hidden; cursor: pointer;
   border: 1px solid #0B0B0B; border-radius: 50px;
-  padding:0;
+  padding: 0;
 }
 
 .onoffswitch-inner {
@@ -265,22 +263,20 @@ anywhere outside of the dropdown */
   width: 100%;
   cursor: pointer; 
   cursor: hand;
-  
 }
 
 .headerTabs::before {
-  content:"";
-  box-sizing:border-box;
+  content: "";
+  box-sizing: border-box;
   position: absolute;
-  bottom:0;
-  height:1px;
-  width:75%;
+  bottom: 0;
+  height: 1px;
+  width: 75%;
   z-index: 1;
-  border-bottom:1px solid #F1A533;
+  border-bottom: 1px solid #F1A533;
 }
 
 .headerTabs > li {
-  /*border-bottom: 1px solid #F1A533;*/
   line-height: 200%;
   text-align: center;
   float: left;
@@ -316,9 +312,8 @@ li.active {
 }
 
 .headerTabs > .marketTab {
-  background-color:#35A5A7;
+  background-color: #35A5A7;
   border-bottom: 1px solid transparent;
-  
 }
 
 .headerTabs li:hover:not(.active).marketTab,
@@ -330,9 +325,9 @@ li.active {
 }
 
 .marketTabImage {
-  fill:white;
-  width:100%;
-  height:100%;
+  fill: white;
+  width: 100%;
+  height: 100%;
 }
 
 /* ----------------------------------------- */
@@ -382,13 +377,9 @@ input.hasTimedError {
   bottom: 0.5%;
   height: 14%;
   padding: 0;
-
   border: 2px solid transparent;
-  /*border-color: #35A533;*/
   outline: 0;
-
   font-weight: 400;
-  
   color: white;
 }
 
@@ -401,8 +392,8 @@ input.hasTimedError {
 }
 
 .sendButton:active {
-  width:97%;
-  left:1.5%;
+  width: 97%;
+  left: 1.5%;
 }
 
 .morphButton {
@@ -410,9 +401,7 @@ input.hasTimedError {
   font-size: 1.2rem;
   width: 49.25%;
   background-color: transparent;
-  
   font-weight: 700;
-  /*font-size: 0.9em;*/
   bottom: 0.5%;
   z-index: 21000;
 }
@@ -424,8 +413,8 @@ input.hasTimedError {
 }
 
 .send-confirm:active {
-  width:47.25%;
-  left:1.5%;
+  width: 47.25%;
+  left: 1.5%;
 }
 
 .send-cancel {
@@ -435,35 +424,32 @@ input.hasTimedError {
 }
 
 .send-cancel:active {
-  width:47.25%;
-  right:1.5%;
+  width: 47.25%;
+  right: 1.5%;
 }
 
 .txMessagePopup {
   position: absolute;
   height: 20px;
   width: 100%;
-  top:2px;
-
+  top: 2px;
   text-align: center;
   line-height: 150%;
   font-family: 'Cabin', sans-serif;
-
   background-color: #35A5A7;
   color: white;
   z-index: 9999;
 }
 
 .errorMessagePopup {
-  background-color:#F15633;
+  background-color: #F15633;
 }
 
 .sendFormError {
   position: absolute;
   margin-left: 20%;
-  color:#F15633;
+  color: #F15633;
 }
-
 
 @-webkit-keyframes enter {
   0% {
@@ -483,6 +469,7 @@ input.hasTimedError {
     top: 10px;
   }
 }
+
 @keyframes enter {
   0% {
     opacity: 0;
@@ -502,16 +489,17 @@ input.hasTimedError {
   }
 }
 
-.loaderBackground .loaderBlur{
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
+.loaderBackground .loaderBlur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: rgba(11, 11, 11, 0.6);
   opacity: .5;
   z-index: 8;
 }
+
 .loaderAnimation {
   opacity: .6;
   z-index: 9;
@@ -563,7 +551,6 @@ input.hasTimedError {
   margin-right: 0;
 }
 
-
 /* ----------------------------------------- */
 /*              Receive View                 */
 /* ----------------------------------------- */
@@ -613,16 +600,16 @@ div.currentAddress {
 }
 
 .currentAddress i {
-  padding-right:4px;
+  padding-right: 4px;
 }
 
 .allAddressesHeader::after {
-  content:"Double-click an address to select";
+  content: "Double-click an address to select";
   position: absolute;
   font-size: .8rem;
-  right:16px;
-  top:.3rem;
-  color:#C2C2C2;
+  right: 16px;
+  top: .3rem;
+  color: #C2C2C2;
 }
 
 ul.scrollbox {
@@ -647,15 +634,15 @@ ul.scrollbox {
 }
 
 .scrollbox > li > div.receiveTooltip {
-  position:absolute;
-  box-sizing:border-box;
-  top:-25px;
-  left:40px;
-  padding:2px;
+  position: absolute;
+  box-sizing: border-box;
+  top: -25px;
+  left: 40px;
+  padding: 2px;
   padding-right: 15px;
-  height:25px;
+  height: 25px;
   background: white;
-  border:2px solid #E8E8E8;
+  border: 2px solid #E8E8E8;
 } 
 
 .scrollbox li:nth-child(2) {
@@ -664,21 +651,20 @@ ul.scrollbox {
 
 .scrollbox li.currentAddressMatch,
 .scrollbox li.currentAddressMatch::before {
-  color:#35A5A7;
+  color: #35A5A7;
 }
 
-.scrollbox li.currentAddressMatch::before{
-  content:">";  
-  position:absolute;
-  left:0;
-  top:0px;
+.scrollbox li.currentAddressMatch::before {
+  content: ">";  
+  position: absolute;
+  left: 0;
+  top: 0px;
 }
 
 .generateButton {
   font-size: 1.2rem;
   letter-spacing: .12rem;
-  cursor:pointer;
-
+  cursor: pointer;
 }
 
 /* ----------------------------------------- */
@@ -686,7 +672,7 @@ ul.scrollbox {
 /* ----------------------------------------- */
 
 .historyTableBoxes {
-  display:block;
+  display: block;
   border: 1px solid #0B0B0B;
   border-radius: 2px;
   border-collapse: separate;
@@ -698,17 +684,17 @@ tr {
 }
 
 .viewContainer > div.historyBox {
-  height:50%;
+  height: 50%;
   margin: 0 auto;
-  padding:0;
+  padding: 0;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
 }
 
 .viewContainer > div.historyBox > div.historyHeader {
-  box-sizing:border-box;
-  padding:1% 5%;
-  height:14%;
+  box-sizing: border-box;
+  padding: 1% 5%;
+  height: 14%;
   -webkit-box-shadow: 0 2px 3px -1px #C2C2C2;
   -moz-box-shadow: 0 2px 3px -1px #C2C2C2;
   box-shadow: 0 2px 3px -1px #C2C2C2;
@@ -727,15 +713,14 @@ tr {
 }
 
 .historyTable {
-  height:85%;
+  height: 85%;
   overflow-y: auto;
 }
 
 table.scrollbox {
   margin-left: 10px;
-  height:100%;
+  height: 100%;
 }
-
 
 /* ----------------------------------------- */
 /*              Markets View                 */
@@ -753,13 +738,14 @@ table.scrollbox {
 
 .marketStatsTable {
   margin-left: 1%;
-  width:98%;
+  width: 98%;
   position: relative;
 }
+
 .marketStatsTableBody {
   position: relative;
   background-color: white;
-  display:block;
+  display: block;
   border: 1px solid #35A5A7;
   border-radius: 2px;
 }
@@ -770,24 +756,24 @@ table.scrollbox {
 
 .marketView .marketUpdate {
   position: absolute;
-  left:60%;
-  bottom:-20%;
+  left: 60%;
+  bottom: -20%;
   max-width: 40%;
   font-size: .7rem;
-  color:#A2A2A2;
+  color: #A2A2A2;
 }
 
-
-
 .marketCol > i.fa-usd {
-  top:-.05rem;
+  top: -.05rem;
   font-size: .85rem;
   padding-right: 2px;
   position: relative;
 }
+
 .sideTab {
   padding-left: 5px;
 }
+
 .marketButtons {
   position: relative;
   display: inline-block;
@@ -810,15 +796,15 @@ table.scrollbox {
   color: white;
   background-color: #35A5A7;
 }
+
 .marketUpdated {
   padding-right: 5px;
 }
 
-
 .graphView {
   position: relative;
   display: block;
-  background-color: #f2f2f2;
+  background-color: #F2F2F2;
   padding: 0 5px 5px 5px;
   clear: left;
 }
@@ -828,42 +814,41 @@ table.scrollbox {
    max-width: 400px;
    min-height: 200px;
    min-width: 250px;
-   background-color: #fff;
+   background-color: #FFF;
    border: 1px solid #888;
    border-color: #35A5A7;
 }
-.graphToolTip {
-  box-sizing:border-box;
-  position: absolute;
-  width:100px;
-  height:45px;
-  left:-50px;
-  top:-30px;
-  background-color: white;
 
+.graphToolTip {
+  box-sizing: border-box;
+  position: absolute;
+  width: 100px;
+  height: 45px;
+  left: -50px;
+  top: -30px;
+  background-color: white;
   font-size: .6rem;
   text-align: center;
   line-height: 1.2rem;
-
   border-radius: 5px;
-  border:1px solid #35A5A7;
-  border-bottom:5px solid #35A5A7;
+  border: 1px solid #35A5A7;
+  border-bottom: 5px solid #35A5A7;
 }
-.graphToolTip::after{
-  content:"";
-  position:absolute;
-  width:0;
-  height:0;
+
+.graphToolTip::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
   border: 5px solid transparent;
-  border-top:5px solid #35A5A7;
-  top:42px;
-  left:45px;
+  border-top: 5px solid #35A5A7;
+  top: 42px;
+  left: 45px;
 }
 
 .graphToolTip > small {
   font-size: .9rem;
 }
-
 
 .graphToolTip > .toolTipHeader {
   padding-top: 2px;
@@ -871,25 +856,23 @@ table.scrollbox {
   font-weight: bold;
   font-size: 1.1rem;
   text-align: center;
-  color:#0B0B0B;
+  color: #0B0B0B;
 }
 
-.graphToolTip > .toolTipPrice{
-  padding-right:4px;
+.graphToolTip > .toolTipPrice {
+  padding-right: 4px;
   font-weight: bold;
-  color:#35A533;
+  color: #35A533;
 }
 
 .graphToolTip > .toolTipPrice > span {
 }
 
 .graphToolTip > .toolTipTime {
-  color:#A2A2A2;
+  color: #A2A2A2;
 }
 
 .div_chart {
-  height:300px;
-  width:300px;
+  height: 300px;
+  width: 300px;
 }
-
-

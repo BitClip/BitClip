@@ -1,11 +1,7 @@
 <ul class="row headerTabs">
-
   <li class="sendTab" ng-class="{'active': activeTab === 'send'}" ui-sref="send" ng-click="setActiveTab('send')">Send</li>
-
-  <li class="receiveTab" ng-class="{'active': activeTab === 'receive'}" ui-sref="receive" ng-click="setActiveTab('receive')">Receive </li>
-
+  <li class="receiveTab" ng-class="{'active': activeTab === 'receive'}" ui-sref="receive" ng-click="setActiveTab('receive')">Receive</li>
   <li class="historyTab" ng-class="{'active': activeTab === 'history'}" ui-sref="history" ng-click="setActiveTab('history')">History</li>
-
   <li class="marketTab" ng-class="{'active': activeTab === 'market'}" ui-sref="market" ng-click="setActiveTab('market')">
     <svg class="marketTabImage" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
       <g>

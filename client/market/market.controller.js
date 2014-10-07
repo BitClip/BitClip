@@ -1,6 +1,8 @@
-angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
+angular.module('bitclip.marketController', [
+  'nvd3ChartDirectives'
+])
 
-.controller('marketController', ['$scope', 'Market', '$http', function($scope, Market, $http){
+.controller('marketController', ['$scope', 'Market', '$http', function($scope, Market, $http) {
   $scope.getGraphData = function(hours) {
     Market.getGraphData(hours, function(data) {
       $scope.setYAxis = [Math.ceil((+data.min * 0.98)), Math.ceil((+data.max * 1.02))];
@@ -16,7 +18,6 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
   };
 
   $scope.toolTipContentFunction = function() {
-
     return function(exchangeName, date, price, e, graph) {
       exchangeName = exchangeName.charAt(0).toUpperCase() + exchangeName.slice(1);
       var template = "<div class='graphToolTip'><small class='toolTipHeader'>" + exchangeName + 
@@ -32,13 +33,10 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
       var values = d[0].values;
       var valLength = values.length;
 
-      if(valLength < 2) { //default if server hasn't collected enough data
-        return [0, 0];
-      }
+      if (valLength < 2) return [0, 0];
 
-      var mid = Math.ceil(valLength/2)
-      tickVals.push(values[mid][0])
-
+      var mid = Math.ceil(valLength / 2);
+      tickVals.push(values[mid][0]);
       return tickVals;
     };
   };
@@ -46,9 +44,9 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
   $scope.xAxisTickFormatFunction = function() {
     return function(d) {
       var time = new Date(d);
-      time = time.toLocaleTimeString()
+      time = time.toLocaleTimeString();
       return time.slice(0, 4) + time.slice(7, time.length);
-    }
+    };
   };
 
   $scope.setActiveTab = function(tab) {
@@ -56,6 +54,5 @@ angular.module('bitclip.marketController', ['nvd3ChartDirectives'])
   };
 
   $scope.getGraphData(24);
-  $scope.activeTab = 'twentyfourHour';
-
+  $scope.activeTab = 'twentyFourHour';
 }]);

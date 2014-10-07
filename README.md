@@ -3,8 +3,6 @@
 #BitClip
 #### The most easy-to-use client-side Bitcoin wallet on the internet.
 
-
-
 ## Interested in Bitcoin and need a simple, secure wallet?
 
 We got tired of clunky wallets with a bazillion form fields. BitClip is built to provide a safe way to store and spend Bitcoins without any clutter:
@@ -16,7 +14,6 @@ We got tired of clunky wallets with a bazillion form fields. BitClip is built to
 Soon to be released:
   - Backup wallet
   - Import/Export address-key pairs
-
 
 ## Team
 
@@ -38,8 +35,7 @@ Soon to be released:
 
 ## Download Working Copy
 
-You can download a deployed version of this App [here](https://chrome.google.com/webstore/category/apps).
-
+You can download a deployed version of this app [here](https://chrome.google.com/webstore/category/apps).
 
 ## Requirements
 
@@ -63,7 +59,6 @@ bower install
 
 ### Tasks
 
-
 1. Visit chrome://extensions in your browser (or open up the Chrome menu by clicking the icon to the far right of the URL box and select Extensions under the Tools menu to get to the same place).
 
 2. Ensure that the Developer mode checkbox in the top right-hand corner is checked.
@@ -74,11 +69,9 @@ bower install
 
 5. Click Select on 'client' directory, and BitClip will be loaded into your Browser.
 
-
 ### Roadmap
 
 View the project roadmap [here](https://docs.google.com/spreadsheets/d/1-yMgsi_L0hib9ap5ruJHyLoarVNYoiJXBJx6AYjVb3U/)
-
 
 ## Contributing
 

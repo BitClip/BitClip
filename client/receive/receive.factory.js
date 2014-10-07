@@ -1,33 +1,30 @@
 angular.module('bitclip.receiveFactory', [])
 
-.factory('Receive', ['$q', 'Utilities', function($q, Utilities) {
-  
-  var newAddress = function() {
-    var that = this;
-    Utilities.isMainNet().then(function(bool) {
-      var isMainNet = bool;
-      var network = isMainNet ? 'bitcoin' : 'testnet';
-      var key = bitcoin.ECKey.makeRandom();
-      var currentPrivateKey = key.toWIF(bitcoin.networks[network]);
-      var currentAddress = key.pub.getAddress(bitcoin.networks[network]).toString();
-      var location = isMainNet ? 'mainNet' : 'testNet';
-      
-      chrome.storage.local.get(location, function(obj) {
-        obj[location].currentAddress = currentAddress;
-        obj[location].currentPrivateKey = currentPrivateKey;
-        chrome.storage.local.set(obj, function() {
-          chrome.storage.local.get(location, function(obj) {
-            obj[location].allAddressesAndKeys.unshift([currentAddress, currentPrivateKey]);
-            chrome.storage.local.set(obj, function() {
-              // Load testnet address with 0.99 BTC
-              if (network === 'testnet') {
-                Utilities.getTestNetCoins(currentAddress, 99000000, function(data) {
-                  angular.element(document.getElementsByTagName('header-bar')).scope().getNetworkStatus();
-                });
-              } else {
-                angular.element(document.getElementsByTagName('header-bar')).scope().getNetworkStatus();
-              }
-            });
+.factory('Receive', ['$q', '$rootScope', 'Utilities', function($q, $rootScope, Utilities) {
+  var newAddress = function(scope) {
+    var isMainNet = $rootScope.isMainNet;
+    var network = isMainNet ? 'bitcoin' : 'testnet';
+    var location = isMainNet ? 'mainNet' : 'testNet';
+    var key = bitcoin.ECKey.makeRandom();
+    var currentPrivateKey = key.toWIF(bitcoin.networks[network]);
+    var currentAddress = key.pub.getAddress(bitcoin.networks[network]).toString();
+
+    chrome.storage.local.get(location, function(obj) {
+      obj[location].currentAddress = currentAddress;
+      obj[location].currentPrivateKey = currentPrivateKey;
+      chrome.storage.local.set(obj, function() {
+        chrome.storage.local.get(location, function(obj) {
+          obj[location].allAddressesAndKeys.unshift([currentAddress, currentPrivateKey]);
+          chrome.storage.local.set(obj, function() {
+            if (network === 'testnet') {
+              Utilities.getTestNetCoins(currentAddress, 99000000, function() {
+                applyCurrentAddress(currentAddress);
+                scope.renderBalances();
+              });
+            } else {
+              applyCurrentAddress(currentAddress);
+              scope.renderBalances();
+            }
           });
         });
       });
@@ -35,23 +32,23 @@ angular.module('bitclip.receiveFactory', [])
   };
 
   var setAsCurrentAddress = function(address) {
-    var that = this;
-    Utilities.isMainNet().then(function(bool) {
-      var isMainNet = bool;
-      var location = isMainNet ? 'mainNet' : 'testNet';
+    applyCurrentAddress(address);
+    var isMainNet = $rootScope.isMainNet;
+    var location = isMainNet ? 'mainNet' : 'testNet';
 
-      chrome.storage.local.get(location, function(obj) {
-        for (var i = 0, l = obj[location].allAddressesAndKeys.length; i < l; i++) {
-          if (address === obj[location].allAddressesAndKeys[i][0]) {
-            obj[location].currentAddress = obj[location].allAddressesAndKeys[i][0];
-            obj[location].currentPrivateKey = obj[location].allAddressesAndKeys[i][1];
-            chrome.storage.local.set(obj, function() {
-              angular.element(document.getElementsByTagName('header-bar')).scope().getNetworkStatus();
-            });
-          }
+    chrome.storage.local.get(location, function(obj) {
+      for (var i = 0, l = obj[location].allAddressesAndKeys.length; i < l; i++) {
+        if (address === obj[location].allAddressesAndKeys[i][0]) {
+          obj[location].currentAddress = obj[location].allAddressesAndKeys[i][0];
+          obj[location].currentPrivateKey = obj[location].allAddressesAndKeys[i][1];
+          chrome.storage.local.set(obj);
         }
-      });
+      }
     });
+  };
+
+  var applyCurrentAddress = function(address) {
+    $rootScope.currentAddress = address;
   };
 
   var prepareDefault = function(allAddresses) {
@@ -75,6 +72,7 @@ angular.module('bitclip.receiveFactory', [])
   return {
     newAddress: newAddress,
     setAsCurrentAddress: setAsCurrentAddress,
+    applyCurrentAddress: applyCurrentAddress,
     prepareDefault: prepareDefault,
     prepareBalances: prepareBalances
   };

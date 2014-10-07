@@ -1,32 +1,33 @@
 angular.module('bitclip.receiveController', [])
 
-.controller('receiveController', ['$scope', 'Receive', 'Utilities', function($scope, Receive, Utilities) {
-  Utilities.getCurrentAddress().then(function(currentAddress) {
-    $scope.currentAddress = currentAddress;
-  });
-  Utilities.getAllAddresses().then(function(allAddresses) {
-    $scope.allAddressesAndBalances = Receive.prepareDefault(allAddresses);
-    Utilities.getBalances(allAddresses).then(function(allBalances) {
-      Receive.prepareBalances(allAddresses, allBalances).then(function(allAddressesAndBalances) {
-        $scope.allAddressesAndBalances = allAddressesAndBalances;
+.controller('receiveController', ['$rootScope', '$scope', 'Receive', 'Utilities', function($rootScope, $scope, Receive, Utilities) {
+  $scope.renderBalances = function() {
+    Utilities.getAllAddresses().then(function(allAddresses) {
+      $scope.allAddressesAndBalances = Receive.prepareDefault(allAddresses);
+      Utilities.getBalances(allAddresses).then(function(allBalances) {
+        Receive.prepareBalances(allAddresses, allBalances).then(function(allAddressesAndBalances) {
+          $scope.allAddressesAndBalances = allAddressesAndBalances;
+          if ($scope.loading) $scope.loading = false;
+        });
       });
     });
-  });
+  };
+  $scope.renderBalances();
 
-  $scope.newAddress = function(){
-    Utilities.isMainNet().then(function(isMainNet){$scope.loading = !isMainNet})
-    Receive.newAddress();
+  $scope.regenerateNetworkAddresses = function() {
+    $scope.renderBalances();
+    Utilities.getCurrentAddress().then(function(currentAddress) {
+      Receive.applyCurrentAddress(currentAddress);
+    });
+  };
+  $rootScope.$watch('isMainNet', $scope.regenerateNetworkAddresses);
+
+  $scope.newAddress = function() {
+    Utilities.isMainNet().then(function(isMainNet) {
+      $scope.loading = !isMainNet;
+    });
+    Receive.newAddress($scope);
   };
 
   $scope.setAsCurrentAddress = Receive.setAsCurrentAddress;
-}])
-
-.filter('toArray', function() {
-  return function(obj) {
-    var result = [];
-    angular.forEach(obj, function(val, key) {
-      result.push(val);
-    });
-    return result;
-  };
-});
+}]);

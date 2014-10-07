@@ -5,11 +5,11 @@ angular.module('bitclip.validateAddressDirective', [])
     restrict: 'A',
     require: 'ngModel',
     link: function (scope, formElement, attr, ngModelCtrl) {
-      formElement.bind('click', function(event){
+      formElement.bind('click', function(event) {
         var isValidAddress = TxBuilder.isValidAddress(scope.transactionDetails.destination);
         scope.sendForm.destination.$invalid = !isValidAddress;
         scope.sendForm.destination.$valid = isValidAddress;
       });
     }
   };
-}])
+}]);

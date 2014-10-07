@@ -4,15 +4,12 @@
   "homepage": "https://github.com/BitClip/BitClip",
   "authors": [
     "JackTanRoo <ordo_sagittae@hotmail.com>",
-    "Etripier <>"
+    "etripier <etripier@gmail.com>"
   ],
   "license": "MIT",
   "ignore": [
     "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "bower_components"
   ],
   "dependencies": {
     "angular": "~1.2.25",

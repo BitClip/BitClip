@@ -16,7 +16,7 @@ angular.module('bitclip', [
   'bitclip.marketController',
   'bitclip.marketFactory',
   'bitclip.utilitiesFactory'
-  ])
+])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/send');
@@ -41,6 +41,4 @@ angular.module('bitclip', [
     templateUrl: 'market/market.tpl.html',
     controller: 'marketController'
   });
-}])
-
-
+}]);

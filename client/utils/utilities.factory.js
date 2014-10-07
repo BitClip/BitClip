@@ -1,6 +1,6 @@
 angular.module('bitclip.utilitiesFactory', [])
 
-.factory('Utilities', ['$http', '$q',function($http, $q) {
+.factory('Utilities', ['$http', '$q', function($http, $q) {
   var InitObj = function() {
     this.currentAddress = '';
     this.currentPrivateKey = '';
@@ -88,6 +88,10 @@ angular.module('bitclip.utilitiesFactory', [])
       if (addresses.length > 1) {
         requestString += addresses.join('&addresses=');
       } else if (addresses.length === 1) {
+        if (!addresses[0]) {
+          deferred.resolve([]);
+          return deferred.promise;
+        }
         requestString = addresses[0];
       } else {
         deferred.resolve([]);
@@ -128,6 +132,7 @@ angular.module('bitclip.utilitiesFactory', [])
 
   var closeExistingSocketsPermanently = function() {
     openSocketsList.forEach(function(websocket) {
+      websocket.onclose = function() {};
       websocket.close();
     });
     openSocketsList.splice(0, openSocketsList.length);
@@ -143,19 +148,19 @@ angular.module('bitclip.utilitiesFactory', [])
     });
   };
 
-  var getTestNetCoins = function(address, value, callback){
+  var getTestNetCoins = function(address, value, callback) {
     $http({
-      method: 'POST', 
+      method: 'POST',
       url: 'http://testnet.helloblock.io/v1/faucet/withdrawal',
-      data:{
+      data: {
         value: value,
-        toAddress:address
+        toAddress: address
       }
-    }).
-      success(function(data, status, headers, config) {
+    })
+      .success(function(data, status, headers, config) {
         callback(data, status, headers, config);
-      }).
-      error(function(data, status, headers, config) {
+      })
+      .error(function(data, status, headers, config) {
         callback(data, status, headers, config);
       });
   };
@@ -170,6 +175,6 @@ angular.module('bitclip.utilitiesFactory', [])
     getBalances: getBalances,
     openSocketsList: openSocketsList,
     getLiveBalanceForCurrentAddress: getLiveBalanceForCurrentAddress,
-    getTestNetCoins:getTestNetCoins
+    getTestNetCoins: getTestNetCoins
   };
 }]);
