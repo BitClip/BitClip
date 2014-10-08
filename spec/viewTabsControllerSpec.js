@@ -1,4 +1,4 @@
-describe.only('Unit: viewTabsController', function () {
+describe('Unit: viewTabsController', function () {
   beforeEach(module('bitclip'));
 
   var $scope, $rootScope, $location, $window, createController;

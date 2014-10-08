@@ -26,11 +26,8 @@ Soon to be released:
 1. [Usage](#download-working-copy)
 2. [Requirements](#requirements)
 3. [Development](#development)
-
     a. [Installing Dependencies](#installing-dependencies)
-
     b. [Tasks](#tasks)
-
 4. [Team](#team)
 5. [Contributing](#contributing)
 
