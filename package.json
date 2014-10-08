@@ -1,0 +1,33 @@
+{
+  "name": "bitClip",
+  "version": "1.0.0",
+  "description": "BitClip",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BitClip/BitClip.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BitClip/BitClip/issues"
+  },
+  "homepage": "https://github.com/BitClip/BitClip",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "chai-as-promised": "^4.1.1",
+    "expect.js": "^0.3.1",
+    "karma": "^0.12.23",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-mocha": "^0.1.4",
+    "karma-nested-reporter": "^0.1.1",
+    "karma-nyan-reporter": "^0.0.43",
+    "karma-sinon": "^1.0.3",
+    "karma-unicorn-reporter": "^0.1.4",
+    "mocha": "^1.20.1"
+  }
+}

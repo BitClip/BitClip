@@ -23,18 +23,17 @@ Soon to be released:
 
 ## Table of Contents
 
-1. [Usage](#Usage)
+1. [Usage](#download-working-copy)
 2. [Requirements](#requirements)
 3. [Development](#development)
     a. [Installing Dependencies](#installing-dependencies)
     b. [Tasks](#tasks)
-
 4. [Team](#team)
 5. [Contributing](#contributing)
 
 ## Download Working Copy
 
-You can download a deployed version of this app [here](https://chrome.google.com/webstore/category/apps).
+You can download a deployed version of this app [here](chrome.google.com/webstore/detail/bitclip/ijmpgkjfkbfhoebgogflfebnmejmfbml).
 
 ## Requirements
 
