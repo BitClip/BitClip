@@ -1,40 +1,20 @@
-describe('Unit: headerFactory', function () {
+describe('Unit: headerController', function () {
   beforeEach(module('bitclip'));
 
-  var $scope, $rootScope, $location, $window, $httpBackend, createController, Header, Utilities, tempStore;
+  var $scope, $rootScope, $location, $window, $controller, createController, Header, Utilities, tempStore, $http;
 
   beforeEach(inject(function($injector) {
     $rootScope = $injector.get('$rootScope');
     $location = $injector.get('$location');
     $scope = $rootScope.$new();
-    $httpBackend = $injector.get('$httpBackend');
     $window = $injector.get('$window');
-    $http = $injector.get('$http');
     Header = $injector.get('Header');
     Utilities = $injector.get('Utilities');
-
-  /***********************************************************
-    Mocks up HelloBlock server when a GET request is made to 
-    query balance of testNet currentAddress.
-    Endpoint: https://helloblock.io/docs/ref#addresses-batch
-  ***********************************************************/
-
-  $httpBackend.when('GET','http://testnet.helloblock.io/v1/addresses?addresses=mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf')
-  .respond({
-    "status":"success",
-    "data":{
-      "addresses":[
-        { "balance":224880000,
-          "confirmedBalance":224880000 
-        }
-      ]
-    }
-  });
-
-  /****************************************************
-    Mocks up the chrome.storage.local setters 
-    and getters.
-  *****************************************************/
+    
+    /*********************************************
+    The next section mocks up the chrome.storage.local
+    setters and getters.
+    **********************************************/
 
     $window.chrome = {
       storage: {
@@ -61,9 +41,9 @@ describe('Unit: headerFactory', function () {
       callback(result);
     };
 
-  /*********************************************
-    Mocks up state of chrome.storage.local
-  **********************************************/
+    /*********************************************
+    Mocked up state of chrome.storage.local
+    **********************************************/
 
     tempStore = {
       "isMainNet":false,
@@ -84,30 +64,30 @@ describe('Unit: headerFactory', function () {
         "currentPrivateKey":"cRqGMD3MDfkEJit4HTtA3tUDcAtQkmogqrLAnuu4aBaefXCp1J79"
       }
     };
+
+    $controller = $injector.get('$controller');
+    createController = function () {
+      return $controller('headerController', {
+        $rootScope: $rootScope,
+        $scope: $scope,
+        $window: $window,
+        $location: $location,
+        Header: Header,
+        Utilities: Utilities,
+        tempStore: tempStore
+      });
+    };
+    createController(); 
   }));
-  
+
   /*********************************************
                       Tests
   **********************************************/
-
-  it('setNetwork should be a function', function () {
-    expect(Header.setNetwork).to.be.a('function');
-  });
-
-  it('setNetwork should change isMainNet in chrome.storage.local', function (done) {
-    Header.setNetwork(true, function(){
-      expect(tempStore.isMainNet).to.equal(true);
-      done();
-    });
-  });
-
-  it('getBalanceForCurrentAddress should make GET request to HelloBlock and return correct balance', function (done) {
-    Header.getBalanceForCurrentAddress()
-    .then(function(balance){
-      expect(balance).to.equal(224880000);
+  it('setBalance should exist on the scope', function ( done ) {
+    Utilities.initialize().then(function(){
+      expect($scope.setBalance).to.be.a('function');
       done();
     })
-    $httpBackend.flush();
     $rootScope.$apply();
   });
-});
+})
