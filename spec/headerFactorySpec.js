@@ -13,12 +13,13 @@ describe('Unit: headerFactory', function () {
     Header = $injector.get('Header');
     Utilities = $injector.get('Utilities');
 
-  /****************************************************
+  /***********************************************************
     The next section mocks up HelloBlock server for expected
     response when a GET request is made to query balance of an 
     address.
     Endpoint: https://helloblock.io/docs/ref#addresses-batch
-  *****************************************************/
+  ***********************************************************/
+
   $httpBackend.when('GET','http://testnet.helloblock.io/v1/addresses?addresses=mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf')
   .respond({
     "status":"success",
@@ -100,7 +101,7 @@ describe('Unit: headerFactory', function () {
     });
   });
 
-  it.only('getBalanceForCurrentAddress should make GET request to HelloBlock and return correct balance', function (done) {
+  it('getBalanceForCurrentAddress should make GET request to HelloBlock and return correct balance', function (done) {
     Header.getBalanceForCurrentAddress()
     .then(function(balance){
       expect(balance).to.equal(224880000);

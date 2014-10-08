@@ -71,22 +71,26 @@ describe('Unit: Utilities Factory', function () {
 
   it('initialize should instantiate isMainNet, mainNet and testNet properties in chrome storage', function (done) {
     tempStore = {};
-    expect(Utilities.initialize).to.be.a('function');
+    var expectedResult = {
+      isMainNet: true,
+      mainNet: {
+        currentAddress: "",
+        currentPrivateKey: "",
+        allAddressesAndKeys: []
+      },
+      testNet: {
+        currentAddress: "",
+        currentPrivateKey: "",
+        allAddressesAndKeys: []
+      }
+    };
+
     Utilities.initialize()
     .then(function(message){
       expect(message).to.be("Initialization complete.");
-      expect(tempStore.isMainNet).to.equal(true);
-      expect(tempStore.mainNet.currentAddress).to.be("");
-      expect(tempStore.mainNet.currentPrivateKey).to.be("");
-      expect(tempStore.mainNet.allAddressesAndKeys).to.be.empty();
-      expect(tempStore.testNet.currentAddress).to.be("");
-      expect(tempStore.testNet.currentPrivateKey).to.be("");
-      expect(tempStore.testNet.allAddressesAndKeys).to.be.empty();
+      expect(JSON.stringify(tempStore)).to.equal(JSON.stringify(expectedResult));
       done();
-    })
-    .catch(function(err){
-      done();
-    })
+    });
     $rootScope.$apply();
   });
 
