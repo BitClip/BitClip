@@ -43,7 +43,7 @@ angular.module('bitclip.sendController', [
           $scope.loading = false;
         })
         .catch(function(err) {
-          $scope.notification = 'Transaction failed: ' + err.message + '.';
+          $scope.notification = 'Transaction failed: ' + (err.message.length > 30 ? err.message.slice(0, 30) + ' ...' : err.message + '.');
           $timeout(function() {
             $scope.notification = false;
           }, 2000);

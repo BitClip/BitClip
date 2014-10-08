@@ -26,10 +26,9 @@ Soon to be released:
 1. [Usage](#Usage)
 2. [Requirements](#requirements)
 3. [Development](#development)
-
     a. [Installing Dependencies](#installing-dependencies)
-
     b. [Tasks](#tasks)
+
 4. [Team](#team)
 5. [Contributing](#contributing)
 
