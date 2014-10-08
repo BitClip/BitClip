@@ -8,38 +8,32 @@ describe('Unit: headerController', function () {
     $location = $injector.get('$location');
     $scope = $rootScope.$new();
     $window = $injector.get('$window');
-
     Header = $injector.get('Header');
     Utilities = $injector.get('Utilities');
-
     $window.chrome = {
-                      storage:{
-                        local: {
-                            set: function(obj , callback){ 
-                              tempStore = obj;
-                              callback();
-                            },
-                            get: function(propStrOrArray, callback){ 
-                              console.log("GET JUST GOT INVOKED");
-                              var result = {};
-                              //TODO later: must also handle case when key input
-                              //has no value in tempstore;
-                              if (typeof propStrOrArray === 'string'){
-                                result[propStrOrArray] = tempStore[propStrOrArray];
-                              } else if (Array.isArray(propStrOrArray)){
-                                propStrOrArray.forEach(function(propName){
-                                  result[propName] = tempStore[propName];
-                                });
-                              } else if (propStrOrArray === null) {
-                                result = tempStore;
-                              }
-                              callback(result);
-                            },
-                            remove: function(){ },
-                            clear: function(){ }
-                        }
-                      }
-                    };
+      storage: {
+        local:{}
+      }
+    };
+
+    $window.chrome.storage.local.set = function(obj , callback){
+      tempStore = obj;
+      callback();
+    };
+
+    $window.chrome.storage.local.get = function(propStrOrArray, callback){
+      var result = {};                        
+      if (typeof propStrOrArray === 'string'){
+        result[propStrOrArray] = tempStore[propStrOrArray];
+      } else if (Array.isArray(propStrOrArray)){
+        propStrOrArray.forEach(function(propName){
+          result[propName] = tempStore[propName];
+        });
+      } else if (propStrOrArray === null) {
+        result = tempStore;
+      }
+      callback(result);
+    };
     tempStore = {
       isMainNet: false,
       mainNet: {
