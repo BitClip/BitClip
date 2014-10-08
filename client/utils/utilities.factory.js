@@ -48,11 +48,9 @@ angular.module('bitclip.utilitiesFactory', [])
     var deferred = $q.defer();
     chrome.storage.local.get(['isMainNet', 'mainNet', 'testNet'], function(obj) {
       if (obj.isMainNet === true) {
-        var result = obj.mainNet[request];
-        deferred.resolve(result);
+        deferred.resolve(obj.mainNet[request]);
       } else if (obj.isMainNet === false) {
-        var result = obj.testNet[request];
-        deferred.resolve(result);
+        deferred.resolve(obj.testNet[request]);
       } else {
         deferred.reject('Network type not defined.');
       }

@@ -1,17 +1,6 @@
 angular.module('bitclip.sendFactory', [])
 
 .factory('TxBuilder', ['$q', '$rootScope', function($q, $rootScope) {
-  var transactionDetails = {};
-
-  var updateTx = function(transactionObj) {
-    transactionDetails = transactionObj;
-    return transactionDetails;
-  };
-
-  var getTransactionDetails = function() {
-    return transactionDetails;
-  };
-
   var sendTransaction = function(privateKeyWIF, transactionObj, isMainNet) {
     var deferred = $q.defer();
     var networkVar = {
@@ -35,7 +24,7 @@ angular.module('bitclip.sendFactory', [])
       };
 
       var tx = new bitcoin.Transaction();
-      var totalUnspentsValue = 0
+      var totalUnspentsValue = 0;
       unspents.forEach(function(unspent) {
         tx.addInput(unspent.txHash, unspent.index);
         totalUnspentsValue += unspent.value;
@@ -54,7 +43,7 @@ angular.module('bitclip.sendFactory', [])
           deferred.reject(err);
           $rootScope.$apply();
         } else if (tx) {
-          deferred.resolve('Transaction successfully propagated');
+          deferred.resolve('Transaction successfully propagated.');
           $rootScope.$apply();
         }
       });
@@ -71,7 +60,6 @@ angular.module('bitclip.sendFactory', [])
       var rest = decoded.substr(0, decoded.length - 4);  
       var good_cksum = hex2a(sha256_digest(hex2a(sha256_digest(rest)))).substr(0, 4);
       if (cksum !== good_cksum) return false;
-
       return true;
     };
 
@@ -144,7 +132,7 @@ angular.module('bitclip.sendFactory', [])
     };
     
     var regex = /[^a-zA-Z0-9]/;
-    if (regex.test(address)) {
+    if (regex.test(address) || address === undefined) {
       return false;
     }
     return check(address);
@@ -152,8 +140,6 @@ angular.module('bitclip.sendFactory', [])
 
   return {
     sendTransaction: sendTransaction,
-    isValidAddress: isValidAddress,
-    updateTx: updateTx,
-    getTransactionDetails: getTransactionDetails
+    isValidAddress: isValidAddress
   };
 }]);

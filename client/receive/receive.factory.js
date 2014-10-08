@@ -12,27 +12,26 @@ angular.module('bitclip.receiveFactory', [])
     chrome.storage.local.get(location, function(obj) {
       obj[location].currentAddress = currentAddress;
       obj[location].currentPrivateKey = currentPrivateKey;
+      obj[location].allAddressesAndKeys.unshift([currentAddress, currentPrivateKey]);
       chrome.storage.local.set(obj, function() {
-        chrome.storage.local.get(location, function(obj) {
-          obj[location].allAddressesAndKeys.unshift([currentAddress, currentPrivateKey]);
-          chrome.storage.local.set(obj, function() {
-            if (network === 'testnet') {
-              Utilities.getTestNetCoins(currentAddress, 99000000, function() {
-                applyCurrentAddress(currentAddress);
-                scope.renderBalances();
-              });
-            } else {
-              applyCurrentAddress(currentAddress);
-              scope.renderBalances();
-            }
+        if (network === 'testnet') {
+          Utilities.getTestNetCoins(currentAddress, 99000000, function() {
+            applyCurrentAddress(currentAddress);
+            scope.renderBalances();
           });
-        });
+        } else {
+          applyCurrentAddress(currentAddress);
+          scope.renderBalances();
+        }
       });
     });
   };
 
+  var applyCurrentAddress = function(address) {
+    $rootScope.currentAddress = address;
+  };
+
   var setAsCurrentAddress = function(address) {
-    applyCurrentAddress(address);
     var isMainNet = $rootScope.isMainNet;
     var location = isMainNet ? 'mainNet' : 'testNet';
 
@@ -41,20 +40,23 @@ angular.module('bitclip.receiveFactory', [])
         if (address === obj[location].allAddressesAndKeys[i][0]) {
           obj[location].currentAddress = obj[location].allAddressesAndKeys[i][0];
           obj[location].currentPrivateKey = obj[location].allAddressesAndKeys[i][1];
-          chrome.storage.local.set(obj);
+          chrome.storage.local.set(obj, function() {
+            $rootScope.$apply(function() {
+              $rootScope.currentAddress = address;
+            });
+          });
         }
       }
     });
   };
 
-  var applyCurrentAddress = function(address) {
-    $rootScope.currentAddress = address;
-  };
-
   var prepareDefault = function(allAddresses) {
     var result = {};
     for (var i = 0, l = allAddresses.length; i < l; i++) {
-      result[i] = {address: allAddresses[i], balance: ''};
+      result[i] = {
+        address: allAddresses[i],
+        balance: ''
+      };
     }
     return result;
   };
@@ -63,7 +65,10 @@ angular.module('bitclip.receiveFactory', [])
     var deferred = $q.defer();
     var result = {};
     for (var i = 0, l = allAddresses.length; i < l; i++) {
-      result[i] = {address: allAddresses[i], balance: allBalances[i].balance / 100000000};
+      result[i] = {
+        address: allAddresses[i],
+        balance: allBalances[i].balance / 100000000
+      };
     }
     deferred.resolve(result);
     return deferred.promise;

@@ -1,13 +1,13 @@
 <form name="sendForm" ng-submit="sendPayment()">
   <div ng-if="notification" class="fx-fade-left fx-easing-cubic fx-speed-200 txMessagePopup" ng-class="{'errorMessagePopup': notification !== 'Transaction successfully propagated.'}">{{ notification }}</div>
   <label>Destination:</label>
-  <input type="text" placeholder="e.g. mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG" name="destination" ng-model="transactionDetails.destination" required autofocus>
+  <input type="text" placeholder="{{ addressPlaceholder }}" name="destination" ng-model="transactionDetails.destination" ng-class="{'has-error': sendForm.destination.$invalid && !sendForm.destination.$pristine }" valid-address required autofocus>
   <label>Amount:</label>
-  <input type="text" placeholder="minimum 0.0001 BTC" name="amount" ng-model="transactionDetails.amount" ng-pattern="/^(\d+\.?\d*|\.\d+)$/" required>
-  <input type="submit" value="confirm" ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-confirm">
-  <button ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-cancel" ng-click="transactionDetails.amount = ''; morph();">cancel</button>
+  <input type="text" placeholder="{{ amountPlaceholder }}" name="amount" ng-model="transactionDetails.amount" ng-class="{'has-error': sendForm.amount.$invalid && !sendForm.amount.$pristine }" ng-pattern="/^(\d+\.?\d*|\.\d+)$/" required>
+  <input type="submit" value="Confirm" ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-confirm">
+  <button ng-init="confirmed=false" ng-if="confirmed" class="sendViewButton morphButton send-cancel" ng-click="transactionDetails.amount = ''; morph();">Cancel</button>
 </form>
-<button ng-if="!confirmed" ng-model="transactionDetails.destination" id="send" class="sendViewButton sendButton" ng-click="validateInput()" valid-address>SEND</button>
+<button ng-if="!confirmed" ng-model="transactionDetails.destination" id="send" class="sendViewButton sendButton" ng-click="validateInput()">Send</button>
 <div ng-if="loading" class="loaderBackground">
   <div class="loaderBlur"></div>
   <div class="loaderAnimation">

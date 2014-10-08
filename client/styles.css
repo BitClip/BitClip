@@ -451,106 +451,6 @@ input.hasTimedError {
   color: #F15633;
 }
 
-@-webkit-keyframes enter {
-  0% {
-    opacity: 0;
-    top: -10px;
-  }
-  5% {
-    opacity: 1;
-    top: 0px;
-  }
-  50.9% {
-    opacity: 1;
-    top: 0px;
-  }
-  55.9% {
-    opacity: 0;
-    top: 10px;
-  }
-}
-
-@keyframes enter {
-  0% {
-    opacity: 0;
-    top: -10px;
-  }
-  5% {
-    opacity: 1;
-    top: 0px;
-  }
-  50.9% {
-    opacity: 1;
-    top: 0px;
-  }
-  55.9% {
-    opacity: 0;
-    top: 10px;
-  }
-}
-
-.loaderBackground .loaderBlur {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(11, 11, 11, 0.6);
-  opacity: .5;
-  z-index: 8;
-}
-
-.loaderAnimation {
-  opacity: .6;
-  z-index: 9;
-  position: absolute;
-  left: 50%;
-  top: 55%;
-  margin-left: -27.5px;
-  margin-top: -27.5px;
-}
-
-.square {
-  background: white;
-  width: 15px;
-  height: 15px;
-  float: left;
-  top: -10px;
-  margin-right: 5px;
-  margin-top: 5px;
-  position: relative;
-  opacity: 0;
-  -webkit-animation: enter 2.15s infinite;
-  animation: enter 2.15s infinite;
-}
-
-.enter {
-  top: 0px;
-  opacity: 1;
-}
-
-.square:nth-child(1) {
-}
-
-.square:nth-child(2) {
-  -webkit-animation-delay: .2s;
-  animation-delay: .2s;
-}
-
-.square:nth-child(3) {
-  -webkit-animation-delay: .4s;
-  animation-delay: .4s;
-  background: #F1A533;
-}
-
-.clear {
-  clear: both;
-}
-
-.last {
-  margin-right: 0;
-}
-
 /* ----------------------------------------- */
 /*              Receive View                 */
 /* ----------------------------------------- */
@@ -662,7 +562,7 @@ ul.scrollbox {
 }
 
 .generateButton {
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   letter-spacing: .12rem;
   cursor: pointer;
 }
@@ -875,4 +775,187 @@ table.scrollbox {
 .div_chart {
   height: 300px;
   width: 300px;
+}
+
+/* ----------------------------------------- */
+/*            Send/Receive Spinner           */
+/* ----------------------------------------- */
+
+@-webkit-keyframes enter {
+  0% {
+    opacity: 0;
+    top: -10px;
+  }
+  5% {
+    opacity: 1;
+    top: 0px;
+  }
+  50.9% {
+    opacity: 1;
+    top: 0px;
+  }
+  55.9% {
+    opacity: 0;
+    top: 10px;
+  }
+}
+
+@keyframes enter {
+  0% {
+    opacity: 0;
+    top: -10px;
+  }
+  5% {
+    opacity: 1;
+    top: 0px;
+  }
+  50.9% {
+    opacity: 1;
+    top: 0px;
+  }
+  55.9% {
+    opacity: 0;
+    top: 10px;
+  }
+}
+
+.loaderBackground .loaderBlur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(11, 11, 11, 0.6);
+  opacity: .5;
+  z-index: 8;
+}
+
+.loaderAnimation {
+  opacity: .6;
+  z-index: 9;
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  margin-left: -27.5px;
+  margin-top: -27.5px;
+}
+
+.square {
+  background: white;
+  width: 15px;
+  height: 15px;
+  float: left;
+  top: -10px;
+  margin-right: 5px;
+  margin-top: 5px;
+  position: relative;
+  opacity: 0;
+  -webkit-animation: enter 2.15s infinite;
+  animation: enter 2.15s infinite;
+}
+
+.enter {
+  top: 0px;
+  opacity: 1;
+}
+
+.square:nth-child(1) {
+}
+
+.square:nth-child(2) {
+  -webkit-animation-delay: .2s;
+  animation-delay: .2s;
+}
+
+.square:nth-child(3) {
+  -webkit-animation-delay: .4s;
+  animation-delay: .4s;
+  background: #F1A533;
+}
+
+.clear {
+  clear: both;
+}
+
+.last {
+  margin-right: 0;
+}
+
+/* ----------------------------------------- */
+/*               Market Spinner              */
+/* ----------------------------------------- */
+
+.marketLoaderBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(256, 256, 256, 0.6);
+  opacity: .5;
+  z-index: 8;
+}
+
+@-webkit-keyframes marketSpinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes marketSpinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes marketSpinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes marketSpinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.marketSpinner:not(:required) {
+  -webkit-animation: marketSpinner 1250ms infinite linear;
+  animation: marketSpinner 1250ms infinite linear;
+  border: 5px solid #35A5A7;
+  border-right-color: transparent;
+  border-radius: 16px;
+  box-sizing: border-box;
+  display: inline-block;
+  overflow: hidden;
+  text-indent: -9999px;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  left: 46%;
+  top: 65%;
+  margin-left: 0px;
+  margin-top: 0px;
+  z-index: 9;
 }

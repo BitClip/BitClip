@@ -4,6 +4,7 @@ angular.module('bitclip.marketController', [
 
 .controller('marketController', ['$scope', 'Market', '$http', function($scope, Market, $http) {
   $scope.getGraphData = function(hours) {
+    $scope.loading = true;
     Market.getGraphData(hours, function(data) {
       $scope.setYAxis = [Math.ceil((+data.min * 0.98)), Math.ceil((+data.max * 1.02))];
       $scope.transactions = Market.parseTxIntoTwoDecimals(data.transactions);
@@ -14,6 +15,7 @@ angular.module('bitclip.marketController', [
       $scope.min = +data.min.toFixed(2);
       $scope.volume = +data.volume.toFixed(2);
       $scope.lastTrade = Market.getLastTrade(data.transactions);
+      $scope.loading = false;
     });
   };
 
@@ -21,7 +23,7 @@ angular.module('bitclip.marketController', [
     return function(exchangeName, date, price, e, graph) {
       exchangeName = exchangeName.charAt(0).toUpperCase() + exchangeName.slice(1);
       var template = "<div class='graphToolTip'><small class='toolTipHeader'>" + exchangeName + 
-        "</small><small class='toolTipPrice'><span>" + price + "</span></small>" + 
+        "</small><small class='toolTipPrice'><span>$" + price + "</span></small>" + 
         "<small class='toolTipTime'>" + date + "</small></div>";
       return template;
     };
@@ -29,15 +31,13 @@ angular.module('bitclip.marketController', [
 
   $scope.xAxisTickValuesFunction = function() {
     return function(d) {
-      var tickVals = [];
-      var values = d[0].values;
-      var valLength = values.length;
-
-      if (valLength < 2) return [0, 0];
-
-      var mid = Math.ceil(valLength / 2);
-      tickVals.push(values[mid][0]);
-      return tickVals;
+      var numTrades = d[0].values.length;
+      var beginningTime = d[0].values[0][0].getTime();
+      var finalTime = d[0].values[numTrades - 1][0].getTime();
+      var first = Market.returnNext2Hour(beginningTime);
+      var last = Market.returnLast2Hour(finalTime);
+      var second = first + (last - first) / 2;
+      return [first, second, last];
     };
   };
 
