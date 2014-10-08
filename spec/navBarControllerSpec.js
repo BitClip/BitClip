@@ -1,4 +1,4 @@
-describe('Unit: navBarController', function () {
+describe.only('Unit: viewTabsController', function () {
   beforeEach(module('bitclip'));
 
   var $scope, $rootScope, $location, $window, createController;
@@ -20,9 +20,6 @@ describe('Unit: navBarController', function () {
     };
     createController();
   }));
-
-  afterEach(function() {
-  });
 
   it('$scope.activeTab should default to send', function () {
     expect($scope.activeTab).to.equal('send');
