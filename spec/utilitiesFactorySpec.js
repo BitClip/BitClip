@@ -1,7 +1,7 @@
 describe('Unit: Utilities Factory', function () {
   beforeEach(module('bitclip'));
 
-  var $scope, $rootScope, $location, $window, $q, $timeout, Utilities, tempStore;
+  var $scope, $rootScope, $location, $window, Utilities, tempStore;
 
   beforeEach(inject(function($injector) {
 
@@ -9,63 +9,68 @@ describe('Unit: Utilities Factory', function () {
     $location = $injector.get('$location');
     $scope = $rootScope.$new();
     $window = $injector.get('$window');
-    $timeout = $injector.get('$timeout');
     Utilities = $injector.get('Utilities');
-    $q = $injector.get('$q');
 
-
+  /****************************************************
+    The next section mocks up the chrome.storage.local
+    setters and getters.
+  *****************************************************/
     $window.chrome = {
-                      storage:{
-                        local: {
-                            set: function(obj , callback){ 
-                              tempStore = obj;
-                              callback();
-                            },
-                            get: function(propStrOrArray, callback){ 
-                              var result = {};
-                              //TODO later: must also handle case when key input
-                              //has no value in tempstore;
-                              if (typeof propStrOrArray === 'string'){
-                                result[propStrOrArray] = tempStore[propStrOrArray];
-                              } else if (Array.isArray(propStrOrArray)){
-                                propStrOrArray.forEach(function(propName){
-                                  result[propName] = tempStore[propName];
-                                });
-                              } else if (propStrOrArray === null) {
-                                result = tempStore;
-                              }
-                              callback(result);
-                            },
-                            remove: function(){ },
-                            clear: function(){ }
-                        }
-                      }
-                    };
+      storage: {
+        local:{}
+      }
+    };
+
+    $window.chrome.storage.local.set = function(obj , callback){
+      tempStore = obj;
+      callback();
+    };
+
+    $window.chrome.storage.local.get = function(propStrOrArray, callback){
+      var result = {};                        
+      if (typeof propStrOrArray === 'string'){
+        result[propStrOrArray] = tempStore[propStrOrArray];
+      } else if (Array.isArray(propStrOrArray)){
+        propStrOrArray.forEach(function(propName){
+          result[propName] = tempStore[propName];
+        });
+      } else if (propStrOrArray === null) {
+        result = tempStore;
+      }
+      callback(result);
+    };
+
+  /*********************************************
+    Mocked up state of chrome.storage.local
+  **********************************************/
+
     tempStore = {
-      isMainNet: false,
-      mainNet: {
-                  currentAddress: "mainNetAddress",
-                  currentPrivateKey: "mainNetPrivateKey",
-                  allAddressesAndKeys: [["mainNetAddress","mainNetPrivateKey"],["m1", "m2"],["m3", "m4"]]
-               },
-      testNet: {
-                  currentAddress: "mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf",
-                  currentPrivateKey: "cRqGMD3MDfkEJit4HTtA3tUDcAtQkmogqrLAnuu4aBaefXCp1J79",
-                  allAddressesAndKeys: [["mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf","cRqGMD3MDfkEJit4HTtA3tUDcAtQkmogqrLAnuu4aBaefXCp1J79"],[1,2],[3,4],[5,6]]
-               }
+      "isMainNet":false,
+      "mainNet":{
+        "allAddressesAndKeys":[
+          ["1GuxzXBZaFfjpGgGEFVt9NBGF9mParcPX2","KwHTcpKsBWSKbpd2JcaPN7yJLFUXXHoUudfrVXoc46QU4sQo87zU"],
+          ["1138fgj4sa1kEMBGBiTBSsQWNnfHWB5aoe","L2Wc7UBsAdyKYFx2S6W29mW73Zn6FMD4JGQYFWrESoUhC1KXc2iC"],
+          ["1bgGRDEyufhMBkVX1XA6rtC9cXAEBqbww","KzPpppRYpLfQAJQtb9tvmynpkfMSaDjXEyd5deNT6ALJ4D4j4Ksy"]],
+        "currentAddress":"1GuxzXBZaFfjpGgGEFVt9NBGF9mParcPX2",
+        "currentPrivateKey":"KwHTcpKsBWSKbpd2JcaPN7yJLFUXXHoUudfrVXoc46QU4sQo87zU"
+      },
+      "testNet":{
+        "allAddressesAndKeys":[
+          ["mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf","cRqGMD3MDfkEJit4HTtA3tUDcAtQkmogqrLAnuu4aBaefXCp1J79"],
+          ["moJvQo6j1uDPXxntNpfFHXcAjwLvJ72sDV","cRnTroGPQrEDR8sjEiC5fDBwqyPL779R2uH3UpfHP5i7rHskXUJg"],
+          ["mivutayae2naDT1NxjYN4LjEHXcUsCM6gr","cP2usaS1DnCR1nQboo7d1bMdJs4idzmPSWgvKKX7hPGPU9Yft1my"]],
+        "currentAddress":"mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf",
+        "currentPrivateKey":"cRqGMD3MDfkEJit4HTtA3tUDcAtQkmogqrLAnuu4aBaefXCp1J79"
+      }
     };
   }));
+  
+  /*********************************************
+                      Tests
+  **********************************************/
 
-  afterEach(function() {
-    //$window.localStorage.removeItem('com.shortly'); //something like this but for chrome storage
-  });
-
-
-  //This test is pattern for mocked up async functions, 
-  //e.g. All chrome setters and getters
-  it('initialize should be a function that instantiates empty testNet/mainNet object pseudoclassically', function (done) {
+  it('initialize should instantiate isMainNet, mainNet and testNet properties in chrome storage', function (done) {
     tempStore = {};
-    console.log("in InitOb");
     expect(Utilities.initialize).to.be.a('function');
     Utilities.initialize()
     .then(function(message){
@@ -80,19 +85,16 @@ describe('Unit: Utilities Factory', function () {
       done();
     })
     .catch(function(err){
-      console.log("I am in the catch");
       done();
     })
     $rootScope.$apply();
   });
 
   it('isMainNet is a function that returns isMainNet property in local storage', function (done) {
-    console.log("isMainNet");
     tempStore.isMainNet = true;
     expect(Utilities.isMainNet).to.be.a('function');
     Utilities.isMainNet()
     .then(function(isMainNet){
-      console.log("In the then");
       expect(isMainNet).to.equal(true);
       done();
     });
@@ -102,139 +104,67 @@ describe('Unit: Utilities Factory', function () {
   it('getCurrentAddress returns correct currentPrivateKey for testNet', function (done) {
     tempStore.isMainNet = false;
 
-    expect(Utilities.getCurrentAddress).to.be.a('function');
-
     Utilities.getCurrentAddress()
     .then(function(currentAddress){
-      console.log("in the then");
       expect(currentAddress).to.equal("mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf");
       done();
-    })
-    .catch(function(error){
-      console.log("in the catch");
-      done();
-    })
+    });
     $rootScope.$apply();
   });
 
   it('getCurrentPrivateKey returns correct currentPrivateKey for testNet', function (done) {
     tempStore.isMainNet = false;
-    expect(Utilities.getCurrentPrivateKey).to.be.a('function');
 
     Utilities.getCurrentPrivateKey()
     .then(function(currentPrivateKey){
-      console.log("in the then");
       expect(currentPrivateKey).to.equal("cRqGMD3MDfkEJit4HTtA3tUDcAtQkmogqrLAnuu4aBaefXCp1J79");
       done();
-    })
-    .catch(function(error){
-      console.log("in the catch");
-      done();
-    })
+    });
     $rootScope.$apply();
   });
 
   it('getCurrentAddress returns correct currentPrivateKey for mainNet', function (done) {
     tempStore.isMainNet = true;
 
-    expect(Utilities.getCurrentAddress).to.be.a('function');
-
     Utilities.getCurrentAddress()
     .then(function(currentAddress){
-      console.log("in the then");
-      expect(currentAddress).to.equal("mainNetAddress");
+      expect(currentAddress).to.equal("1GuxzXBZaFfjpGgGEFVt9NBGF9mParcPX2");
       done();
-    })
-    .catch(function(error){
-      console.log("in the catch");
-      done();
-    })
+    });
     $rootScope.$apply();
   });
 
   it('getCurrentPrivateKey returns correct currentPrivateKey for mainNet', function (done) {
     tempStore.isMainNet = true;
 
-    expect(Utilities.getCurrentPrivateKey).to.be.a('function');
-
     Utilities.getCurrentPrivateKey()
     .then(function(currentPrivateKey){
-      console.log("in the then");
-      expect(currentPrivateKey).to.equal("mainNetPrivateKey");
-      done();
-    })
-    .catch(function(error){
-      console.log("in the catch");
+      expect(currentPrivateKey).to.equal("KwHTcpKsBWSKbpd2JcaPN7yJLFUXXHoUudfrVXoc46QU4sQo87zU");
       done();
     })
     $rootScope.$apply();
   });
 
-
-  it('getAllAddresses returns correct addresses and keys for testNet', function (done) {
+  it('getAllAddresses returns correct addresses for testNet', function (done) {
+    var expectedResult = [ 'mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf', "moJvQo6j1uDPXxntNpfFHXcAjwLvJ72sDV", "mivutayae2naDT1NxjYN4LjEHXcUsCM6gr"];
     
-    var result = [ 'mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf', 1, 3, 5 ];
-    
-    expect(Utilities.getCurrentPrivateKey).to.be.a('function');
-
     Utilities.getAllAddresses()
     .then(function(allAddressesAndKeys){
-      //This is a bit of a hack.
-      //Need to test the contents of allAddressAndKeys === result
-      for (var i = 0; i < allAddressesAndKeys.length; i ++ ){
-        expect(allAddressesAndKeys[i]).to.be(result[i]);
-      }
+      expect(JSON.stringify(allAddressesAndKeys)).to.equal(JSON.stringify(expectedResult));
       done();
-    })
-    .catch(function(error){
-      console.log("in the catch");
-      done();
-    })
+    });
     $rootScope.$apply();
   });
 
-  it('getAllAddresses returns correct addresses and keys for mainNet', function (done) {
+  it('getAllAddresses returns correct addresses ainNet', function (done) {
     tempStore.isMainNet = true;
-    var result = ["mainNetAddress","m1","m3"];
-    expect(Utilities.getCurrentPrivateKey).to.be.a('function');
+    var expectedResult = ["1GuxzXBZaFfjpGgGEFVt9NBGF9mParcPX2","1138fgj4sa1kEMBGBiTBSsQWNnfHWB5aoe","1bgGRDEyufhMBkVX1XA6rtC9cXAEBqbww"];
 
     Utilities.getAllAddresses()
     .then(function(allAddressesAndKeys){
-      //This is a bit of a hack.
-      //Need to test the contents of allAddressAndKeys === result
-      for (var i = 0; i < allAddressesAndKeys.length; i ++ ){
-        expect(allAddressesAndKeys[i]).to.be(result[i]);
-      }
+      expect(JSON.stringify(allAddressesAndKeys)).to.equal(JSON.stringify(expectedResult));
       done();
-    })
-    .catch(function(error){
-      console.log("in the catch");
-      done();
-    })
+    });
     $rootScope.$apply();
   });
-
-
-  // All methods involving getting balance of address requries
-  // mocking up a backend using $httpBackend
-
-  // it.only('getBalances should get return correct Balance', function (done) {
-  //   tempStore.isMainNet = false;
-
-  //   //address: morpWFtSj2LBMUxLfxHJ7U4s5dnqn2QBa6
-  //   //balance: 0.0134BTC
-  //   Utilities.getBalances(["morpWFtSj2LBMUxLfxHJ7U4s5dnqn2QBa6"])
-  //   .then(function(addressesArr){
-  //     //This is a bit of a hack.
-  //     //Need to test the contents of allAddressAndKeys === result
-  //     console.log("this is the addressesArr: ", addressesArr);
-  //     done();
-  //   })
-  //   .catch(function(error){
-  //     console.log("in the catch: ", error);
-  //     done();
-  //   });
-  //   $rootScope.$apply();
-  // });
-
 });

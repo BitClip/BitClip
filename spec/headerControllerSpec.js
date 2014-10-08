@@ -1,7 +1,7 @@
 describe('Unit: headerController', function () {
   beforeEach(module('bitclip'));
 
-  var $scope, $rootScope, $location, $window, createController, Header, Utilities, tempStore, $http;
+  var $scope, $rootScope, $location, $window, $controller, createController, Header, Utilities, tempStore, $http;
 
   beforeEach(inject(function($injector) {
     $rootScope = $injector.get('$rootScope');
@@ -10,6 +10,12 @@ describe('Unit: headerController', function () {
     $window = $injector.get('$window');
     Header = $injector.get('Header');
     Utilities = $injector.get('Utilities');
+    
+
+    /*********************************************
+    The next section mocks up the chrome.storage.local
+    setters and getters.
+    **********************************************/
     $window.chrome = {
       storage: {
         local:{}
@@ -34,22 +40,32 @@ describe('Unit: headerController', function () {
       }
       callback(result);
     };
+
+    /*********************************************
+    Mocked up state of chrome.storage.local
+    **********************************************/
+
     tempStore = {
-      isMainNet: false,
-      mainNet: {
-                  currentAddress: "",
-                  currentPrivateKey: "",
-                  allAddressesAndKeys: []
-               },
-      testNet: {
-                  currentAddress: "mjjeyn6Vs4TAtMFKJEwpMPJsAVysxL4nYG",
-                  currentPrivateKey: "",
-                  allAddressesAndKeys: []
-               }
+      "isMainNet":false,
+      "mainNet":{
+        "allAddressesAndKeys":[
+          ["1GuxzXBZaFfjpGgGEFVt9NBGF9mParcPX2","KwHTcpKsBWSKbpd2JcaPN7yJLFUXXHoUudfrVXoc46QU4sQo87zU"],
+          ["1138fgj4sa1kEMBGBiTBSsQWNnfHWB5aoe","L2Wc7UBsAdyKYFx2S6W29mW73Zn6FMD4JGQYFWrESoUhC1KXc2iC"],
+          ["1bgGRDEyufhMBkVX1XA6rtC9cXAEBqbww","KzPpppRYpLfQAJQtb9tvmynpkfMSaDjXEyd5deNT6ALJ4D4j4Ksy"]],
+        "currentAddress":"1GuxzXBZaFfjpGgGEFVt9NBGF9mParcPX2",
+        "currentPrivateKey":"KwHTcpKsBWSKbpd2JcaPN7yJLFUXXHoUudfrVXoc46QU4sQo87zU"
+      },
+      "testNet":{
+        "allAddressesAndKeys":[
+          ["mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf","cRqGMD3MDfkEJit4HTtA3tUDcAtQkmogqrLAnuu4aBaefXCp1J79"],
+          ["moJvQo6j1uDPXxntNpfFHXcAjwLvJ72sDV","cRnTroGPQrEDR8sjEiC5fDBwqyPL779R2uH3UpfHP5i7rHskXUJg"],
+          ["mivutayae2naDT1NxjYN4LjEHXcUsCM6gr","cP2usaS1DnCR1nQboo7d1bMdJs4idzmPSWgvKKX7hPGPU9Yft1my"]],
+        "currentAddress":"mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf",
+        "currentPrivateKey":"cRqGMD3MDfkEJit4HTtA3tUDcAtQkmogqrLAnuu4aBaefXCp1J79"
+      }
     };
 
-    var $controller = $injector.get('$controller');
-
+    $controller = $injector.get('$controller');
     createController = function () {
       return $controller('headerController', {
         $scope: $scope,
@@ -60,13 +76,8 @@ describe('Unit: headerController', function () {
         tempStore: tempStore
       });
     };
-
-    createController();
+    createController(); 
   }));
-
-  afterEach(function() {
-    //$window.localStorage.removeItem('com.shortly'); //something like this but for chrome storage
-  });
 
   it('setNetwork should be a function', function () {
     expect(Header.setNetwork).to.be.a('function');
@@ -89,9 +100,5 @@ describe('Unit: headerController', function () {
       });
     });
   });
-
-  // it('getNetworkStatus should set $scope.isMainNet variable identical to isMainNet in local storage', function () {
-    
-  // });
 
 })
