@@ -1,20 +1,46 @@
 describe('Unit: headerController', function () {
   beforeEach(module('bitclip'));
 
-  var $scope, $rootScope, $location, $window, $controller, createController, Header, Utilities, tempStore, $http;
+  var $scope, $rootScope, $location, $http, $window, $timeout, $controller, createController, Header, Utilities, tempStore, $http;
 
   beforeEach(inject(function($injector) {
     $rootScope = $injector.get('$rootScope');
     $location = $injector.get('$location');
+    $httpBackend = $injector.get('$httpBackend');
+    $http = $injector.get('$http');
     $scope = $rootScope.$new();
+    $timeout = $injector.get('$timeout');
     $window = $injector.get('$window');
     Header = $injector.get('Header');
     Utilities = $injector.get('Utilities');
-    
-    /*********************************************
-    The next section mocks up the chrome.storage.local
-    setters and getters.
-    **********************************************/
+
+  /***********************************************************
+    Mocks up HelloBlock server when a GET request is made to 
+    query balance of testNet currentAddress.
+    Endpoint: https://helloblock.io/docs/ref#addresses-batch
+  ***********************************************************/
+
+    $httpBackend.when('GET','http://testnet.helloblock.io/v1/addresses?addresses=mieyV4Y8ba87pZYJKsJRz8qcZP4b2HvWLf')
+    .respond({
+      "status":"success",
+      "data":{
+        "addresses":[
+          { "balance":224880000,
+            "confirmedBalance":224880000 
+          }
+        ]
+      }
+    });
+
+    $httpBackend.when('GET','send/send.tpl.html')
+    .respond({
+      "status":"success"
+    });
+
+  /***********************************************************
+  The next section mocks up the chrome.storage.local
+  setters and getters.
+  ***********************************************************/
 
     $window.chrome = {
       storage: {
@@ -83,6 +109,7 @@ describe('Unit: headerController', function () {
   /*********************************************
                       Tests
   **********************************************/
+  
   it('setBalance should exist on the scope', function ( done ) {
     Utilities.initialize().then(function(){
       expect($scope.setBalance).to.be.a('function');
@@ -90,4 +117,29 @@ describe('Unit: headerController', function () {
     })
     $rootScope.$apply();
   });
-})
+
+  it('getNetworkStatus should set the $rootScope.isMainNet property as same as chrome.storage.local', function ( done ) {
+    Utilities.initialize().then(function(){
+      
+    })
+    $rootScope.$apply();
+  });
+
+
+  //does not work
+  it.only('setBalance should set the correct balanceMessage variable on the $scope', function ( done ) {
+    Utilities.initialize().then(function(){
+      $scope.setBalance();
+      // expect($scope.balanceMessage).to.equal("Bal: 2.2488 BTC");
+      setTimeout( function(){
+        console.log("haha");
+        console.log($scope.balanceMessage);
+        expect($scope.balanceMessage).to.equal("Bal: 2.2488 BTC");
+        done();
+      }, 1000);
+    });
+    $httpBackend.flush();
+    $rootScope.$apply();
+  });
+
+});

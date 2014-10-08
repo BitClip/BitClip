@@ -4,7 +4,7 @@ angular.module('bitclip.headerController', [])
   Utilities.initialize().then(function() {
     $scope.setBalance = function() {
       $scope.balanceMessage = 'Loading balance ...';
-      Header.getBalanceForCurrentAddress().then(function(balance) {
+      return Header.getBalanceForCurrentAddress().then(function(balance) {
         if (typeof balance === 'string') {
           $scope.balanceMessage = balance;
         } else {
@@ -18,9 +18,9 @@ angular.module('bitclip.headerController', [])
     $rootScope.$watch('currentAddress', $scope.setBalance);
 
     $scope.getNetworkStatus = function() {
-      Utilities.isMainNet().then(function(isMainNet) {
+      return Utilities.isMainNet().then(function(isMainNet) {
         $rootScope.isMainNet = isMainNet;
-        $scope.setBalance();
+        return $scope.setBalance();
       });
     };
     $scope.getNetworkStatus();
