@@ -24,6 +24,7 @@ Soon to be released:
 ## Table of Contents
 
 1. [Download Working Copy](#download-working-copy)
+
 2. [Requirements](#requirements)
 3. [Development](#development)
 
