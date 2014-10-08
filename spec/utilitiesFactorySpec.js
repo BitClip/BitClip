@@ -12,9 +12,10 @@ describe('Unit: Utilities Factory', function () {
     Utilities = $injector.get('Utilities');
 
   /****************************************************
-    The next section mocks up the chrome.storage.local
-    setters and getters.
+    Mocks up the chrome.storage.local setters 
+    and getters.
   *****************************************************/
+
     $window.chrome = {
       storage: {
         local:{}
@@ -41,7 +42,7 @@ describe('Unit: Utilities Factory', function () {
     };
 
   /*********************************************
-    Mocked up state of chrome.storage.local
+    Mocks up state of chrome.storage.local
   **********************************************/
 
     tempStore = {
@@ -96,7 +97,7 @@ describe('Unit: Utilities Factory', function () {
 
   it('isMainNet is a function that returns isMainNet property in local storage', function (done) {
     tempStore.isMainNet = true;
-    expect(Utilities.isMainNet).to.be.a('function');
+    
     Utilities.isMainNet()
     .then(function(isMainNet){
       expect(isMainNet).to.equal(true);

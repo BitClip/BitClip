@@ -14,9 +14,8 @@ describe('Unit: headerFactory', function () {
     Utilities = $injector.get('Utilities');
 
   /***********************************************************
-    The next section mocks up HelloBlock server for expected
-    response when a GET request is made to query balance of an 
-    address.
+    Mocks up HelloBlock server when a GET request is made to 
+    query balance of testNet currentAddress.
     Endpoint: https://helloblock.io/docs/ref#addresses-batch
   ***********************************************************/
 
@@ -33,9 +32,10 @@ describe('Unit: headerFactory', function () {
   });
 
   /****************************************************
-    The next section mocks up the chrome.storage.local
-    setters and getters.
+    Mocks up the chrome.storage.local setters 
+    and getters.
   *****************************************************/
+
     $window.chrome = {
       storage: {
         local:{}
@@ -62,7 +62,7 @@ describe('Unit: headerFactory', function () {
     };
 
   /*********************************************
-    Mocked up state of chrome.storage.local
+    Mocks up state of chrome.storage.local
   **********************************************/
 
     tempStore = {

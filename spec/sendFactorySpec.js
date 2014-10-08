@@ -12,8 +12,8 @@ describe('Unit: sendFactory - TxBuilder', function () {
     transactionDetails = {};
 
   /****************************************************
-    The next section mocks up the chrome.storage.local
-    setters and getters.
+    Mocks up the chrome.storage.local setters 
+    and getters.
   *****************************************************/
 
     $window.chrome = {
@@ -42,7 +42,7 @@ describe('Unit: sendFactory - TxBuilder', function () {
     };
 
   /*********************************************
-    Mocked up state of chrome.storage.local
+    Mocks up state of chrome.storage.local
   **********************************************/
 
     tempStore = {
