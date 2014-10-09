@@ -32,6 +32,18 @@ describe('Unit: headerController', function () {
       }
     });
 
+    $httpBackend.when('GET','http://mainnet.helloblock.io/v1/addresses?addresses=1GuxzXBZaFfjpGgGEFVt9NBGF9mParcPX2')
+    .respond({
+      "status":"success",
+      "data":{
+        "addresses":[
+          { "balance":0,
+            "confirmedBalance":0 
+          }
+        ]
+      }
+    });
+
     $httpBackend.when('GET','send/send.tpl.html')
     .respond({
       "status":"success"
@@ -118,28 +130,55 @@ describe('Unit: headerController', function () {
     $rootScope.$apply();
   });
 
-  it('getNetworkStatus should set the $rootScope.isMainNet property as same as chrome.storage.local', function ( done ) {
+  it('setBalance should set the correct balanceMessage variable on the $scope for testNet', function ( done ) {
     Utilities.initialize().then(function(){
-      
-    })
-    $rootScope.$apply();
-  });
-
-
-  //does not work
-  it.only('setBalance should set the correct balanceMessage variable on the $scope', function ( done ) {
-    Utilities.initialize().then(function(){
-      $scope.setBalance();
-      // expect($scope.balanceMessage).to.equal("Bal: 2.2488 BTC");
-      setTimeout( function(){
-        console.log("haha");
-        console.log($scope.balanceMessage);
+      $scope.setBalance().then(function(){
         expect($scope.balanceMessage).to.equal("Bal: 2.2488 BTC");
         done();
-      }, 1000);
+      });
     });
     $httpBackend.flush();
+  });
+
+  it.only('setBalance should set the correct balanceMessage variable on the $scope for mainNet', function ( done ) {
+    Utilities.initialize().then(function(){
+      tempStore.isMainNet = true;
+      $scope.setBalance().then(function(){
+        expect($scope.balanceMessage).to.equal("Bal: 0 BTC");
+        done();
+      });
+    });
+    $httpBackend.flush();
+  });
+
+  it('getNetworkStatus should set the $rootScope.isMainNet property as same as chrome.storage.local', function ( done ) {
+    Utilities.initialize().then(function(){
+      $scope.getNetworkStatus().then(function(){
+        expect($rootScope.isMainNet).to.equal(tempStore.isMainNet);
+        done();
+      });
+    });
     $rootScope.$apply();
   });
 
+  it('getNetworkStatus should set the $rootScope.isMainNet when isMainNet property changes', function ( done ) {
+    Utilities.initialize().then(function(){
+      tempStore.isMainNet = true;
+      $scope.getNetworkStatus().then(function(){
+        expect($rootScope.isMainNet).to.equal(tempStore.isMainNet);
+        done();
+      });
+    });
+    $rootScope.$apply();
+  });
+
+  it('menu should be a function that toggles $scope.isCollapsed', function ( done ) {
+    Utilities.initialize().then(function(){
+      $scope.isCollapsed = true;
+      $scope.menu();
+      expect($scope.isCollapsed).to.be(false);
+      done();
+    });
+    $rootScope.$apply();
+  });
 });

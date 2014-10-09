@@ -20,7 +20,7 @@ angular.module('bitclip.headerController', [])
     $scope.getNetworkStatus = function() {
       return Utilities.isMainNet().then(function(isMainNet) {
         $rootScope.isMainNet = isMainNet;
-        return $scope.setBalance();
+        $scope.setBalance();
       });
     };
     $scope.getNetworkStatus();
