@@ -3,7 +3,7 @@
 
   "name": "BitClip",
   "description": "BitClip: A simple, secure client-side Bitcoin wallet.",
-  "version": "0.3",
+  "version": "0.4",
 
   "icons": {
     "16": "assets/bitcoin_16.png",
