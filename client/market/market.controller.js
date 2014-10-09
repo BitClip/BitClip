@@ -6,6 +6,8 @@ angular.module('bitclip.marketController', [
   $scope.getGraphData = function(hours) {
     $scope.loading = true;
     Market.getGraphData(hours, function(data) {
+      console.log(data);
+      console.log("STUUUUUUUUUUUUUUUF");
       $scope.setYAxis = [Math.ceil((+data.min * 0.98)), Math.ceil((+data.max * 1.02))];
       $scope.transactions = Market.parseTxIntoTwoDecimals(data.transactions);
       $scope.updateTime = data.time;
