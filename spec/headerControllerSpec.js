@@ -1,15 +1,13 @@
 describe('Unit: headerController', function () {
   beforeEach(module('bitclip'));
 
-  var $scope, $rootScope, $location, $http, $window, $timeout, $controller, createController, Header, Utilities, tempStore, $http;
+  var $scope, $rootScope, $location, $window, $controller, createController, Header, Utilities, tempStore, $http;
 
   beforeEach(inject(function($injector) {
     $rootScope = $injector.get('$rootScope');
     $location = $injector.get('$location');
     $httpBackend = $injector.get('$httpBackend');
-    $http = $injector.get('$http');
     $scope = $rootScope.$new();
-    $timeout = $injector.get('$timeout');
     $window = $injector.get('$window');
     Header = $injector.get('Header');
     Utilities = $injector.get('Utilities');
@@ -140,7 +138,7 @@ describe('Unit: headerController', function () {
     $httpBackend.flush();
   });
 
-  it.only('setBalance should set the correct balanceMessage variable on the $scope for mainNet', function ( done ) {
+  it('setBalance should set the correct balanceMessage variable on the $scope for mainNet', function ( done ) {
     Utilities.initialize().then(function(){
       tempStore.isMainNet = true;
       $scope.setBalance().then(function(){
