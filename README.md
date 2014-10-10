@@ -75,10 +75,6 @@ bower install
 
 5. Click Select on 'client' directory, and BitClip will be loaded into your Browser.
 
-### Roadmap
-
-View the project roadmap [here](https://docs.google.com/spreadsheets/d/1-yMgsi_L0hib9ap5ruJHyLoarVNYoiJXBJx6AYjVb3U/)
-
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
