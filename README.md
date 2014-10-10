@@ -39,6 +39,7 @@ Soon to be released:
 
 #### Download BitClip and try it out [here](https://chrome.google.com/webstore/detail/bitclip/ijmpgkjfkbfhoebgogflfebnmejmfbml "BitClip - Chrome Store").
 
+
 Transactions made easy         |Manage Multiple Addresses      
 :-----------------------------:|:-----------------------------:
 ![Transaction History](/../screenshots/screenshots/bitclip_SendView_1.png?raw=true "Send Bitcoin")  |  ![Manage addresses](/../screenshots/screenshots/bitclip_ReceiveView_1.png?raw=true "Manage addresses") 
