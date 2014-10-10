@@ -36,9 +36,12 @@ Soon to be released:
 
 ## Download Working Copy
 
-You can download a deployed version of this app [here](chrome.google.com/webstore/detail/bitclip/ijmpgkjfkbfhoebgogflfebnmejmfbml).
+#### You can download this app [here](https://chrome.google.com/webstore/detail/bitclip/ijmpgkjfkbfhoebgogflfebnmejmfbml "BitClip - Chrome Store").
 
-![Alt text](/../screenshots/screenshots/bitclip_HistoryView_1.png?raw=true "View transaction history")
+Transactions made easy         |Manage Multiple Addresses      
+:-----------------------------:|:-----------------------------:
+![Transaction History](/../screenshots/screenshots/bitclip_SendView_1.png?raw=true "Send Bitcoin")  |  ![Manage addresses](/../screenshots/screenshots/bitclip_ReceiveView_1.png?raw=true "Manage addresses") 
+
 
 ## Requirements
 
