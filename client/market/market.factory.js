@@ -7,15 +7,17 @@ angular.module('bitclip.marketFactory', [])
       timePeriod: hours * 3600000,
       time: new Date().getTime()
     };
+
     var config = {
       url: url,
       method: 'GET',
       params: dataObj
     };
-    $http(config).success(function(data) {
+
+    $http(config).success(function(data){
       callback(data);
-    }).error(function(data, statusCode) {
-      callback('Error fetching market data from API.');
+    }).error(function(data, statusCode){
+      callback("Error with HTTP request");
     });
   };
 
@@ -24,7 +26,9 @@ angular.module('bitclip.marketFactory', [])
     for (var exchange in txObj) {
       var tradesForExchange = txObj[exchange].values;
       var finalTrade = tradesForExchange[tradesForExchange.length - 1];
-      if (finalTrade[0] > result[0]) result = finalTrade;
+      if (finalTrade[0] > result[0]){
+        result = finalTrade;
+      } 
     };
     result[1] = +result[1].toFixed(2);
     return result[1];
