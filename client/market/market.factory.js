@@ -5,20 +5,21 @@ angular.module('bitclip.marketFactory', [])
     var url = 'http://bitscrape.azurewebsites.net/api/marketdata'; 
     var dataObj = {
       timePeriod: hours * 3600000,
-          time: new Date().getTime()//get current time in milliseconds
-        };
+      time: new Date().getTime();
+    };
 
-        var config = {
-          url: url,
-          method: 'GET',
-          params: dataObj
-        };
-        $http(config).success(function(data){
-          callback(data);
-        }).error(function(data, statusCode){
-          callback("Error with HTTP request");
-        });
-      };
+    var config = {
+      url: url,
+      method: 'GET',
+      params: dataObj
+    };
+    
+    $http(config).success(function(data){
+      callback(data);
+    }).error(function(data, statusCode){
+      callback("Error with HTTP request");
+    });
+  };
 
   var getLastTrade = function(txObj) {
     var result = [0,0];

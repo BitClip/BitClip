@@ -78,8 +78,7 @@ describe('Market Controller', function () {
       });
     };
     createController(); 
-
-}));
+  }));
   
 
 /*********************************************
@@ -105,5 +104,4 @@ describe('Market Controller', function () {
   it('setActiveTab should be a function', function () {
     expect($scope.setActiveTab).to.be.a('function');
   });
-
 });
