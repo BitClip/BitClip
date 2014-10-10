@@ -24,7 +24,6 @@ Soon to be released:
 ## Table of Contents
 
 1. [Download Working Copy](#download-working-copy)
-
 2. [Requirements](#requirements)
 3. [Development](#development)
 
@@ -38,6 +37,8 @@ Soon to be released:
 ## Download Working Copy
 
 You can download a deployed version of this app [here](chrome.google.com/webstore/detail/bitclip/ijmpgkjfkbfhoebgogflfebnmejmfbml).
+
+![Alt text](/../screenshots/screenshots/bitclip_HistoryView_1.png?raw=true "View transaction history")
 
 ## Requirements
 
