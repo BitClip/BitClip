@@ -6,15 +6,15 @@
   "version": "0.4",
 
   "icons": {
-    "16": "assets/bitcoin_16.png",
-    "48": "assets/bitcoin_48.png",
-    "128": "assets/bitcoin_128.png"
+    "32": "assets/logo_32.png",
+    "48": "assets/logo_48.png",
+    "128": "assets/logo_128.png"
   },
 
   "browser_action": {
     "default_icon": {
-      "19": "assets/bitcoin_19.png",
-      "38": "assets/bitcoin_38.png"
+      "19": "assets/logo_19.png",
+      "38": "assets/logo_38.png"
     },
     "default_title": "BitClip",
     "default_popup": "popup.html"
