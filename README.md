@@ -24,6 +24,7 @@ Soon to be released:
 ## Table of Contents
 
 1. [Download Working Copy](#download-working-copy)
+
 2. [Requirements](#requirements)
 3. [Development](#development)
 
@@ -36,7 +37,7 @@ Soon to be released:
 
 ## Download Working Copy
 
-#### You can check out BitClip with one-click [here](https://chrome.google.com/webstore/detail/bitclip/ijmpgkjfkbfhoebgogflfebnmejmfbml "BitClip - Chrome Store").
+#### Download BitClip and try it out [here](https://chrome.google.com/webstore/detail/bitclip/ijmpgkjfkbfhoebgogflfebnmejmfbml "BitClip - Chrome Store").
 
 Transactions made easy         |Manage Multiple Addresses      
 :-----------------------------:|:-----------------------------:
