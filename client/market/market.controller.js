@@ -2,13 +2,11 @@ angular.module('bitclip.marketController', [
   'nvd3ChartDirectives'
 ])
 
-.controller('marketController', ['$scope', 'Market', '$http', function($scope, Market, $http) {
+.controller('marketController', ['$scope', '$http', 'Market', function($scope, $http, Market) {
   $scope.getGraphData = function(hours) {
     $scope.loading = true;
     Market.getGraphData(hours, function(data) {
-      console.log(JSON.stringify(data));
       $scope.setYAxis = [Math.ceil((+data.min * 0.98)), Math.ceil((+data.max * 1.02))];
-      console.log("setYAxis: ", $scope.setYAxis);
       $scope.transactions = Market.parseTxIntoTwoDecimals(data.transactions);
       $scope.updateTime = data.time;
       $scope.vwap = +(data.vwap).toFixed(2);

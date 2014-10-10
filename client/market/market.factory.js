@@ -25,7 +25,9 @@ angular.module('bitclip.marketFactory', [])
     for (var exchange in txObj) {
       var tradesForExchange = txObj[exchange].values;
       var finalTrade = tradesForExchange[tradesForExchange.length - 1];
-      if (finalTrade[0] > result[0]) result = finalTrade;
+      if (finalTrade[0] > result[0]){
+        result = finalTrade;
+      } 
     };
     result[1] = +result[1].toFixed(2);
     return result[1];

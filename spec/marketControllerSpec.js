@@ -1,4 +1,4 @@
-describe('Market Factory', function () {
+describe('Market Controller', function () {
   beforeEach(module('bitclip'));
 
   var $scope, $rootScope, $httpBackend, $location, $window, History, tempStore;
@@ -90,32 +90,20 @@ describe('Market Factory', function () {
     expect($scope.getGraphData).to.be.a('function');
   });
 
-  it.only('getGraphData should set a market scope values', function(done){
-    var result = {"timePeriod":86400000,"time":1412901968055,"transactions":[{"key":"bitstamp","values":[[1412816359007,354.84979334118697]]}],"stdDeviation":9.601723573401443,"vwap":367.1599991515436,"max":395.25,"min":343,"volume":114680.90688799924};
-    $httpBackend.when('GET', "http://bitscrape.azurewebsites.net/api/marketdata?time=" + new Date().getTime() + "&timePeriod=86400000")
-    // in order to fix this query string so that it always works
-    // you need to add code to produce a time variable IN the query
-    .respond(result);
+  it('toolTipContentFunction should be a function', function () {
+    expect($scope.toolTipContentFunction).to.be.a('function');
+  });
+  
+  it('xAxisTickValuesFunction should be a function', function () {
+    expect($scope.xAxisTickValuesFunction).to.be.a('function');
+  });
 
-    $scope.getGraphData(24);
-    console.log($scope.setYAxis);
-    setTimeout(function(){
-      console.log($scope.volume);
-      done();
-    },1000)
+  it('xAxisTickFormatFunction should be a function', function () {
+    expect($scope.xAxisTickFormatFunction).to.be.a('function');
+  });
 
-    $httpBackend.flush();
-    $rootScope.$apply();
-    // expect($scope.setYAxis).to.be.a(Number);
-    // expect($scope.transactions) = Market.parseTxIntoTwoDecimals(data.transactions);
-    // $scope.updateTime = data.time;
-    // $scope.vwap = +(data.vwap).toFixed(2);
-    // $scope.stdDeviation = +data.stdDeviation.toFixed(2);
-    // $scope.max = +data.max.toFixed(2);
-    // $scope.min = +data.min.toFixed(2);
-    // $scope.volume = +data.volume.toFixed(2);
-    // $scope.lastTrade = Market.getLastTrade(data.transactions);
-    // $scope.loading = false;
+  it('setActiveTab should be a function', function () {
+    expect($scope.setActiveTab).to.be.a('function');
   });
 
 });
