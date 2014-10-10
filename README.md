@@ -36,7 +36,7 @@ Soon to be released:
 
 ## Download Working Copy
 
-#### You can download this app [here](https://chrome.google.com/webstore/detail/bitclip/ijmpgkjfkbfhoebgogflfebnmejmfbml "BitClip - Chrome Store").
+#### You can check out BitClip with one-click [here](https://chrome.google.com/webstore/detail/bitclip/ijmpgkjfkbfhoebgogflfebnmejmfbml "BitClip - Chrome Store").
 
 Transactions made easy         |Manage Multiple Addresses      
 :-----------------------------:|:-----------------------------:
