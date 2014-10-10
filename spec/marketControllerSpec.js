@@ -21,7 +21,7 @@ describe('Market Controller', function () {
       storage: {
         local:{}
       }
-    };
+    }; 
 
     $window.chrome.storage.local.set = function(obj , callback){
       tempStore = obj;
