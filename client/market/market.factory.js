@@ -5,9 +5,8 @@ angular.module('bitclip.marketFactory', [])
     var url = 'http://bitscrape.azurewebsites.net/api/marketdata'; 
     var dataObj = {
       timePeriod: hours * 3600000,
-          time: new Date().getTime() //get current time in milliseconds
+          time: new Date().getTime()//get current time in milliseconds
         };
-          console.log("DERRRRRP: " + dataObj.time);
 
         var config = {
           url: url,
