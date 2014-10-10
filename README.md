@@ -37,7 +37,13 @@ Soon to be released:
 
 ## Download Working Copy
 
-You can download a deployed version of this app [here](chrome.google.com/webstore/detail/bitclip/ijmpgkjfkbfhoebgogflfebnmejmfbml).
+#### Download BitClip and try it out [here](https://chrome.google.com/webstore/detail/bitclip/ijmpgkjfkbfhoebgogflfebnmejmfbml "BitClip - Chrome Store").
+
+
+Transactions made easy         |Manage Multiple Addresses      
+:-----------------------------:|:-----------------------------:
+![Transaction History](/../screenshots/screenshots/bitclip_SendView_1.png?raw=true "Send Bitcoin")  |  ![Manage addresses](/../screenshots/screenshots/bitclip_ReceiveView_1.png?raw=true "Manage addresses") 
+
 
 ## Requirements
 
@@ -70,10 +76,6 @@ bower install
 4. Navigate to the 'client' directory of BitClip (path/BitClip_Directory/client)
 
 5. Click Select on 'client' directory, and BitClip will be loaded into your Browser.
-
-### Roadmap
-
-View the project roadmap [here](https://docs.google.com/spreadsheets/d/1-yMgsi_L0hib9ap5ruJHyLoarVNYoiJXBJx6AYjVb3U/)
 
 ## Contributing
 
