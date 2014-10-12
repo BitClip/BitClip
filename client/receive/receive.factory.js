@@ -5,6 +5,7 @@ angular.module('bitclip.receiveFactory', [])
     var isMainNet = $rootScope.isMainNet;
     var network = isMainNet ? 'bitcoin' : 'testnet';
     var location = isMainNet ? 'mainNet' : 'testNet';
+    // Use BitcoinJS library to generate new address/private key
     var key = bitcoin.ECKey.makeRandom();
     var currentPrivateKey = key.toWIF(bitcoin.networks[network]);
     var currentAddress = key.pub.getAddress(bitcoin.networks[network]).toString();
@@ -13,7 +14,9 @@ angular.module('bitclip.receiveFactory', [])
       obj[location].currentAddress = currentAddress;
       obj[location].currentPrivateKey = currentPrivateKey;
       obj[location].allAddressesAndKeys.unshift([currentAddress, currentPrivateKey]);
+      // Add address to local storage, then set current address in local storage to new address
       chrome.storage.local.set(obj, function() {
+        // Load TestNet addresses with 0.99 BTC
         if (network === 'testnet') {
           Utilities.getTestNetCoins(currentAddress, 99000000, function() {
             applyCurrentAddress(currentAddress);
@@ -40,7 +43,9 @@ angular.module('bitclip.receiveFactory', [])
         if (address === obj[location].allAddressesAndKeys[i][0]) {
           obj[location].currentAddress = obj[location].allAddressesAndKeys[i][0];
           obj[location].currentPrivateKey = obj[location].allAddressesAndKeys[i][1];
+          // Set new current address in local storage
           chrome.storage.local.set(obj, function() {
+            // We need to update AngularJS digest cycle with new current address
             $rootScope.$apply(function() {
               $rootScope.currentAddress = address;
             });
