@@ -1,6 +1,7 @@
 angular.module('bitclip.marketFactory', [])
 
 .factory('Market', ['$http', function($http) {
+  //Query's database for market data
   var getGraphData = function(hours, callback) {
     var url = 'http://bitscrape.azurewebsites.net/api/marketdata'; 
     var dataObj = {
@@ -14,6 +15,7 @@ angular.module('bitclip.marketFactory', [])
       params: dataObj
     };
 
+    //call callback on returned data.
     $http(config).success(function(data){
       callback(data);
     }).error(function(data, statusCode){
@@ -21,6 +23,7 @@ angular.module('bitclip.marketFactory', [])
     });
   };
 
+  //Determines which transaction was last out of all exchanges
   var getLastTrade = function(txObj) {
     var result = [0,0];
     for (var exchange in txObj) {
@@ -34,6 +37,7 @@ angular.module('bitclip.marketFactory', [])
     return result[1];
   };
 
+  //Rounds trade values to two decimal places 
   var parseTxIntoTwoDecimals = function(txObj) {
     for (var exchange in txObj) {
       var tradesForExchange = txObj[exchange].values;
@@ -45,10 +49,12 @@ angular.module('bitclip.marketFactory', [])
     return txObj;
   };
 
+  //Rounds up and sets time two hours up for graph data max limit.
   var returnNext2Hour = function(msSinceEpoch) {
     return Math.ceil(msSinceEpoch / 7200000) * 7200000;
   };
 
+  //Rounds down and sets time two hours down for graph data min limit.
   var returnLast2Hour = function(msSinceEpoch) {
     return Math.floor(msSinceEpoch / 7200000) * 7200000;
   };

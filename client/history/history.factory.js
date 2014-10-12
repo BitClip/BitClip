@@ -1,8 +1,12 @@
 angular.module('bitclip.historyFactory', [])
 
 .factory('History', ['$http', 'Utilities', '$q', function($http, Utilities, $q) {
+  //Retrieves the transaction history from helloblock given current address
   var getTransactionHist = function(currentAddress) {
     var deferred = $q.defer();
+
+    //determine what network is running (test or main)
+    //then retrieve transaction data
     Utilities.isMainNet().then(function(bool) {
       var baseUrl = 'http://' + (bool ? 'mainnet' : 'testnet') + '.helloblock.io/v1/addresses/';
       var requestString = currentAddress;
@@ -15,6 +19,7 @@ angular.module('bitclip.historyFactory', [])
     return deferred.promise;
   };
 
+  //determines if the current address is in an array and returns its values if true
   var isContainedInArrayMatrix = function(inputOrOutputMatrix, current) {
     for (var i = 0, l = inputOrOutputMatrix.length; i < l; i++) {
       var returnedAddress = inputOrOutputMatrix[i][0];
@@ -27,6 +32,7 @@ angular.module('bitclip.historyFactory', [])
     return false;
   };  
 
+  //determines if transaction was inbound or outbound
   var getUsableTransData = function(transObj, current) {
     var direction, amount, time, address;
     var addressObj = {
@@ -42,6 +48,7 @@ angular.module('bitclip.historyFactory', [])
       addressObj.outputs.push([tx.address, tx.value, transObj.estimatedTxTime]);
     });
     
+    //sets values of transaction relative to user.
     if (isContainedInArrayMatrix(addressObj.inputs, current) && isContainedInArrayMatrix(addressObj.outputs, current)) {
       var matchedInputs = isContainedInArrayMatrix(addressObj.inputs, current);
       var matchedOutputs = isContainedInArrayMatrix(addressObj.outputs, current);

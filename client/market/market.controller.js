@@ -3,6 +3,8 @@ angular.module('bitclip.marketController', [
 ])
 
 .controller('marketController', ['$scope', '$http', 'Market', function($scope, $http, Market) {
+  //Innitiates spinner, calls getGraphData factory function,
+  //and sets scope variables with returned data.
   $scope.getGraphData = function(hours) {
     $scope.loading = true;
     Market.getGraphData(hours, function(data) {
@@ -19,6 +21,7 @@ angular.module('bitclip.marketController', [
     });
   };
 
+  //Returns callback function that generates tooltip template.
   $scope.toolTipContentFunction = function() {
     return function(exchangeName, date, price, e, graph) {
       exchangeName = exchangeName.charAt(0).toUpperCase() + exchangeName.slice(1);
@@ -29,6 +32,7 @@ angular.module('bitclip.marketController', [
     };
   };
 
+  //Returns callback function that sets what data is graphed
   $scope.xAxisTickValuesFunction = function() {
     return function(d) {
       var numTrades = d[0].values.length;
@@ -41,6 +45,7 @@ angular.module('bitclip.marketController', [
     };
   };
 
+  //Returns callback function that sets the order of graph data
   $scope.xAxisTickFormatFunction = function() {
     return function(d) {
       var time = new Date(d);
@@ -49,6 +54,7 @@ angular.module('bitclip.marketController', [
     };
   };
 
+  //sets the active tab (8 or 24 hours)
   $scope.setActiveTab = function(tab) {
     $scope.activeTab = tab;
   };

@@ -1,6 +1,7 @@
 angular.module('bitclip.sendFactory', [])
 
 .factory('TxBuilder', ['$q', '$rootScope', function($q, $rootScope) {
+  //Sends transaction data through helloblock
   var sendTransaction = function(privateKeyWIF, transactionObj, isMainNet) {
     var deferred = $q.defer();
     var networkVar = {
@@ -14,6 +15,7 @@ angular.module('bitclip.sendFactory', [])
     var txFee = isMainNet ? 10000 : 0;
     var txTargetValue = transactionObj.amount * 100000000;
 
+    //Sets transaction bitcoin value (send value + transaction fee)
     helloblocktx.addresses.getUnspents(ecKeyAddress, {
       value: txTargetValue + txFee
     }, function(err, res, unspents) {
@@ -23,6 +25,7 @@ angular.module('bitclip.sendFactory', [])
         return deferred.promise;
       };
 
+      //sets change amount for transaction
       var tx = new bitcoin.Transaction();
       var totalUnspentsValue = 0;
       unspents.forEach(function(unspent) {
@@ -37,6 +40,7 @@ angular.module('bitclip.sendFactory', [])
         tx.sign(index, ecKey);
       });
 
+      //Sends off transaction
       var rawTxHex = tx.toHex();
       helloblocktx.transactions.propagate(rawTxHex, function(err, res, tx) { 
         if (err) {
@@ -51,6 +55,7 @@ angular.module('bitclip.sendFactory', [])
     return deferred.promise;
   };
 
+  //Varifies if address is valid
   var isValidAddress = function(address) {
     function check(address) {
       var decoded = base58_decode(address);     
@@ -63,6 +68,7 @@ angular.module('bitclip.sendFactory', [])
       return true;
     };
 
+    //Transaction data encryption
     function base58_decode(string) {
       var table = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
       var table_rev = new Array();
