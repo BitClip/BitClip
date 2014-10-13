@@ -7,6 +7,8 @@ angular.module('bitclip.utilitiesFactory', [])
     this.allAddressesAndKeys = [];
   };
 
+  // If local storage structure has not been created (when first running app)
+  // then create shell used to store addresses, keys, etc.
   var initialize = function() {
     var deferred = $q.defer();
     chrome.storage.local.get(['isMainNet', 'mainNet', 'testNet'], function(obj) {
@@ -44,6 +46,7 @@ angular.module('bitclip.utilitiesFactory', [])
     return deferred.promise;
   };
 
+  // Abstracted function used to fetch data from local storage
   var getNetworkData = function(request) {
     var deferred = $q.defer();
     chrome.storage.local.get(['isMainNet', 'mainNet', 'testNet'], function(obj) {
@@ -78,6 +81,8 @@ angular.module('bitclip.utilitiesFactory', [])
     return deferred.promise;
   };
 
+  // Query Helloblock for balance information
+  // Accepts array of addresses
   var getBalances = function(addresses) {
     var deferred = $q.defer();
     isMainNet().then(function(bool) {
@@ -103,6 +108,7 @@ angular.module('bitclip.utilitiesFactory', [])
     return deferred.promise;
   };
 
+  // Tracks sockets used to fetch balance information for current address
   var openSocketsList = [];
 
   var openSocketToGetLiveBalance = function(url, currentAddress, callback) {
@@ -146,6 +152,7 @@ angular.module('bitclip.utilitiesFactory', [])
     });
   };
 
+  // Add TestNet Bitcoins for given address
   var getTestNetCoins = function(address, value, callback) {
     $http({
       method: 'POST',
